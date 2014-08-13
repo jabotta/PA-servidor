@@ -1,7 +1,6 @@
-ProgApp2014
-===========
+ProgApp2014 - Programación de Aplicaciones
+==========================================
 
-####Programación de Aplicaciones
 ####Integrantes Grupo 3 - 2014
 Andres Botta   - andresbotta@gmail.com
 
