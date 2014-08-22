@@ -4,19 +4,12 @@
  * and open the template in the editor.
  */
 
-package programacionapp;
+package Controlador.Clases;
 
 /**
  *
  * @author rodro
  */
-public class ProgramacionApp {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Main {
     
 }
