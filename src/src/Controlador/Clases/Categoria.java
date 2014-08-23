@@ -1,32 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Controlador.Clases;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-/**
- *
- * @author rodro
- */
 public class Categoria {
+    
     private String nombre;
-    private Bool tieneProductos;
+    private Categoria padre;
 
-    public Categoria(String nombre, Bool tieneProductos) {
+    public Categoria(String nombre, Categoria padre) {
         this.nombre = nombre;
-        this.tieneProductos = tieneProductos;
+        this.padre = padre;
     }
 
     public String getNombre() {
         return nombre;
     }
-
-    public Bool getTieneProductos() {
-        return tieneProductos;
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public Categoria getPadre() {
+        return padre;
+    }
+    
+    public void setPadre(Categoria padre) {
+        this.padre = padre;
     }
     
 }
