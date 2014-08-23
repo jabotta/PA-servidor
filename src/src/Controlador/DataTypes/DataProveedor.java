@@ -3,16 +3,16 @@ package Controlador.DataTypes;
 import Controlador.Clases.Usuario;
 import java.util.Date;
 
-public class DataProovedor extends DataUsuario{
+public class DataProveedor extends DataUsuario{
     
     private String nombreCompania;
     private String linkSitio;
     
-    public DataProovedor(Usuario u) {
+    public DataProveedor(Usuario u) {
         super(u);
     }
     
-    public DataProovedor(String nombre_compania, String link_sitio, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public DataProveedor(String nombre_compania, String link_sitio, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
         super(nickname, nombre, apellido, email, fechaNacimiento);
         this.nombreCompania = nombre_compania;
         this.linkSitio = link_sitio;
