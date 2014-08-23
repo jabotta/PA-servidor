@@ -2,7 +2,7 @@ package Controlador.Clases;
 
 import java.util.Date;
 
-public class Usuario {
+public abstract class Usuario {
     
     private String nickname;
     private String nombre;
