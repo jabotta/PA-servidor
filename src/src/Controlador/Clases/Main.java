@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     
@@ -16,10 +17,63 @@ public class Main {
 //        s.put(3, "s");
 //        System.out.println(s);
         
+        casoDeUso1();
+        casoDeUso3();
         casoDeUso4();
     }
     
+    public static void casoDeUso1(){
+        System.out.println("**************************** Registrar Usuario ****************************");
+        
+        String tipoUsuario;
+        Scanner eTipoUsuario = new Scanner (System.in); 
+        tipoUsuario = eTipoUsuario.nextLine ();
+        
+        switch (tipoUsuario) {
+            case "c":
+                Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
+                clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
+                clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
+                    System.out.println(valor);
+                }); 
+            break;
+            case "p":
+                Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
+                proveedores.put("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+                proveedores.entrySet().stream().map((proveedor) -> proveedor.getValue()).forEach((valor) -> {
+                    System.out.println(valor);
+                }); 
+            break;
+        }
+    }
+    
+    public static void casoDeUso3(){
+        System.out.println("**************************** Alta de categoría ****************************");
+        
+        Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap());
+        categorias.put("cat1", new Categoria("cat1", null));
+        
+        categorias.entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+            System.out.println(valor);
+        });
+    }
+    
     public static void casoDeUso4(){
+        Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
+        System.out.println("*************************** Clientes ***************************");
+        clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
+        clientes.put("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
+        clientes.put("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
+        clientes.put("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
+        clientes.put("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
+        
+        //        for(Map.Entry<String, Cliente> cliente : clientes.entrySet()){
+//            System.out.println(cliente.getValue().toString());
+//        }
+        clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
+            System.out.println(valor);
+        });
+        
         Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
         System.out.println("************************** Proveedores **************************");
         proveedores.put("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
@@ -82,22 +136,7 @@ public class Main {
             System.out.println(valor);
         });
         
-        Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
-        System.out.println("*************************** Clientes ***************************");
-        clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
-        clientes.put("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
-        clientes.put("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
-        clientes.put("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
-        clientes.put("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
-        
-        //        for(Map.Entry<String, Cliente> cliente : clientes.entrySet()){
-//            System.out.println(cliente.getValue().toString());
-//        }
-        clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
-        
-        System.out.println("**************************** Inicio ****************************");
+        System.out.println("**************************** Generar orden de compra ****************************");
         System.out.println("Cliente Seleccionado: ");
         Cliente cliSeleccionado = clientes.get("abotta");
         System.out.println(cliSeleccionado);
