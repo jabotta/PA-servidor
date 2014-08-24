@@ -26,4 +26,8 @@ public class Categoria {
         this.padre = padre;
     }
     
+    @Override
+    public String toString() {
+        return this.getNombre() + "  --  " + this.getPadre();
+    }
 }

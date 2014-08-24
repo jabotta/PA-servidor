@@ -7,7 +7,7 @@ public class Proveedor extends Usuario{
     private String nombreCompania;
     private String linkSitio;
 
-    public Proveedor(String nombreCompania, String linkSitio, String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public Proveedor(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String nombreCompania, String linkSitio) {
         super(nickname, nombre, apellido, email, fechaNacimiento);
         this.nombreCompania = nombreCompania;
         this.linkSitio = linkSitio;
@@ -27,6 +27,11 @@ public class Proveedor extends Usuario{
 
     public void setLinkSitio(String linkSitio) {
         this.linkSitio = linkSitio;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getNickname() + "  --  " + this.getNombre() + "  --  " + this.getApellido();
     }
     
 }

@@ -7,20 +7,19 @@ public class EspecificacionProducto {
     private String nroReferencia;
     private String nombre;
     private String descripcion;
-    private String especificacion;
+    private ArrayList<String> especificacion;
     private Float precio;
     private Proveedor proveedor;
     private ArrayList<String> imagenes;
-    private ArrayList<String> categorias;
+    private ArrayList<Categoria> categorias;
     
-    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, String especificacion, Float precio, Proveedor proveedor, ArrayList<String> imagenes, ArrayList<String> categorias) {
+    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, ArrayList<String> especificacion, Float precio, Proveedor proveedor, ArrayList<Categoria> categorias) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.especificacion = especificacion;
         this.precio = precio;
         this.proveedor = proveedor;
-        this.imagenes = imagenes;
         this.categorias = categorias;
     }
 
@@ -48,11 +47,11 @@ public class EspecificacionProducto {
         this.descripcion = descripcion;
     }
 
-    public String getEspecificacion() {
+    public ArrayList<String> getEspecificacion() {
         return especificacion;
     }
 
-    public void setEspecificacion(String especificacion) {
+    public void setEspecificacion(ArrayList<String> especificacion) {
         this.especificacion = especificacion;
     }
 
@@ -80,12 +79,17 @@ public class EspecificacionProducto {
         this.imagenes = imagenes;
     }
     
-    public ArrayList<String> getCategorias() {
+    public ArrayList<Categoria> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(ArrayList<String> categorias) {
+    public void setCategorias(ArrayList<Categoria> categorias) {
         this.categorias = categorias;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getNroReferencia() + "  --  " + this.getNombre();
     }
     
 }

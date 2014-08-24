@@ -44,4 +44,9 @@ public class OrdenCompra {
         return precioTotal;
     }
     
+    @Override
+    public String toString() {
+        return this.getNroOrden() + "  --  " + this.getFecha() + "  --  " + this.getClienteCompraProducto() ;
+    }
+    
 }

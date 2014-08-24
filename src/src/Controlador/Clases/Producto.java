@@ -26,4 +26,9 @@ public class Producto {
         this.especificacionProducto = especificacionProducto;
     }
     
+    @Override
+    public String toString() {
+        return this.getId() + "  --  " + this.getEspecificacionProducto();
+    }
+    
 }
