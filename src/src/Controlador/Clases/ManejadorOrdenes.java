@@ -14,4 +14,16 @@ public class ManejadorOrdenes {
     
     }
     
+    public void agregarOrden(OrdenCompra orden){
+        
+    }
+    
+    public OrdenCompra obtenerOrdenes(){
+        return null;
+    }
+    
+    public void eliminarOrden(OrdenCompra orden){
+        
+    }
+    
 }

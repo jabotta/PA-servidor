@@ -67,4 +67,8 @@ public abstract class Usuario {
         this.imagenes = imagenes;
     }
     
+    public boolean validarDatosUsuario(){
+        return true;
+    }
+    
 }

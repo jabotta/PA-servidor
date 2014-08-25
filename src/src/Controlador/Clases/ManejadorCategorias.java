@@ -16,4 +16,8 @@ public class ManejadorCategorias {
     
     }
     
+    public void guardarCategoria(Categoria categoria){
+        
+    }
+    
 }

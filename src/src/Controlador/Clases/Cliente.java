@@ -8,6 +8,10 @@ public class Cliente extends Usuario{
         super(nickname, nombre, apellido, email, fechaNacimiento);
     }
     
+    public ClienteCompraProducto obtenerClienteCompraProducto() {
+        return null;
+    }
+    
     @Override
     public String toString() {
         return this.getNickname() + "  --  " + this.getNombre() + "  --  " + this.getApellido();

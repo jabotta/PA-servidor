@@ -1,5 +1,6 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataProveedor;
 import java.util.Date;
 
 public class Proveedor extends Usuario{
@@ -27,6 +28,10 @@ public class Proveedor extends Usuario{
 
     public void setLinkSitio(String linkSitio) {
         this.linkSitio = linkSitio;
+    }
+    
+    public DataProveedor obtenerDataProovedor(){
+        return null;
     }
     
     @Override

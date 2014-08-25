@@ -36,6 +36,10 @@ public class ClienteCompraProducto {
         this.precio = precio;
     }
     
+    public OrdenCompra obtenerOrdenCompra(){
+        return null;
+    }
+    
     @Override
     public String toString() {
         return this.getCliente() + "  --  " + this.getProducto() + "  --  " + this.getPrecio() ;

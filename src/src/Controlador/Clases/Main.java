@@ -182,7 +182,10 @@ public class Main {
             System.out.println(cliComProd);
         });
         
-        OrdenCompra ordenCompra = new OrdenCompra(1, new Date(), cliComProds);
+        Map<Integer,OrdenCompra> ordenesDeCompras = Collections.synchronizedMap(new HashMap());
+        ordenesDeCompras.put(1, new OrdenCompra(1, new Date(), cliComProds));
+        
+        OrdenCompra ordenCompra = ordenesDeCompras.get(1);
         
         System.out.println("Orden de Compra: ");
         System.out.println(ordenCompra);
