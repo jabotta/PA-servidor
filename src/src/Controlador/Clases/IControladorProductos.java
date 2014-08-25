@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public interface IControladorProductos {
     
+    public Integer getId();
+    public void setId(Integer id);
     public ArrayList<DataProveedor> listarProveedores();    
     public void elegirProveedor(String nickname);
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto);
@@ -31,6 +33,5 @@ public interface IControladorProductos {
     public void agregarImagen(String rutaImagen);
     public void agregarCategoria(DataCategoria categoria);
     public Boolean validarInfo();
-    public Integer getId();
     
 }

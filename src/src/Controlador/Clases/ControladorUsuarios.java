@@ -1,6 +1,5 @@
 package Controlador.Clases;
 
-import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProveedor;
@@ -10,8 +9,14 @@ import java.util.ArrayList;
 public class ControladorUsuarios implements IControladorUsuarios{
     public Integer id;
     
+    @Override
     public Integer getId(){
         return this.id;
+    }
+    
+    @Override
+    public void setId(Integer id){
+        this.id = id;
     }
     
     private Cliente clienteElegido;

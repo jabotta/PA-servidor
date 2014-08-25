@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 public interface IControladorOrdenes {
     
-    public DataCliente listarClientes();
+    public Integer getId();
+    public void setId(Integer id);
+    public ArrayList<DataCliente> listarClientes();
     public void elegirCliente(String nickname);
     public ArrayList<DataCategoria> listarCategorias();
     public void elegirCategoria(String categoria);
@@ -26,5 +28,5 @@ public interface IControladorOrdenes {
     public Boolean confirmarEliminacion();
     public void borrarOrdenCompra();
     public DataOrdenCompra mostrarDetalles();
-    public Integer getId();
+    
 }

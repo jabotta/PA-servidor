@@ -23,70 +23,98 @@ public class ControladorOrdenes implements IControladorOrdenes{
         return this.id;
     }
     
-    public DataCliente listarClientes(){
-        return null;
+    @Override
+    public void setId(Integer id){
+        this.id = id;
     }
     
+    @Override
+    public ArrayList<DataCliente> listarClientes(){
+        ArrayList<DataCliente> dataCliente = new ArrayList<>();
+        ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
+            if(valor instanceof Cliente){
+                dataCliente.add(new DataCliente(valor));
+            }
+        });
+        System.out.print(dataCliente);
+        return dataCliente;
+    }
+    
+    @Override
     public void elegirCliente(String nickname){
-        
+        clienteElegido = (Cliente) ManejadorUsuarios.getInstance().obtenerUsuarios().get(nickname);
     }
     
+    @Override
     public ArrayList<DataCategoria> listarCategorias(){
         return null;
     }
     
+    @Override
     public void elegirCategoria(String categoria){
         
     }
     
+    @Override
     public ArrayList<DataEspecificacionProducto> listarEspecificacionProductos(){
         return null;
     }
     
+    @Override
     public void elegirEspecificacionProducto(String nroRef){
         
     }
-    
+    //@Override
 //    public void elegirMetodoDeSeleccion(String metodo){
 //        
 //    }
     
+    @Override
     public ArrayList<DataProducto> listarProductos(){
         return null;
     }
     
+    @Override
     public void elegirProducto(Integer id){
         
     }
     
+    @Override
     public void generarItemOrden(){
         
     }
     
+    @Override
     public void guardarOrden(){
         
     }
     
+    //@Override
 //    public void imprimirDatosOrden(){
 //        
 //    }
     
+    @Override
     public ArrayList<DataOrdenCompra> listarOrdenes(){
         return null;
     }
     
+    @Override
     public void elegirOrden(Integer nroOrden){
         
     }
     
+    @Override
     public Boolean confirmarEliminacion(){
         return true;
     }
     
+    @Override
     public void borrarOrdenCompra(){
         
     }
     
+    @Override
     public DataOrdenCompra mostrarDetalles(){
         return null;
     }

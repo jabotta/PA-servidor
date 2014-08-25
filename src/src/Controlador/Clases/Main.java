@@ -1,17 +1,23 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataCliente;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     
-    public static int idUsuariosControlador;
-    public static int idProductosControlador;
-    public static int idOrdenesControlador;
+    public static Integer idUsuariosControlador;
+    public static Integer idProductosControlador;
+    public static Integer idOrdenesControlador;
+    public static IControladorOrdenes controlarOrden;
     
     public static void main(String args[]) {
 //        Map<Integer,String> s = Collections.synchronizedMap(new HashMap());
@@ -20,158 +26,168 @@ public class Main {
 //        s.put(2, "s");
 //        s.put(3, "s");
 //        System.out.println(s);
-        idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
-        idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
-        idOrdenesControlador = Fabrica.getInstance().getControladorOrdenes(null).getId();
-        casoDeUso1();
-        casoDeUso3();
-        casoDeUso4();
-    }
-    
-    public static void casoDeUso1(){
-        System.out.println("**************************** Registrar Usuario ****************************");
-        
-        String tipoUsuario;
-        Scanner eTipoUsuario = new Scanner (System.in); 
-        tipoUsuario = eTipoUsuario.nextLine ();
-        
-        switch (tipoUsuario) {
-            case "c":
-                Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
-                clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
-                clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
-                    System.out.println(valor);
-                }); 
-            break;
-            case "p":
-                Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
-                proveedores.put("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-                proveedores.entrySet().stream().map((proveedor) -> proveedor.getValue()).forEach((valor) -> {
-                    System.out.println(valor);
-                }); 
-            break;
+        try {
+            idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
+            idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
+            idOrdenesControlador = Fabrica.getInstance().getControladorOrdenes(null).getId();
+        } catch (Exception e) {
+            Writer writer = new StringWriter(); PrintWriter printWriter = new PrintWriter(writer); e.printStackTrace(printWriter); String s = writer.toString();
+            System.out.println(s);
         }
+        
+        
+        controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
+//        casoDeUso1();
+//        casoDeUso3();
+        casoDeUso4(controlarOrden);
     }
     
-    public static void casoDeUso3(){
-        System.out.println("**************************** Alta de categoría ****************************");
-        
-        Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap());
-        categorias.put("cat1", new Categoria("cat1", null));
-        
-        categorias.entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
-    }
-    
-    public static void casoDeUso4(){
-        Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
-        System.out.println("*************************** Clientes ***************************");
-        clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
-        clientes.put("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
-        clientes.put("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
-        clientes.put("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
-        clientes.put("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
-        
-        //        for(Map.Entry<String, Cliente> cliente : clientes.entrySet()){
-//            System.out.println(cliente.getValue().toString());
+//    public static void casoDeUso1(){
+//        System.out.println("**************************** Registrar Usuario ****************************");
+//        
+//        String tipoUsuario;
+//        Scanner eTipoUsuario = new Scanner (System.in); 
+//        tipoUsuario = eTipoUsuario.nextLine ();
+//        
+//        switch (tipoUsuario) {
+//            case "c":
+//                Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
+//                clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
+//                clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
+//                    System.out.println(valor);
+//                }); 
+//            break;
+//            case "p":
+//                Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
+//                proveedores.put("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+//                proveedores.entrySet().stream().map((proveedor) -> proveedor.getValue()).forEach((valor) -> {
+//                    System.out.println(valor);
+//                }); 
+//            break;
 //        }
-        clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
-        
-        Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
-        System.out.println("************************** Proveedores **************************");
-        proveedores.put("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-        proveedores.put("prov2", new Proveedor("prov2", "Proveedor 2", "", "prov2@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-        proveedores.put("prov3", new Proveedor("prov3", "Proveedor 3", "", "prov3@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+//    }
+//    
+//    public static void casoDeUso3(){
+//        System.out.println("**************************** Alta de categoría ****************************");
+//        
+//        Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap());
+//        categorias.put("cat1", new Categoria("cat1", null));
+//        
+//        categorias.entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+//            System.out.println(valor);
+//        });
+//    }
+    
+    public static void casoDeUso4(IControladorOrdenes controlarOrden){
+//        System.out.println("*************************** Clientes ***************************");
+        ManejadorUsuarios.getInstance().agregarUsuario("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
 
-        proveedores.entrySet().stream().map((proveedor) -> proveedor.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
+//        ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
+//            System.out.println(valor);
+//        });
         
-        Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap());
-        System.out.println("************************** Categorias **************************");
-        categorias.put("cat1", new Categoria("cat1", null));
-        categorias.put("cat2", new Categoria("cat2", null));
-        categorias.put("cat3", new Categoria("cat3", null));
-        categorias.put("cat4", new Categoria("cat4", null));
-        categorias.put("cat5", new Categoria("cat5", null));
+//        System.out.println("************************** Proveedores **************************");
+        ManejadorUsuarios.getInstance().agregarUsuario("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+        ManejadorUsuarios.getInstance().agregarUsuario("prov2", new Proveedor("prov2", "Proveedor 2", "", "prov2@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+        ManejadorUsuarios.getInstance().agregarUsuario("prov3", new Proveedor("prov3", "Proveedor 3", "", "prov3@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
         
-        categorias.entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
+//        ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet().stream().map((proveedor) -> proveedor.getValue()).forEach((valor) -> {
+//            System.out.println(valor);
+//        });
         
-        Map<String,EspecificacionProducto> espProductos = Collections.synchronizedMap(new HashMap());
-        System.out.println("******************* Especificacion Productos *******************");
+//        System.out.println("************************** Categorias **************************");
+        ManejadorCategorias.getInstance().agregarCategoria("cat1", new Categoria("cat1", null));
+        ManejadorCategorias.getInstance().agregarCategoria("cat2", new Categoria("cat2", null));
+        ManejadorCategorias.getInstance().agregarCategoria("cat3", new Categoria("cat3", null));
+        ManejadorCategorias.getInstance().agregarCategoria("cat4", new Categoria("cat4", null));
+        ManejadorCategorias.getInstance().agregarCategoria("cat5", new Categoria("cat5", null));
+        
+//        ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+//            System.out.println(valor);
+//        });
+        
+//        System.out.println("******************* Especificacion Productos *******************");
         ArrayList<Categoria> cat1 = new ArrayList<>();
-        cat1.add(categorias.get("cat1"));
-        cat1.add(categorias.get("cat5"));
+        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
+        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat5"));
         ArrayList<String> esp1 = new ArrayList<>();
         esp1.add("Espacificacion 1");
         esp1.add("Espacificacion 2");
-        espProductos.put("a1", new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, proveedores.get("prov1"), cat1));
-
+        Proveedor prov1 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov1");
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a1", new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1));
+                
         ArrayList<Categoria> cat2 = new ArrayList<>();
-        cat2.add(categorias.get("cat1"));
-        cat2.add(categorias.get("cat3"));
+        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
+        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat3"));
         ArrayList<String> esp2 = new ArrayList<>();
         esp2.add("Espacificacion 1");
-        espProductos.put("a2", new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, proveedores.get("prov2"), cat2));
+        Proveedor prov2 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov2");
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a2", new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, prov2, cat2));
         
         ArrayList<Categoria> cat3 = new ArrayList<>();
-        cat3.add(categorias.get("cat4"));
+        cat3.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat4"));
         ArrayList<String> esp3 = new ArrayList<>();
         esp3.add("Espacificacion 1");
-        espProductos.put("a3", new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, proveedores.get("prov3"), cat3));
+        Proveedor prov3 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov3");
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a3", new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, prov3, cat3));
+
+//        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
+//            System.out.println(valor);
+//        });
         
-        espProductos.entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
+//        System.out.println("************************** Productos **************************");
+        ManejadorProductos.getInstance().agregarProducto(1, new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+        ManejadorProductos.getInstance().agregarProducto(2, new Producto(2, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+        ManejadorProductos.getInstance().agregarProducto(3, new Producto(3, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+        ManejadorProductos.getInstance().agregarProducto(4, new Producto(4, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
+        ManejadorProductos.getInstance().agregarProducto(5, new Producto(5, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
+        ManejadorProductos.getInstance().agregarProducto(6, new Producto(6, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
         
-        Map<Integer,Producto> productos = Collections.synchronizedMap(new HashMap());
-        System.out.println("************************** Productos **************************");
-        productos.put(1, new Producto(1, espProductos.get("a1")));
-        productos.put(2, new Producto(2, espProductos.get("a1")));
-        productos.put(3, new Producto(3, espProductos.get("a1")));
-        productos.put(4, new Producto(4, espProductos.get("a2")));
-        productos.put(5, new Producto(5, espProductos.get("a2")));
-        productos.put(6, new Producto(6, espProductos.get("a3")));
-        
-        productos.entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
+//        ManejadorProductos.getInstance().obtenerProductos().entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
+//            System.out.println(valor);
+//        });
         
         System.out.println("**************************** Generar orden de compra ****************************");
-        System.out.println("Cliente Seleccionado: ");
-        Cliente cliSeleccionado = clientes.get("abotta");
-        System.out.println(cliSeleccionado);
+        
+        //Listar clientes
+        Iterator<DataCliente> it = controlarOrden.listarClientes().iterator();
+        while(it.hasNext()){
+            DataCliente cliente = it.next();
+            System.out.print(cliente);
+        }
+
+        //Cliente Seleccionado
+        controlarOrden.elegirCliente("abotta");
         
         System.out.println("Categoria seleccionada: ");
-        Categoria categoriaSeleccionada = categorias.get("cat1");
+        Categoria categoriaSeleccionada = ManejadorCategorias.getInstance().obtenerCategorias().get("cat1");
         System.out.println(categoriaSeleccionada);
         
         System.out.println("Listar esp de productos de la categoria seleccionada: ");
-        espProductos.entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
+        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
             if(valor.getCategorias().contains(categoriaSeleccionada)){
                 System.out.println(valor);
             }
         });
         
         System.out.println("Esp Producto seleccionado: ");
-        EspecificacionProducto espProductoSeleccionado = espProductos.get("a1");
+        EspecificacionProducto espProductoSeleccionado = ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1");
         System.out.println(espProductoSeleccionado);
         
         System.out.println("Listar productos de la especificacion seleccionada: ");
-        productos.entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
+        ManejadorProductos.getInstance().obtenerProductos().entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
             if(valor.getEspecificacionProducto() == espProductoSeleccionado){
                 System.out.println(valor);
             }
         });
         
         ArrayList<Producto> productosSeleccionados = new ArrayList<>();
-        productosSeleccionados.add(productos.get(1));
-        productosSeleccionados.add(productos.get(3));
+        productosSeleccionados.add(ManejadorProductos.getInstance().obtenerProductos().get(1));
+        productosSeleccionados.add(ManejadorProductos.getInstance().obtenerProductos().get(3));
         
         System.out.println("Producto seleccionado: ");
         productosSeleccionados.stream().forEach((productoSeleccionado) -> {

@@ -10,7 +10,6 @@ public class Fabrica {
     
     public static Fabrica getInstance(){
         if(Fabrica.instance == null){
-            
             Fabrica.instance = new Fabrica();
         }
         return Fabrica.instance;

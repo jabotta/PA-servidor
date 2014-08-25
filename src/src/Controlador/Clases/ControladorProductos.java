@@ -15,16 +15,20 @@ public class ControladorProductos implements IControladorProductos{
     private Producto nuevoProducto;
     private Categoria nuevaCategoria;
     public Integer id;
+    //    - prvLst Set<Proveedor>
+//    - espLst : map<string,string>
+//    - prdList : Productos
+//    - lstCategorias  : Set<Categoria>
     
     @Override
     public Integer getId(){
         return this.id;
     }
     
-//    - prvLst Set<Proveedor>
-//    - espLst : map<string,string>
-//    - prdList : Productos
-//    - lstCategorias  : Set<Categoria>
+    @Override
+    public void setId(Integer id){
+        this.id = id;
+    }
     
     public ArrayList<DataProveedor> listarProveedores(){
         return null;

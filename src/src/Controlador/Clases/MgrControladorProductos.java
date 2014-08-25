@@ -7,12 +7,11 @@ import java.util.Map;
 public class MgrControladorProductos {
     
     private static MgrControladorProductos instance = null; 
-    private Map<Integer,ControladorProductos> controladorColection;
+    private Map<Integer,ControladorProductos> controladorColection = Collections.synchronizedMap(new HashMap());
     
     public static MgrControladorProductos getInstance(){
         if(MgrControladorProductos.instance == null){
             MgrControladorProductos.instance = new MgrControladorProductos();
-            MgrControladorProductos.instance.controladorColection =Collections.synchronizedMap(new HashMap());
         }
         return MgrControladorProductos.instance;
     }
@@ -26,6 +25,7 @@ public class MgrControladorProductos {
             return controladorColection.get(idController);
         }else{
             ControladorProductos newController = new ControladorProductos();
+            newController.setId(idController);
             controladorColection.put(idController, newController);
             return newController;
         }
