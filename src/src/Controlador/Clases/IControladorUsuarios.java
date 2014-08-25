@@ -7,7 +7,7 @@ import Controlador.DataTypes.DataUsuario;
 import java.util.ArrayList;
 
 public interface IControladorUsuarios {
-    
+
     public void ingresarDatos(DataUsuario usuario);
     public void validarDatosUsuario();
     public void guardarUsuario();
@@ -19,5 +19,6 @@ public interface IControladorUsuarios {
     public ArrayList<DataProveedor> listarProveedores();
     public void elegirProveedor(String nickname);
     public DataProveedor mostrarDatosProveedor();
-    
+
+    public Integer getId();
 }

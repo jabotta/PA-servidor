@@ -8,6 +8,11 @@ import Controlador.DataTypes.DataUsuario;
 import java.util.ArrayList;
 
 public class ControladorUsuarios implements IControladorUsuarios{
+    public Integer id;
+    
+    public Integer getId(){
+        return this.id;
+    }
     
     private Cliente clienteElegido;
     private Proveedor proveedorElegido;

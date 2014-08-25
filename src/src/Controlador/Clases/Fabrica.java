@@ -16,7 +16,7 @@ public class Fabrica {
         return Fabrica.instance;
     }
     
-    public static IControladorOrdenes getControladorOrdenes(Integer idController){
+    public IControladorOrdenes getControladorOrdenes(Integer idController){
         if (idController == null) {
             Integer nextKey = MgrControladorOrdenes.getInstance().getSiguienteKey();
             return MgrControladorOrdenes.getInstance().getController(nextKey);
@@ -24,7 +24,7 @@ public class Fabrica {
         return MgrControladorOrdenes.getInstance().getController(idController);
     }
     
-    public static IControladorProductos getControladorProductos(Integer idController){
+    public IControladorProductos getControladorProductos(Integer idController){
         if(idController == null){
             Integer nextKey = MgrControladorProductos.getInstance().getSiguienteKey();
             return MgrControladorProductos.getInstance().getController(nextKey);
@@ -32,7 +32,7 @@ public class Fabrica {
         return MgrControladorProductos.getInstance().getController(idController);
     }
     
-    public static IControladorUsuarios getControladorUsuarios(Integer idController){
+    public IControladorUsuarios getControladorUsuarios(Integer idController){
         if(idController == null){
             Integer nextKey = MgrControladorUsuarios.getInstance().getSiguienteKey();
             return MgrControladorUsuarios.getInstance().getController(nextKey);

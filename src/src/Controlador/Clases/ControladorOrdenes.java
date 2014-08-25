@@ -7,6 +7,7 @@ import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProducto;
 import java.util.ArrayList;
 
+
 public class ControladorOrdenes implements IControladorOrdenes{
     
     private Cliente clienteElegido;
@@ -15,6 +16,12 @@ public class ControladorOrdenes implements IControladorOrdenes{
     private Producto productoElegido;
     private OrdenCompra nuevaOrden;
     private OrdenCompra ordenElegida;
+    public Integer id;
+    
+    @Override
+    public Integer getId(){
+        return this.id;
+    }
     
     public DataCliente listarClientes(){
         return null;

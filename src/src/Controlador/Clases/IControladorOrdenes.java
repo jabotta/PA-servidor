@@ -26,5 +26,5 @@ public interface IControladorOrdenes {
     public Boolean confirmarEliminacion();
     public void borrarOrdenCompra();
     public DataOrdenCompra mostrarDetalles();
-    
+    public Integer getId();
 }

@@ -31,5 +31,6 @@ public interface IControladorProductos {
     public void agregarImagen(String rutaImagen);
     public void agregarCategoria(DataCategoria categoria);
     public Boolean validarInfo();
+    public Integer getId();
     
 }

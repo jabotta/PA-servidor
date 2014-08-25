@@ -1,84 +1,40 @@
-package Controlador.Clases;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+import Controlador.Clases.Categoria;
+import Controlador.Clases.Cliente;
+import Controlador.Clases.ClienteCompraProducto;
+import Controlador.Clases.ControladorOrdenes;
+import Controlador.Clases.EspecificacionProducto;
+import Controlador.Clases.OrdenCompra;
+import Controlador.Clases.Producto;
+import Controlador.Clases.Proveedor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+import org.junit.After;
+import org.junit.AfterClass;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class Main {
+/**
+ *
+ * @author darius
+ */
+public class TestControladorOrdenes {
+
+
     
-    public static int idUsuariosControlador;
-    public static int idProductosControlador;
-    public static int idOrdenesControlador;
-    
-    public static void main(String args[]) {
-//        Map<Integer,String> s = Collections.synchronizedMap(new HashMap());
-//        s.put(1, "s");
-//        s.put(1, "t");
-//        s.put(2, "s");
-//        s.put(3, "s");
-//        System.out.println(s);
-        idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
-        idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
-        idOrdenesControlador = Fabrica.getInstance().getControladorOrdenes(null).getId();
-        casoDeUso1();
-        casoDeUso3();
-        casoDeUso4();
-    }
-    
-    public static void casoDeUso1(){
-        System.out.println("**************************** Registrar Usuario ****************************");
-        
-        String tipoUsuario;
-        Scanner eTipoUsuario = new Scanner (System.in); 
-        tipoUsuario = eTipoUsuario.nextLine ();
-        
-        switch (tipoUsuario) {
-            case "c":
-                Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
-                clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
-                clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
-                    System.out.println(valor);
-                }); 
-            break;
-            case "p":
-                Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
-                proveedores.put("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-                proveedores.entrySet().stream().map((proveedor) -> proveedor.getValue()).forEach((valor) -> {
-                    System.out.println(valor);
-                }); 
-            break;
-        }
-    }
-    
-    public static void casoDeUso3(){
-        System.out.println("**************************** Alta de categoría ****************************");
-        
-        Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap());
-        categorias.put("cat1", new Categoria("cat1", null));
-        
-        categorias.entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
-    }
-    
-    public static void casoDeUso4(){
-        Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
-        System.out.println("*************************** Clientes ***************************");
-        clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
-        clientes.put("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
-        clientes.put("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
-        clientes.put("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
-        clientes.put("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
-        
-        //        for(Map.Entry<String, Cliente> cliente : clientes.entrySet()){
-//            System.out.println(cliente.getValue().toString());
-//        }
-        clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
-            System.out.println(valor);
-        });
+    @Test
+    public void GenerarOrdenTest() {
+       // Generar environment
         
         Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
         System.out.println("************************** Proveedores **************************");
@@ -142,7 +98,22 @@ public class Main {
             System.out.println(valor);
         });
         
-        System.out.println("**************************** Generar orden de compra ****************************");
+        Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
+        System.out.println("*************************** Clientes ***************************");
+        clientes.put("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
+        clientes.put("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
+        clientes.put("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
+        clientes.put("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
+        clientes.put("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
+        
+        //        for(Map.Entry<String, Cliente> cliente : clientes.entrySet()){
+//            System.out.println(cliente.getValue().toString());
+//        }
+        clientes.entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
+            System.out.println(valor);
+        });
+        
+        System.out.println("**************************** Inicio ****************************");
         System.out.println("Cliente Seleccionado: ");
         Cliente cliSeleccionado = clientes.get("abotta");
         System.out.println(cliSeleccionado);
@@ -188,13 +159,14 @@ public class Main {
             System.out.println(cliComProd);
         });
         
-        Map<Integer,OrdenCompra> ordenesDeCompras = Collections.synchronizedMap(new HashMap());
-        ordenesDeCompras.put(1, new OrdenCompra(1, new Date(), cliComProds));
-        
-        OrdenCompra ordenCompra = ordenesDeCompras.get(1);
+        OrdenCompra ordenCompra = new OrdenCompra(1, new Date(), cliComProds);
         
         System.out.println("Orden de Compra: ");
         System.out.println(ordenCompra);
-    }
-    
+       // MyClass is tested
+       ControladorOrdenes tester = new ControladorOrdenes();
+       assertTrue(false);
+
+       // Tests
+     }
 }
