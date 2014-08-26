@@ -24,9 +24,7 @@ public class ControladorProductos implements IControladorProductos{
 //    - espLst : map<string,string>
 //    - prdList : Productos
 //    - lstCategorias  : Set<Categoria>
-    public Proveedor getProveedorElegido(){
-        return this.proveedorElegido;
-    }
+    
     @Override
     public Integer getId(){
         return this.id;
