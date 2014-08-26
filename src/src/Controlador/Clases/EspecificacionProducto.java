@@ -3,7 +3,6 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class EspecificacionProducto {
     
@@ -92,11 +91,9 @@ public class EspecificacionProducto {
     
     public ArrayList<DataCategoria> getDataCategorias() {
         ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
-        Iterator<Categoria> itc = categorias.iterator();
-        while(itc.hasNext()){
-            Categoria categoria = itc.next();
+        categorias.stream().forEach((categoria) -> {
             dataCategorias.add(new DataCategoria(categoria));
-        }
+        });
         return dataCategorias;
     }
 

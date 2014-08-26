@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class ControladorOrdenes implements IControladorOrdenes{
     
+    private Integer id;
     private Cliente clienteElegido;
     private Categoria categoriaElegida;
     private EspecificacionProducto espProdElegido;
@@ -18,7 +19,6 @@ public class ControladorOrdenes implements IControladorOrdenes{
     private ArrayList<ClienteCompraProducto> cliComProds;
     private OrdenCompra nuevaOrden;
     private OrdenCompra ordenElegida;
-    private Integer id;
     
     @Override
     public Integer getId(){

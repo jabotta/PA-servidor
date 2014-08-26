@@ -1,15 +1,10 @@
 package Controlador.Clases;
 
-import Controlador.DataTypes.DataCategoria;
-import Controlador.DataTypes.DataCliente;
-import Controlador.DataTypes.DataEspecificacionProducto;
-import Controlador.DataTypes.DataProducto;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -154,10 +149,6 @@ public class Main {
         System.out.println("**************************** Generar orden de compra ****************************");
         
         //Listar clientes
-//        Iterator<DataCliente> itcl = controlarOrden.listarClientes().iterator();
-//        while(itcl.hasNext()){
-//            DataCliente cliente = itcl.next();
-//        }
         controlarOrden.listarClientes().stream().forEach((cliente) -> {
             System.out.println(cliente);
         });
