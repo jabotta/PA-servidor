@@ -49,4 +49,9 @@ public class DataOrdenCompra {
         return precioTotal;
     }
     
+    @Override
+    public String toString() {
+        return this.getNroOrden() + "  --  " + this.getFecha() + "  --  " + this.getClienteCompraProducto() ;
+    }
+    
 }

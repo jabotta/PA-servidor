@@ -42,4 +42,9 @@ public class DataClienteCompraProducto {
         this.precio = precio;
     }
     
+    @Override
+    public String toString() {
+        return this.getCliente() + "  --  " + this.getProducto() + "  --  " + this.getPrecio() ;
+    }
+    
 }
