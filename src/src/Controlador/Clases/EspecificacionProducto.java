@@ -1,6 +1,7 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataCategoria;
+import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
 
@@ -23,6 +24,17 @@ public class EspecificacionProducto {
         this.precio = precio;
         this.proveedor = proveedor;
         this.categorias = categorias;
+    }
+    
+    public EspecificacionProducto(DataEspecificacionProducto espProducto, Proveedor proveedor) {
+        this.nroReferencia = espProducto.getNroReferencia();
+        this.nombre = espProducto.getNombre();
+        this.descripcion = espProducto.getDescripcion();
+        this.especificacion = new ArrayList<String>();
+        this.precio = espProducto.getPrecio();
+        this.proveedor = proveedor;
+        this.categorias = new ArrayList<Categoria>();
+        this.imagenes = new ArrayList<String>();
     }
 
     public String getNroReferencia() {

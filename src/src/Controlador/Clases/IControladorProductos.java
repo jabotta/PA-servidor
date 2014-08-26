@@ -34,4 +34,6 @@ public interface IControladorProductos {
     public void agregarCategoria(DataCategoria categoria);
     public Boolean validarInfo();
     
+    public Proveedor getProveedorElegido();
+    
 }

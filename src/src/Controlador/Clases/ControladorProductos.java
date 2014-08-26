@@ -5,6 +5,9 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControladorProductos implements IControladorProductos{
     
@@ -13,14 +16,17 @@ public class ControladorProductos implements IControladorProductos{
     private Proveedor proveedorElegido;
     private EspecificacionProducto espProdElegido;
     private ArrayList<String> especificaciones;
-    private Producto nuevoProducto;
+    private EspecificacionProducto nuevoProducto;
     private Categoria nuevaCategoria;
+    private Map<String,Proveedor> prvList = Collections.synchronizedMap(new HashMap());
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
 //    - prdList : Productos
 //    - lstCategorias  : Set<Categoria>
-    
+    public Proveedor getProveedorElegido(){
+        return this.proveedorElegido;
+    }
     @Override
     public Integer getId(){
         return this.id;
@@ -33,17 +39,22 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public ArrayList<DataProveedor> listarProveedores(){
-        return null;
+        prvList = ManejadorUsuarios.getInstance().obtenerProveedores();
+        ArrayList<DataProveedor> result = new ArrayList<DataProveedor>();
+        prvList.keySet().stream().forEach((p) -> {
+            result.add(new DataProveedor(prvList.get(p)));
+        });
+        return result;
     }
     
     @Override
     public void elegirProveedor(String nickname){
-        
+        proveedorElegido = prvList.get(nickname);
     }
     
     @Override
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto){
-        
+        nuevoProducto = new EspecificacionProducto(espProducto,proveedorElegido);
     }
     
     @Override

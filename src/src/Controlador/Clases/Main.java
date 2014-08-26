@@ -1,5 +1,8 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataCategoria;
+import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataProveedor;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -13,6 +16,7 @@ public class Main {
     public static Integer idProductosControlador;
     public static Integer idOrdenesControlador;
     public static IControladorOrdenes controlarOrden;
+    public static IControladorProductos controlarProducto;
     
     public static void main(String args[]) {
 //        Map<Integer,String> s = Collections.synchronizedMap(new HashMap());
@@ -32,7 +36,9 @@ public class Main {
         
         
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
+        controlarProducto = Fabrica.getInstance().getControladorProductos(idOrdenesControlador);
 //        casoDeUso1();
+        casoDeUso2(controlarProducto);
 //        casoDeUso3();
         casoDeUso4(controlarOrden);
     }
@@ -61,7 +67,19 @@ public class Main {
 //            break;
 //        }
 //    }
-//    
+    
+    public static void casoDeUso2(IControladorProductos controlarProducto){
+        ArrayList<DataProveedor> listaProveedores = controlarProducto.listarProveedores();
+        //imprimir los proveedores
+        
+        String nicknameProveedor = "";//leer el nickname del proveedor elegido
+        controlarProducto.elegirProveedor(nicknameProveedor);
+        
+        //leer datos de nueva especificacion
+        DataEspecificacionProducto espProducto = DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", new ArrayList<String>(), (float)12.0, new DataProveedor(controlarProducto.getProveedorElegido()), new ArrayList<String>(), new ArrayList<DataCategoria>());
+        controlarProducto.ingresarDatosProductos(espProducto);
+        
+    }
 //    public static void casoDeUso3(){
 //        System.out.println("**************************** Alta de categoría ****************************");
 //        
@@ -192,5 +210,6 @@ public class Main {
         System.out.println("Orden de Compra: ");
         System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(1));
     }
+
     
 }
