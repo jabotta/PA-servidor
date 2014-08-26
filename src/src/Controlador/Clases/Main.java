@@ -76,7 +76,7 @@ public class Main {
         controlarProducto.elegirProveedor(nicknameProveedor);
         
         //leer datos de nueva especificacion
-        DataEspecificacionProducto espProducto = DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", new ArrayList<String>(), (float)12.0, new DataProveedor(controlarProducto.getProveedorElegido()), new ArrayList<String>(), new ArrayList<DataCategoria>());
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", new ArrayList<String>(), (float)12.0, new DataProveedor(controlarProducto.getProveedorElegido()), new ArrayList<String>(), new ArrayList<DataCategoria>());
         controlarProducto.ingresarDatosProductos(espProducto);
         
     }
