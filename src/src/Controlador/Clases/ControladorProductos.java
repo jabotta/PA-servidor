@@ -14,7 +14,7 @@ public class ControladorProductos implements IControladorProductos{
     private ArrayList<String> especificaciones;
     private Producto nuevoProducto;
     private Categoria nuevaCategoria;
-    public Integer id;
+    private Integer id;
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
 //    - prdList : Productos

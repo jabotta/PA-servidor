@@ -7,7 +7,7 @@ import Controlador.DataTypes.DataUsuario;
 import java.util.ArrayList;
 
 public class ControladorUsuarios implements IControladorUsuarios{
-    public Integer id;
+    private Integer id;
     
     @Override
     public Integer getId(){

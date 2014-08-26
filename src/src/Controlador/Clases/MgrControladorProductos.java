@@ -7,11 +7,12 @@ import java.util.Map;
 public class MgrControladorProductos {
     
     private static MgrControladorProductos instance = null; 
-    private Map<Integer,ControladorProductos> controladorColection = Collections.synchronizedMap(new HashMap());
+    private Map<Integer,ControladorProductos> controladorColection;
     
     public static MgrControladorProductos getInstance(){
         if(MgrControladorProductos.instance == null){
             MgrControladorProductos.instance = new MgrControladorProductos();
+            MgrControladorProductos.instance.controladorColection =Collections.synchronizedMap(new HashMap());
         }
         return MgrControladorProductos.instance;
     }

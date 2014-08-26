@@ -6,6 +6,7 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProducto;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ControladorOrdenes implements IControladorOrdenes{
@@ -13,10 +14,11 @@ public class ControladorOrdenes implements IControladorOrdenes{
     private Cliente clienteElegido;
     private Categoria categoriaElegida;
     private EspecificacionProducto espProdElegido;
-    private Producto productoElegido;
+    private ArrayList<Producto> productosElegidos;
+    private ArrayList<ClienteCompraProducto> cliComProds;
     private OrdenCompra nuevaOrden;
     private OrdenCompra ordenElegida;
-    public Integer id;
+    private Integer id;
     
     @Override
     public Integer getId(){
@@ -36,7 +38,6 @@ public class ControladorOrdenes implements IControladorOrdenes{
                 dataCliente.add(new DataCliente(valor));
             }
         });
-        System.out.print(dataCliente);
         return dataCliente;
     }
     
@@ -47,22 +48,32 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public ArrayList<DataCategoria> listarCategorias(){
-        return null;
+        ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
+        ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+            dataCategoria.add(new DataCategoria(valor));
+        });
+        return dataCategoria;
     }
     
     @Override
     public void elegirCategoria(String categoria){
-        
+        categoriaElegida = ManejadorCategorias.getInstance().obtenerCategorias().get(categoria);
     }
     
     @Override
     public ArrayList<DataEspecificacionProducto> listarEspecificacionProductos(){
-        return null;
+        ArrayList<DataEspecificacionProducto> dataEspecificacionProducto = new ArrayList<>();
+        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
+            if(valor.getCategorias().contains(categoriaElegida)){
+                dataEspecificacionProducto.add(new DataEspecificacionProducto(valor));
+            }
+        });
+        return dataEspecificacionProducto;
     }
     
     @Override
     public void elegirEspecificacionProducto(String nroRef){
-        
+        espProdElegido = ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get(nroRef);
     }
     //@Override
 //    public void elegirMetodoDeSeleccion(String metodo){
@@ -71,22 +82,30 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public ArrayList<DataProducto> listarProductos(){
-        return null;
+        ArrayList<DataProducto> dataProductos = new ArrayList<>();
+        ManejadorProductos.getInstance().obtenerProductos().entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
+            if(valor.getEspecificacionProducto() == espProdElegido){
+                dataProductos.add(new DataProducto(valor));
+            }
+        });
+        return dataProductos;
     }
     
     @Override
     public void elegirProducto(Integer id){
-        
+        productosElegidos.add(ManejadorProductos.getInstance().obtenerProductos().get(id));
     }
     
     @Override
     public void generarItemOrden(){
-        
+        productosElegidos.stream().forEach((productoElegido) -> {
+            cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio()));
+        });
     }
     
     @Override
     public void guardarOrden(){
-        
+        ManejadorOrdenes.getInstance().agregarOrden(1, new OrdenCompra(1, new Date(), cliComProds));
     }
     
     //@Override

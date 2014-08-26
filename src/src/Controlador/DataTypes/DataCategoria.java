@@ -8,7 +8,12 @@ public class DataCategoria {
     private DataCategoria padre;
 
     public DataCategoria(Categoria c) {
-       
+        this.nombre = c.getNombre();
+        if(c.getPadre() == null){
+            this.padre = null;
+        }else{
+            this.padre = c.getDataPadre();
+        }
     }
     
     public DataCategoria(String nombre, DataCategoria padre) {
@@ -30,6 +35,11 @@ public class DataCategoria {
     
     public void setPadre(DataCategoria padre) {
         this.padre = padre;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getNombre() + "  --  " + this.getPadre();
     }
     
 }

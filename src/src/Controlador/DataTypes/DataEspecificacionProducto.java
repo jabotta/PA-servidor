@@ -9,17 +9,24 @@ public class DataEspecificacionProducto {
     private String nroReferencia;
     private String nombre;
     private String descripcion;
-    private String especificacion;
+    private ArrayList<String> especificacion;
     private Float precio;
     private DataProveedor proveedor;
     private ArrayList<String> imagenes;
-    private ArrayList<String> categorias;
+    private ArrayList<DataCategoria> categorias;
     
     public DataEspecificacionProducto(EspecificacionProducto ep) {
-        
+        this.nroReferencia = ep.getNroReferencia();
+        this.nombre = ep.getNombre();
+        this.descripcion = ep.getDescripcion();
+        this.especificacion = ep.getEspecificacion();
+        this.precio = ep.getPrecio();
+        this.proveedor = ep.getDataProveedor();
+        this.imagenes = ep.getImagenes();
+        this.categorias = ep.getDataCategorias();
     }
     
-    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, String especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<String> categorias) {
+    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, ArrayList<String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -54,11 +61,11 @@ public class DataEspecificacionProducto {
         this.descripcion = descripcion;
     }
 
-    public String getEspecificacion() {
+    public ArrayList<String> getEspecificacion() {
         return especificacion;
     }
 
-    public void setEspecificacion(String especificacion) {
+    public void setEspecificacion(ArrayList<String> especificacion) {
         this.especificacion = especificacion;
     }
 
@@ -86,11 +93,11 @@ public class DataEspecificacionProducto {
         this.imagenes = imagenes;
     }
     
-    public ArrayList<String> getCategorias() {
+    public ArrayList<DataCategoria> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(ArrayList<String> categorias) {
+    public void setCategorias(ArrayList<DataCategoria> categorias) {
         this.categorias = categorias;
     }
     

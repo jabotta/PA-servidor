@@ -1,7 +1,13 @@
 package Controlador.Clases;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class ManejadorOrdenes {
+    
     private static ManejadorOrdenes instance = null;
+    Map<Integer,OrdenCompra> ordenes = Collections.synchronizedMap(new HashMap());
     
     public static ManejadorOrdenes getInstance(){
         if(ManejadorOrdenes.instance == null){
@@ -14,12 +20,12 @@ public class ManejadorOrdenes {
     
     }
     
-    public void agregarOrden(OrdenCompra orden){
-        
+    public void agregarOrden(Integer key, OrdenCompra orden){
+        ordenes.put(key, orden);
     }
     
-    public OrdenCompra obtenerOrdenes(){
-        return null;
+    public Map<Integer,OrdenCompra> obtenerOrdenes(){
+        return ordenes;
     }
     
     public void eliminarOrden(OrdenCompra orden){

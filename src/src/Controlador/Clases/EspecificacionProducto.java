@@ -1,6 +1,9 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataCategoria;
+import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class EspecificacionProducto {
     
@@ -66,6 +69,10 @@ public class EspecificacionProducto {
     public Proveedor getProveedor() {
         return proveedor;
     }
+    
+    public DataProveedor getDataProveedor() {
+        return new DataProveedor(proveedor);
+    }
 
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
@@ -81,6 +88,16 @@ public class EspecificacionProducto {
     
     public ArrayList<Categoria> getCategorias() {
         return categorias;
+    }
+    
+    public ArrayList<DataCategoria> getDataCategorias() {
+        ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
+        Iterator<Categoria> itc = categorias.iterator();
+        while(itc.hasNext()){
+            Categoria categoria = itc.next();
+            dataCategorias.add(new DataCategoria(categoria));
+        }
+        return dataCategorias;
     }
 
     public void setCategorias(ArrayList<Categoria> categorias) {

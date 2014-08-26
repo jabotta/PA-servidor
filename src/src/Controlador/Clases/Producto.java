@@ -1,5 +1,7 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataEspecificacionProducto;
+
 public class Producto {
     
     private Integer id;
@@ -20,6 +22,10 @@ public class Producto {
     
     public EspecificacionProducto getEspecificacionProducto() {
         return especificacionProducto;
+    }
+    
+    public DataEspecificacionProducto getDataEspecificacionProducto() {
+        return new DataEspecificacionProducto(especificacionProducto);
     }
     
     public void setEspecificacionProducto(EspecificacionProducto especificacionProducto) {

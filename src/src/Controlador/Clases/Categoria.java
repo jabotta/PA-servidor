@@ -1,5 +1,7 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataCategoria;
+
 public class Categoria {
     
     private String nombre;
@@ -20,6 +22,10 @@ public class Categoria {
     
     public Categoria getPadre() {
         return padre;
+    }
+    
+    public DataCategoria getDataPadre() {
+        return new DataCategoria(padre);
     }
     
     public void setPadre(Categoria padre) {

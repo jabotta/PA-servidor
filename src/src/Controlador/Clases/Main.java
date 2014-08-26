@@ -1,15 +1,15 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataProducto;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -154,63 +154,52 @@ public class Main {
         System.out.println("**************************** Generar orden de compra ****************************");
         
         //Listar clientes
-        Iterator<DataCliente> it = controlarOrden.listarClientes().iterator();
-        while(it.hasNext()){
-            DataCliente cliente = it.next();
-            System.out.print(cliente);
-        }
+//        Iterator<DataCliente> itcl = controlarOrden.listarClientes().iterator();
+//        while(itcl.hasNext()){
+//            DataCliente cliente = itcl.next();
+//        }
+        controlarOrden.listarClientes().stream().forEach((cliente) -> {
+            System.out.println(cliente);
+        });
 
         //Cliente Seleccionado
         controlarOrden.elegirCliente("abotta");
         
-        System.out.println("Categoria seleccionada: ");
-        Categoria categoriaSeleccionada = ManejadorCategorias.getInstance().obtenerCategorias().get("cat1");
-        System.out.println(categoriaSeleccionada);
-        
-        System.out.println("Listar esp de productos de la categoria seleccionada: ");
-        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
-            if(valor.getCategorias().contains(categoriaSeleccionada)){
-                System.out.println(valor);
-            }
+        //Listar categorias
+        controlarOrden.listarCategorias().stream().forEach((categoria) -> {
+            System.out.println(categoria);
         });
         
-        System.out.println("Esp Producto seleccionado: ");
-        EspecificacionProducto espProductoSeleccionado = ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1");
-        System.out.println(espProductoSeleccionado);
+        //Categoria Seleccionado
+        controlarOrden.elegirCategoria("cat1");
         
-        System.out.println("Listar productos de la especificacion seleccionada: ");
-        ManejadorProductos.getInstance().obtenerProductos().entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
-            if(valor.getEspecificacionProducto() == espProductoSeleccionado){
-                System.out.println(valor);
-            }
+        //Listar especificaciones de categoria seleccionada
+        controlarOrden.listarEspecificacionProductos().stream().forEach((espProducto) -> {
+            System.out.println(espProducto);
         });
         
-        ArrayList<Producto> productosSeleccionados = new ArrayList<>();
-        productosSeleccionados.add(ManejadorProductos.getInstance().obtenerProductos().get(1));
-        productosSeleccionados.add(ManejadorProductos.getInstance().obtenerProductos().get(3));
+        //Especificacion Producto seleccionado
+        controlarOrden.elegirEspecificacionProducto("a1");
         
-        System.out.println("Producto seleccionado: ");
-        productosSeleccionados.stream().forEach((productoSeleccionado) -> {
-            System.out.println(productoSeleccionado);
+        //Listar productos de la especificacion seleccionada
+        controlarOrden.listarProductos().stream().forEach((producto) -> {
+            System.out.println(producto);
         });
         
-        ArrayList<ClienteCompraProducto> cliComProds = new ArrayList<>();
-        productosSeleccionados.stream().forEach((productoSeleccionado) -> {
-            cliComProds.add(new ClienteCompraProducto(cliSeleccionado, productoSeleccionado, espProductoSeleccionado.getPrecio()));
-        });
+        //HAY Q VER ESTO SI SE AGREGA DE A UNO LOS PRODUCTOS O SE AGREGAN TODOS JUNTOS PQ CAMBIARIA EL
+        //GENERAR ITEM ORDEN. HABLARLO CON ANDRES Q ENTIENDE
+        //Especificacion Producto seleccionado
+        controlarOrden.elegirProducto(1);
+        controlarOrden.elegirProducto(3);
+        //Generar item Orden
+        controlarOrden.generarItemOrden();
+        //HASTA ACA VA LA CONSULTA
         
-        System.out.println("Cliente Compra Productos seleccionado: ");
-        cliComProds.stream().forEach((cliComProd) -> {
-            System.out.println(cliComProd);
-        });
-        
-        Map<Integer,OrdenCompra> ordenesDeCompras = Collections.synchronizedMap(new HashMap());
-        ordenesDeCompras.put(1, new OrdenCompra(1, new Date(), cliComProds));
-        
-        OrdenCompra ordenCompra = ordenesDeCompras.get(1);
+        //Guardar Orden
+        controlarOrden.guardarOrden();
         
         System.out.println("Orden de Compra: ");
-        System.out.println(ordenCompra);
+        System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(1));
     }
     
 }

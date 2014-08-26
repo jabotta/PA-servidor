@@ -8,7 +8,8 @@ public class DataProducto {
     private DataEspecificacionProducto especificacionProducto;
     
     public DataProducto(Producto p) {
-        
+        this.id = p.getId();
+        this.especificacionProducto = p.getDataEspecificacionProducto();
     }
     
     public DataProducto(Integer id, DataEspecificacionProducto especificacionProducto) {
