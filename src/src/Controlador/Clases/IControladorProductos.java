@@ -24,7 +24,7 @@ public interface IControladorProductos {
     public void guardarProducto();
     public void ingresarDatosCategoria(DataCategoria categoria);
 //    public Boolean tienePadre();
-    public void asociarCategoriaPadre();
+    public void asociarCategoriaPadre(DataCategoria padre);
     public void guardarCategoria();
     public void elegirProducto(Integer id);
     public DataProducto mostrarInformacionProducto();

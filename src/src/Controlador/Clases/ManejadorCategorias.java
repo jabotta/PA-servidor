@@ -21,8 +21,8 @@ public class ManejadorCategorias {
     
     }
     
-    public void agregarCategoria(String key, Categoria categoria){
-        categorias.put(key, categoria);
+    public void agregarCategoria(Categoria categoria){
+        categorias.put(categoria.getNombre(), categoria);
     }
     
     public Map<String,Categoria> obtenerCategorias(){

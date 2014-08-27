@@ -21,8 +21,8 @@ public class ManejadorProductos {
     
     }
     
-    public void agregarProducto(Integer key, Producto producto){
-        productos.put(key, producto);
+    public void agregarProducto(Producto producto){
+        productos.put(producto.getId(), producto);
     }
     
     public Map<Integer,Producto> obtenerProductos(){

@@ -36,8 +36,8 @@ public class EspecificacionProducto {
         this.especificacion = Collections.synchronizedMap(new HashMap());
         this.precio = espProducto.getPrecio();
         this.proveedor = proveedor;
-        this.categorias = new ArrayList<Categoria>();
-        this.imagenes = new ArrayList<String>();
+        this.categorias = new ArrayList<>();
+        this.imagenes = new ArrayList<>();
     }
 
     public String getNroReferencia() {

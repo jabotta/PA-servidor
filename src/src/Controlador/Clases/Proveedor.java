@@ -14,6 +14,12 @@ public class Proveedor extends Usuario{
         this.linkSitio = linkSitio;
     }
     
+    public Proveedor(DataProveedor dp) {
+        super(dp.getNickname(), dp.getNombre(), dp.getApellido(), dp.getEmail(), dp.getFechaNacimiento());
+        this.nombreCompania = dp.getNombreCompania();
+        this.linkSitio = dp.getLinkSitio();
+    }
+    
     public String getNombreCompania() {
         return nombreCompania;
     }

@@ -21,8 +21,8 @@ public class ManejadorEspProductos {
     
     }
     
-    public void agregarEspecificacionProducto(String key, EspecificacionProducto especificacionProducto){
-        especificacionProductos.put(key, especificacionProducto);
+    public void agregarEspecificacionProducto(EspecificacionProducto especificacionProducto){
+        especificacionProductos.put(especificacionProducto.getNroReferencia(), especificacionProducto);
     }
     
     public Map<String,EspecificacionProducto> obtenerEspecificacionProductos(){

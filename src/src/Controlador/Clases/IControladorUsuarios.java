@@ -3,15 +3,15 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProveedor;
-import Controlador.DataTypes.DataUsuario;
 import java.util.ArrayList;
 
 public interface IControladorUsuarios {
     
     public Integer getId();
     public void setId(Integer id);
-    public void ingresarDatos(DataUsuario usuario);
-    public void validarDatosUsuario();
+    public void ingresarDatosCliente(DataCliente cliente);
+    public void ingresarDatosProveedor(DataProveedor proveedor);
+    public Boolean validarDatosUsuario();
     public void guardarUsuario();
 //    public void cancelar();
 //    public DataTablaUsuario mostrarTablaCliente();

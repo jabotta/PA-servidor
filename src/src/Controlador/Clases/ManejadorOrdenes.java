@@ -20,8 +20,8 @@ public class ManejadorOrdenes {
     
     }
     
-    public void agregarOrden(Integer key, OrdenCompra orden){
-        ordenes.put(key, orden);
+    public void agregarOrden(OrdenCompra orden){
+        ordenes.put(orden.getNroOrden(), orden);
     }
     
     public Map<Integer,OrdenCompra> obtenerOrdenes(){

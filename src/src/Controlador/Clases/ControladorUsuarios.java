@@ -3,11 +3,11 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProveedor;
-import Controlador.DataTypes.DataUsuario;
 import java.util.ArrayList;
 
 public class ControladorUsuarios implements IControladorUsuarios{
     private Integer id;
+    private Usuario nuevoUsuario;
     private Cliente clienteElegido;
     private Proveedor proveedorElegido;
     
@@ -24,18 +24,24 @@ public class ControladorUsuarios implements IControladorUsuarios{
 //    - prvLst : Set<Proveedor> 
     
     @Override
-    public void ingresarDatos(DataUsuario usuario){
-        
+    public void ingresarDatosCliente(DataCliente cliente){
+        nuevoUsuario = new Cliente(cliente);
     }
     
     @Override
-    public void validarDatosUsuario(){
-        
+    public void ingresarDatosProveedor(DataProveedor proveedor){
+        nuevoUsuario = new Proveedor(proveedor);
+    }
+    
+    @Override
+    public Boolean validarDatosUsuario(){
+        return ManejadorUsuarios.getInstance().obtenerUsuarios().containsKey(nuevoUsuario.getNickname());
     }
     
     @Override
     public void guardarUsuario(){
-        
+        ManejadorUsuarios.getInstance().agregarUsuario(nuevoUsuario);
+        System.out.println("Nuevo Usuario " + nuevoUsuario);
     }
     
     //@Override

@@ -11,6 +11,10 @@ public class Categoria {
         this.nombre = nombre;
         this.padre = padre;
     }
+    
+    public Categoria(DataCategoria dc) {
+        this.nombre = dc.getNombre();
+    }
 
     public String getNombre() {
         return nombre;

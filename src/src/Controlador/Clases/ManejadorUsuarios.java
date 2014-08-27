@@ -20,8 +20,8 @@ public class ManejadorUsuarios {
     
     }
     
-    public void agregarUsuario(String key, Usuario usuario){
-        usuarios.put(key, usuario);
+    public void agregarUsuario(Usuario usuario){
+        usuarios.put(usuario.getNickname(), usuario);
     }
     
     public Map<String,Usuario> obtenerUsuarios(){
@@ -32,7 +32,7 @@ public class ManejadorUsuarios {
         Map<String,Cliente> result = Collections.synchronizedMap(new HashMap());
         usuarios.keySet().stream().forEach((u) -> {
             if(usuarios.get(u) instanceof Cliente){
-                result.put(u,(Cliente)usuarios.get(u));
+                result.put(u,(Cliente) usuarios.get(u));
             }
         });
         return result;
@@ -42,7 +42,7 @@ public class ManejadorUsuarios {
         Map<String,Proveedor> result = Collections.synchronizedMap(new HashMap());
         usuarios.keySet().stream().forEach((u) -> {
             if(usuarios.get(u) instanceof Proveedor){
-                result.put(u,(Proveedor)usuarios.get(u));
+                result.put(u,(Proveedor) usuarios.get(u));
             }
         });
         return result;

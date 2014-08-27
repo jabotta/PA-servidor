@@ -1,5 +1,6 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataUsuario;
 import java.util.Date;
 
 public abstract class Usuario {
@@ -17,6 +18,14 @@ public abstract class Usuario {
         this.apellido = apellido;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    public Usuario(DataUsuario du) {
+        this.nickname = du.getNickname();
+        this.nombre = du.getNombre();
+        this.apellido = du.getApellido();
+        this.email = du.getEmail();
+        this.fechaNacimiento = du.getFechaNacimiento();
     }
 
     public String getNickname() {

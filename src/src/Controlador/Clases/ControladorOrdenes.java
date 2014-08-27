@@ -103,7 +103,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public void guardarOrden(){
-        ManejadorOrdenes.getInstance().agregarOrden(1, new OrdenCompra(1, new Date(), cliComProds));
+        ManejadorOrdenes.getInstance().agregarOrden(new OrdenCompra(1, new Date(), cliComProds));
     }
     
     //@Override
