@@ -4,7 +4,6 @@ import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProveedor;
-import Controlador.DataTypes.DataUsuario;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -23,7 +22,6 @@ public class Main {
     public static IControladorUsuarios controlarUsuario;
     public static IControladorProductos controlarProducto;
     public static IControladorOrdenes controlarOrden;
-    
     
     public static void main(String args[]) {
         
