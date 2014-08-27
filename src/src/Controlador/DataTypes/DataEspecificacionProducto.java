@@ -1,15 +1,15 @@
 package Controlador.DataTypes;
 
-import java.util.ArrayList;
-
 import Controlador.Clases.EspecificacionProducto;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class DataEspecificacionProducto {
     
     private String nroReferencia;
     private String nombre;
     private String descripcion;
-    private ArrayList<String> especificacion;
+    private Map<String,String> especificacion;
     private Float precio;
     private DataProveedor proveedor;
     private ArrayList<String> imagenes;
@@ -26,7 +26,7 @@ public class DataEspecificacionProducto {
         this.categorias = ep.getDataCategorias();
     }
     
-    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, ArrayList<String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias) {
+    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -61,11 +61,11 @@ public class DataEspecificacionProducto {
         this.descripcion = descripcion;
     }
 
-    public ArrayList<String> getEspecificacion() {
+    public Map<String,String> getEspecificacion() {
         return especificacion;
     }
 
-    public void setEspecificacion(ArrayList<String> especificacion) {
+    public void setEspecificacion(Map<String,String> especificacion) {
         this.especificacion = especificacion;
     }
 

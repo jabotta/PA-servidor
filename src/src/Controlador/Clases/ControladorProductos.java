@@ -15,10 +15,9 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto espProductoModificada;
     private Proveedor proveedorElegido;
     private EspecificacionProducto espProdElegido;
-    private ArrayList<String> especificaciones;
+    private Map<String,String> especificaciones;
     private EspecificacionProducto nuevoProducto;
     private Categoria nuevaCategoria;
-    private Map<String,Proveedor> prvList = Collections.synchronizedMap(new HashMap());
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
@@ -46,12 +45,14 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void elegirProveedor(String nickname){
-        proveedorElegido = prvList.get(nickname);
+        proveedorElegido = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get(nickname);
+        System.out.println("ProveedorElegido "+proveedorElegido);
     }
     
     @Override
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto){
         nuevoProducto = new EspecificacionProducto(espProducto,proveedorElegido);
+        System.out.println("Nuevo Producto "+nuevoProducto);
     }
     
     @Override

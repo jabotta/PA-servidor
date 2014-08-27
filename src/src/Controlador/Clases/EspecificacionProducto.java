@@ -4,19 +4,22 @@ import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EspecificacionProducto {
     
     private String nroReferencia;
     private String nombre;
     private String descripcion;
-    private ArrayList<String> especificacion;
+    private Map<String,String> especificacion;
     private Float precio;
     private Proveedor proveedor;
     private ArrayList<String> imagenes;
     private ArrayList<Categoria> categorias;
     
-    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, ArrayList<String> especificacion, Float precio, Proveedor proveedor, ArrayList<Categoria> categorias) {
+    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, ArrayList<Categoria> categorias) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -30,7 +33,7 @@ public class EspecificacionProducto {
         this.nroReferencia = espProducto.getNroReferencia();
         this.nombre = espProducto.getNombre();
         this.descripcion = espProducto.getDescripcion();
-        this.especificacion = new ArrayList<String>();
+        this.especificacion = Collections.synchronizedMap(new HashMap());
         this.precio = espProducto.getPrecio();
         this.proveedor = proveedor;
         this.categorias = new ArrayList<Categoria>();
@@ -61,11 +64,11 @@ public class EspecificacionProducto {
         this.descripcion = descripcion;
     }
 
-    public ArrayList<String> getEspecificacion() {
+    public Map<String,String> getEspecificacion() {
         return especificacion;
     }
 
-    public void setEspecificacion(ArrayList<String> especificacion) {
+    public void setEspecificacion(Map<String,String> especificacion) {
         this.especificacion = especificacion;
     }
 
