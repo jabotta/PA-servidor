@@ -37,6 +37,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public ArrayList<DataProveedor> listarProveedores(){
+        System.out.println("ACAAAAAAAAAAAAAA"+ManejadorUsuarios.getInstance().obtenerProveedores());
         prvList = ManejadorUsuarios.getInstance().obtenerProveedores();
         ArrayList<DataProveedor> result = new ArrayList<DataProveedor>();
         prvList.keySet().stream().forEach((p) -> {

@@ -77,7 +77,9 @@ public class Main {
         ManejadorProductos.getInstance().agregarProducto(6, new Producto(6, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
            
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
-        controlarProducto = Fabrica.getInstance().getControladorProductos(idOrdenesControlador);
+        controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
+        System.out.println("idOrdenesControlador: "+idOrdenesControlador);
+        System.out.println("idProductosControlador: "+idProductosControlador);
 //        casoDeUso1();
         casoDeUso2(controlarProducto);
 //        casoDeUso3();
@@ -111,15 +113,26 @@ public class Main {
     
     public static void casoDeUso2(IControladorProductos controlarProducto){
         System.out.println("**************************** Registrar Producto ****************************");
+        
+        ManejadorUsuarios.getInstance().agregarUsuario("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
+        ManejadorUsuarios.getInstance().agregarUsuario("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
+
+        ManejadorUsuarios.getInstance().agregarUsuario("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+        ManejadorUsuarios.getInstance().agregarUsuario("prov2", new Proveedor("prov2", "Proveedor 2", "", "prov2@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+        ManejadorUsuarios.getInstance().agregarUsuario("prov3", new Proveedor("prov3", "Proveedor 3", "", "prov3@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+        
         ArrayList<DataProveedor> listaProveedores = controlarProducto.listarProveedores();
         //imprimir los proveedores
-        
+        System.out.println("LISTA!!!!! " + listaProveedores);
         String nicknameProveedor = "";//leer el nickname del proveedor elegido
         controlarProducto.elegirProveedor(nicknameProveedor);
         
         //leer datos de nueva especificacion
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", new ArrayList<String>(), (float)12.0, new DataProveedor(controlarProducto.getProveedorElegido()), new ArrayList<String>(), new ArrayList<DataCategoria>());
-        controlarProducto.ingresarDatosProductos(espProducto);
+        //DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", new ArrayList<String>(), (float)12.0,controlarProducto.listarProveedores().get(0), new ArrayList<String>(), new ArrayList<DataCategoria>());
+        //controlarProducto.ingresarDatosProductos(espProducto);
         
     }
 //    public static void casoDeUso3(){
