@@ -36,4 +36,9 @@ public class DataProveedor extends DataUsuario{
         this.linkSitio = linkSitio;
     }
     
+    @Override
+    public String toString() {
+        return this.getNickname() + "  --  " + this.getNombre() + "  --  " + this.getApellido();
+    }
+    
 }

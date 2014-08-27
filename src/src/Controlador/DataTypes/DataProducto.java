@@ -33,4 +33,9 @@ public class DataProducto {
         this.especificacionProducto = especificacionProducto;
     }
     
+    @Override
+    public String toString() {
+        return this.getId() + "  --  " + this.getEspecificacionProducto();
+    }
+    
 }

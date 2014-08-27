@@ -101,4 +101,9 @@ public class DataEspecificacionProducto {
         this.categorias = categorias;
     }
     
+    @Override
+    public String toString() {
+        return this.getNroReferencia() + "  --  " + this.getNombre();
+    }
+    
 }
