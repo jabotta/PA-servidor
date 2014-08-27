@@ -33,10 +33,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
     @Override
     public ArrayList<DataCliente> listarClientes(){
         ArrayList<DataCliente> dataCliente = new ArrayList<>();
-        ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
-            if(valor instanceof Cliente){
-                dataCliente.add(new DataCliente(valor));
-            }
+        ManejadorUsuarios.getInstance().obtenerClientes().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
+            dataCliente.add(new DataCliente(valor));
         });
         return dataCliente;
     }

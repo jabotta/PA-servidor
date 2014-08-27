@@ -21,7 +21,7 @@ public class Main {
     public static void main(String args[]) {
         
         try {
-            idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
+//            idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
             idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
             idOrdenesControlador = Fabrica.getInstance().getControladorOrdenes(null).getId();
         } catch (Exception e) {
@@ -29,61 +29,60 @@ public class Main {
             System.out.println(s);
         }
         
-        ManejadorUsuarios.getInstance().agregarUsuario("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
-
-        ManejadorUsuarios.getInstance().agregarUsuario("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-        ManejadorUsuarios.getInstance().agregarUsuario("prov2", new Proveedor("prov2", "Proveedor 2", "", "prov2@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-        ManejadorUsuarios.getInstance().agregarUsuario("prov3", new Proveedor("prov3", "Proveedor 3", "", "prov3@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-
-        ManejadorCategorias.getInstance().agregarCategoria("cat1", new Categoria("cat1", null));
-        ManejadorCategorias.getInstance().agregarCategoria("cat2", new Categoria("cat2", null));
-        ManejadorCategorias.getInstance().agregarCategoria("cat3", new Categoria("cat3", null));
-        ManejadorCategorias.getInstance().agregarCategoria("cat4", new Categoria("cat4", null));
-        ManejadorCategorias.getInstance().agregarCategoria("cat5", new Categoria("cat5", null));
-
-        ArrayList<Categoria> cat1 = new ArrayList<>();
-        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
-        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat5"));
-        ArrayList<String> esp1 = new ArrayList<>();
-        esp1.add("Espacificacion 1");
-        esp1.add("Espacificacion 2");
-        Proveedor prov1 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov1");
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a1", new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1));
-                
-        ArrayList<Categoria> cat2 = new ArrayList<>();
-        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
-        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat3"));
-        ArrayList<String> esp2 = new ArrayList<>();
-        esp2.add("Espacificacion 1");
-        Proveedor prov2 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov2");
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a2", new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, prov2, cat2));
-        
-        ArrayList<Categoria> cat3 = new ArrayList<>();
-        cat3.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat4"));
-        ArrayList<String> esp3 = new ArrayList<>();
-        esp3.add("Espacificacion 1");
-        Proveedor prov3 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov3");
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a3", new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, prov3, cat3));
-
-        ManejadorProductos.getInstance().agregarProducto(1, new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        ManejadorProductos.getInstance().agregarProducto(2, new Producto(2, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        ManejadorProductos.getInstance().agregarProducto(3, new Producto(3, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        ManejadorProductos.getInstance().agregarProducto(4, new Producto(4, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
-        ManejadorProductos.getInstance().agregarProducto(5, new Producto(5, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
-        ManejadorProductos.getInstance().agregarProducto(6, new Producto(6, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
+//        ManejadorUsuarios.getInstance().agregarUsuario("abotta", new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
+//        ManejadorUsuarios.getInstance().agregarUsuario("dlevy", new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
+//        ManejadorUsuarios.getInstance().agregarUsuario("rrossi", new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
+//        ManejadorUsuarios.getInstance().agregarUsuario("ldeniz", new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
+//        ManejadorUsuarios.getInstance().agregarUsuario("mbergalli", new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
+//
+//        ManejadorUsuarios.getInstance().agregarUsuario("prov1", new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+//        ManejadorUsuarios.getInstance().agregarUsuario("prov2", new Proveedor("prov2", "Proveedor 2", "", "prov2@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+//        ManejadorUsuarios.getInstance().agregarUsuario("prov3", new Proveedor("prov3", "Proveedor 3", "", "prov3@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
+//
+//        ManejadorCategorias.getInstance().agregarCategoria("cat1", new Categoria("cat1", null));
+//        ManejadorCategorias.getInstance().agregarCategoria("cat2", new Categoria("cat2", null));
+//        ManejadorCategorias.getInstance().agregarCategoria("cat3", new Categoria("cat3", null));
+//        ManejadorCategorias.getInstance().agregarCategoria("cat4", new Categoria("cat4", null));
+//        ManejadorCategorias.getInstance().agregarCategoria("cat5", new Categoria("cat5", null));
+//
+//        ArrayList<Categoria> cat1 = new ArrayList<>();
+//        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
+//        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat5"));
+//        ArrayList<String> esp1 = new ArrayList<>();
+//        esp1.add("Espacificacion 1");
+//        esp1.add("Espacificacion 2");
+//        Proveedor prov1 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov1");
+//        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a1", new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1));
+//                
+//        ArrayList<Categoria> cat2 = new ArrayList<>();
+//        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
+//        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat3"));
+//        ArrayList<String> esp2 = new ArrayList<>();
+//        esp2.add("Espacificacion 1");
+//        Proveedor prov2 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov2");
+//        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a2", new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, prov2, cat2));
+//        
+//        ArrayList<Categoria> cat3 = new ArrayList<>();
+//        cat3.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat4"));
+//        ArrayList<String> esp3 = new ArrayList<>();
+//        esp3.add("Espacificacion 1");
+//        Proveedor prov3 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov3");
+//        ManejadorEspProductos.getInstance().agregarEspecificacionProducto("a3", new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, prov3, cat3));
+//
+//        ManejadorProductos.getInstance().agregarProducto(1, new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+//        ManejadorProductos.getInstance().agregarProducto(2, new Producto(2, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+//        ManejadorProductos.getInstance().agregarProducto(3, new Producto(3, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+//        ManejadorProductos.getInstance().agregarProducto(4, new Producto(4, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
+//        ManejadorProductos.getInstance().agregarProducto(5, new Producto(5, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
+//        ManejadorProductos.getInstance().agregarProducto(6, new Producto(6, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
            
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
         controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
-        System.out.println("idOrdenesControlador: "+idOrdenesControlador);
-        System.out.println("idProductosControlador: "+idProductosControlador);
+        
 //        casoDeUso1();
         casoDeUso2(controlarProducto);
 //        casoDeUso3();
-        casoDeUso4(controlarOrden);
+//        casoDeUso4(controlarOrden);
     }
     
 //    public static void casoDeUso1(){
@@ -124,9 +123,10 @@ public class Main {
         ManejadorUsuarios.getInstance().agregarUsuario("prov2", new Proveedor("prov2", "Proveedor 2", "", "prov2@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
         ManejadorUsuarios.getInstance().agregarUsuario("prov3", new Proveedor("prov3", "Proveedor 3", "", "prov3@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
         
-        ArrayList<DataProveedor> listaProveedores = controlarProducto.listarProveedores();
-        //imprimir los proveedores
-        System.out.println("LISTA!!!!! " + listaProveedores);
+        controlarProducto.listarProveedores().stream().forEach((proveedor) -> {
+            System.out.println(proveedor);
+        });
+        
         String nicknameProveedor = "";//leer el nickname del proveedor elegido
         controlarProducto.elegirProveedor(nicknameProveedor);
         

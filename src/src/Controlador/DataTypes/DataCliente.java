@@ -1,12 +1,12 @@
 package Controlador.DataTypes;
 
-import Controlador.Clases.Usuario;
+import Controlador.Clases.Cliente;
 import java.util.Date;
 
 public class DataCliente extends DataUsuario{
 
-    public DataCliente(Usuario u) {
-        super(u.getNickname(), u.getNombre(), u.getApellido(), u.getEmail(), u.getFechaNacimiento());
+    public DataCliente(Cliente c) {
+        super(c.getNickname(), c.getNombre(), c.getApellido(), c.getEmail(), c.getFechaNacimiento());
     }
 
     public DataCliente(String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {

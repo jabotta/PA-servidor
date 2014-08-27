@@ -12,7 +12,7 @@ public class MgrControladorProductos {
     public static MgrControladorProductos getInstance(){
         if(MgrControladorProductos.instance == null){
             MgrControladorProductos.instance = new MgrControladorProductos();
-            MgrControladorProductos.instance.controladorColection =Collections.synchronizedMap(new HashMap());
+            MgrControladorProductos.instance.controladorColection = Collections.synchronizedMap(new HashMap());
         }
         return MgrControladorProductos.instance;
     }
