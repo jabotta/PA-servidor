@@ -14,6 +14,7 @@ public class Categoria {
     
     public Categoria(DataCategoria dc) {
         this.nombre = dc.getNombre();
+        this.padre = null;
     }
 
     public String getNombre() {
