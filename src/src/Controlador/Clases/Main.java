@@ -59,23 +59,35 @@ public class Main {
         esp1.put("Esp1","Espacificacion 1");
         esp1.put("Esp1","Espacificacion 2");
         Proveedor prov1 = ManejadorUsuarios.getInstance().getProveedor("prov1");
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1));
-                
+        Map<Integer,Producto> prod1 = Collections.synchronizedMap(new HashMap());
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1,prod1));
+        prod1.put(0,new Producto(0, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+        prod1.put(1,new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
+        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1").setListaProductos(prod1);
+        
         ArrayList<Categoria> cat2 = new ArrayList<>();
         cat2.add(ManejadorCategorias.getInstance().getCategoria("cat1"));
         cat2.add(ManejadorCategorias.getInstance().getCategoria("cat3"));
         Map<String,String> esp2 = Collections.synchronizedMap(new HashMap());
         esp2.put("Esp1","Espacificacion 1");
         Proveedor prov2 = ManejadorUsuarios.getInstance().getProveedor("prov2");
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, prov2, cat2));
+        Map<Integer,Producto> prod2 = Collections.synchronizedMap(new HashMap());
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, prov2, cat2,prod2));
+        prod2.put(2,new Producto(2, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
+        prod2.put(3,new Producto(3, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
+        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2").setListaProductos(prod2);
         
         ArrayList<Categoria> cat3 = new ArrayList<>();
         cat3.add(ManejadorCategorias.getInstance().getCategoria("cat4"));
         Map<String,String> esp3 = Collections.synchronizedMap(new HashMap());
         esp3.put("Esp1","Espacificacion 1");
         Proveedor prov3 = ManejadorUsuarios.getInstance().getProveedor("prov3");
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, prov3, cat3));
-
+        Map<Integer,Producto> prod3 = Collections.synchronizedMap(new HashMap());
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, prov3, cat3,prod3));
+        prod3.put(2,new Producto(4, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
+        prod3.put(3,new Producto(5, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
+        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3").setListaProductos(prod3);
+        
         ManejadorProductos.getInstance().agregarProducto(new Producto(1, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
         ManejadorProductos.getInstance().agregarProducto(new Producto(2, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
         ManejadorProductos.getInstance().agregarProducto(new Producto(3, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
@@ -87,16 +99,16 @@ public class Main {
         controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
         
-        casoDeUso1(controlarUsuario);
+        //casoDeUso1(controlarUsuario);
         casoDeUso2(controlarProducto);
-        casoDeUso3(controlarProducto);
+        /*casoDeUso3(controlarProducto);
         casoDeUso4(controlarOrden);
         casoDeUso5(controlarUsuario);
         casoDeUso6(controlarUsuario);
         casoDeUso7(controlarProducto);
         casoDeUso8(controlarProducto);
         casoDeUso9(controlarOrden);
-        casoDeUso10(controlarOrden);
+        casoDeUso10(controlarOrden);*/
     }
     
     public static void casoDeUso1(IControladorUsuarios controlarUsuario){
@@ -158,6 +170,7 @@ public class Main {
         }
         
         controlarProducto.guardarCategoria();
+        ArrayList<DataCategoria> lstCategorias = controlarProducto.listarCategorias();
     }
     
     public static void casoDeUso4(IControladorOrdenes controlarOrden){

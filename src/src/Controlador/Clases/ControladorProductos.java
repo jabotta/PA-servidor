@@ -17,6 +17,7 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto nuevoProducto;
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
+    private String rutaImagen;
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
@@ -108,7 +109,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void elegirImagen(String rutaImagen){
-        
+        this.rutaImagen = rutaImagen;
     }
     
     @Override
