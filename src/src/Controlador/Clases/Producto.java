@@ -1,6 +1,7 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataProducto;
 import java.util.ArrayList;
 
 public class Producto {
@@ -11,6 +12,11 @@ public class Producto {
     public Producto(Integer id, EspecificacionProducto especificacionProducto) {
         this.id = id;
         this.especificacionProducto = especificacionProducto;
+    }
+    
+    public Producto(DataProducto dp) {
+        this.id = dp.getId();
+        this.especificacionProducto = dp.getObjectEspecificacionProducto();
     }
 
     public Integer getId() {

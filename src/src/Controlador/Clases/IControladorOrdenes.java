@@ -21,12 +21,12 @@ public interface IControladorOrdenes {
     public ArrayList<DataProducto> listarProductos();
     public void elegirProducto(Integer id);
     public void generarItemOrden();
-    public void guardarOrden();
+    public void guardarOrden(DataOrdenCompra dataOrden);
 //    public void imprimirDatosOrden();
     public ArrayList<DataOrdenCompra> listarOrdenes();
     public void elegirOrden(Integer nroOrden);
-    public Boolean confirmarEliminacion();
+//    public Boolean confirmarEliminacion();
     public void borrarOrdenCompra();
-    public DataOrdenCompra mostrarDetalles();
+    public DataOrdenCompra mostrarDatosOrden();
     
 }

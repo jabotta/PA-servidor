@@ -29,4 +29,8 @@ public class ManejadorEspProductos {
         return especificacionProductos;
     }
     
+    public EspecificacionProducto getEspecificacionProducto(String nroRef){
+        return this.obtenerEspecificacionProductos().get(nroRef);
+    }
+    
 }

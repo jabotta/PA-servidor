@@ -3,6 +3,7 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.io.PrintWriter;
@@ -52,47 +53,50 @@ public class Main {
         ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat5", null));
 
         ArrayList<Categoria> cat1 = new ArrayList<>();
-        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
-        cat1.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat5"));
+        cat1.add(ManejadorCategorias.getInstance().getCategoria("cat1"));
+        cat1.add(ManejadorCategorias.getInstance().getCategoria("cat5"));
         Map<String,String> esp1 = Collections.synchronizedMap(new HashMap());
         esp1.put("Esp1","Espacificacion 1");
         esp1.put("Esp1","Espacificacion 2");
-        Proveedor prov1 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov1");
+        Proveedor prov1 = ManejadorUsuarios.getInstance().getProveedor("prov1");
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1));
                 
         ArrayList<Categoria> cat2 = new ArrayList<>();
-        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat1"));
-        cat2.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat3"));
+        cat2.add(ManejadorCategorias.getInstance().getCategoria("cat1"));
+        cat2.add(ManejadorCategorias.getInstance().getCategoria("cat3"));
         Map<String,String> esp2 = Collections.synchronizedMap(new HashMap());
         esp2.put("Esp1","Espacificacion 1");
-        Proveedor prov2 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov2");
+        Proveedor prov2 = ManejadorUsuarios.getInstance().getProveedor("prov2");
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, prov2, cat2));
         
         ArrayList<Categoria> cat3 = new ArrayList<>();
-        cat3.add(ManejadorCategorias.getInstance().obtenerCategorias().get("cat4"));
+        cat3.add(ManejadorCategorias.getInstance().getCategoria("cat4"));
         Map<String,String> esp3 = Collections.synchronizedMap(new HashMap());
         esp3.put("Esp1","Espacificacion 1");
-        Proveedor prov3 = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get("prov3");
+        Proveedor prov3 = ManejadorUsuarios.getInstance().getProveedor("prov3");
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, prov3, cat3));
 
-        ManejadorProductos.getInstance().agregarProducto(new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(2, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(3, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(4, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(5, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(6, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
+        ManejadorProductos.getInstance().agregarProducto(new Producto(1, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
+        ManejadorProductos.getInstance().agregarProducto(new Producto(2, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
+        ManejadorProductos.getInstance().agregarProducto(new Producto(3, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
+        ManejadorProductos.getInstance().agregarProducto(new Producto(4, ManejadorEspProductos.getInstance().getEspecificacionProducto("a2")));
+        ManejadorProductos.getInstance().agregarProducto(new Producto(5, ManejadorEspProductos.getInstance().getEspecificacionProducto("a2")));
+        ManejadorProductos.getInstance().agregarProducto(new Producto(6, ManejadorEspProductos.getInstance().getEspecificacionProducto("a3")));
            
         controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
         controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
         
-//        casoDeUso1(controlarUsuario);
-//        casoDeUso2(controlarProducto);
-//        casoDeUso3(controlarProducto);
+        casoDeUso1(controlarUsuario);
+        casoDeUso2(controlarProducto);
+        casoDeUso3(controlarProducto);
         casoDeUso4(controlarOrden);
         casoDeUso5(controlarUsuario);
         casoDeUso6(controlarUsuario);
         casoDeUso7(controlarProducto);
+        casoDeUso8(controlarProducto);
+        casoDeUso9(controlarOrden);
+        casoDeUso10(controlarOrden);
     }
     
     public static void casoDeUso1(IControladorUsuarios controlarUsuario){
@@ -196,7 +200,8 @@ public class Main {
         controlarOrden.generarItemOrden();
         
         //Guardar Orden
-        controlarOrden.guardarOrden();
+        DataOrdenCompra dataOrden = new DataOrdenCompra(1);
+        controlarOrden.guardarOrden(dataOrden);
         
         System.out.println("Orden de Compra: ");
         System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(1));
@@ -258,6 +263,62 @@ public class Main {
         //Mostrar Datos Cliente
         DataProducto dataProducto = controlarProducto.mostrarDatosProducto(4);
         System.out.println("Mostrar Datos del producto: " + dataProducto);
+    }
+    
+    public static void casoDeUso8(IControladorProductos controlarProducto){
+        System.out.println("**************************** Modificar datos del Producto ****************************");
+        
+        //Listar categorias
+        controlarProducto.listarCategorias().stream().forEach((categoria) -> {
+            System.out.println(categoria);
+        });
+        
+        //Categoria Seleccionado
+        controlarProducto.elegirCategoria("cat3");
+        
+        //Listar productos categoria seleccionada
+        controlarProducto.listarProductosCategoria().stream().forEach((producto) -> {
+            System.out.println(producto);
+        });
+    }
+    
+    public static void casoDeUso9(IControladorOrdenes controlarOrden){
+        System.out.println("**************************** Cancelar Orden de Compra ****************************");
+        
+        //Listar ordenes
+        controlarOrden.listarOrdenes().stream().forEach((orden) -> {
+            System.out.println(orden);
+        });
+        
+        //Orden Seleccionada
+        controlarOrden.elegirOrden(1);
+        
+        String confirmaEliminar;
+        Scanner eConfirmaEliminar = new Scanner (System.in);
+        System.out.println("Eliminar? (s o n)");
+        confirmaEliminar = eConfirmaEliminar.nextLine();
+        
+        switch (confirmaEliminar) {
+            case "s":
+                controlarOrden.borrarOrdenCompra();
+            break;
+        }
+    }
+    
+    public static void casoDeUso10(IControladorOrdenes controlarOrden){
+        System.out.println("**************************** Ver informacion de Orden de Compra ****************************");
+        
+        //Listar ordenes
+        controlarOrden.listarOrdenes().stream().forEach((orden) -> {
+            System.out.println(orden);
+        });
+        
+        //Orden Seleccionada
+        controlarOrden.elegirOrden(1);
+        
+        //Mostrar Datos Cliente
+        DataOrdenCompra dataOrden = controlarOrden.mostrarDatosOrden();
+        System.out.println("Mostrar Datos de la Orden: " + dataOrden);
     }
     
 }

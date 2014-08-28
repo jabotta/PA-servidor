@@ -1,6 +1,7 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataClienteCompraProducto;
 import Controlador.DataTypes.DataProducto;
 
 public class ClienteCompraProducto {
@@ -13,6 +14,10 @@ public class ClienteCompraProducto {
         this.cliente = cliente;
         this.producto = producto;
         this.precio = precio;
+    }
+    
+    public ClienteCompraProducto(DataClienteCompraProducto dccp) {
+        this.precio = dccp.getPrecio();
     }
 
     public Cliente getCliente() {

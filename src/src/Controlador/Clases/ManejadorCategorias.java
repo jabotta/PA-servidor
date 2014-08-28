@@ -29,4 +29,8 @@ public class ManejadorCategorias {
         return categorias;
     }
     
+    public Categoria getCategoria(String nombre){
+        return this.obtenerCategorias().get(nombre);
+    }
+    
 }

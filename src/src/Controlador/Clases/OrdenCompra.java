@@ -1,6 +1,7 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataClienteCompraProducto;
+import Controlador.DataTypes.DataOrdenCompra;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -12,10 +13,21 @@ public class OrdenCompra {
     private Float precioTotal;
     private ArrayList<ClienteCompraProducto> clienteCompraProducto;
     
+    public OrdenCompra(Integer nroOrden, ArrayList<ClienteCompraProducto> clienteCompraProducto) {
+        this.nroOrden = nroOrden;
+        this.fecha = new Date();
+        this.clienteCompraProducto = clienteCompraProducto;
+    }
+    
     public OrdenCompra(Integer nroOrden, Date fecha, ArrayList<ClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = fecha;
         this.clienteCompraProducto = clienteCompraProducto;
+    }
+    
+    public OrdenCompra(DataOrdenCompra doc) {
+        this.nroOrden = doc.getNroOrden();
+        this.fecha = doc.getFecha();
     }
 
     public Integer getNroOrden() {

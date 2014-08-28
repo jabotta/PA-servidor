@@ -28,8 +28,12 @@ public class ManejadorOrdenes {
         return ordenes;
     }
     
-    public void eliminarOrden(OrdenCompra orden){
-        
+    public OrdenCompra getOrden(Integer nroOrden){
+        return this.obtenerOrdenes().get(nroOrden);
+    }
+    
+    public void eliminarOrden(Integer nroOrden){
+        this.obtenerOrdenes().remove(nroOrden);
     }
     
 }

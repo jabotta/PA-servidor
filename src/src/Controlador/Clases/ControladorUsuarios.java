@@ -1,11 +1,9 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataCliente;
-import Controlador.DataTypes.DataClienteCompraProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ControladorUsuarios implements IControladorUsuarios{
     private Integer id;
@@ -62,7 +60,7 @@ public class ControladorUsuarios implements IControladorUsuarios{
     
     @Override
     public void elegirCliente(String nickname){
-        clienteElegido = (Cliente) ManejadorUsuarios.getInstance().obtenerUsuarios().get(nickname);
+        clienteElegido = ManejadorUsuarios.getInstance().getCliente(nickname);
     }
     
     @Override
@@ -93,7 +91,7 @@ public class ControladorUsuarios implements IControladorUsuarios{
     
     @Override
     public void elegirProveedor(String nickname){
-        proveedorElegido = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get(nickname);
+        proveedorElegido = ManejadorUsuarios.getInstance().getProveedor(nickname);
     }
     
     @Override

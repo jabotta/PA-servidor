@@ -6,7 +6,6 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProducto;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class ControladorOrdenes implements IControladorOrdenes{
@@ -17,7 +16,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     private EspecificacionProducto espProdElegido;
     private ArrayList<Producto> productosElegidos = new ArrayList<>();
     private ArrayList<ClienteCompraProducto> cliComProds = new ArrayList<>();
-    private OrdenCompra nuevaOrden;
+//    private OrdenCompra nuevaOrden;
     private OrdenCompra ordenElegida;
     
     @Override
@@ -41,7 +40,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public void elegirCliente(String nickname){
-        clienteElegido = (Cliente) ManejadorUsuarios.getInstance().obtenerUsuarios().get(nickname);
+        clienteElegido = ManejadorUsuarios.getInstance().getCliente(nickname);
     }
     
     @Override
@@ -55,7 +54,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public void elegirCategoria(String categoria){
-        categoriaElegida = ManejadorCategorias.getInstance().obtenerCategorias().get(categoria);
+        categoriaElegida = ManejadorCategorias.getInstance().getCategoria(categoria);
     }
     
     @Override
@@ -71,7 +70,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public void elegirEspecificacionProducto(String nroRef){
-        espProdElegido = ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get(nroRef);
+        espProdElegido = ManejadorEspProductos.getInstance().getEspecificacionProducto(nroRef);
     }
     //@Override
 //    public void elegirMetodoDeSeleccion(String metodo){
@@ -91,7 +90,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public void elegirProducto(Integer id){
-        productosElegidos.add(ManejadorProductos.getInstance().obtenerProductos().get(id));
+        productosElegidos.add(ManejadorProductos.getInstance().getProducto(id));
     }
     
     @Override
@@ -102,8 +101,14 @@ public class ControladorOrdenes implements IControladorOrdenes{
     }
     
     @Override
-    public void guardarOrden(){
-        ManejadorOrdenes.getInstance().agregarOrden(new OrdenCompra(1, new Date(), cliComProds));
+    public void guardarOrden(DataOrdenCompra dataOrden){
+        OrdenCompra orden = new OrdenCompra(dataOrden);
+        ArrayList<ClienteCompraProducto> cliComProd = new ArrayList<>();
+        cliComProds.stream().forEach((cliProd) -> {
+            cliComProd.add(cliProd);
+        });
+        orden.setClienteCompraProducto(cliComProd);        
+        ManejadorOrdenes.getInstance().agregarOrden(orden);
     }
     
     //@Override
@@ -113,27 +118,33 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public ArrayList<DataOrdenCompra> listarOrdenes(){
-        return null;
+        ArrayList<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
+        ManejadorOrdenes.getInstance().obtenerOrdenes().entrySet().stream().map((orden) -> orden.getValue()).forEach((valor) -> {
+            dataOrdenCompra.add(new DataOrdenCompra(valor));
+        });
+        return dataOrdenCompra;
     }
     
     @Override
     public void elegirOrden(Integer nroOrden){
-        
+        ordenElegida = ManejadorOrdenes.getInstance().getOrden(nroOrden);
     }
     
-    @Override
-    public Boolean confirmarEliminacion(){
-        return true;
-    }
+//    @Override
+//    public Boolean confirmarEliminacion(){
+//        return true;
+//    }
     
     @Override
     public void borrarOrdenCompra(){
-        
+        ManejadorOrdenes.getInstance().eliminarOrden(ordenElegida.getNroOrden());
+        System.out.println("Borrar orden: " + ordenElegida);
     }
     
     @Override
-    public DataOrdenCompra mostrarDetalles(){
-        return null;
+    public DataOrdenCompra mostrarDatosOrden(){
+        DataOrdenCompra dataOrden = new DataOrdenCompra(ordenElegida);
+        return dataOrden;
     }
     
 }

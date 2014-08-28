@@ -1,6 +1,8 @@
 package Controlador.DataTypes;
 
+import Controlador.Clases.EspecificacionProducto;
 import Controlador.Clases.Producto;
+import Controlador.Clases.Proveedor;
 
 public class DataProducto {
     
@@ -27,6 +29,11 @@ public class DataProducto {
     
     public DataEspecificacionProducto getEspecificacionProducto() {
         return especificacionProducto;
+    }
+    
+    public EspecificacionProducto getObjectEspecificacionProducto() {
+        Proveedor prov = new Proveedor(especificacionProducto.getProveedor());
+        return new EspecificacionProducto(especificacionProducto, prov);
     }
     
     public void setEspecificacionProducto(DataEspecificacionProducto especificacionProducto) {

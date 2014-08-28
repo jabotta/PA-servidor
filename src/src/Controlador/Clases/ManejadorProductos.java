@@ -29,4 +29,8 @@ public class ManejadorProductos {
         return productos;
     }
     
+    public Producto getProducto(Integer id){
+        return this.obtenerProductos().get(id);
+    }
+    
 }

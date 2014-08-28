@@ -5,8 +5,6 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ControladorProductos implements IControladorProductos{
@@ -46,7 +44,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void elegirProveedor(String nickname){
-        proveedorElegido = (Proveedor) ManejadorUsuarios.getInstance().obtenerUsuarios().get(nickname);
+        proveedorElegido = ManejadorUsuarios.getInstance().getProveedor(nickname);
         System.out.println("ProveedorElegido " + proveedorElegido);
     }
     
@@ -82,7 +80,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void elegirCategoria(String categoria){
-        categoriaElegida = ManejadorCategorias.getInstance().obtenerCategorias().get(categoria);
+        categoriaElegida = ManejadorCategorias.getInstance().getCategoria(categoria);
     }
     
     @Override
@@ -98,7 +96,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public DataProducto mostrarDatosProducto(Integer id){
-        Producto productoElegido = ManejadorProductos.getInstance().obtenerProductos().get(id);
+        Producto productoElegido = ManejadorProductos.getInstance().getProducto(id);
         DataProducto dataProducto = new DataProducto(productoElegido);
         return dataProducto;
     }

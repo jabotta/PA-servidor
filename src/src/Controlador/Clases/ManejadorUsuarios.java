@@ -48,4 +48,12 @@ public class ManejadorUsuarios {
         return result;
     }
     
+    public Cliente getCliente(String nickname){
+        return this.obtenerClientes().get(nickname);
+    }
+    
+    public Proveedor getProveedor(String nickname){
+        return this.obtenerProveedores().get(nickname);
+    }
+    
 }

@@ -3,7 +3,6 @@ package Controlador.DataTypes;
 import Controlador.Clases.OrdenCompra;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 public class DataOrdenCompra {
     
@@ -18,9 +17,20 @@ public class DataOrdenCompra {
         this.clienteCompraProducto = oc.getDataClienteCompraProducto();
     }
     
+    public DataOrdenCompra(Integer nroOrden) {
+        this.nroOrden = nroOrden;
+        this.fecha = new Date();
+    }
+    
     public DataOrdenCompra(Integer nroOrden, Date fecha, ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = fecha;
+        this.clienteCompraProducto = clienteCompraProducto;
+    }
+    
+    public DataOrdenCompra(Integer nroOrden, ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
+        this.nroOrden = nroOrden;
+        this.fecha = new Date();
         this.clienteCompraProducto = clienteCompraProducto;
     }
 
