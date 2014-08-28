@@ -18,6 +18,8 @@ public interface IControladorProductos {
     public void ingresarDatosUnidad(DataProducto producto);
     public ArrayList<DataCategoria> listarCategorias();
     public void elegirCategoria(String categoria);
+    public ArrayList<DataProducto> listarProductosCategoria();
+    public DataProducto mostrarDatosProducto(Integer id);
     public void listarImagenesDisco();
     public void elegirImagen(String rutaImagen);
     public Boolean controlarErrores();

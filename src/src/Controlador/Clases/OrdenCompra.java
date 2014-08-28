@@ -1,7 +1,9 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataClienteCompraProducto;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class OrdenCompra {
     
@@ -35,6 +37,14 @@ public class OrdenCompra {
     public ArrayList<ClienteCompraProducto> getClienteCompraProducto() {
         return clienteCompraProducto;
     }
+    
+    public ArrayList<DataClienteCompraProducto> getDataClienteCompraProducto() {
+        ArrayList<DataClienteCompraProducto> dataClienteCompraProducto = new ArrayList<>();
+        clienteCompraProducto.stream().forEach((cliProd) -> {
+            dataClienteCompraProducto.add(new DataClienteCompraProducto(cliProd));
+        });
+        return dataClienteCompraProducto;
+    }
 
     public void setClienteCompraProducto(ArrayList<ClienteCompraProducto> clienteCompraProducto) {
         this.clienteCompraProducto = clienteCompraProducto;
@@ -42,6 +52,15 @@ public class OrdenCompra {
     
     public Float getPrecioTotal() {
         return precioTotal;
+    }
+    
+    public Cliente getCliente(){
+        Iterator<ClienteCompraProducto> it = this.getClienteCompraProducto().iterator();
+        while(it.hasNext()){
+            ClienteCompraProducto cliProd = it.next();
+            return cliProd.getCliente();
+        }
+        return null;
     }
     
     @Override

@@ -18,6 +18,7 @@ public class ControladorProductos implements IControladorProductos{
     private Map<String,String> especificaciones;
     private EspecificacionProducto nuevoProducto;
     private Categoria nuevaCategoria;
+    private Categoria categoriaElegida;
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
@@ -72,12 +73,34 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public ArrayList<DataCategoria> listarCategorias(){
-        return null;
+        ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
+        ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+            dataCategoria.add(new DataCategoria(valor));
+        });
+        return dataCategoria;
     }
     
     @Override
     public void elegirCategoria(String categoria){
-        
+        categoriaElegida = ManejadorCategorias.getInstance().obtenerCategorias().get(categoria);
+    }
+    
+    @Override
+    public ArrayList<DataProducto> listarProductosCategoria(){
+        ArrayList<DataProducto> dataProducto = new ArrayList<>();
+        ManejadorProductos.getInstance().obtenerProductos().entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
+            if(valor.getCategorias().contains(categoriaElegida.getNombre())){
+                dataProducto.add(new DataProducto(valor));
+            }
+        });
+        return dataProducto;
+    }
+    
+    @Override
+    public DataProducto mostrarDatosProducto(Integer id){
+        Producto productoElegido = ManejadorProductos.getInstance().obtenerProductos().get(id);
+        DataProducto dataProducto = new DataProducto(productoElegido);
+        return dataProducto;
     }
     
     @Override

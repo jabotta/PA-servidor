@@ -106,7 +106,7 @@ public class EspecificacionProducto {
     
     public ArrayList<DataCategoria> getDataCategorias() {
         ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
-        categorias.stream().forEach((categoria) -> {
+        this.getCategorias().stream().forEach((categoria) -> {
             dataCategorias.add(new DataCategoria(categoria));
         });
         return dataCategorias;

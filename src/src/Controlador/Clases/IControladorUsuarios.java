@@ -14,10 +14,10 @@ public interface IControladorUsuarios {
     public Boolean validarDatosUsuario();
     public void guardarUsuario();
 //    public void cancelar();
-//    public DataTablaUsuario mostrarTablaCliente();
+    public ArrayList<DataCliente> listarClientes();
     public void elegirCliente(String nickname);
     public DataCliente mostrarDatosCliente();
-    public ArrayList<DataOrdenCompra> listarOrdenes();
+    public ArrayList<DataOrdenCompra> listarOrdenesCliente();
     public ArrayList<DataProveedor> listarProveedores();
     public void elegirProveedor(String nickname);
     public DataProveedor mostrarDatosProveedor();

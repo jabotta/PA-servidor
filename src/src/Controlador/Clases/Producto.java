@@ -1,6 +1,7 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataEspecificacionProducto;
+import java.util.ArrayList;
 
 public class Producto {
     
@@ -30,6 +31,14 @@ public class Producto {
     
     public void setEspecificacionProducto(EspecificacionProducto especificacionProducto) {
         this.especificacionProducto = especificacionProducto;
+    }
+    
+    public ArrayList<String> getCategorias(){
+        ArrayList<String> categorias = new ArrayList<>();
+        this.getEspecificacionProducto().getCategorias().stream().forEach((cat) -> {
+            categorias.add(cat.getNombre());
+        });
+        return categorias;
     }
     
     @Override

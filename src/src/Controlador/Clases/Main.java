@@ -3,6 +3,7 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -88,7 +89,10 @@ public class Main {
 //        casoDeUso1(controlarUsuario);
 //        casoDeUso2(controlarProducto);
 //        casoDeUso3(controlarProducto);
-//        casoDeUso4(controlarOrden);
+        casoDeUso4(controlarOrden);
+        casoDeUso5(controlarUsuario);
+        casoDeUso6(controlarUsuario);
+        casoDeUso7(controlarProducto);
     }
     
     public static void casoDeUso1(IControladorUsuarios controlarUsuario){
@@ -184,7 +188,7 @@ public class Main {
             System.out.println(producto);
         });
         
-        //Especificacion Producto seleccionado
+        //Producto seleccionado
         controlarOrden.elegirProducto(1);
         controlarOrden.elegirProducto(3);
         
@@ -197,6 +201,63 @@ public class Main {
         System.out.println("Orden de Compra: ");
         System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(1));
     }
+    
+    public static void casoDeUso5(IControladorUsuarios controlarUsuario){
+        System.out.println("**************************** Ver informacion del cliente ****************************");
+        
+        //Listar clientes
+        controlarUsuario.listarClientes().stream().forEach((cliente) -> {
+            System.out.println(cliente);
+        });
 
+        //Cliente Seleccionado
+        controlarUsuario.elegirCliente("abotta");
+        
+        //Mostrar Datos Cliente
+        DataCliente dataCliente = controlarUsuario.mostrarDatosCliente();
+        System.out.println("Mostrar Datos del cliente: " + dataCliente);
+        
+        //Listar ordenes del cliente elegido
+        controlarUsuario.listarOrdenesCliente().stream().forEach((orden) -> {
+            System.out.println(orden);
+        });
+    }
+    
+    public static void casoDeUso6(IControladorUsuarios controlarUsuario){
+        System.out.println("**************************** Ver informacion del proveedor ****************************");
+        
+        //Listar proveedores
+        controlarUsuario.listarProveedores().stream().forEach((cliente) -> {
+            System.out.println(cliente);
+        });
+
+        //Proveedor Seleccionado
+        controlarUsuario.elegirProveedor("prov1");
+        
+        //Mostrar Datos Cliente
+        DataProveedor dataProveedor = controlarUsuario.mostrarDatosProveedor();
+        System.out.println("Mostrar Datos del proveedor: " + dataProveedor);
+    }
+    
+    public static void casoDeUso7(IControladorProductos controlarProducto){
+        System.out.println("**************************** Ver informacion del producto ****************************");
+        
+        //Listar categorias
+        controlarProducto.listarCategorias().stream().forEach((categoria) -> {
+            System.out.println(categoria);
+        });
+        
+        //Categoria Seleccionado
+        controlarProducto.elegirCategoria("cat3");
+        
+        //Listar productos categoria seleccionada
+        controlarProducto.listarProductosCategoria().stream().forEach((producto) -> {
+            System.out.println(producto);
+        });
+        
+        //Mostrar Datos Cliente
+        DataProducto dataProducto = controlarProducto.mostrarDatosProducto(4);
+        System.out.println("Mostrar Datos del producto: " + dataProducto);
+    }
     
 }

@@ -15,8 +15,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
     private Cliente clienteElegido;
     private Categoria categoriaElegida;
     private EspecificacionProducto espProdElegido;
-    private ArrayList<Producto> productosElegidos = new ArrayList<Producto>();
-    private ArrayList<ClienteCompraProducto> cliComProds = new ArrayList<ClienteCompraProducto>();
+    private ArrayList<Producto> productosElegidos = new ArrayList<>();
+    private ArrayList<ClienteCompraProducto> cliComProds = new ArrayList<>();
     private OrdenCompra nuevaOrden;
     private OrdenCompra ordenElegida;
     

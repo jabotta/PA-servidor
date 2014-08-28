@@ -9,7 +9,9 @@ public class DataClienteCompraProducto {
     private Float precio;
     
     public DataClienteCompraProducto(ClienteCompraProducto cp) {
-       
+        this.cliente = cp.getDataCliente();
+        this.producto = cp.getDataProducto();
+        this.precio = cp.getPrecio();
     }
     
     public DataClienteCompraProducto(DataCliente cliente, DataProducto producto, Float precio) {

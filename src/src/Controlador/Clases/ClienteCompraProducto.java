@@ -1,5 +1,8 @@
 package Controlador.Clases;
 
+import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataProducto;
+
 public class ClienteCompraProducto {
     
     private Cliente cliente;
@@ -16,12 +19,20 @@ public class ClienteCompraProducto {
         return cliente;
     }
     
+    public DataCliente getDataCliente() {
+        return new DataCliente(cliente);
+    }
+    
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
     
     public Producto getProducto() {
         return producto;
+    }
+    
+    public DataProducto getDataProducto() {
+        return new DataProducto(producto);
     }
 
     public void setProducto(Producto producto) {
