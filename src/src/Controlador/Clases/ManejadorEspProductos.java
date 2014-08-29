@@ -23,8 +23,8 @@ public class ManejadorEspProductos {
     
     public void agregarEspecificacionProducto(EspecificacionProducto especificacionProducto){
         especificacionProductos.put(especificacionProducto.getNroReferencia(), especificacionProducto);
-        especificacionProducto.getCategorias().forEach((categoria) -> {
-           ManejadorCategorias.getInstance().getCategoria(categoria.getNombre()).agregarProducto(especificacionProducto);
+        especificacionProducto.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {    
+           ManejadorCategorias.getInstance().getCategoria(valor.getNombre()).agregarProducto(especificacionProducto);
         });
         
     }

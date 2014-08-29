@@ -88,8 +88,8 @@ class RegistrarCategoriaForm extends JInternalFrame {
         }
         
         controladorProducto.ingresarDatosCategoria(categoria);
-        
         controladorProducto.guardarCategoria();
+        
         setVisible(false);
         padreText.setText("");
         nombreText.setText("");
