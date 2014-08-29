@@ -23,6 +23,10 @@ public class ManejadorEspProductos {
     
     public void agregarEspecificacionProducto(EspecificacionProducto especificacionProducto){
         especificacionProductos.put(especificacionProducto.getNroReferencia(), especificacionProducto);
+        especificacionProducto.getCategorias().forEach((categoria) -> {
+           ManejadorCategorias.getInstance().getCategoria(categoria.getNombre()).agregarProducto(especificacionProducto);
+        });
+        
     }
     
     public Map<String,EspecificacionProducto> obtenerEspecificacionProductos(){

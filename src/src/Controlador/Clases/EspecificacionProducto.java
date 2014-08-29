@@ -35,12 +35,15 @@ public class EspecificacionProducto {
         this.nroReferencia = espProducto.getNroReferencia();
         this.nombre = espProducto.getNombre();
         this.descripcion = espProducto.getDescripcion();
-        this.especificacion = Collections.synchronizedMap(new HashMap());
+        this.especificacion = espProducto.getEspecificacion();
         this.precio = espProducto.getPrecio();
         this.proveedor = proveedor;
         this.categorias = new ArrayList<>();
         this.imagenes = new ArrayList<>();
         this.listaProductos = Collections.synchronizedMap(new HashMap());
+        espProducto.getProductos().entrySet().forEach((producto) -> {
+           this.listaProductos.put(producto.getKey(),new Producto(producto.getKey(),this));
+        });
     }
 
     public String getNroReferencia() {
@@ -118,13 +121,17 @@ public class EspecificacionProducto {
     public ArrayList<DataCategoria> getDataCategorias() {
         ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
         this.getCategorias().stream().forEach((categoria) -> {
-            dataCategorias.add(new DataCategoria(categoria));
+            dataCategorias.add(new DataCategoria(categoria, false));
         });
         return dataCategorias;
     }
 
     public void setCategorias(ArrayList<Categoria> categorias) {
         this.categorias = categorias;
+    }
+    
+    public void agregarCategoria(Categoria categoria){
+        this.categorias.add(categoria);
     }
     
     @Override

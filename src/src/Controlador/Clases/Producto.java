@@ -49,19 +49,11 @@ public class Producto {
     }
     
     public DataEspecificacionProducto getDataEspecificacionProducto() {
-        return new DataEspecificacionProducto(especificacionProducto);
+        return new DataEspecificacionProducto(especificacionProducto,true);
     }
     
     public void setEspecificacionProducto(EspecificacionProducto especificacionProducto) {
         this.especificacionProducto = especificacionProducto;
-    }
-    
-    public ArrayList<String> getCategorias(){
-        ArrayList<String> categorias = new ArrayList<>();
-        this.getEspecificacionProducto().getCategorias().stream().forEach((cat) -> {
-            categorias.add(cat.getNombre());
-        });
-        return categorias;
     }
     
     @Override

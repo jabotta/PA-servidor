@@ -5,6 +5,7 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface IControladorProductos {
     
@@ -18,7 +19,7 @@ public interface IControladorProductos {
     public void ingresarDatosUnidad(DataProducto producto);
     public ArrayList<DataCategoria> listarCategorias();
     public void elegirCategoria(String categoria);
-    public ArrayList<DataProducto> listarProductosCategoria();
+    public ArrayList<DataEspecificacionProducto> listarProductosCategoria();
     public DataProducto mostrarDatosProducto(Integer id);
     public void listarImagenesDisco();
     public Boolean controlarErrores();
@@ -27,9 +28,9 @@ public interface IControladorProductos {
 //    public Boolean tienePadre();
     public void asociarCategoriaPadre(DataCategoria padre);
     public void guardarCategoria();
-    public void elegirProducto(Integer id);
+    public void elegirEspProducto(String numRef);
     public DataProducto mostrarInformacionProducto();
-    public DataEspecificacionProducto listarEspecificacionProductos();
+    //public ArrayList<DataEspecificacionProducto> listarEspecificacionProductos();
     public void modificarDatosEspecificacionProducto(DataEspecificacionProducto espProducto);
     public void agregarImagen(String rutaImagen);
     public void agregarCategoria(DataCategoria categoria);

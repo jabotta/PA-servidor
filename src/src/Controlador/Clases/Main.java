@@ -61,6 +61,7 @@ public class Main {
         Proveedor prov1 = ManejadorUsuarios.getInstance().getProveedor("prov1");
         Map<Integer,Producto> prod1 = Collections.synchronizedMap(new HashMap());
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1,prod1));
+        
         prod1.put(0,new Producto(0, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
         prod1.put(1,new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
         ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1").setListaProductos(prod1);
@@ -99,16 +100,16 @@ public class Main {
         controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
         
-        //casoDeUso1(controlarUsuario);
+        casoDeUso1(controlarUsuario);
         casoDeUso2(controlarProducto);
-        /*casoDeUso3(controlarProducto);
+        casoDeUso3(controlarProducto);
         casoDeUso4(controlarOrden);
         casoDeUso5(controlarUsuario);
         casoDeUso6(controlarUsuario);
         casoDeUso7(controlarProducto);
         casoDeUso8(controlarProducto);
         casoDeUso9(controlarOrden);
-        casoDeUso10(controlarOrden);*/
+        casoDeUso10(controlarOrden);
     }
     
     public static void casoDeUso1(IControladorUsuarios controlarUsuario){
@@ -173,7 +174,7 @@ public class Main {
         
         switch (tienePadre) {
             case "s":
-                DataCategoria categoriaPadre = new DataCategoria(ManejadorCategorias.getInstance().obtenerCategorias().get("cat4"));
+                DataCategoria categoriaPadre = new DataCategoria(ManejadorCategorias.getInstance().obtenerCategorias().get("cat4"),true);
                 controlarProducto.asociarCategoriaPadre(categoriaPadre);
             break;
         }
@@ -302,6 +303,9 @@ public class Main {
         controlarProducto.listarProductosCategoria().stream().forEach((producto) -> {
             System.out.println(producto);
         });
+        
+        controlarProducto.elegirEspProducto("a3");
+        
     }
     
     public static void casoDeUso9(IControladorOrdenes controlarOrden){

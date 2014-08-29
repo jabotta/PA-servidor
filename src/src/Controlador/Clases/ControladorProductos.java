@@ -83,7 +83,7 @@ public class ControladorProductos implements IControladorProductos{
     public ArrayList<DataCategoria> listarCategorias(){
         ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
         ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
-            dataCategoria.add(new DataCategoria(valor));
+            dataCategoria.add(new DataCategoria(valor,true));
         });
         return dataCategoria;
     }
@@ -99,14 +99,12 @@ public class ControladorProductos implements IControladorProductos{
     }
                 
     @Override
-    public ArrayList<DataProducto> listarProductosCategoria(){
-        ArrayList<DataProducto> dataProducto = new ArrayList<>();
-        ManejadorProductos.getInstance().obtenerProductos().entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
-            if(valor.getCategorias().contains(categoriaElegida.getNombre())){
-                dataProducto.add(new DataProducto(valor));
-            }
+    public ArrayList<DataEspecificacionProducto> listarProductosCategoria(){
+        ArrayList<DataEspecificacionProducto> result = new ArrayList<DataEspecificacionProducto>();
+        categoriaElegida.getListaProductos().entrySet().stream().map((espProd) -> espProd.getValue()).forEach((valor) -> {
+            result.add(new DataEspecificacionProducto(valor,true));
         });
-        return dataProducto;
+        return result;
     }
     
     @Override
@@ -170,8 +168,8 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
-    public void elegirProducto(Integer id){
-        
+    public void elegirEspProducto(String numRef){
+        espProdElegido = ManejadorEspProductos.getInstance().getEspecificacionProducto(numRef);
     }
     
     @Override
@@ -179,10 +177,14 @@ public class ControladorProductos implements IControladorProductos{
         return null;
     }
     
-    @Override
-    public DataEspecificacionProducto listarEspecificacionProductos(){
-        return null;
-    }
+    /*@Override
+    public ArrayList<DataEspecificacionProducto> listarEspecificacionProductos(){
+        ArrayList<DataEspecificacionProducto> result = new ArrayList<DataEspecificacionProducto>();
+        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProd) -> espProd.getValue()).forEach((valor) -> {
+            result.add(new DataEspecificacionProducto(valor));
+        });
+        return result;
+    }*/
     
     @Override
     public void modificarDatosEspecificacionProducto(DataEspecificacionProducto espProducto){

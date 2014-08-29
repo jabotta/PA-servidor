@@ -47,7 +47,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public ArrayList<DataCategoria> listarCategorias(){
         ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
         ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
-            dataCategoria.add(new DataCategoria(valor));
+            dataCategoria.add(new DataCategoria(valor,true));
         });
         return dataCategoria;
     }
@@ -62,7 +62,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
         ArrayList<DataEspecificacionProducto> dataEspecificacionProducto = new ArrayList<>();
         ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
             if(valor.getCategorias().contains(categoriaElegida)){
-                dataEspecificacionProducto.add(new DataEspecificacionProducto(valor));
+                dataEspecificacionProducto.add(new DataEspecificacionProducto(valor,true));
             }
         });
         return dataEspecificacionProducto;

@@ -23,6 +23,9 @@ public class ManejadorCategorias {
     
     public void agregarCategoria(Categoria categoria){
         categorias.put(categoria.getNombre(), categoria);
+        categoria.getListaProductos().entrySet().forEach((producto) -> {
+            ManejadorEspProductos.getInstance().getEspecificacionProducto(producto.getKey()).agregarCategoria(categoria);
+        });
     }
     
     public Map<String,Categoria> obtenerCategorias(){

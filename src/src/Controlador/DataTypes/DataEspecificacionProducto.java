@@ -18,7 +18,7 @@ public class DataEspecificacionProducto {
     private ArrayList<DataCategoria> categorias;
     private Map<Integer,DataProducto> productos;
     
-    public DataEspecificacionProducto(EspecificacionProducto ep) {
+    public DataEspecificacionProducto(EspecificacionProducto ep, boolean conCategorias) {
         this.nroReferencia = ep.getNroReferencia();
         this.nombre = ep.getNombre();
         this.descripcion = ep.getDescripcion();
@@ -26,10 +26,13 @@ public class DataEspecificacionProducto {
         this.precio = ep.getPrecio();
         this.proveedor = ep.getDataProveedor();
         this.imagenes = ep.getImagenes();
-        this.categorias = ep.getDataCategorias();
-        productos = Collections.synchronizedMap(new HashMap());
+        if(conCategorias)
+            this.categorias = ep.getDataCategorias();
+        else
+            this.categorias = new ArrayList<DataCategoria>();
+        this.productos = Collections.synchronizedMap(new HashMap());
         ep.getListaProductos().entrySet().forEach((producto) -> {
-            productos.put(producto.getKey(),new DataProducto(producto.getValue()));
+           productos.put(producto.getKey(),new DataProducto(producto.getKey(),this));
         });
     }
     
@@ -113,7 +116,7 @@ public class DataEspecificacionProducto {
         return productos;
     }
 
-    public void setCategorias(Map<Integer,DataProducto> productos) {
+    public void setProductos(Map<Integer,DataProducto> productos) {
         this.productos = productos;
     }
     

@@ -1,20 +1,36 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataCategoria;
+import Controlador.DataTypes.DataEspecificacionProducto;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Categoria {
     
     private String nombre;
     private Categoria padre;
+    private Map<String,EspecificacionProducto> listaProductos;
 
     public Categoria(String nombre, Categoria padre) {
         this.nombre = nombre;
         this.padre = padre;
+        this.listaProductos = Collections.synchronizedMap(new HashMap());
+    }
+    
+    public Categoria(String nombre, Categoria padre, Map<String,EspecificacionProducto> productos) {
+        this.nombre = nombre;
+        this.padre = padre;
+        this.listaProductos = productos;
     }
     
     public Categoria(DataCategoria dc) {
         this.nombre = dc.getNombre();
         this.padre = null;
+        this.listaProductos = Collections.synchronizedMap(new HashMap());
+        dc.getListaProductos().entrySet().forEach((producto) -> {
+           listaProductos.put(producto.getKey(),new EspecificacionProducto(producto.getValue(),new Proveedor(producto.getValue().getProveedor())));
+        });
     }
 
     public String getNombre() {
@@ -30,11 +46,23 @@ public class Categoria {
     }
     
     public DataCategoria getDataPadre() {
-        return new DataCategoria(padre);
+        return new DataCategoria(padre,true);
     }
     
     public void setPadre(Categoria padre) {
         this.padre = padre;
+    }
+    
+    public Map<String,EspecificacionProducto> getListaProductos() {
+        return this.listaProductos;
+    }
+    
+    public void setListaProductos(Map<String,EspecificacionProducto> productos) {
+        this.listaProductos = productos;
+    }
+    
+    public void agregarProducto(EspecificacionProducto producto){
+        this.listaProductos.put(producto.getNroReferencia(),producto);
     }
     
     @Override
