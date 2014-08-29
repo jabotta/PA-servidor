@@ -24,6 +24,7 @@ public interface IControladorProductos {
     public void listarImagenesDisco();
     public Boolean controlarErrores();
     public void guardarProducto();
+    public DataCategoria elegirCategoriaPadre(String categoria);
     public void ingresarDatosCategoria(DataCategoria categoria);
 //    public Boolean tienePadre();
     public void asociarCategoriaPadre(DataCategoria padre);

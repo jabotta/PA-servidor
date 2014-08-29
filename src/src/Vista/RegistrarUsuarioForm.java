@@ -1,31 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
-import Controlador.Clases.Fabrica;
+import Controlador.Clases.IControladorUsuarios;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
-import Controlador.DataTypes.DataUsuario;
-import java.awt.BorderLayout;
-import java.awt.PopupMenu;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.time.Clock;
-import java.util.Date;
+import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author rodro
- */
 class RegistrarUsuarioForm extends JPanel {
 
     private final JLabel nickname;
@@ -33,18 +17,26 @@ class RegistrarUsuarioForm extends JPanel {
     private final JLabel apellido;
     private final JLabel fNac;
     private final JLabel email;
+    private final JLabel nombreCompania;
+    private final JLabel linkSitio;
     private final JTextField nicknameText;
     private final JTextField emailText;
     private final JTextField fNacText;
     private final JTextField apellidoText;
     private final JTextField nombreText;
+    private final JTextField nombreCompaniaText;
+    private final JTextField linkSitioText;
     private final JButton guardarBtn;
     private final JButton cancelarBtn;
     private final JCheckBox esProveedor;
+    private final IControladorUsuarios controlarUsuario;
 
-    public RegistrarUsuarioForm() {
-
+    public RegistrarUsuarioForm(IControladorUsuarios ICU) {
+        
+        controlarUsuario = ICU;
+                
         setLayout(null);
+        
         JLabel proveedorlabel = new JLabel("Es proovedor?:");
         proveedorlabel.setVisible(true);
         proveedorlabel.setBounds(0, 10, 150, 20);
@@ -93,56 +85,97 @@ class RegistrarUsuarioForm extends JPanel {
         fNacText.setBounds(150, 140, 300, 30);
         add(fNacText);
 
-        email = new JLabel("correo electronico");
+        email = new JLabel("Correo electronico");
         email.setVisible(true);
         email.setBounds(0, 180, 150, 10);
         add(email);
-
+        
         emailText = new JTextField();
         emailText.setBounds(150, 170, 300, 30);
         add(emailText);
+        
+        nombreCompania = new JLabel("Nombre Compania");
+        nombreCompania.setVisible(true);
+        nombreCompania.setBounds(0, 205, 150, 15);
+        add(nombreCompania);
+        
+        nombreCompaniaText = new JTextField();
+        nombreCompaniaText.setBounds(150, 200, 300, 30);
+        add(nombreCompaniaText);
+        
+        linkSitio = new JLabel("Link Sitio");
+        linkSitio.setVisible(true);
+        linkSitio.setBounds(0, 240, 150, 10);
+        add(linkSitio);
+        
+        linkSitioText = new JTextField();
+        linkSitioText.setBounds(150, 230, 300, 30);
+        add(linkSitioText);
 
         guardarBtn = new JButton("Guardar");
         cancelarBtn = new JButton("Cancelar");
 
-        guardarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                guardarUsuario(evt);
-            }
-
-        });
-        cancelarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cancelar(evt);
+        guardarBtn.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 guardarUsuario(e);
             }
         });
-        guardarBtn.setBounds(200, 200, 100, 40);
-        cancelarBtn.setBounds(320, 200, 100, 40);
+        
+        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 cancelar(e);
+            }
+        });
+        
+        guardarBtn.setBounds(200, 260, 100, 40);
+        cancelarBtn.setBounds(320, 260, 100, 40);
         add(guardarBtn);
         add(cancelarBtn);
     }
 
-    private void guardarUsuario(MouseEvent evtu) {
-        System.out.print("Guardar usuario");
+    private void guardarUsuario(ActionEvent evt) {
         String nickname = nicknameText.getText();
         String email = emailText.getText();
         String fnac = fNacText.getText();
         String apellido = apellidoText.getText();
         String nombre = nombreText.getText();
-        DataUsuario dt;
-        System.out.print(esProveedor.isSelected());
-        //TODO: hay que agregar checkbox para saber si es cliente o proveedor
-        if (esProveedor.isSelected()) {
-            dt = new DataCliente(nickname, nombre, apellido, email, null);
-            Fabrica.getInstance().getControladorUsuarios(null).ingresarDatosCliente((DataCliente)dt);
+        String nombreCompania = nombreCompaniaText.getText();
+        String linkSitio = linkSitioText.getText();
+        
+        if (!esProveedor.isSelected()) {
+            DataCliente cliente = new DataCliente(nickname, nombre, apellido, email, null);
+            controlarUsuario.ingresarDatosCliente(cliente);
         } else {
-            dt = new DataProveedor(nickname, nombre, apellido, email, null,null,null);
-            Fabrica.getInstance().getControladorUsuarios(null).ingresarDatosProveedor((DataProveedor)dt);
+            DataProveedor proveedor = new DataProveedor(nickname, nombre, apellido, email, null, nombreCompania, linkSitio);
+            controlarUsuario.ingresarDatosProveedor(proveedor);
+        }
+        
+        if(controlarUsuario.validarDatosUsuario()){
+            System.out.println("Ya existe el usuario");
+        }else{
+            setVisible(false);
+            controlarUsuario.guardarUsuario();
+            nicknameText.setText("");
+            emailText.setText("");
+            fNacText.setText("");
+            apellidoText.setText("");
+            nombreText.setText("");
+            nombreCompaniaText.setText("");
+            linkSitioText.setText("");
         }
     }
 
-    private void cancelar(MouseEvent evt) {
+    private void cancelar(ActionEvent evt) {
         setVisible(false);
+        nicknameText.setText("");
+        emailText.setText("");
+        fNacText.setText("");
+        apellidoText.setText("");
+        nombreText.setText("");
+        nombreCompaniaText.setText("");
+        linkSitioText.setText("");
     }
 
 }

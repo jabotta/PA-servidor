@@ -164,23 +164,9 @@ public class Main {
     public static void casoDeUso3(IControladorProductos controlarProducto){
         System.out.println("**************************** Alta de categoría ****************************");
         
-        String tienePadre;
-        Scanner eTienePadre = new Scanner (System.in);
-        System.out.println("tiene padre? (s o n)");
-        tienePadre = eTienePadre.nextLine();
-        
-        DataCategoria categoria = new DataCategoria("cat6", null);
+        DataCategoria padre = new DataCategoria(ManejadorCategorias.getInstance().getCategoria("cat1"), true);
+        DataCategoria categoria = new DataCategoria("cat6", padre);
         controlarProducto.ingresarDatosCategoria(categoria);
-        
-        switch (tienePadre) {
-            case "s":
-                DataCategoria categoriaPadre = new DataCategoria(ManejadorCategorias.getInstance().obtenerCategorias().get("cat4"),true);
-                controlarProducto.asociarCategoriaPadre(categoriaPadre);
-            break;
-        }
-        
-        controlarProducto.guardarCategoria();
-        ArrayList<DataCategoria> lstCategorias = controlarProducto.listarCategorias();
     }
     
     public static void casoDeUso4(IControladorOrdenes controlarOrden){

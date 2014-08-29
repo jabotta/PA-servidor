@@ -142,6 +142,11 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
+    public DataCategoria elegirCategoriaPadre(String categoria){
+        return new DataCategoria(ManejadorCategorias.getInstance().getCategoria(categoria), true);
+    }
+    
+    @Override
     public void ingresarDatosCategoria(DataCategoria categoria){
         nuevaCategoria = new Categoria(categoria);
         if(!isNull(categoria.getPadre())){
@@ -158,7 +163,6 @@ public class ControladorProductos implements IControladorProductos{
     public void asociarCategoriaPadre(DataCategoria padre){
         Categoria catPadre = ManejadorCategorias.getInstance().getCategoria(padre.getNombre());
         nuevaCategoria.setPadre(catPadre);
-        System.out.println("asociarCategoriaPadre " + nuevaCategoria);
     }
     
     @Override

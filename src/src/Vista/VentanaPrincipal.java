@@ -1,10 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Vista;
+
+import Controlador.Clases.Fabrica;
+import Controlador.Clases.IControladorOrdenes;
+import Controlador.Clases.IControladorProductos;
+import Controlador.Clases.IControladorUsuarios;
 
 import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
@@ -17,10 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 //import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-/**
- *
- * @author rodro
- */
 public class VentanaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JMenuItem altaCategoriaOpt;
@@ -41,13 +36,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private JDesktopPane desktopPane;
     private GroupLayout layout;
     private JInternalFrame registrarUsuarioVentana;
+    private JInternalFrame registrarCategoriaVentana;
     private JPanel panelRegistrarUsuario;
-    // End of variables declaration       
+    private JPanel panelRegistrarCategoria;
+    // End of variables declaration
+    
+    public static Integer idUsuariosControlador;
+    public static Integer idProductosControlador;
+    public static Integer idOrdenesControlador;
+    public static IControladorUsuarios controlarUsuario;
+    public static IControladorProductos controlarProducto;
+    public static IControladorOrdenes controlarOrden;
+    
     /**
      * Creates new form MainWindow
      */
     public VentanaPrincipal() {
         initComponents();
+        
+        idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
+        idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
+        idOrdenesControlador = Fabrica.getInstance().getControladorOrdenes(null).getId();
+        controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
+        controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
+        controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
     }
 
                
@@ -57,10 +69,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
   
         casosUsoMenu = new javax.swing.JMenu();
+        
         //menu sobre colaboraciones
         userMenu = new javax.swing.JMenu();
         ordenMenu = new javax.swing.JMenu();
         productoMenu = new javax.swing.JMenu();
+        
         //Opciones sobre Usuarios
         registrarUsrOpt = new javax.swing.JMenuItem();
         verInfoClienteOpt = new javax.swing.JMenuItem();
@@ -72,13 +86,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         verInfoProdOpt = new javax.swing.JMenuItem();
         modDatosProdOpt = new javax.swing.JMenuItem();
         
-//        Opciones sobre Ordenes de compra
+        //Opciones sobre Ordenes de compra
         crearOrdenOpt = new javax.swing.JMenuItem();
         cancelarOrdOpt = new javax.swing.JMenuItem();
         verInfoOrdenOpt = new javax.swing.JMenuItem();
         
-        
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         casosUsoMenu.setText("Casos de Uso");
@@ -180,29 +192,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void registrarUsrOptActionPerformed(java.awt.event.ActionEvent evt) {                                                
         registrarUsuarioVentana = new javax.swing.JInternalFrame();
-        panelRegistrarUsuario = new RegistrarUsuarioForm();
+        panelRegistrarUsuario = new RegistrarUsuarioForm(controlarUsuario);
         
         javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(registrarUsuarioVentana.getContentPane());
         registrarUsuarioVentana.getContentPane().setLayout(registrarUsuariosLayout);
         
         registrarUsuariosLayout.setHorizontalGroup(
             registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registrarUsuariosLayout.createSequentialGroup()
+                .addGroup(registrarUsuariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelRegistrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+        
         registrarUsuariosLayout.setVerticalGroup(
             registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        
         desktopPane.add(registrarUsuarioVentana);
-        registrarUsuarioVentana.setBounds(100, 100, 700, 300);
+        registrarUsuarioVentana.setBounds(50, 50, 700, 400);
         registrarUsuarioVentana.setVisible(true);
-       
-        
-        
-       
     }                                               
 
     private void registrarProdOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
@@ -210,7 +220,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }                                                
 
     private void altaCategoriaOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+        registrarCategoriaVentana = new javax.swing.JInternalFrame();
+        panelRegistrarCategoria = new RegistrarCategoriaForm(controlarProducto);
+        
+        javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(registrarCategoriaVentana.getContentPane());
+        registrarCategoriaVentana.getContentPane().setLayout(registrarUsuariosLayout);
+        
+        registrarUsuariosLayout.setHorizontalGroup(
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(registrarUsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelRegistrarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        
+        registrarUsuariosLayout.setVerticalGroup(
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelRegistrarCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        
+        desktopPane.add(registrarCategoriaVentana);
+        registrarCategoriaVentana.setBounds(50, 50, 700, 400);
+        registrarCategoriaVentana.setVisible(true);
     }                                                
 
     private void crearOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                              
