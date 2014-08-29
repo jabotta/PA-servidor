@@ -2,6 +2,8 @@ package Controlador.DataTypes;
 
 import Controlador.Clases.EspecificacionProducto;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DataEspecificacionProducto {
@@ -14,6 +16,7 @@ public class DataEspecificacionProducto {
     private DataProveedor proveedor;
     private ArrayList<String> imagenes;
     private ArrayList<DataCategoria> categorias;
+    private Map<Integer,DataProducto> productos;
     
     public DataEspecificacionProducto(EspecificacionProducto ep) {
         this.nroReferencia = ep.getNroReferencia();
@@ -24,9 +27,13 @@ public class DataEspecificacionProducto {
         this.proveedor = ep.getDataProveedor();
         this.imagenes = ep.getImagenes();
         this.categorias = ep.getDataCategorias();
+        productos = Collections.synchronizedMap(new HashMap());
+        ep.getListaProductos().entrySet().forEach((producto) -> {
+            productos.put(producto.getKey(),new DataProducto(producto.getValue()));
+        });
     }
     
-    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias) {
+    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias,Map<Integer,DataProducto> productos) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -35,6 +42,7 @@ public class DataEspecificacionProducto {
         this.proveedor = proveedor;
         this.imagenes = imagenes;
         this.categorias = categorias;
+        this.productos = productos;
     }
 
     public String getNroReferencia() {
@@ -99,6 +107,14 @@ public class DataEspecificacionProducto {
 
     public void setCategorias(ArrayList<DataCategoria> categorias) {
         this.categorias = categorias;
+    }
+    
+    public Map<Integer,DataProducto> getProductos() {
+        return productos;
+    }
+
+    public void setCategorias(Map<Integer,DataProducto> productos) {
+        this.productos = productos;
     }
     
     @Override

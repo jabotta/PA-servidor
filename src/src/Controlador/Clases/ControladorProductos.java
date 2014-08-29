@@ -5,7 +5,11 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import static java.util.Objects.isNull;
 
 public class ControladorProductos implements IControladorProductos{
@@ -14,11 +18,13 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto espProductoModificada;
     private Proveedor proveedorElegido;
     private EspecificacionProducto espProdElegido;
-    private Map<String,String> especificaciones;
-    private EspecificacionProducto nuevoProducto;
+    private Map<String,String> especificaciones = Collections.synchronizedMap(new HashMap());
+    private EspecificacionProducto nuevoEspProducto;
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
-    private String rutaImagen;
+    private ArrayList<Categoria> categoriasElegidas = new ArrayList<Categoria>();
+    private ArrayList<String> imagenes = new ArrayList<String>();
+    private Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap());
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
@@ -52,8 +58,8 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto){
-        nuevoProducto = new EspecificacionProducto(espProducto,proveedorElegido);
-        System.out.println("Nuevo Producto " + nuevoProducto);
+        nuevoEspProducto = new EspecificacionProducto(espProducto,proveedorElegido);
+        System.out.println("Nuevo Producto " + nuevoEspProducto);
     }
     
     @Override
@@ -63,12 +69,14 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void agregarMultiplesProductosAutogenerados(Integer cantidad){
-        
+        for(Integer i=0;i<cantidad;i++){
+            productosAAgregar.put(i, new Producto(i, nuevoEspProducto));
+        }
     }
     
     @Override
     public void ingresarDatosUnidad(DataProducto producto){
-        
+        productosAAgregar.put(producto.getId(), new Producto(producto));
     }
     
     @Override
@@ -85,6 +93,11 @@ public class ControladorProductos implements IControladorProductos{
         categoriaElegida = ManejadorCategorias.getInstance().getCategoria(categoria);
     }
     
+    @Override
+    public void agregarCategoriaAEspecificacion(String categoria){
+        categoriasElegidas.add(ManejadorCategorias.getInstance().getCategoria(categoria));
+    }
+                
     @Override
     public ArrayList<DataProducto> listarProductosCategoria(){
         ArrayList<DataProducto> dataProducto = new ArrayList<>();
@@ -109,18 +122,25 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
-    public void elegirImagen(String rutaImagen){
-        this.rutaImagen = rutaImagen;
-    }
-    
-    @Override
     public Boolean controlarErrores(){
+        if(!isNull(ManejadorEspProductos.getInstance().getEspecificacionProducto(nuevoEspProducto.getNroReferencia()))){
+            return false;
+        }        
+        for(Entry<String,EspecificacionProducto> iter : ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet()){
+            if(iter.getValue().getNombre().equals(nuevoEspProducto.getNombre())){
+                return false;
+            }
+        }
         return true;
     }
     
     @Override
     public void guardarProducto(){
-        
+        nuevoEspProducto.setCategorias(categoriasElegidas);
+        nuevoEspProducto.setEspecificacion(especificaciones);
+        nuevoEspProducto.setImagenes(imagenes);
+        nuevoEspProducto.setListaProductos(productosAAgregar);
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(nuevoEspProducto);
     }
     
     @Override
@@ -171,7 +191,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void agregarImagen(String rutaImagen){
-        
+        imagenes.add(rutaImagen);
     }
     
     @Override
@@ -183,5 +203,11 @@ public class ControladorProductos implements IControladorProductos{
     public Boolean validarInfo(){
         return true;
     }
+    
+    @Override
+    public void ingresarEspecificacion(String clave, String desc){
+        especificaciones.put(clave, desc);
+    }
+    
     
 }

@@ -21,7 +21,6 @@ public interface IControladorProductos {
     public ArrayList<DataProducto> listarProductosCategoria();
     public DataProducto mostrarDatosProducto(Integer id);
     public void listarImagenesDisco();
-    public void elegirImagen(String rutaImagen);
     public Boolean controlarErrores();
     public void guardarProducto();
     public void ingresarDatosCategoria(DataCategoria categoria);
@@ -35,5 +34,7 @@ public interface IControladorProductos {
     public void agregarImagen(String rutaImagen);
     public void agregarCategoria(DataCategoria categoria);
     public Boolean validarInfo();
+    public void ingresarEspecificacion(String clave, String desc);
+    public void agregarCategoriaAEspecificacion(String categoria);
     
 }

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
+//import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
