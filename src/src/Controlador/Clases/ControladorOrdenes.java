@@ -61,7 +61,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public ArrayList<DataEspecificacionProducto> listarEspecificacionProductos(){
         ArrayList<DataEspecificacionProducto> dataEspecificacionProducto = new ArrayList<>();
         ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
-            if(valor.getCategorias().contains(categoriaElegida)){
+            if(valor.getCategorias().containsValue(categoriaElegida)){
                 dataEspecificacionProducto.add(new DataEspecificacionProducto(valor,true));
             }
         });

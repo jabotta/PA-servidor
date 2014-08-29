@@ -17,10 +17,10 @@ public class EspecificacionProducto {
     private Float precio;
     private Proveedor proveedor;
     private ArrayList<String> imagenes;
-    private ArrayList<Categoria> categorias;
+    private Map<String,Categoria> categorias;
     private Map<Integer,Producto> listaProductos;
     
-    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, ArrayList<Categoria> categorias,Map<Integer,Producto> listaProductos) {
+    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, Map<String,Categoria> categorias,Map<Integer,Producto> listaProductos) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -38,7 +38,7 @@ public class EspecificacionProducto {
         this.especificacion = espProducto.getEspecificacion();
         this.precio = espProducto.getPrecio();
         this.proveedor = proveedor;
-        this.categorias = new ArrayList<>();
+        this.categorias = Collections.synchronizedMap(new HashMap());
         this.imagenes = new ArrayList<>();
         this.listaProductos = Collections.synchronizedMap(new HashMap());
         espProducto.getProductos().entrySet().forEach((producto) -> {
@@ -114,24 +114,24 @@ public class EspecificacionProducto {
         this.imagenes = imagenes;
     }
     
-    public ArrayList<Categoria> getCategorias() {
+    public Map<String,Categoria> getCategorias() {
         return categorias;
     }
     
     public ArrayList<DataCategoria> getDataCategorias() {
         ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
-        this.getCategorias().stream().forEach((categoria) -> {
-            dataCategorias.add(new DataCategoria(categoria, false));
+        this.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+            dataCategorias.add(new DataCategoria(valor, false));
         });
         return dataCategorias;
     }
 
-    public void setCategorias(ArrayList<Categoria> categorias) {
+    public void setCategorias(Map<String,Categoria> categorias) {
         this.categorias = categorias;
     }
     
     public void agregarCategoria(Categoria categoria){
-        this.categorias.add(categoria);
+        this.categorias.put(categoria.getNombre(),categoria);
     }
     
     @Override

@@ -52,9 +52,9 @@ public class Main {
         ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat4", null));
         ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat5", null));
 
-        ArrayList<Categoria> cat1 = new ArrayList<>();
-        cat1.add(ManejadorCategorias.getInstance().getCategoria("cat1"));
-        cat1.add(ManejadorCategorias.getInstance().getCategoria("cat5"));
+        Map<String,Categoria> cat1 = Collections.synchronizedMap(new HashMap());
+        cat1.put("cat1",ManejadorCategorias.getInstance().getCategoria("cat1"));
+        cat1.put("cat5",ManejadorCategorias.getInstance().getCategoria("cat5"));
         Map<String,String> esp1 = Collections.synchronizedMap(new HashMap());
         esp1.put("Esp1","Espacificacion 1");
         esp1.put("Esp1","Espacificacion 2");
@@ -66,9 +66,9 @@ public class Main {
         prod1.put(1,new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
         ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1").setListaProductos(prod1);
         
-        ArrayList<Categoria> cat2 = new ArrayList<>();
-        cat2.add(ManejadorCategorias.getInstance().getCategoria("cat1"));
-        cat2.add(ManejadorCategorias.getInstance().getCategoria("cat3"));
+        Map<String,Categoria> cat2 = Collections.synchronizedMap(new HashMap());
+        cat2.put("cat1",ManejadorCategorias.getInstance().getCategoria("cat1"));
+        cat2.put("cat3",ManejadorCategorias.getInstance().getCategoria("cat3"));
         Map<String,String> esp2 = Collections.synchronizedMap(new HashMap());
         esp2.put("Esp1","Espacificacion 1");
         Proveedor prov2 = ManejadorUsuarios.getInstance().getProveedor("prov2");
@@ -78,8 +78,8 @@ public class Main {
         prod2.put(3,new Producto(3, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
         ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2").setListaProductos(prod2);
         
-        ArrayList<Categoria> cat3 = new ArrayList<>();
-        cat3.add(ManejadorCategorias.getInstance().getCategoria("cat4"));
+        Map<String,Categoria> cat3 = Collections.synchronizedMap(new HashMap());
+        cat3.put("cat4",ManejadorCategorias.getInstance().getCategoria("cat4"));
         Map<String,String> esp3 = Collections.synchronizedMap(new HashMap());
         esp3.put("Esp1","Espacificacion 1");
         Proveedor prov3 = ManejadorUsuarios.getInstance().getProveedor("prov3");
@@ -270,7 +270,7 @@ public class Main {
         });
         
         //Mostrar Datos Cliente
-        DataProducto dataProducto = controlarProducto.mostrarDatosProducto(4);
+        DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto("a3");
         System.out.println("Mostrar Datos del producto: " + dataProducto);
     }
     
@@ -291,7 +291,14 @@ public class Main {
         });
         
         controlarProducto.elegirEspProducto("a3");
+        DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto("a3");
+        controlarProducto.modificarDatosEspecificacionProducto(dataProducto);
         
+        controlarProducto.listarCategoriasAModificar();
+        controlarProducto.agregarCategoriaAEspecificacion("cat5");
+        controlarProducto.borrarCategoriaAEspecificacion("cat5");
+        if(controlarProducto.validarInfo())
+            controlarProducto.guardarEspProductoModificado();
     }
     
     public static void casoDeUso9(IControladorOrdenes controlarOrden){

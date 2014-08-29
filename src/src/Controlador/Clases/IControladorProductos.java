@@ -20,7 +20,7 @@ public interface IControladorProductos {
     public ArrayList<DataCategoria> listarCategorias();
     public void elegirCategoria(String categoria);
     public ArrayList<DataEspecificacionProducto> listarProductosCategoria();
-    public DataProducto mostrarDatosProducto(Integer id);
+    public DataEspecificacionProducto mostrarDatosProducto(String numRef);
     public void listarImagenesDisco();
     public Boolean controlarErrores();
     public void guardarProducto();
@@ -38,5 +38,10 @@ public interface IControladorProductos {
     public Boolean validarInfo();
     public void ingresarEspecificacion(String clave, String desc);
     public void agregarCategoriaAEspecificacion(String categoria);
+    public ArrayList<String> listarImagenesAModificar();
+    public void borrarImagen(String rutaImagen);
+    public ArrayList<DataCategoria> listarCategoriasAModificar();
+    public void borrarCategoriaAEspecificacion(String categoria);
+    public void guardarEspProductoModificado();
     
 }

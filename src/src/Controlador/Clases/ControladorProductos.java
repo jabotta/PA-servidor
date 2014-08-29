@@ -22,7 +22,7 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto nuevoEspProducto;
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
-    private ArrayList<Categoria> categoriasElegidas = new ArrayList<Categoria>();
+    private Map<String,Categoria> categoriasElegidas = Collections.synchronizedMap(new HashMap());
     private ArrayList<String> imagenes = new ArrayList<String>();
     private Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap());
     
@@ -94,8 +94,23 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
+    public ArrayList<DataCategoria> listarCategoriasAModificar(){
+        ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
+        espProductoModificada.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+            categoriasElegidas.put(valor.getNombre(),valor);
+            dataCategoria.add(new DataCategoria(valor,true));
+        });
+        return dataCategoria;
+    }
+    
+    @Override
     public void agregarCategoriaAEspecificacion(String categoria){
-        categoriasElegidas.add(ManejadorCategorias.getInstance().getCategoria(categoria));
+        categoriasElegidas.put(categoria,ManejadorCategorias.getInstance().getCategoria(categoria));
+    }
+    
+    @Override
+    public void borrarCategoriaAEspecificacion(String categoria){
+        categoriasElegidas.remove(categoria);
     }
                 
     @Override
@@ -108,9 +123,9 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
-    public DataProducto mostrarDatosProducto(Integer id){
-        Producto productoElegido = ManejadorProductos.getInstance().getProducto(id);
-        DataProducto dataProducto = new DataProducto(productoElegido);
+    public DataEspecificacionProducto mostrarDatosProducto(String numRef){
+        EspecificacionProducto productoElegido = ManejadorEspProductos.getInstance().getEspecificacionProducto(numRef);
+        DataEspecificacionProducto dataProducto = new DataEspecificacionProducto(productoElegido,true);
         return dataProducto;
     }
     
@@ -120,10 +135,18 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
+    public ArrayList<String> listarImagenesAModificar(){
+        imagenes = espProductoModificada.getImagenes();
+        return imagenes;
+    }
+    
+    @Override
     public Boolean controlarErrores(){
         if(!isNull(ManejadorEspProductos.getInstance().getEspecificacionProducto(nuevoEspProducto.getNroReferencia()))){
             return false;
-        }        
+        }    
+        if(categoriasElegidas.isEmpty())
+            return false;
         for(Entry<String,EspecificacionProducto> iter : ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet()){
             if(iter.getValue().getNombre().equals(nuevoEspProducto.getNombre())){
                 return false;
@@ -192,7 +215,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void modificarDatosEspecificacionProducto(DataEspecificacionProducto espProducto){
-        
+        espProductoModificada = new EspecificacionProducto(espProducto,ManejadorUsuarios.getInstance().getProveedor(espProducto.getProveedor().getNickname()));
     }
     
     @Override
@@ -201,12 +224,24 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
+    public void borrarImagen(String rutaImagen){
+        imagenes.remove(rutaImagen);
+    }
+    
+    @Override
     public void agregarCategoria(DataCategoria categoria){
         
     }
     
     @Override
-    public Boolean validarInfo(){
+    public Boolean validarInfo(){   
+        if(categoriasElegidas.isEmpty())
+            return false;
+        for(Entry<String,EspecificacionProducto> iter : ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet()){
+            if(!iter.getValue().getNroReferencia().equals(espProductoModificada.getNroReferencia()) && iter.getValue().getNombre().equals(nuevoEspProducto.getNombre())){
+                return false;
+            }
+        }
         return true;
     }
     
@@ -215,5 +250,13 @@ public class ControladorProductos implements IControladorProductos{
         especificaciones.put(clave, desc);
     }
     
-    
+    @Override
+    public void guardarEspProductoModificado(){
+        espProductoModificada.setCategorias(categoriasElegidas);
+        espProductoModificada.setEspecificacion(especificaciones);
+        espProductoModificada.setImagenes(imagenes);
+        espProductoModificada.setListaProductos(productosAAgregar);
+        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().remove(espProductoModificada.getNroReferencia());
+        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(espProductoModificada);
+    }
 }
