@@ -7,15 +7,24 @@ import Controlador.Clases.Proveedor;
 public class DataProducto {
     
     private Integer id;
+    private String idEspecifico;
     private DataEspecificacionProducto especificacionProducto;
     
     public DataProducto(Producto p) {
         this.id = p.getId();
+        this.idEspecifico = p.getIdEspecifico();
         this.especificacionProducto = p.getDataEspecificacionProducto();
     }
     
     public DataProducto(Integer id, DataEspecificacionProducto especificacionProducto) {
         this.id = id;
+        this.idEspecifico = null;
+        this.especificacionProducto = especificacionProducto;
+    }
+    
+    public DataProducto(Integer id, String idEspecifico, DataEspecificacionProducto especificacionProducto) {
+        this.id = id;
+        this.idEspecifico = idEspecifico;
         this.especificacionProducto = especificacionProducto;
     }
 
@@ -25,6 +34,14 @@ public class DataProducto {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public String getIdEspecifico() {
+        return idEspecifico;
+    }
+    
+    public void setIdEspecifico(String id) {
+        this.idEspecifico = id;
     }
     
     public DataEspecificacionProducto getEspecificacionProducto() {

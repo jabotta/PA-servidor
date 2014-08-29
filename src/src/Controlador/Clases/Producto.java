@@ -7,15 +7,24 @@ import java.util.ArrayList;
 public class Producto {
     
     private Integer id;
+    private String idEspecifico;
     private EspecificacionProducto especificacionProducto;
 
     public Producto(Integer id, EspecificacionProducto especificacionProducto) {
         this.id = id;
+        this.idEspecifico = null;
+        this.especificacionProducto = especificacionProducto;
+    }
+    
+    public Producto(Integer id, String idEspecifico, EspecificacionProducto especificacionProducto) {
+        this.id = id;
+        this.idEspecifico = idEspecifico;
         this.especificacionProducto = especificacionProducto;
     }
     
     public Producto(DataProducto dp) {
         this.id = dp.getId();
+        this.idEspecifico = dp.getIdEspecifico();
         this.especificacionProducto = dp.getObjectEspecificacionProducto();
     }
 
@@ -25,6 +34,14 @@ public class Producto {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public String getIdEspecifico() {
+        return idEspecifico;
+    }
+    
+    public void setId(String id) {
+        this.idEspecifico = id;
     }
     
     public EspecificacionProducto getEspecificacionProducto() {

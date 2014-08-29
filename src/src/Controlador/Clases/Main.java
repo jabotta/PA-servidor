@@ -147,8 +147,17 @@ public class Main {
         controlarProducto.elegirProveedor(nicknameProveedor);
         
         //leer datos de nueva especificacion
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0,controlarProducto.listarProveedores().get(0), new ArrayList<String>(), new ArrayList<DataCategoria>());
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0,controlarProducto.listarProveedores().get(0), new ArrayList<String>(), new ArrayList<DataCategoria>(),Collections.synchronizedMap(new HashMap()));
         controlarProducto.ingresarDatosProductos(espProducto);
+        controlarProducto.ingresarEspecificacion("Color", "Verde");
+        controlarProducto.ingresarEspecificacion("Peso", "1kg");
+        controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.ingresarDatosUnidad(new DataProducto(11,"idesp1",espProducto));
+        controlarProducto.listarCategorias();
+        controlarProducto.agregarCategoriaAEspecificacion("cat1");
+        controlarProducto.agregarImagen("peteco");
+        if(controlarProducto.controlarErrores())
+            controlarProducto.guardarProducto();
     }
     
     public static void casoDeUso3(IControladorProductos controlarProducto){
