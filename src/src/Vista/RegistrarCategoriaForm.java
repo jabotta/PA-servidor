@@ -78,8 +78,8 @@ class RegistrarCategoriaForm extends JPanel {
         }
         
         controladorProducto.ingresarDatosCategoria(categoria);
-        
         controladorProducto.guardarCategoria();
+        
         setVisible(false);
         padreText.setText("");
         nombreText.setText("");
