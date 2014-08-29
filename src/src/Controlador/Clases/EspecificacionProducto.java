@@ -18,8 +18,9 @@ public class EspecificacionProducto {
     private Proveedor proveedor;
     private ArrayList<String> imagenes;
     private ArrayList<Categoria> categorias;
+    private Map<Integer,Producto> listaProductos;
     
-    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, ArrayList<Categoria> categorias) {
+    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, ArrayList<Categoria> categorias,Map<Integer,Producto> listaProductos) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -27,6 +28,7 @@ public class EspecificacionProducto {
         this.precio = precio;
         this.proveedor = proveedor;
         this.categorias = categorias;
+        this.listaProductos = listaProductos;
     }
     
     public EspecificacionProducto(DataEspecificacionProducto espProducto, Proveedor proveedor) {
@@ -38,6 +40,7 @@ public class EspecificacionProducto {
         this.proveedor = proveedor;
         this.categorias = new ArrayList<>();
         this.imagenes = new ArrayList<>();
+        this.listaProductos = Collections.synchronizedMap(new HashMap());
     }
 
     public String getNroReferencia() {
@@ -70,6 +73,14 @@ public class EspecificacionProducto {
 
     public void setEspecificacion(Map<String,String> especificacion) {
         this.especificacion = especificacion;
+    }
+    
+    public Map<Integer,Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(Map<Integer,Producto> listaProductos) {
+        this.listaProductos = listaProductos;
     }
 
     public Float getPrecio() {

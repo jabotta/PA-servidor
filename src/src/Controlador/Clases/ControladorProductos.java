@@ -6,6 +6,7 @@ import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
 import java.util.Map;
+import static java.util.Objects.isNull;
 
 public class ControladorProductos implements IControladorProductos{
     
@@ -17,6 +18,7 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto nuevoProducto;
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
+    private String rutaImagen;
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
@@ -108,7 +110,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void elegirImagen(String rutaImagen){
-        
+        this.rutaImagen = rutaImagen;
     }
     
     @Override
@@ -124,6 +126,9 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public void ingresarDatosCategoria(DataCategoria categoria){
         nuevaCategoria = new Categoria(categoria);
+        if(!isNull(categoria.getPadre())){
+            asociarCategoriaPadre(categoria.getPadre());
+        }
     }
     
     //@Override
@@ -133,7 +138,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void asociarCategoriaPadre(DataCategoria padre){
-        Categoria catPadre = new Categoria(padre);
+        Categoria catPadre = ManejadorCategorias.getInstance().getCategoria(padre.getNombre());
         nuevaCategoria.setPadre(catPadre);
         System.out.println("asociarCategoriaPadre " + nuevaCategoria);
     }
