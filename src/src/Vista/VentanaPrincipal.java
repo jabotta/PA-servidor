@@ -191,28 +191,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }                       
 
     private void registrarUsrOptActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        registrarUsuarioVentana = new javax.swing.JInternalFrame();
-        panelRegistrarUsuario = new RegistrarUsuarioForm(controlarUsuario);
+        registrarUsuarioVentana  = new RegistrarUsuarioForm(controlarUsuario);
         
         javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(registrarUsuarioVentana.getContentPane());
         registrarUsuarioVentana.getContentPane().setLayout(registrarUsuariosLayout);
         
         registrarUsuariosLayout.setHorizontalGroup(
             registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(registrarUsuariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelRegistrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(registrarUsuariosLayout.createSequentialGroup())
         );
         
         registrarUsuariosLayout.setVerticalGroup(
-            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
         
         desktopPane.add(registrarUsuarioVentana);
-        registrarUsuarioVentana.setBounds(50, 50, 700, 400);
-        registrarUsuarioVentana.setVisible(true);
+        
     }                                               
 
     private void registrarProdOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
@@ -220,28 +213,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }                                                
 
     private void altaCategoriaOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        registrarCategoriaVentana = new javax.swing.JInternalFrame();
-        panelRegistrarCategoria = new RegistrarCategoriaForm(controlarProducto);
+        registrarCategoriaVentana =  new RegistrarCategoriaForm(controlarProducto);
         
         javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(registrarCategoriaVentana.getContentPane());
         registrarCategoriaVentana.getContentPane().setLayout(registrarUsuariosLayout);
         
         registrarUsuariosLayout.setHorizontalGroup(
             registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(registrarUsuariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelRegistrarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(registrarUsuariosLayout.createSequentialGroup())
         );
         
         registrarUsuariosLayout.setVerticalGroup(
-            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelRegistrarCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
         
         desktopPane.add(registrarCategoriaVentana);
-        registrarCategoriaVentana.setBounds(50, 50, 700, 400);
-        registrarCategoriaVentana.setVisible(true);
+     
     }                                                
 
     private void crearOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                              
