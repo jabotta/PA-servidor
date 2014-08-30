@@ -40,6 +40,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public static IControladorUsuarios controlarUsuario;
     public static IControladorProductos controlarProducto;
     public static IControladorOrdenes controlarOrden;
+    private JInternalFrame registrarProductoVentana;
     
     /**
      * Creates new form MainWindow
@@ -207,7 +208,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }                                               
 
     private void registrarProdOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+         registrarProductoVentana  = new RegistrarProducto(controlarProducto);
+        
+        desktopPane.add(registrarProductoVentana);
     }                                                
 
     private void altaCategoriaOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
