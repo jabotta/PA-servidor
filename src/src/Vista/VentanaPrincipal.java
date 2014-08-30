@@ -5,15 +5,9 @@ import Controlador.Clases.IControladorOrdenes;
 import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
 
-import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JDesktopPane;
-import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 //import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
@@ -37,8 +31,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private GroupLayout layout;
     private JInternalFrame registrarUsuarioVentana;
     private JInternalFrame registrarCategoriaVentana;
-    private JPanel panelRegistrarUsuario;
-    private JPanel panelRegistrarCategoria;
+    private JInternalFrame cancelarOrdenVentana;
     // End of variables declaration
     
     public static Integer idUsuariosControlador;
@@ -165,6 +158,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ordenMenu.add(crearOrdenOpt);
 
         cancelarOrdOpt.setText("Cancelar orden de compra");
+        cancelarOrdOpt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarOrdenOptActionPerformed(evt);
+            }
+        });
         ordenMenu.add(cancelarOrdOpt);
 
         verInfoOrdenOpt.setText("Ver información de orden de compra");
@@ -232,7 +230,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void crearOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }                                             
+    }        
+    
+    private void cancelarOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        // TODO add your handling code here:
+    }   
 
     private void verInfoClienteOptActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:

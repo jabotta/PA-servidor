@@ -41,15 +41,17 @@ class RegistrarUsuarioForm extends JInternalFrame {
     
     public RegistrarUsuarioForm(IControladorUsuarios ICU) {
         
+        controlarUsuario = ICU;
+        
         setBounds(50, 50, 700, 400);
         setVisible(true);
         setLayout(null);
-        controlarUsuario = ICU;
         contenedor = new JPanel();
         contenedor.setLayout(null);
         contenedor.setSize(700, 400);
         contenedor.setLocation(10, 0);
         add(contenedor);
+        
         JLabel proveedorlabel = new JLabel("Es proovedor?:");
         proveedorlabel.setVisible(true);
         proveedorlabel.setBounds(0, 10, 150, 20);
@@ -101,7 +103,6 @@ class RegistrarUsuarioForm extends JInternalFrame {
         fNac.setBounds(0, 150, 150, 10);
         contenedor.add(fNac);
         as = new JDayChooser();
-        
                 
         fNacText = new JCalendar();
          
