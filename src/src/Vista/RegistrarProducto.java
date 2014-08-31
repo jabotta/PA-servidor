@@ -71,8 +71,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         DataProveedor proveedor = new DataProveedor("prov4", "Proveedor 4", "", "prov4@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com");
         Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador).ingresarDatosProveedor(proveedor);
         Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador).guardarUsuario();
-        
-        
+
         setBounds(50, 50, 800, 500);
         setVisible(true);
         setLayout(new SpringLayout());
@@ -88,8 +87,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         form.addField("Precio", "text");
         form.addField("Stock", "text");
         form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray());
- 
-        
+
         treePane = new ElegirCategoriaComponente(controlarProducto);
 
         sdi = new SelectorDeImagenes();
@@ -177,19 +175,25 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
 
         DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
         controlarProducto.ingresarDatosProductos(espProducto);
-        
+
         controlarProducto.ingresarEspecificacion("Especificacion", especificaciones);
 
         controlarProducto.agregarMultiplesProductosAutogenerados(stockReal);
-       
+
         categorias.forEach((cat) -> {
             controlarProducto.agregarCategoriaAEspecificacion(cat);
         });
         imagenes.forEach((img) -> {
             controlarProducto.agregarImagen(img);
-        }); 
+        });
         if (controlarProducto.controlarErrores()) {
-            controlarProducto.guardarProducto();
+            try {
+                controlarProducto.guardarProducto();
+                JOptionPane.showMessageDialog(this, "Su Producto se ha creado correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } catch (Exception e) {
+
+            }
         }
 
     }
