@@ -42,6 +42,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public static IControladorOrdenes controlarOrden;
     private JInternalFrame registrarProductoVentana;
     private JInternalFrame verInfoClienteVentana;
+    private JInternalFrame verInfoProveedorVentana;
     
     /**
      * Creates new form MainWindow
@@ -255,10 +256,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             verUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
         
         desktopPane.add(verInfoClienteVentana);
-    }                                                 
+    }
 
     private void verInfoProvOptActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+        verInfoProveedorVentana =  new VerInformacionProveedorForm(controlarUsuario);
+        
+        javax.swing.GroupLayout verUsuariosLayout = new javax.swing.GroupLayout(verInfoProveedorVentana.getContentPane());
+        verInfoProveedorVentana.getContentPane().setLayout(verUsuariosLayout);
+        
+        verUsuariosLayout.setHorizontalGroup(
+            verUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(verUsuariosLayout.createSequentialGroup())
+        );
+        
+        verUsuariosLayout.setVerticalGroup(
+            verUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
+        
+        desktopPane.add(verInfoProveedorVentana);
     }                                              
 
     private void verInfoProdOptActionPerformed(java.awt.event.ActionEvent evt) {                                               
