@@ -44,9 +44,7 @@ public class Categoria {
     public Categoria getPadre() {
         return padre;
     }
-    public Boolean tienePadre(){
-        return padre != null;
-    }
+    
     public DataCategoria getDataPadre() {
         return new DataCategoria(padre,true);
     }
