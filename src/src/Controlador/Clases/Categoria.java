@@ -70,7 +70,7 @@ public class Categoria {
         return this.getNombre() + "  --  " + this.getPadre();
     }
 
-    public boolean tienePadre() {
+    public boolean tienePadre() { 
         return this.padre != null;
     }
     

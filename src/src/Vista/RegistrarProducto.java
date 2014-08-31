@@ -5,7 +5,9 @@
  */
 package Vista;
 
+import Controlador.Clases.Categoria;
 import Controlador.Clases.IControladorProductos;
+import Controlador.Clases.ManejadorCategorias;
 import Controlador.Clases.Utils;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -39,8 +41,8 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     
     
     RegistrarProducto(IControladorProductos controlarProducto) {
- 
-                
+        
+        Utils.generarCategoriasDePrueba();
         setBounds(50, 50, 800, 500); 
         setVisible(true);
         setLayout(new SpringLayout());
