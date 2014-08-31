@@ -209,22 +209,22 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
         
         precioTotal = new JLabel("Precio total");
         precioTotal.setVisible(true);
-        precioTotal.setBounds(220, 150, 150, 10);
+        precioTotal.setBounds(220, 140, 150, 10);
         contenedor.add(precioTotal);
         
         precioTotalText = new JTextField();
-        precioTotalText.setBounds(370, 150, 300, 30);
+        precioTotalText.setBounds(370, 130, 300, 30);
         contenedor.add(precioTotalText);
         
         fechaVenta = new JLabel("Fecha de venta");
         fechaVenta.setVisible(true);
-        fechaVenta.setBounds(220, 110, 150, 10);
+        fechaVenta.setBounds(220, 100, 150, 10);
         contenedor.add(fechaVenta);
         as = new JDayChooser();
                 
         fechaVentaText = new JCalendar();
          
-        fechaVentaText.setBounds(370, 110, 300, 30);
+        fechaVentaText.setBounds(370, 90, 300, 30);
         contenedor.add(fechaVentaText);
         
         borrarBtn = new JButton("Eliminar");
@@ -244,8 +244,8 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
             }
         });
         
-        borrarBtn.setBounds(200, 260, 100, 40);
-        cancelarBtn.setBounds(320, 260, 100, 40);
+        borrarBtn.setBounds(250, 260, 100, 40);
+        cancelarBtn.setBounds(370, 260, 100, 40);
         contenedor.add(borrarBtn);
         contenedor.add(cancelarBtn);
         

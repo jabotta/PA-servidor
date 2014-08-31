@@ -104,10 +104,13 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public void guardarOrden(DataOrdenCompra dataOrden){
         OrdenCompra orden = new OrdenCompra(dataOrden);
         ArrayList<ClienteCompraProducto> cliComProd = new ArrayList<>();
-        cliComProds.stream().forEach((cliProd) -> {
+        Float tempSumTotal = 0.0f;
+        for(ClienteCompraProducto cliProd : cliComProds){
             cliComProd.add(cliProd);
-        });
-        orden.setClienteCompraProducto(cliComProd);        
+            tempSumTotal += cliProd.getPrecio();
+        }
+        orden.setPrecioTotal(tempSumTotal);
+        orden.setClienteCompraProducto(cliComProd);
         ManejadorOrdenes.getInstance().agregarOrden(orden);
     }
     
