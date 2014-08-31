@@ -236,11 +236,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }                                                
 
     private void crearOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+        
     }        
     
     private void cancelarOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+        cancelarOrdenVentana =  new CancelarOrdenDeCompra(controlarOrden);
+        
+        javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(cancelarOrdenVentana.getContentPane());
+        cancelarOrdenVentana.getContentPane().setLayout(registrarUsuariosLayout);
+        
+        registrarUsuariosLayout.setHorizontalGroup(
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(registrarUsuariosLayout.createSequentialGroup())
+        );
+        
+        registrarUsuariosLayout.setVerticalGroup(
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
+        
+        desktopPane.add(cancelarOrdenVentana);
     }   
 
     private void verInfoClienteOptActionPerformed(java.awt.event.ActionEvent evt) {                                                  

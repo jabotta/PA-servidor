@@ -14,23 +14,27 @@ public class DataOrdenCompra {
     public DataOrdenCompra(OrdenCompra oc) {
         this.nroOrden = oc.getNroOrden();
         this.fecha = oc.getFecha();
+        this.precioTotal = oc.getPrecioTotal();
         this.clienteCompraProducto = oc.getDataClienteCompraProducto();
     }
     
     public DataOrdenCompra(Integer nroOrden) {
         this.nroOrden = nroOrden;
         this.fecha = new Date();
+        this.precioTotal = 0.0f;
     }
     
-    public DataOrdenCompra(Integer nroOrden, Date fecha, ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
+    public DataOrdenCompra(Integer nroOrden, Date fecha, Float precioTotal, ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = fecha;
+        this.precioTotal = precioTotal;
         this.clienteCompraProducto = clienteCompraProducto;
     }
     
     public DataOrdenCompra(Integer nroOrden, ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = new Date();
+        this.precioTotal = 0.0f;
         this.clienteCompraProducto = clienteCompraProducto;
     }
 
@@ -60,6 +64,10 @@ public class DataOrdenCompra {
     
     public Float getPrecioTotal() {
         return precioTotal;
+    }
+    
+    public void setPrecioTotal(Float pt) {
+        this.precioTotal = pt;
     }
     
     @Override

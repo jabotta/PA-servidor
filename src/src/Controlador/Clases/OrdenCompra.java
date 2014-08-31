@@ -66,6 +66,10 @@ public class OrdenCompra {
         return precioTotal;
     }
     
+    public void setPrecioTotal(Float pt) {
+        this.precioTotal = pt;
+    }
+    
     public Cliente getCliente(){
         Iterator<ClienteCompraProducto> it = this.getClienteCompraProducto().iterator();
         while(it.hasNext()){
