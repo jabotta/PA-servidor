@@ -74,7 +74,7 @@ public class Formulario extends JPanel {
         label.setLocation(10, currentHeight);
         componente.setLocation(150, currentHeight);
         currentHeight += componentSize.height;
-        
+        label.setLabelFor(componente);
       //  System.out.println(componente.getClass());
         add(label);
         add(componente);

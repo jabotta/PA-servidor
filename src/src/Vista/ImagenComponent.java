@@ -8,25 +8,26 @@ package Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.EventListenerList;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author rodro
  */
-public class ImagenComponent extends JPanel {
+public class ImagenComponent extends JPanel{
 
     private final JLabel nombre;
     private final JButton editBtn;
     private final JButton deleteBtn;
     private File f;
-    private boolean isDeleted;
-
+    private boolean isDeleted; 
     public ImagenComponent(File f) {
 
         this.f = f;
@@ -61,10 +62,38 @@ public class ImagenComponent extends JPanel {
         });
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.nombre);
+        hash = 31 * hash + (this.isDeleted ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ImagenComponent other = (ImagenComponent) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (this.isDeleted != other.isDeleted) {
+            return false;
+        }
+        return true;
+    }
+
     private void delete(ActionEvent e) {
         
         this.setVisible(false);
         this.isDeleted = true;
+        this.disableEvents(WIDTH);
+        fireNotifyEvent(new NotifyEvent(this));
     }
 
     private void editarImagen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarImgBtnActionPerformed
@@ -92,5 +121,20 @@ public class ImagenComponent extends JPanel {
     public boolean isDeleted() {
         return isDeleted;
     }
+     protected EventListenerList listenerList = new EventListenerList();
 
+    public void addNotifyEventListener(NotifyEventListener listener) {
+      listenerList.add(NotifyEventListener.class, listener);
+    }
+    public void removeNotifyEventLListener(NotifyEventListener listener) {
+      listenerList.remove(NotifyEventListener.class, listener);
+    }
+    void fireNotifyEvent(NotifyEvent evt) {
+      Object[] listeners = listenerList.getListenerList();
+      for (int i = 0; i < listeners.length; i = i+2) {
+        if (listeners[i] == NotifyEventListener.class) {
+          ((NotifyEventListener) listeners[i+1]).notifyEvent(evt);
+        }
+      }
+    }
 }

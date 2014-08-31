@@ -11,7 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
+import java.util.function.Predicate;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -31,19 +33,19 @@ public class SelectorDeImagenes extends JPanel {
     private final JPanel paneWrapper;
 
     public SelectorDeImagenes() {
-        
+
         setLayout(new BorderLayout());
-        paneWrapper =  new JPanel();
+        paneWrapper = new JPanel();
         paneWrapper.setLayout(new BorderLayout());
-                
-        add(paneWrapper,BorderLayout.CENTER);
- 
-        pane =  new JPanel();
+
+        add(paneWrapper, BorderLayout.CENTER);
+
+        pane = new JPanel();
         pane.setLayout(new SpringLayout());
-        
+
         pane.setLocation(0, 40);
-        paneWrapper.add(pane,BorderLayout.NORTH);
-        
+        paneWrapper.add(pane, BorderLayout.NORTH);
+
         imagenes = new ArrayList();
         JButton addIMG = new JButton("Agregar Imagen");
         addIMG.addActionListener(new ActionListener() {
@@ -54,13 +56,10 @@ public class SelectorDeImagenes extends JPanel {
             }
 
         });
-        
+
         setSize(400, 1200);
         addIMG.setBounds(100, 20, 0, 0);
-        add(addIMG,BorderLayout.NORTH);
-        
-        
-        
+        add(addIMG, BorderLayout.NORTH);
 
     }
 
@@ -79,17 +78,53 @@ public class SelectorDeImagenes extends JPanel {
     }
 
     private void addImagenComponent(File f) {
-       
+
         ImagenComponent ic = new ImagenComponent(f);
         imagenes.add(ic);
-        pane.setSize(500,imagenes.size() * 50);
+        pane.setSize(500, imagenes.size() * 50);
         pane.repaint();
         ic.setLocation(10, imagenes.size() * 40);
         pane.add(ic);
-        SpringUtilities.makeCompactGrid(pane,imagenes.size(),1,0,0,6,6);
+        SpringUtilities.makeCompactGrid(pane, imagenes.size(), 1, 0, 0, 6, 6);
+
+        ic.addNotifyEventListener(new NotifyEventListener() {
+
+            @Override
+            public void notifyEvent(NotifyEvent evt) {
+
+                imagenBorrada(evt);
+
+            }
+
+        });
         revalidate();
-        repaint(); 
-        getParent().repaint( );
+        repaint();
+        getParent().repaint();
 
     }
+
+    private void imagenBorrada(NotifyEvent evt) { 
+        Predicate<ImagenComponent> p =  new Predicate<ImagenComponent>() {
+
+            @Override
+            public boolean test(ImagenComponent t) {
+                return t.isDeleted();
+            }
+        };
+        imagenes.removeIf(p);
+        System.out.println(imagenes.size());
+        pane.removeAll();
+        Iterator it = imagenes.iterator();
+        while(it.hasNext()){
+            ImagenComponent ic = (ImagenComponent)it.next();
+            ic.setLocation(10, imagenes.size() * 40);
+            pane.add(ic);
+            revalidate();
+            repaint();
+            getParent().repaint();
+            it.next();
+        }
+                
+            SpringUtilities.makeCompactGrid(pane, imagenes.size(), 1, 0, 0, 6, 6);
+     }
 }
