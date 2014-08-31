@@ -9,11 +9,16 @@ import Controlador.Clases.Categoria;
 import Controlador.Clases.ManejadorCategorias;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 
 /**
  *
@@ -32,14 +37,46 @@ class ElegirCategoriaComponente extends JPanel {
 
         }
     };
+    private final ArrayList<String> selectedCategorias;
 
     public ElegirCategoriaComponente() {
 
+        selectedCategorias = new ArrayList();
         node = new DefaultMutableTreeNode("Categorias");
         JTree tree = new JTree(node);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
+        TreeSelectionListener myTreeListener;
+        myTreeListener = new TreeSelectionListener() {
+
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                for (int i = 0; i < e.getPaths().length; i++) {
+                    if (e.isAddedPath(e.getPaths()[i])) {
+                        for (int j = 0; j < e.getPaths()[i].getPathCount(); j++) {
+                            //if(!selectedCategorias.contains((e.getPaths()[i]).getPathComponent(j).toString()))
+                            selectedCategorias.add((e.getPaths()[i]).getPathComponent(j).toString());
+                        }
+                    } else {
+                        for (int j = 0; j < e.getPaths()[i].getPathCount(); j++) {
+                            selectedCategorias.remove((e.getPaths()[i]).getPathComponent(j).toString());
+                        }
+                    }
+                } 
+               // System.out.println("--"+getSelectedCategories());
+            }
+            
+        };
+        tree.addTreeSelectionListener(myTreeListener);
+
         buildTree();
         add(tree);
         setSize(400, 400);
+    }
+
+    public HashSet<String> getSelectedCategories() {
+        HashSet<String> r = new HashSet();
+        r.addAll(selectedCategorias);
+        return r;
     }
 
     /**
@@ -59,11 +96,10 @@ class ElegirCategoriaComponente extends JPanel {
             Boolean padresAgregados = false;
 
             while (!padresAgregados) {
-                System.out.println("cname " + auxDeBusqueda.getNombre());
+
                 if (!auxDeBusqueda.tienePadre()) {
-                    System.out.println("es padre ");
+
                     NodoCategoria nodoRaiz = new NodoCategoria(auxDeBusqueda.getNombre());
-                    System.out.println("es huefano " + String.valueOf(auxHuerfana != null));
                     if (auxHuerfana != null) {
                         nodoRaiz.addHijo(auxHuerfana);
                     }
@@ -79,7 +115,6 @@ class ElegirCategoriaComponente extends JPanel {
                 } else {
                     NodoCategoria encontrado = getPadre(auxDeBusqueda.getPadre().getNombre());
 
-                    System.out.println(" encontrado " + String.valueOf(encontrado != null));
                     if (encontrado != null) {
                         padresAgregados = true;
                         NodoCategoria newNodo = new NodoCategoria(auxDeBusqueda.getNombre());
@@ -161,7 +196,7 @@ class ElegirCategoriaComponente extends JPanel {
         public void addHijo(NodoCategoria h) {
 
             this.hijos.add(h);
-            //   hijos.sort(ElegirCategoriaComponente.comp);
+            hijos.sort(ElegirCategoriaComponente.comp);
         }
 
         public NodoCategoria find(String nombre) {

@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -38,6 +39,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author rodro
  */
 public class RegistrarProducto extends javax.swing.JInternalFrame {
+    private JDialog dialog;
+    private ElegirCategoriaComponente treePane;
     
     
     RegistrarProducto(IControladorProductos controlarProducto) {
@@ -92,11 +95,23 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     }
     
     private void openDialog(){
-        JDialog dialog =  new JDialog();
+        dialog =  new JDialog();
         dialog.setTitle("Elegir Categoria");
-        ElegirCategoriaComponente treePane =  new ElegirCategoriaComponente();
+        treePane =  new ElegirCategoriaComponente();
+        
+        JButton aceptarButton = new JButton("Listo!!");
+        aceptarButton.setSize(80,30);
+        aceptarButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+                System.out.println(treePane.getSelectedCategories());
+            }
+        });
         dialog.getContentPane().setSize(400,400);
         dialog.getContentPane().add(treePane, BorderLayout.CENTER);
+        dialog.getContentPane().add(aceptarButton, BorderLayout.SOUTH);
         dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dialog.setSize(new Dimension(400, 400));
         dialog.setLocationRelativeTo(this);
