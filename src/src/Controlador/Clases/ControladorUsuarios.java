@@ -4,6 +4,7 @@ import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 public class ControladorUsuarios implements IControladorUsuarios{
     private Integer id;
@@ -35,7 +36,12 @@ public class ControladorUsuarios implements IControladorUsuarios{
     
     @Override
     public Boolean validarDatosUsuario(){
-        return ManejadorUsuarios.getInstance().obtenerUsuarios().containsKey(nuevoUsuario.getNickname());
+        for(Entry<String,Usuario> iter : ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet()){
+            if(iter.getValue().getEmail().equals(nuevoUsuario.getEmail()) || iter.getValue().getNickname().equals(nuevoUsuario.getNickname())){
+                return true;
+            }
+        }
+        return false;
     }
     
     @Override
