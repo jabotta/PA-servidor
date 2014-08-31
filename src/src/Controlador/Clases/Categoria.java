@@ -69,5 +69,9 @@ public class Categoria {
     public String toString() {
         return this.getNombre() + "  --  " + this.getPadre();
     }
+
+    public boolean tienePadre() {
+        return this.padre != null;
+    }
     
 }
