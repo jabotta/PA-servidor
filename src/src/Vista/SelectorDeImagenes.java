@@ -6,6 +6,7 @@
 package Vista;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -42,9 +44,11 @@ public class SelectorDeImagenes extends JPanel {
 
         pane = new JPanel();
         pane.setLayout(new SpringLayout());
-
+        JScrollPane sp = new JScrollPane(pane);
+        sp.setSize(400,400);
+        sp.setPreferredSize(new Dimension(400, 110));
         pane.setLocation(0, 40);
-        paneWrapper.add(pane, BorderLayout.NORTH);
+        paneWrapper.add(sp, BorderLayout.NORTH);
 
         imagenes = new ArrayList();
         JButton addIMG = new JButton("Agregar Imagen");

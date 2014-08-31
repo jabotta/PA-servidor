@@ -187,7 +187,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
-        setBounds(100, 100, 500, 900);
+        setBounds(100, 100, 1200, 1000);
         pack();
     }                       
 
