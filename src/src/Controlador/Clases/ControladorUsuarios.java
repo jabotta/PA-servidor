@@ -38,10 +38,10 @@ public class ControladorUsuarios implements IControladorUsuarios{
     public Boolean validarDatosUsuario(){
         for(Entry<String,Usuario> iter : ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet()){
             if(iter.getValue().getEmail().equals(nuevoUsuario.getEmail()) || iter.getValue().getNickname().equals(nuevoUsuario.getNickname())){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
     
     @Override
