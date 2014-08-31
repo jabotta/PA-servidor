@@ -53,7 +53,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.setLocation(10, 0);
         add(contenedor);
         
-        JLabel elegirUsuarioLabel = new JLabel("ElegirUsuario:");
+        JLabel elegirUsuarioLabel = new JLabel("Elegir Cliente:");
         elegirUsuarioLabel.setVisible(true);
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
         contenedor.add(elegirUsuarioLabel);
