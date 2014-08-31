@@ -122,6 +122,7 @@ public class SelectorDeImagenes extends JPanel {
             revalidate();
             repaint();
             getParent().repaint();
+            it.next();
         }
                 
             SpringUtilities.makeCompactGrid(pane, imagenes.size(), 1, 0, 0, 6, 6);
