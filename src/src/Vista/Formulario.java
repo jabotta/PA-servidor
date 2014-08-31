@@ -39,8 +39,10 @@ public class Formulario extends JPanel {
         JScrollPane scroll = new JScrollPane(this);
         currentHeight = 20;
     } 
-
-    public void addField(String fieldName, String fieldType)   {
+    public void addField(String fieldName, String fieldType) {
+        this.addField(fieldName,fieldType,null);
+    }
+    public void addField(String fieldName, String fieldType, Object[] toArray)   {
         JComponent componente;
         JLabel label = new JLabel();
         label.setText(fieldName);
@@ -53,7 +55,7 @@ public class Formulario extends JPanel {
                 componentSize.setSize(180, 200);
                 break;
             case "combo":
-                componente = new JComboBox();
+                componente = new JComboBox(toArray);
                 break;
             case "checkbox":
                 componente = new JCheckBox();
@@ -93,4 +95,6 @@ public class Formulario extends JPanel {
         }
         return null;
     }
+
+    
 }

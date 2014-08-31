@@ -137,4 +137,8 @@ public class ImagenComponent extends JPanel{
         }
       }
     }
+
+    public String getPath() {
+        return f.getAbsolutePath();
+     }
 }

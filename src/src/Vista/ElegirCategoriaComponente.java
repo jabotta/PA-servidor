@@ -6,7 +6,10 @@
 package Vista;
 
 import Controlador.Clases.Categoria;
+import Controlador.Clases.Constantes;
+import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.ManejadorCategorias;
+import Controlador.DataTypes.DataCategoria;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -38,11 +41,12 @@ class ElegirCategoriaComponente extends JPanel {
         }
     };
     private final ArrayList<String> selectedCategorias;
+    private final IControladorProductos cotrolador;
 
-    public ElegirCategoriaComponente() {
-
+    public ElegirCategoriaComponente(IControladorProductos controlador) {
+        this.cotrolador = controlador;
         selectedCategorias = new ArrayList();
-        node = new DefaultMutableTreeNode("Categorias");
+        node = new DefaultMutableTreeNode(Constantes.CATEGORIA_ROOT);
         JTree tree = new JTree(node);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         TreeSelectionListener myTreeListener;
@@ -72,10 +76,12 @@ class ElegirCategoriaComponente extends JPanel {
         add(tree);
         setSize(400, 400);
     }
+    
 
     public HashSet<String> getSelectedCategories() {
         HashSet<String> r = new HashSet();
         r.addAll(selectedCategorias);
+        r.remove(Constantes.CATEGORIA_ROOT);
         return r;
     }
 
@@ -88,10 +94,10 @@ class ElegirCategoriaComponente extends JPanel {
     private void buildTree() {
 
         categoriasAgregadas = new ArrayList();
+       
+         cotrolador.listarCategorias().forEach((categoria) -> {
 
-        ManejadorCategorias.getInstance().obtenerCategorias().entrySet().forEach((categoria) -> {
-
-            Categoria auxDeBusqueda = categoria.getValue();
+            DataCategoria auxDeBusqueda = categoria;
             NodoCategoria auxHuerfana = null;
             Boolean padresAgregados = false;
 
@@ -107,7 +113,7 @@ class ElegirCategoriaComponente extends JPanel {
                     if (!categoriasAgregadas.contains(nodoRaiz)) {
 
                         categoriasAgregadas.add(nodoRaiz);
-
+ 
                     }
                     auxHuerfana = null;
                     padresAgregados = true;

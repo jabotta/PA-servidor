@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.function.Predicate;
@@ -103,8 +104,20 @@ public class SelectorDeImagenes extends JPanel {
 
     }
 
-    private void imagenBorrada(NotifyEvent evt) { 
-        Predicate<ImagenComponent> p =  new Predicate<ImagenComponent>() {
+    public HashSet<String> getListaDeImagenes() {
+        HashSet<String> imgPaths = new HashSet();
+        Iterator it = imagenes.iterator();
+        while (it.hasNext()) {
+            ImagenComponent ic = (ImagenComponent) it.next();
+            if (!ic.isDeleted()) {
+                imgPaths.add(ic.getPath());
+            }
+        }
+        return imgPaths;
+    }
+
+    private void imagenBorrada(NotifyEvent evt) {
+        Predicate<ImagenComponent> p = new Predicate<ImagenComponent>() {
 
             @Override
             public boolean test(ImagenComponent t) {
@@ -115,16 +128,15 @@ public class SelectorDeImagenes extends JPanel {
         System.out.println(imagenes.size());
         pane.removeAll();
         Iterator it = imagenes.iterator();
-        while(it.hasNext()){
-            ImagenComponent ic = (ImagenComponent)it.next();
+        while (it.hasNext()) {
+            ImagenComponent ic = (ImagenComponent) it.next();
             ic.setLocation(10, imagenes.size() * 40);
             pane.add(ic);
             revalidate();
             repaint();
             getParent().repaint();
-            it.next();
         }
-                
-            SpringUtilities.makeCompactGrid(pane, imagenes.size(), 1, 0, 0, 6, 6);
-     }
+
+        SpringUtilities.makeCompactGrid(pane, imagenes.size(), 1, 0, 0, 6, 6);
+    }
 }

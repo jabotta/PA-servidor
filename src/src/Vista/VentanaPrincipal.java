@@ -4,9 +4,9 @@ import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorOrdenes;
 import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
-
 import javax.swing.GroupLayout;
 import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 //import org.netbeans.lib.awtextra.AbsoluteLayout;
 
@@ -187,7 +187,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
-        setBounds(100, 100, 500, 900);
+        setBounds(100, 100, 700, 1000);
+        desktopPane.setBounds(100, 100, 700, 1000);
+        setExtendedState(getExtendedState()|JFrame.MAXIMIZED_BOTH );
         pack();
     }                       
 
