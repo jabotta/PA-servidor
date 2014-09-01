@@ -365,7 +365,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 new VentanaPrincipal().setVisible(true);
             }
         });
-        Utils.generarCategoriasDePrueba();
+//        Utils.generarCategoriasDePrueba();
     }
 
 }
