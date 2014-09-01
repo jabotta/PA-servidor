@@ -23,7 +23,7 @@ public class ControladorProductos implements IControladorProductos{
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
     private Map<String,Categoria> categoriasElegidas = Collections.synchronizedMap(new HashMap());
-    private ArrayList<String> imagenes = new ArrayList<String>();
+    private ArrayList<String> imagenes = new ArrayList<>();
     private Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap());
     
     //    - prvLst Set<Proveedor>
@@ -162,6 +162,10 @@ public class ControladorProductos implements IControladorProductos{
         nuevoEspProducto.setImagenes(imagenes);
         nuevoEspProducto.setListaProductos(productosAAgregar);
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(nuevoEspProducto);
+
+        especificaciones = Collections.synchronizedMap(new HashMap());
+        imagenes = new ArrayList<>();
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
     }
     
     @Override

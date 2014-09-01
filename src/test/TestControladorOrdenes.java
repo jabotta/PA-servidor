@@ -9,8 +9,10 @@ import Controlador.Clases.IControladorOrdenes;
 import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.Clases.ManejadorOrdenes;
+import Controlador.Clases.ManejadorProductos;
 import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.OrdenCompra;
+import Controlador.Clases.Producto;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
@@ -77,27 +79,15 @@ public class TestControladorOrdenes {
         controlarProducto.ingresarDatosCategoria(cat5);
         controlarProducto.guardarCategoria();
         
-        //leer datos de nueva especificacion de autogenerados
-        controlarProducto.elegirProveedor("nmar");
-        DataProveedor proveedor1 = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("nmar"));
-        DataEspecificacionProducto espProducto1 = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)23.5, proveedor1, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
-        controlarProducto.ingresarDatosProductos(espProducto1);
-        controlarProducto.ingresarEspecificacion("Color", "Verde");
-        controlarProducto.ingresarEspecificacion("Peso", "1kg");
-        controlarProducto.ingresarEspecificacion("Altura", "20cm");
-        controlarProducto.agregarMultiplesProductosAutogenerados(3);
-        controlarProducto.agregarCategoriaAEspecificacion("cat2");
-        controlarProducto.agregarImagen("peteco");
-        controlarProducto.guardarProducto();
-        
         //leer datos de nueva especificacion de IngresarDatosUnidad
         controlarProducto.elegirProveedor("jrod");
-        DataProveedor proveedor2 = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("jrod"));
-        DataEspecificacionProducto espProducto2 = new DataEspecificacionProducto("prod2", "Producto 2", "descripcion 2", Collections.synchronizedMap(new HashMap()), (float)12.0, proveedor2, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
-        controlarProducto.ingresarDatosProductos(espProducto2);
+        DataProveedor proveedor = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("jrod"));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0, proveedor, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
+        controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("Color", "Verde");
         controlarProducto.ingresarEspecificacion("Peso", "1kg");
-        controlarProducto.ingresarDatosUnidad(new DataProducto(11, "idesp1", espProducto2));
+        DataProducto prodUnidad = new DataProducto(11, "idesp1", espProducto);
+        controlarProducto.ingresarDatosUnidad(prodUnidad);
         controlarProducto.agregarCategoriaAEspecificacion("cat1");
         controlarProducto.agregarImagen("peteco");
         controlarProducto.guardarProducto();
@@ -106,37 +96,25 @@ public class TestControladorOrdenes {
         
         //Cliente Seleccionado
         controlarOrden.elegirCliente("piedra");
-        
         //Categoria Seleccionado
         controlarOrden.elegirCategoria("cat1");
-        
         //Especificacion Producto seleccionado
         controlarOrden.elegirEspecificacionProducto("prod1");
-        
-        //Producto seleccionado
-        controlarOrden.elegirProducto(1);
-        controlarOrden.elegirProducto(2);
-        
-        //Generar item Orden
+        //Producto seleccionado1
+        controlarOrden.elegirProducto(11);
+        //Generar item Orden1
         controlarOrden.generarItemOrden();
-        
-        //Guardar Orden
+        //Guardar Orden1
         DataOrdenCompra dataOrden1 = new DataOrdenCompra(1);
         controlarOrden.guardarOrden(dataOrden1);
-        
-        //Producto seleccionado
-        controlarOrden.elegirProducto(11);
-        
-        //Generar item Orden
-        controlarOrden.generarItemOrden();
-        
-        //Guardar Orden
-        DataOrdenCompra dataOrden2 = new DataOrdenCompra(2);
-        controlarOrden.guardarOrden(dataOrden2);
         
         //Listar clientes
         Map<Integer, OrdenCompra> ord = ManejadorOrdenes.getInstance().obtenerOrdenes();
         assertTrue (!isNull (ord.get(1)));
-        assertTrue (!isNull (ord.get(2)));
+        assertEquals ((long) ord.get(1).getNroOrden(), (long) 1);
+//        assertEquals ((double) ord.get(2).getPrecioTotal(), (double) 12.0);
+        //prod
+        assertEquals (ord.get(1).getClienteCompraProducto().get(0).getProducto().getId(), new Producto(prodUnidad).getId());
+        
      }
 }

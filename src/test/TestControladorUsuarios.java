@@ -6,8 +6,6 @@
 
 import Controlador.Clases.Cliente;
 import Controlador.Clases.Fabrica;
-//import static Controlador.Clases.Fabrica.getInstance;
-//import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.Proveedor;
@@ -93,8 +91,8 @@ public class TestControladorUsuarios {
         assertEquals (ManejadorUsuarios.getInstance().getCliente("darwind").getApellido(), "Duck");
         assertEquals (ManejadorUsuarios.getInstance().getCliente("darwind").getFechaNacimiento(), new Date(1997, 03, 12));        
 
-
-}   
+    }  
+    
     @Test
     public void TestVerInformaciondeCliente () {
     
@@ -119,7 +117,8 @@ public class TestControladorUsuarios {
         assertTrue (!isNull (clie.get("pmar")));
         assertTrue (!isNull (clie.get("loco")));
                 
-}
+    }
+    
     @Test
     public void TestVerInformaciondeProveedor () {
     
@@ -143,6 +142,5 @@ public class TestControladorUsuarios {
         assertTrue (!isNull (prov.get("nmar")));
         assertTrue (!isNull (prov.get("sdum")));
         
-        
-}
+    }
 }

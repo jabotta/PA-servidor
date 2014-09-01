@@ -148,7 +148,7 @@ public class Main {
         controlarProducto.elegirProveedor(nicknameProveedor);
         
         //leer datos de nueva especificacion
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0,null, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0, controlarProducto.listarProveedores().get(0), new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
         controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("Color", "Verde");
         controlarProducto.ingresarEspecificacion("Peso", "1kg");

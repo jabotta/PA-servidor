@@ -90,7 +90,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     
     @Override
     public void elegirProducto(Integer id){
-        productosElegidos.add(ManejadorProductos.getInstance().getProducto(id));
+        productosElegidos.add(espProdElegido.getListaProductos().get(id));
     }
     
     @Override
@@ -98,6 +98,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
         productosElegidos.stream().forEach((productoElegido) -> {
             cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio()));
         });
+        productosElegidos = new ArrayList<>();
     }
     
     @Override
@@ -112,6 +113,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
         orden.setPrecioTotal(tempSumTotal);
         orden.setClienteCompraProducto(cliComProd);
         ManejadorOrdenes.getInstance().agregarOrden(orden);
+        cliComProds = new ArrayList<>();
     }
     
     //@Override
