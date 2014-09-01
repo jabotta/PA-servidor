@@ -17,6 +17,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Vector;
@@ -28,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SpringLayout;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -41,18 +44,18 @@ public class VerInfoProductos extends JInternalFrame {
     private final JPanel InfoPanel;
     private final JPanel offsetleft;
     private final IControladorProductos controlarProducto;
- 
+
     private int index;
     private final JPanel listaProductosPanel;
+    private Formulario form;
 
     /**
      * Creates new form VerInfoProductos
      */
     public VerInfoProductos(IControladorProductos controlarProducto) {
-
-//        DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto(nroRef);
+ 
         this.controlarProducto = controlarProducto;
-        
+
         setBounds(50, 50, 800, 500);
         setVisible(true);
         setLayout(new SpringLayout());
@@ -70,7 +73,7 @@ public class VerInfoProductos extends JInternalFrame {
         treePane = new ElegirCategoriaComponente(controlarProducto, true);
         listaProductosPanel = new JPanel();
         listaProductosPanel.setLayout(new GridLayout(1, 0));
-       
+
         offsetleft = new JPanel();
         offsetleft.setLayout(new BorderLayout());
         offsetleft.setSize(400, 500);
@@ -79,6 +82,8 @@ public class VerInfoProductos extends JInternalFrame {
         offsetleft.add(elegirCategoria, BorderLayout.NORTH);
         offsetleft.add(listaProductosPanel, BorderLayout.CENTER);
         InfoPanel = new JPanel();
+        InfoPanel.setSize(400, 500);
+        InfoPanel.setLayout(new BorderLayout());
         add(offsetleft);
         add(InfoPanel);
 
@@ -90,34 +95,58 @@ public class VerInfoProductos extends JInternalFrame {
         listaProductosPanel.removeAll();
         listaProductosPanel.revalidate();
         listaProductosPanel.repaint();
-                
+
         if (!treePane.getSelectedCategories().isEmpty()) {
             String catName = treePane.getSelectedCategories().iterator().next();
             controlarProducto.elegirCategoria(catName);
         }
-        Object[] []rowData = new Object[controlarProducto.listarProductosCategoria().size()][2];
+        Object[][] rowData = new Object[controlarProducto.listarProductosCategoria().size()][2];
         index = 0;
-         
+
         controlarProducto.listarProductosCategoria().forEach((c) -> {
-            Object [] obj={c.getNroReferencia(),c.getNombre()};
-           
+            Object[] obj = {c.getNroReferencia(), c.getNombre()};
+
             rowData[index] = obj;
             index++;
         });
-        String [] columnNames =  {"NroRef","Nombre"};
+        String[] columnNames = {"NroRef", "Nombre"};
 
         JTable listaProductos = new JTable(rowData, columnNames);
         listaProductos.setPreferredScrollableViewportSize(new Dimension(500, 100));
         listaProductos.setFillsViewportHeight(true);
+
+        listaProductos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                printDataProducto(listaProductos);
+            }
+        });
+
         JScrollPane scrollPane = new JScrollPane(listaProductos);
- 
-        listaProductosPanel. add(scrollPane); 
+        listaProductosPanel.add(scrollPane);
         listaProductosPanel.revalidate();
         listaProductosPanel.repaint();
         revalidate();
         repaint();
     }
-
+    private void printDataProducto(JTable listaProductos) {
+        TableModel model = listaProductos.getModel();
+        int row = listaProductos.getSelectedRow();
+        String nroRef = (String) model.getValueAt(row,0);
+        DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto(nroRef);
+        form = new  Formulario(false);
+        form.addField("Nombre", "text",null,dataProducto.getNombre());
+        form.addField("NroRef", "text",null,dataProducto.getNroReferencia());
+        form.addField("Descripcion", "text",null,dataProducto.getDescripcion());
+        form.addField("Especificaciones", "text",null,dataProducto.getEspecificacion().values().toString());
+        form.addField("Categorias", "text",null,dataProducto.getCategorias().toString());
+        form.addField("Proveedor", "text",null,dataProducto.getProveedor().toString());
+        form.addField("Imagenes", "text",null,dataProducto.getImagenes().toString());
+        InfoPanel.add(form,BorderLayout.CENTER);
+        InfoPanel.revalidate();
+        InfoPanel.repaint();
+                
+    }
     private void openDialog() {
         dialog = new JDialog();
         dialog.setTitle("Elegir Categoria");

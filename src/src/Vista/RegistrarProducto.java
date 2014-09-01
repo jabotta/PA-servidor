@@ -77,7 +77,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         setLayout(new SpringLayout());
 
         setTitle("Registrar Producto");
-
+ 
         form = new Formulario();
 
         form.addField("Titulo", "text");
@@ -86,7 +86,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         form.addField("Especificaciones", "textarea");
         form.addField("Precio", "text");
         form.addField("Stock", "text");
-        form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray());
+        form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray(),null);
 
         treePane = new ElegirCategoriaComponente(controlarProducto, false);
 
