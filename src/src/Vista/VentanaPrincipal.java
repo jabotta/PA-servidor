@@ -291,7 +291,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }                                              
 
     private void verInfoProdOptActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+        VerInfoProductos vinfo = new VerInfoProductos(controlarProducto);
+        desktopPane.add(vinfo);
     }                                              
 
     /**

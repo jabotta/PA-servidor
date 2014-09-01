@@ -53,13 +53,13 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public void elegirProveedor(String nickname){
         proveedorElegido = ManejadorUsuarios.getInstance().getProveedor(nickname);
-        System.out.println("ProveedorElegido " + proveedorElegido);
+//        System.out.println("ProveedorElegido " + proveedorElegido);
     }
     
     @Override
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto){
         nuevoEspProducto = new EspecificacionProducto(espProducto,proveedorElegido);
-        System.out.println("Nuevo Producto " + nuevoEspProducto);
+//        System.out.println("Nuevo Producto " + nuevoEspProducto);
     }
     
     @Override
@@ -191,7 +191,6 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public void guardarCategoria(){
         ManejadorCategorias.getInstance().agregarCategoria(nuevaCategoria);
-        System.out.println("NuevaCategoria " + nuevaCategoria);
     }
     
     @Override

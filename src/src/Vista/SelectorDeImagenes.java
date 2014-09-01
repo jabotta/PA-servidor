@@ -125,7 +125,6 @@ public class SelectorDeImagenes extends JPanel {
             }
         };
         imagenes.removeIf(p);
-        System.out.println(imagenes.size());
         pane.removeAll();
         Iterator it = imagenes.iterator();
         while (it.hasNext()) {

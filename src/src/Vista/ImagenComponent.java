@@ -33,7 +33,6 @@ public class ImagenComponent extends JPanel{
         this.f = f;
         this.setSize(400, 100);
         nombre = new JLabel(f.getName());
-        System.out.println(f.getName());
         editBtn = new JButton("editar");
         deleteBtn = new JButton("Borrar");
         nombre.setVerticalAlignment(0);
