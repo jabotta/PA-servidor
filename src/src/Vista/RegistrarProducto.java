@@ -188,7 +188,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         categorias.forEach((cat) -> {
             controlarProducto.agregarCategoriaAEspecificacion(cat);
         });
-        imagenes.forEach((img) -> {
+        imagenes.forEach((img) -> { 
             controlarProducto.agregarImagen(img);
         });
         if (controlarProducto.controlarErrores()) {

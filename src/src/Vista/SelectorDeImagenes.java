@@ -32,6 +32,7 @@ public class SelectorDeImagenes extends JPanel {
     private ArrayList<ImagenComponent> imagenes;
     private final JPanel pane;
     private final JPanel paneWrapper;
+    
 
     public SelectorDeImagenes() {
 
@@ -64,6 +65,7 @@ public class SelectorDeImagenes extends JPanel {
 
     }
 
+ 
     private void agregarImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarImgBtnActionPerformed
 
         JFileChooser chooser = new JFileChooser();
@@ -138,4 +140,10 @@ public class SelectorDeImagenes extends JPanel {
 
         SpringUtilities.makeCompactGrid(pane, imagenes.size(), 1, 0, 0, 6, 6);
     }
+
+    void load(ArrayList<String> imagenesPreload) {
+         imagenesPreload.forEach((str)->{ 
+            addImagenComponent(new File(str));
+        });
+     }
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -135,7 +136,7 @@ public class ModificarInformacionProducto extends JInternalFrame {
     }
 
     private void save() {
-String titulo = ((JTextField) form.getComponentByName("Titulo")).getText();
+        String titulo = ((JTextField) form.getComponentByName("Titulo")).getText();
         String NroRef = ((JTextField) form.getComponentByName("NroRef")).getText();
         String descripcion = ((JTextField) form.getComponentByName("Descripcion")).getText();
         String especificaciones = ((JTextArea) form.getComponentByName("Especificaciones")).getText();
@@ -164,10 +165,16 @@ String titulo = ((JTextField) form.getComponentByName("Titulo")).getText();
         }
 
         DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
+
+        controlarProducto.modificarDatosEspecificacionProducto(espProducto);
+
+        controlarProducto.listarCategoriasAModificar().forEach((cat) -> {
+
+            controlarProducto.borrarCategoriaAEspecificacion(cat.getNombre());
+        });
+
         controlarProducto.elegirProveedor(Proveedor.getNickname());
         controlarProducto.ingresarDatosProductos(espProducto);
-        
-        controlarProducto.ingresarEspecificacion("Especificacion", especificaciones);
 
         controlarProducto.agregarMultiplesProductosAutogenerados(stockReal);
 
@@ -177,15 +184,17 @@ String titulo = ((JTextField) form.getComponentByName("Titulo")).getText();
         imagenes.forEach((img) -> {
             controlarProducto.agregarImagen(img);
         });
-        if (controlarProducto.controlarErrores()) {
+
+        if (controlarProducto.validarInfo()) {
             try {
-                controlarProducto.guardarProducto();
+                controlarProducto.guardarEspProductoModificado();
                 JOptionPane.showMessageDialog(this, "Su Producto se ha creado correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } catch (Exception e) {
 
             }
         }
+
     }
 
     private void cancel() {
@@ -232,24 +241,32 @@ String titulo = ((JTextField) form.getComponentByName("Titulo")).getText();
     }
 
     private void printDataProducto(JTable listaProductos) {
-        
+
         InfoPanel.removeAll();
         thirdPanel.removeAll();
         TableModel model = listaProductos.getModel();
         int row = listaProductos.getSelectedRow();
         String nroRef = (String) model.getValueAt(row, 0);
+        controlarProducto.elegirEspProducto(nroRef);
         DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto(nroRef);
         form = new Formulario(true);
-        form.addField("Nombre", "text", null, dataProducto.getNombre());
+        form.addField("Titulo", "text", null, dataProducto.getNombre());
         form.addField("NroRef", "text", null, dataProducto.getNroReferencia());
         form.addField("Descripcion", "text", null, dataProducto.getDescripcion());
-        form.addField("Especificaciones", "text", null, dataProducto.getEspecificacion().values().toString());
-        form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray(),null);
-        
-        
-        ((JComboBox)form.getComponentByName("Proveedor")).setSelectedItem(dataProducto.getProveedor());
-         
+        Iterator it = dataProducto.getEspecificacion().values().iterator();
+        if (it.hasNext()) {
+            form.addField("Especificaciones", "textarea", null, it.next().toString());
+        } else {
+            form.addField("Especificaciones", "textarea");
+        }
+        form.addField("Precio", "text", null, String.valueOf(dataProducto.getPrecio()));
+        form.addField("Stock", "text", null, String.valueOf(dataProducto.getProductos().size()));
+        form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray(), null);
+
+        ((JComboBox) form.getComponentByName("Proveedor")).setSelectedItem(dataProducto.getProveedor());
+
         treePane = new ElegirCategoriaComponente(controlarProducto, false);
+
         sdi = new SelectorDeImagenes();
         sdi.setLocation(700, 10);
 
@@ -272,6 +289,7 @@ String titulo = ((JTextField) form.getComponentByName("Titulo")).getText();
         thirdPanel.repaint();
         saveButton.setVisible(true);
 
+        sdi.load(dataProducto.getImagenes());
     }
 
     private void openDialog() {
@@ -299,5 +317,4 @@ String titulo = ((JTextField) form.getComponentByName("Titulo")).getText();
 
     }
 
-   
 }

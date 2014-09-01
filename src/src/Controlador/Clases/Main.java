@@ -293,8 +293,7 @@ public class Main {
         
         controlarProducto.elegirEspProducto("a3");
         DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto("a3");
-        controlarProducto.modificarDatosEspecificacionProducto(dataProducto);
-        
+        controlarProducto.modificarDatosEspecificacionProducto(dataProducto);       
         controlarProducto.listarCategoriasAModificar();
         controlarProducto.agregarCategoriaAEspecificacion("cat5");
         controlarProducto.borrarCategoriaAEspecificacion("cat5");

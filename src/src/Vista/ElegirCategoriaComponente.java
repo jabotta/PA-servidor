@@ -21,6 +21,7 @@ import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 /**
@@ -42,12 +43,13 @@ class ElegirCategoriaComponente extends JPanel {
     };
     private final ArrayList<String> selectedCategorias;
     private final IControladorProductos cotrolador;
+    private final JTree tree;
 
     public ElegirCategoriaComponente(IControladorProductos controlador, Boolean ultimaCategoria) {
         this.cotrolador = controlador;
         selectedCategorias = new ArrayList();
         node = new DefaultMutableTreeNode(Constantes.CATEGORIA_ROOT);
-        JTree tree = new JTree(node);
+         tree = new JTree(node);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         TreeSelectionListener myTreeListener;
         myTreeListener = new TreeSelectionListener() {
@@ -55,6 +57,7 @@ class ElegirCategoriaComponente extends JPanel {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 for (int i = 0; i < e.getPaths().length; i++) {
+//                    System.out.println(e.getPaths()[i]);
                     if (e.isAddedPath(e.getPaths()[i])) {
 
                         if (ultimaCategoria) {
@@ -155,8 +158,9 @@ class ElegirCategoriaComponente extends JPanel {
             NodoCategoria current = it.next();
             node.add(current.getSubTree());
         }
+   
     }
-
+   
     public NodoCategoria getPadre(String padre) {
         Boolean found = false;
         NodoCategoria encontrado = null;
