@@ -5,15 +5,19 @@
  */
 package Vista;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.EventListenerList;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -21,18 +25,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author rodro
  */
-public class ImagenComponent extends JPanel{
+public class ImagenComponent extends JPanel {
 
     private final JLabel nombre;
     private final JButton editBtn;
     private final JButton deleteBtn;
     private File f;
-    private boolean isDeleted; 
+    private boolean isDeleted;
+    private final JButton viewBtn;
+
     public ImagenComponent(File f) {
 
         this.f = f;
         this.setSize(400, 100);
         nombre = new JLabel(f.getName());
+        viewBtn = new JButton("ver");
         editBtn = new JButton("editar");
         deleteBtn = new JButton("Borrar");
         nombre.setVerticalAlignment(0);
@@ -40,6 +47,7 @@ public class ImagenComponent extends JPanel{
         editBtn.setBounds(90, 10, 80, 20);
         deleteBtn.setBounds(180, 10, 80, 20);
         this.add(nombre);
+        this.add(viewBtn);
         this.add(editBtn);
         this.add(deleteBtn);
         repaint();
@@ -59,6 +67,32 @@ public class ImagenComponent extends JPanel{
             }
 
         });
+        viewBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ver(e);
+            }
+
+        });
+
+    }
+
+    private void ver(ActionEvent e) {
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Visor Imagenes"+f.getName());
+
+        ImagePanel p = new ImagePanel(f.getAbsolutePath());
+        p.setSize(400, 400);
+         dialog.getContentPane().setSize(400, 400);
+        dialog.getContentPane().add(p, BorderLayout.CENTER); 
+        dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        dialog.setSize(new Dimension(400, 400));
+        dialog.setLocationRelativeTo(getParent().getParent().getParent());
+        dialog.setModal(true);
+        dialog.setVisible(true);
+        
+        dialog.setSize(new Dimension(500, 500));
     }
 
     @Override
@@ -88,7 +122,7 @@ public class ImagenComponent extends JPanel{
     }
 
     private void delete(ActionEvent e) {
-        
+
         this.setVisible(false);
         this.isDeleted = true;
         this.disableEvents(WIDTH);
@@ -110,34 +144,36 @@ public class ImagenComponent extends JPanel{
     }
 
     private void cambiarArchivo(File selectedFile) {
-        
+
         this.f = selectedFile;
         this.nombre.setText(f.getName());
         repaint();
-                
+
     }
 
     public boolean isDeleted() {
         return isDeleted;
     }
-     protected EventListenerList listenerList = new EventListenerList();
+    protected EventListenerList listenerList = new EventListenerList();
 
     public void addNotifyEventListener(NotifyEventListener listener) {
-      listenerList.add(NotifyEventListener.class, listener);
+        listenerList.add(NotifyEventListener.class, listener);
     }
+
     public void removeNotifyEventLListener(NotifyEventListener listener) {
-      listenerList.remove(NotifyEventListener.class, listener);
+        listenerList.remove(NotifyEventListener.class, listener);
     }
+
     void fireNotifyEvent(NotifyEvent evt) {
-      Object[] listeners = listenerList.getListenerList();
-      for (int i = 0; i < listeners.length; i = i+2) {
-        if (listeners[i] == NotifyEventListener.class) {
-          ((NotifyEventListener) listeners[i+1]).notifyEvent(evt);
+        Object[] listeners = listenerList.getListenerList();
+        for (int i = 0; i < listeners.length; i = i + 2) {
+            if (listeners[i] == NotifyEventListener.class) {
+                ((NotifyEventListener) listeners[i + 1]).notifyEvent(evt);
+            }
         }
-      }
     }
 
     public String getPath() {
         return f.getAbsolutePath();
-     }
+    }
 }
