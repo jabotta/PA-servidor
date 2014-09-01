@@ -18,6 +18,7 @@ import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.Producto;
 import Controlador.Clases.Proveedor;
 import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDayChooser;
@@ -50,8 +51,12 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
     private final JLabel nroRef;
     private final JLabel fechaVenta;
     private final JLabel precioTotal;
+    private final JLabel cliente;
+    private final JLabel productos;
     private final JTextField precioTotalText;
     private final JTextField nroRefText;
+    private final JTextField clienteText;
+    private JList productosList;
     private final JCalendar fechaVentaText;
     private final JButton borrarBtn;
     private final JButton cancelarBtn;
@@ -145,9 +150,7 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
         controlarOrden.elegirEspecificacionProducto("a1");
         
         //Listar productos de la especificacion seleccionada
-        controlarOrden.listarProductos().stream().forEach((producto) -> {
-            System.out.println(producto);
-        });
+
         
         //Producto seleccionado
         controlarOrden.elegirProducto(1);
@@ -190,10 +193,18 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
                 if(evt.getValueIsAdjusting())
                     return;
                 DataOrdenCompra aux = (DataOrdenCompra)ordenList.getSelectedValue();
+                controlarOrden.elegirOrden(aux.getNroOrden());
                 nroRefText.setText(String.valueOf(aux.getNroOrden()));
                 fechaVentaText.setDate(aux.getFecha());
                 precioTotalText.setText(String.valueOf(aux.getPrecioTotal()));
+                clienteText.setText(aux.getClienteCompraProducto().get(0).getCliente().getNickname());
+                DefaultListModel tes2 = new DefaultListModel();
+                ArrayList<DataEspecificacionProducto> productosLst = controlarOrden.listarProductosEnOrden();
                 
+                productosLst.stream().forEach((producto) -> {
+                    tes2.addElement(producto.getNroReferencia() + " - "+producto.getNombre() + " - $"+producto.getPrecio());
+                });
+                productosList.setModel(tes2);
             }
         });
         contenedor.add(ordenList);
@@ -207,15 +218,6 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
         nroRefText.setBounds(370, 50, 300, 30);
         contenedor.add(nroRefText);
         
-        precioTotal = new JLabel("Precio total");
-        precioTotal.setVisible(true);
-        precioTotal.setBounds(220, 140, 150, 10);
-        contenedor.add(precioTotal);
-        
-        precioTotalText = new JTextField();
-        precioTotalText.setBounds(370, 130, 300, 30);
-        contenedor.add(precioTotalText);
-        
         fechaVenta = new JLabel("Fecha de venta");
         fechaVenta.setVisible(true);
         fechaVenta.setBounds(220, 100, 150, 10);
@@ -226,6 +228,34 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
          
         fechaVentaText.setBounds(370, 90, 300, 30);
         contenedor.add(fechaVentaText);
+        
+        precioTotal = new JLabel("Precio total");
+        precioTotal.setVisible(true);
+        precioTotal.setBounds(220, 140, 150, 10);
+        contenedor.add(precioTotal);
+        
+        precioTotalText = new JTextField();
+        precioTotalText.setBounds(370, 130, 300, 30);
+        contenedor.add(precioTotalText);
+        
+        cliente = new JLabel("Cliente");
+        cliente.setVisible(true);
+        cliente.setBounds(220, 180, 150, 10);
+        contenedor.add(cliente);
+        
+        clienteText = new JTextField();
+        clienteText.setBounds(370, 170, 300, 30);
+        contenedor.add(clienteText);
+        
+        productos = new JLabel("Productos");
+        productos.setVisible(true);
+        productos.setBounds(220, 220, 150, 10);
+        contenedor.add(productos);
+        
+        productosList = new JList(new DefaultListModel());
+        productosList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        productosList.setBounds(220, 240, 450, 80);
+        contenedor.add(productosList);
         
         borrarBtn = new JButton("Eliminar");
         cancelarBtn = new JButton("Cancelar");
@@ -244,8 +274,8 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
             }
         });
         
-        borrarBtn.setBounds(250, 260, 100, 40);
-        cancelarBtn.setBounds(370, 260, 100, 40);
+        borrarBtn.setBounds(250, 330, 100, 40);
+        cancelarBtn.setBounds(370, 330, 100, 40);
         contenedor.add(borrarBtn);
         contenedor.add(cancelarBtn);
         
@@ -266,6 +296,7 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
         nroRefText.setText("");
         fechaVentaText.setDate(new Date());
         precioTotalText.setText("");
+        clienteText.setText("");
     }
     
 }

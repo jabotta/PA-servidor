@@ -32,6 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private JInternalFrame registrarUsuarioVentana;
     private JInternalFrame registrarCategoriaVentana;
     private JInternalFrame cancelarOrdenVentana;
+    private JInternalFrame verOrdenVentana;
     // End of variables declaration
     
     public static Integer idUsuariosControlador;
@@ -169,6 +170,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ordenMenu.add(cancelarOrdOpt);
 
         verInfoOrdenOpt.setText("Ver información de orden de compra");
+        verInfoOrdenOpt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verInfoOrdenOptActionPerformed(evt);
+            }
+        });
         ordenMenu.add(verInfoOrdenOpt);
 
         casosUsoMenu.add(ordenMenu);
@@ -238,6 +244,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void crearOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                              
         
     }        
+    
+    private void verInfoOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {
+        verOrdenVentana =  new VerInformacionOrden(controlarOrden);
+        
+        javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(verOrdenVentana.getContentPane());
+        verOrdenVentana.getContentPane().setLayout(registrarUsuariosLayout);
+        
+        registrarUsuariosLayout.setHorizontalGroup(
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(registrarUsuariosLayout.createSequentialGroup())
+        );
+        
+        registrarUsuariosLayout.setVerticalGroup(
+            registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
+        
+        desktopPane.add(verOrdenVentana);
+    }
     
     private void cancelarOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         cancelarOrdenVentana =  new CancelarOrdenDeCompra(controlarOrden);

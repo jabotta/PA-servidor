@@ -148,7 +148,7 @@ public class Main {
         controlarProducto.elegirProveedor(nicknameProveedor);
         
         //leer datos de nueva especificacion
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0,controlarProducto.listarProveedores().get(0), new ArrayList<String>(), new ArrayList<DataCategoria>(),Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto a", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0,null, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
         controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("Color", "Verde");
         controlarProducto.ingresarEspecificacion("Peso", "1kg");
@@ -167,6 +167,7 @@ public class Main {
         DataCategoria padre = new DataCategoria(ManejadorCategorias.getInstance().getCategoria("cat1"), true);
         DataCategoria categoria = new DataCategoria("cat6", padre);
         controlarProducto.ingresarDatosCategoria(categoria);
+        controlarProducto.guardarCategoria();
     }
     
     public static void casoDeUso4(IControladorOrdenes controlarOrden){
@@ -197,9 +198,9 @@ public class Main {
         controlarOrden.elegirEspecificacionProducto("a1");
         
         //Listar productos de la especificacion seleccionada
-        controlarOrden.listarProductos().stream().forEach((producto) -> {
+        /*controlarOrden.listarProductos().stream().forEach((producto) -> {
             System.out.println(producto);
-        });
+        });*/
         
         //Producto seleccionado
         controlarOrden.elegirProducto(1);
