@@ -3,15 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Vista;
 
-import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
-import static Controlador.Clases.Main.idUsuariosControlador;
-import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataEspecificacionProducto;
-import Controlador.DataTypes.DataProveedor;
-import static Vista.VentanaPrincipal.controlarProducto;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -20,9 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.Instant;
-import java.util.Date;
-import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
@@ -37,7 +30,7 @@ import javax.swing.table.TableModel;
  *
  * @author rodro
  */
-public class VerInfoProductos extends JInternalFrame {
+public class ModificarInformacionProducto  extends JInternalFrame {
 
     private String nroRef;
     private JDialog dialog;
@@ -56,10 +49,10 @@ public class VerInfoProductos extends JInternalFrame {
     /**
      * Creates new form VerInfoProductos
      */
-    public VerInfoProductos(IControladorProductos controlarProducto) {
+    public ModificarInformacionProducto(IControladorProductos controlarProducto) {
 
         this.controlarProducto = controlarProducto;
-    
+ 
 
         setBounds(50, 50, 800, 500);
         setVisible(true);
@@ -89,6 +82,20 @@ public class VerInfoProductos extends JInternalFrame {
         buttonContainer.setSize(400, 500);
         buttonContainer.setVisible(true);
  
+            saveButton = new JButton("Guardar");
+            saveButton.setVisible(false);
+
+            saveButton.setSize(100, 40);
+            saveButton.addActionListener(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    save();
+                }
+            });
+             setTitle("Modificar Informacion de Producto");
+       
+        buttonContainer.add(saveButton);
         cancelarButton = new JButton("Cancelar");
         cancelarButton.setSize(100, 40);
         cancelarButton.addActionListener(new ActionListener() {
@@ -107,6 +114,10 @@ public class VerInfoProductos extends JInternalFrame {
         add(InfoPanel);
 
         SpringUtilities.makeGrid(this.getContentPane(), 1, 2, 0, 0, 6, 6);
+
+    }
+
+    private void save() {
 
     }
 
@@ -158,20 +169,20 @@ public class VerInfoProductos extends JInternalFrame {
         int row = listaProductos.getSelectedRow();
         String nroRef = (String) model.getValueAt(row, 0);
         DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto(nroRef);
-        form = new Formulario(false);
+        form = new Formulario(true);
         form.addField("Nombre", "text", null, dataProducto.getNombre());
         form.addField("NroRef", "text", null, dataProducto.getNroReferencia());
         form.addField("Descripcion", "text", null, dataProducto.getDescripcion());
         form.addField("Especificaciones", "text", null, dataProducto.getEspecificacion().values().toString());
-
         form.addField("Categorias", "text", null, dataProducto.getCategorias().toString());
         form.addField("Proveedor", "text", null, dataProducto.getProveedor().toString());
         form.addField("Imagenes", "text", null, dataProducto.getImagenes().toString());
-
+        
         InfoPanel.add(form, BorderLayout.CENTER);
         InfoPanel.revalidate();
-        InfoPanel.repaint();  
-
+        InfoPanel.repaint();
+        saveButton.setVisible(true);
+        
     }
 
     private void openDialog() {
@@ -198,4 +209,7 @@ public class VerInfoProductos extends JInternalFrame {
         dialog.setVisible(true);
 
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
 }

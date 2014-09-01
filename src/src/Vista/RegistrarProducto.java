@@ -66,7 +66,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     RegistrarProducto(IControladorProductos controlarProducto) {
 
         this.controlarProducto = controlarProducto;
-        Utils.generarCategoriasDePrueba();
+     
         idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
         DataProveedor proveedor = new DataProveedor("prov4", "Proveedor 4", "", "prov4@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com");
         Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador).ingresarDatosProveedor(proveedor);
