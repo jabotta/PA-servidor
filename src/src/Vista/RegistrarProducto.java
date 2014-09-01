@@ -66,7 +66,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
     RegistrarProducto(IControladorProductos controlarProducto) {
 
         this.controlarProducto = controlarProducto;
-        Utils.generarCategoriasDePrueba();
+     
         idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
         DataProveedor proveedor = new DataProveedor("prov4", "Proveedor 4", "", "prov4@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com");
         Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador).ingresarDatosProveedor(proveedor);
@@ -77,7 +77,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         setLayout(new SpringLayout());
 
         setTitle("Registrar Producto");
-
+ 
         form = new Formulario();
 
         form.addField("Titulo", "text");
@@ -86,9 +86,9 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         form.addField("Especificaciones", "textarea");
         form.addField("Precio", "text");
         form.addField("Stock", "text");
-        form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray());
+        form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray(),null);
 
-        treePane = new ElegirCategoriaComponente(controlarProducto);
+        treePane = new ElegirCategoriaComponente(controlarProducto, false);
 
         sdi = new SelectorDeImagenes();
 
@@ -172,10 +172,15 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         if (categorias.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe elegir una Categoria para el producto", "Validacion", JOptionPane.ERROR_MESSAGE);
         }
+        if (Proveedor == null) {
+            JOptionPane.showMessageDialog(this, "Debe elegir una Proveedor para el producto", "Validacion", JOptionPane.ERROR_MESSAGE);
+
+        }
 
         DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
+        controlarProducto.elegirProveedor(Proveedor.getNickname());
         controlarProducto.ingresarDatosProductos(espProducto);
-
+        
         controlarProducto.ingresarEspecificacion("Especificacion", especificaciones);
 
         controlarProducto.agregarMultiplesProductosAutogenerados(stockReal);
@@ -209,7 +214,6 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dialog.dispose();
-                System.out.println(treePane.getSelectedCategories());
             }
         });
         dialog.getContentPane().setSize(400, 400);

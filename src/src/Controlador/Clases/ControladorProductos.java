@@ -53,11 +53,13 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public void elegirProveedor(String nickname){
         proveedorElegido = ManejadorUsuarios.getInstance().getProveedor(nickname);
+ 
     }
     
     @Override
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto){
         nuevoEspProducto = new EspecificacionProducto(espProducto,proveedorElegido);
+ 
     }
     
     @Override
@@ -193,7 +195,6 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public void guardarCategoria(){
         ManejadorCategorias.getInstance().agregarCategoria(nuevaCategoria);
-        System.out.println("NuevaCategoria " + nuevaCategoria);
     }
     
     @Override

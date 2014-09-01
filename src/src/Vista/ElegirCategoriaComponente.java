@@ -43,7 +43,7 @@ class ElegirCategoriaComponente extends JPanel {
     private final ArrayList<String> selectedCategorias;
     private final IControladorProductos cotrolador;
 
-    public ElegirCategoriaComponente(IControladorProductos controlador) {
+    public ElegirCategoriaComponente(IControladorProductos controlador, Boolean ultimaCategoria) {
         this.cotrolador = controlador;
         selectedCategorias = new ArrayList();
         node = new DefaultMutableTreeNode(Constantes.CATEGORIA_ROOT);
@@ -56,19 +56,25 @@ class ElegirCategoriaComponente extends JPanel {
             public void valueChanged(TreeSelectionEvent e) {
                 for (int i = 0; i < e.getPaths().length; i++) {
                     if (e.isAddedPath(e.getPaths()[i])) {
-                        for (int j = 0; j < e.getPaths()[i].getPathCount(); j++) {
-                            //if(!selectedCategorias.contains((e.getPaths()[i]).getPathComponent(j).toString()))
-                            selectedCategorias.add((e.getPaths()[i]).getPathComponent(j).toString());
+
+                        if (ultimaCategoria) {
+
+                            selectedCategorias.add(e.getPath().getLastPathComponent().toString().trim());
+                        } else {
+                            for (int j = 0; j < e.getPaths()[i].getPathCount(); j++) {
+                                //if(!selectedCategorias.contains((e.getPaths()[i]).getPathComponent(j).toString()))
+                                selectedCategorias.add((e.getPaths()[i]).getPathComponent(j).toString().trim());
+                            }
                         }
                     } else {
                         for (int j = 0; j < e.getPaths()[i].getPathCount(); j++) {
-                            selectedCategorias.remove((e.getPaths()[i]).getPathComponent(j).toString());
+                            selectedCategorias.remove((e.getPaths()[i]).getPathComponent(j).toString().trim());
                         }
                     }
-                } 
-               // System.out.println("--"+getSelectedCategories());
+                }
+                // System.out.println("--"+getSelectedCategories());
             }
-            
+
         };
         tree.addTreeSelectionListener(myTreeListener);
 
@@ -76,7 +82,6 @@ class ElegirCategoriaComponente extends JPanel {
         add(tree);
         setSize(400, 400);
     }
-    
 
     public HashSet<String> getSelectedCategories() {
         HashSet<String> r = new HashSet();
@@ -94,8 +99,8 @@ class ElegirCategoriaComponente extends JPanel {
     private void buildTree() {
 
         categoriasAgregadas = new ArrayList();
-       
-         cotrolador.listarCategorias().forEach((categoria) -> {
+
+        cotrolador.listarCategorias().forEach((categoria) -> {
 
             DataCategoria auxDeBusqueda = categoria;
             NodoCategoria auxHuerfana = null;
@@ -113,7 +118,7 @@ class ElegirCategoriaComponente extends JPanel {
                     if (!categoriasAgregadas.contains(nodoRaiz)) {
 
                         categoriasAgregadas.add(nodoRaiz);
- 
+
                     }
                     auxHuerfana = null;
                     padresAgregados = true;
@@ -131,7 +136,6 @@ class ElegirCategoriaComponente extends JPanel {
                     } else {
 
                         NodoCategoria padre = new NodoCategoria(auxDeBusqueda.getPadre().getNombre());
-                        System.out.println("  " + auxDeBusqueda.getPadre().getNombre());
                         padre.addHijo(new NodoCategoria(auxDeBusqueda.getNombre()));
                         if (auxDeBusqueda.getPadre().tienePadre()) {
                             auxDeBusqueda = auxDeBusqueda.getPadre().getPadre();
