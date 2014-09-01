@@ -6,6 +6,7 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProducto;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class ControladorOrdenes implements IControladorOrdenes{
@@ -72,6 +73,11 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public void elegirEspecificacionProducto(String nroRef){
         espProdElegido = ManejadorEspProductos.getInstance().getEspecificacionProducto(nroRef);
     }
+    
+    @Override
+    public void removerEspecificacionProducto(String nroRef){
+            espProdElegido = null;
+    }
     //@Override
 //    public void elegirMetodoDeSeleccion(String metodo){
 //        
@@ -92,7 +98,17 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public void elegirProducto(Integer id){
         productosElegidos.add(espProdElegido.getListaProductos().get(id));
     }
-    
+    @Override
+    public void elegirCantidadProducto(Integer cantidad){
+        
+        Iterator it =  espProdElegido.getListaProductos().keySet().iterator();
+        int indice = 0;
+        while(it.hasNext() && indice<cantidad){
+            
+            productosElegidos.add(espProdElegido.getListaProductos().get(it));
+            indice++;
+        }
+    }
     @Override
     public void generarItemOrden(){
         productosElegidos.stream().forEach((productoElegido) -> {
@@ -120,7 +136,10 @@ public class ControladorOrdenes implements IControladorOrdenes{
 //    public void imprimirDatosOrden(){
 //        
 //    }
-    
+    @Override
+    public Integer getNextId(){
+        return ManejadorOrdenes.getInstance().obtenerOrdenes().keySet().size();
+    }
     @Override
     public ArrayList<DataOrdenCompra> listarOrdenes(){
         ArrayList<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
@@ -151,5 +170,6 @@ public class ControladorOrdenes implements IControladorOrdenes{
         DataOrdenCompra dataOrden = new DataOrdenCompra(ordenElegida);
         return dataOrden;
     }
-    
+
+   
 }

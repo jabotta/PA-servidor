@@ -20,6 +20,7 @@ public interface IControladorOrdenes {
 //    public void elegirMetodoDeSeleccion(String metodo);
     public ArrayList<DataEspecificacionProducto> listarProductosEnOrden();
     public void elegirProducto(Integer id);
+    public void elegirCantidadProducto(Integer cantidad);
     public void generarItemOrden();
     public void guardarOrden(DataOrdenCompra dataOrden);
 //    public void imprimirDatosOrden();
@@ -28,5 +29,9 @@ public interface IControladorOrdenes {
 //    public Boolean confirmarEliminacion();
     public void borrarOrdenCompra();
     public DataOrdenCompra mostrarDatosOrden();
+
+    public void removerEspecificacionProducto(String ref);
+
+    public Integer getNextId();
     
 }

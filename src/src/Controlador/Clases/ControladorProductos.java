@@ -159,6 +159,7 @@ public class ControladorProductos implements IControladorProductos{
     public void guardarProducto(){
         nuevoEspProducto.setCategorias(categoriasElegidas);
         nuevoEspProducto.setEspecificacion(especificaciones);
+     
         nuevoEspProducto.setImagenes(imagenes);
         nuevoEspProducto.setListaProductos(productosAAgregar);
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(nuevoEspProducto);

@@ -44,7 +44,7 @@ public class Formulario extends JPanel {
     }
 
     public Formulario(boolean b) {
-        
+
         isEnabled = b;
         campos = new HashMap();
         setLayout(null);
@@ -72,6 +72,7 @@ public class Formulario extends JPanel {
                 break;
             case "combo":
                 componente = new JComboBox(toArray);
+                
                 break;
             case "checkbox":
                 componente = new JCheckBox(value);
