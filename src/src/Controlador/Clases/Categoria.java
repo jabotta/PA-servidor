@@ -46,7 +46,7 @@ public class Categoria {
     }
     
     public DataCategoria getDataPadre() {
-        return new DataCategoria(padre,true);
+        return new DataCategoria(padre,false);
     }
     
     public void setPadre(Categoria padre) {
