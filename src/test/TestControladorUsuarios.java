@@ -6,8 +6,6 @@
 
 import Controlador.Clases.Cliente;
 import Controlador.Clases.Fabrica;
-//import static Controlador.Clases.Fabrica.getInstance;
-//import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.Proveedor;
