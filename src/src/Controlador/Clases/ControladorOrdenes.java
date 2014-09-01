@@ -101,11 +101,11 @@ public class ControladorOrdenes implements IControladorOrdenes{
     @Override
     public void elegirCantidadProducto(Integer cantidad){
         
-        Iterator it =  espProdElegido.getListaProductos().keySet().iterator();
+        Iterator it =  espProdElegido.getListaProductos().values().iterator();
         int indice = 0;
         while(it.hasNext() && indice<cantidad){
             
-            productosElegidos.add(espProdElegido.getListaProductos().get(it));
+            productosElegidos.add((Producto) it.next());
             indice++;
         }
     }
