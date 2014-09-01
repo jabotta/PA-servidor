@@ -110,8 +110,6 @@ public class TestControladorOrdenes {
         
         //Listar clientes
         Map<Integer, OrdenCompra> ord = ManejadorOrdenes.getInstance().obtenerOrdenes();
-        System.out.println(ord.get(1).getClienteCompraProducto().get(0).getProducto());
-        System.out.println(prodUnidad);
         assertTrue (!isNull (ord.get(1)));
         assertEquals ((long) ord.get(1).getNroOrden(), (long) 1);
 //        assertEquals ((double) ord.get(2).getPrecioTotal(), (double) 12.0);
