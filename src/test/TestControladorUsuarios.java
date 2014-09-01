@@ -6,8 +6,8 @@
 
 import Controlador.Clases.Cliente;
 import Controlador.Clases.Fabrica;
-import static Controlador.Clases.Fabrica.getInstance;
-import Controlador.Clases.IControladorProductos;
+//import static Controlador.Clases.Fabrica.getInstance;
+//import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.Proveedor;
@@ -26,7 +26,7 @@ import org.junit.Test;
  */
 public class TestControladorUsuarios {
 
-    //public static IControladorUsuarios controlarUsuario;    
+    
     @Test
     public void AltadeUsuarioTest () {
 
@@ -36,7 +36,7 @@ public class TestControladorUsuarios {
         
         DataCliente cliente1 = new DataCliente("dduck", "Daffy", "Duck", "dduck@gmail.com", new Date(1995, 01, 01));
         controlarUsuario.ingresarDatosCliente(cliente1);
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Cliente(cliente1));
+
         
         controlarUsuario.guardarUsuario();
         
@@ -85,7 +85,6 @@ public class TestControladorUsuarios {
         DataCliente cliente3 = new DataCliente("darwind", "Darwin", "Duck", "dduck@gmail.com", new Date(1997, 03, 12));
         controlarUsuario.ingresarDatosCliente(cliente3);
         controlarUsuario.guardarUsuario();        
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Cliente(cliente3));
         
         assertEquals (ManejadorUsuarios.getInstance().getCliente("darwind").validarDatosUsuario(), true);         
         assertEquals (ManejadorUsuarios.getInstance().getCliente("darwind").getNickname(), "darwind");
@@ -111,17 +110,11 @@ public class TestControladorUsuarios {
         controlarUsuario.ingresarDatosCliente(cliente2);
         controlarUsuario.guardarUsuario();
         controlarUsuario.ingresarDatosCliente(cliente3);
-        controlarUsuario.guardarUsuario();        
+        controlarUsuario.guardarUsuario();                
         
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Cliente(cliente1));   
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Cliente(cliente2));   
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Cliente(cliente3));
-        //cargar producto para despues poder cargar ordenes de los clientes
-        
-        System.out.println("****************************Test Ver informacion del cliente ****************************");
 
         //Listar clientes
-        Map<String, Cliente> clie = ManejadorUsuarios.getInstance().obtenerClientes();//Collections.synchronizedMap(new HashMap());
+        Map<String, Cliente> clie = ManejadorUsuarios.getInstance().obtenerClientes();
         assertTrue (!isNull (clie.get("piedra")));
         assertTrue (!isNull (clie.get("pmar")));
         assertTrue (!isNull (clie.get("loco")));
@@ -143,15 +136,8 @@ public class TestControladorUsuarios {
         controlarUsuario.guardarUsuario();
         controlarUsuario.ingresarDatosProveedor(proveed3);
         controlarUsuario.guardarUsuario();
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Proveedor(proveed1));   
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Proveedor(proveed2));   
-        //ManejadorUsuarios.getInstance().agregarUsuario(new Proveedor(proveed3));
         
-        //cargar producto para despues poder cargar ordenes de los clientes
-        
-        System.out.println("****************************Test Ver informacion de proveedor ****************************");
 
-        //Listar clientes
         Map<String, Proveedor> prov = ManejadorUsuarios.getInstance().obtenerProveedores();
         assertTrue (!isNull (prov.get("jrod")));
         assertTrue (!isNull (prov.get("nmar")));
