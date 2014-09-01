@@ -250,7 +250,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void crearOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {
-
+        GenerarOrdenDeCompra codec = new GenerarOrdenDeCompra(controlarOrden);
+        desktopPane.add(codec);
     }
 
     private void verInfoOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,7 +365,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 new VentanaPrincipal().setVisible(true);
             }
         });
-           Utils.generarCategoriasDePrueba();
+        Utils.generarCategoriasDePrueba();
     }
 
 }

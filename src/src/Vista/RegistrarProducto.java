@@ -67,11 +67,6 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
 
         this.controlarProducto = controlarProducto;
      
-        idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
-        DataProveedor proveedor = new DataProveedor("prov4", "Proveedor 4", "", "prov4@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com");
-        Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador).ingresarDatosProveedor(proveedor);
-        Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador).guardarUsuario();
-
         setBounds(50, 50, 800, 500);
         setVisible(true);
         setLayout(new SpringLayout());
@@ -165,16 +160,19 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
             precioReal = Float.parseFloat(precio);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Precio y Stock deben ser un numero valido", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if (Utils.formatString(titulo).isEmpty() || Utils.formatString(NroRef).isEmpty()) {
             JOptionPane.showMessageDialog(this, "Titulo,NroRef,Proveedor son requeridos", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if (categorias.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe elegir una Categoria para el producto", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if (Proveedor == null) {
             JOptionPane.showMessageDialog(this, "Debe elegir una Proveedor para el producto", "Validacion", JOptionPane.ERROR_MESSAGE);
-
+            return;
         }
 
         DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
@@ -197,8 +195,13 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Su Producto se ha creado correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Sus datos no son correctos, Verifique", "Validacion", JOptionPane.ERROR_MESSAGE);
 
             }
+        }else{
+           
+            JOptionPane.showMessageDialog(this, "Sus datos no son correctos, Verifique", "Validacion", JOptionPane.ERROR_MESSAGE);
+
         }
 
     }

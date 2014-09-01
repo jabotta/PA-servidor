@@ -152,16 +152,19 @@ public class ModificarInformacionProducto extends JInternalFrame {
             precioReal = Float.parseFloat(precio);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Precio y Stock deben ser un numero valido", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if (Utils.formatString(titulo).isEmpty() || Utils.formatString(NroRef).isEmpty()) {
             JOptionPane.showMessageDialog(this, "Titulo,NroRef,Proveedor son requeridos", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if (categorias.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe elegir una Categoria para el producto", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if (Proveedor == null) {
             JOptionPane.showMessageDialog(this, "Debe elegir una Proveedor para el producto", "Validacion", JOptionPane.ERROR_MESSAGE);
-
+            return;
         }
 
         DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
@@ -172,7 +175,7 @@ public class ModificarInformacionProducto extends JInternalFrame {
 
             controlarProducto.borrarCategoriaAEspecificacion(cat.getNombre());
         });
-
+        controlarProducto.ingresarEspecificacion("Especificacion", especificaciones);
         controlarProducto.elegirProveedor(Proveedor.getNickname());
         controlarProducto.ingresarDatosProductos(espProducto);
 
@@ -191,8 +194,13 @@ public class ModificarInformacionProducto extends JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Su Producto se ha creado correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Sus datos no son correctos, Verifique", "Validacion", JOptionPane.ERROR_MESSAGE);
 
             }
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Sus datos no son correctos, Verifique", "Validacion", JOptionPane.ERROR_MESSAGE);
+
         }
 
     }
