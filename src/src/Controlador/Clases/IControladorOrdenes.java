@@ -31,5 +31,7 @@ public interface IControladorOrdenes {
     public DataOrdenCompra mostrarDatosOrden();
 
     public void removerEspecificacionProducto(String ref);
+
+    public Integer getNextId();
     
 }

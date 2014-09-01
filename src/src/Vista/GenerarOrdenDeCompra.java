@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.Clases.IControladorOrdenes;
+import Controlador.Clases.ManejadorOrdenes;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import static Vista.VentanaPrincipal.controlarProducto;
@@ -197,8 +198,11 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
     }
 
     private void ordenar() {
-        DataOrdenCompra dataOrden = new DataOrdenCompra(1);
+        Integer id= controlarOrden.getNextId();
+        DataOrdenCompra dataOrden = new DataOrdenCompra(id);
         controlarOrden.guardarOrden(dataOrden);
+        
+        System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(id));
     }
 
     private void openDialog() {

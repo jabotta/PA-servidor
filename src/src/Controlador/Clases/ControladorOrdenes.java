@@ -136,7 +136,10 @@ public class ControladorOrdenes implements IControladorOrdenes{
 //    public void imprimirDatosOrden(){
 //        
 //    }
-    
+    @Override
+    public Integer getNextId(){
+        return ManejadorOrdenes.getInstance().obtenerOrdenes().keySet().size();
+    }
     @Override
     public ArrayList<DataOrdenCompra> listarOrdenes(){
         ArrayList<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
