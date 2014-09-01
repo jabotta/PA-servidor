@@ -18,7 +18,7 @@ public interface IControladorOrdenes {
     public ArrayList<DataEspecificacionProducto> listarEspecificacionProductos();
     public void elegirEspecificacionProducto(String nroRef);
 //    public void elegirMetodoDeSeleccion(String metodo);
-    public ArrayList<DataProducto> listarProductos();
+    public ArrayList<DataEspecificacionProducto> listarProductosEnOrden();
     public void elegirProducto(Integer id);
     public void generarItemOrden();
     public void guardarOrden(DataOrdenCompra dataOrden);

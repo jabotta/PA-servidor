@@ -78,12 +78,12 @@ public class ControladorOrdenes implements IControladorOrdenes{
 //    }
     
     @Override
-    public ArrayList<DataProducto> listarProductos(){
-        ArrayList<DataProducto> dataProductos = new ArrayList<>();
-        ManejadorProductos.getInstance().obtenerProductos().entrySet().stream().map((producto) -> producto.getValue()).forEach((valor) -> {
-            if(valor.getEspecificacionProducto() == espProdElegido){
-                dataProductos.add(new DataProducto(valor));
-            }
+    public ArrayList<DataEspecificacionProducto> listarProductosEnOrden(){
+        ArrayList<DataEspecificacionProducto> dataProductos = new ArrayList<>();
+        ordenElegida.getDataClienteCompraProducto().stream().forEach((clienteproducto) -> {
+            DataEspecificacionProducto aux = clienteproducto.getProducto().getEspecificacionProducto();
+            aux.setPrecio(clienteproducto.getPrecio()); //precio al momento de realizar la compra
+            dataProductos.add(clienteproducto.getProducto().getEspecificacionProducto());
         });
         return dataProductos;
     }

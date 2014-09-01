@@ -197,9 +197,9 @@ public class Main {
         controlarOrden.elegirEspecificacionProducto("a1");
         
         //Listar productos de la especificacion seleccionada
-        controlarOrden.listarProductos().stream().forEach((producto) -> {
+        /*controlarOrden.listarProductos().stream().forEach((producto) -> {
             System.out.println(producto);
-        });
+        });*/
         
         //Producto seleccionado
         controlarOrden.elegirProducto(1);
