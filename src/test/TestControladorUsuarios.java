@@ -94,7 +94,7 @@ public class TestControladorUsuarios {
     }  
     
     @Test
-    public void TestVerInformaciondeCliente () {
+    public void TestVerInformacionCliente () {
     
         //cargar clientes
         Integer idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
@@ -120,7 +120,7 @@ public class TestControladorUsuarios {
     }
     
     @Test
-    public void TestVerInformaciondeProveedor () {
+    public void TestVerInformacionProveedor () {
     
         //cargar clientes
         Integer idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
