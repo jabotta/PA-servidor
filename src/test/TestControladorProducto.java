@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
@@ -98,8 +93,18 @@ public class TestControladorProducto {
         assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getIdEspecifico(), "idSpec");
         assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDescripcion(), "nuevo");
         assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getNombre(), "prod1");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getNroReferencia(), "nroref1");
+        assertTrue ((ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getPrecio() == (float) 2500.0) );
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDataProveedor().getLinkSitio(), "www.pcel.com");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDataProveedor().getNombreCompania(), "Pcel");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDataProveedor().getNombre(), "Pedro");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDataProveedor().getApellido(), "Perez");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDataProveedor().getNickname(), "pperez");
+        Date fecha = new Date(1990, 03, 02);
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDataProveedor().getFechaNacimiento(), fecha);
         
-    }
+                
+    }   
 
     @Test
     public void TestVerInformaciondeProducto() {
@@ -129,8 +134,60 @@ public class TestControladorProducto {
         controlarProducto.guardarProducto();
         
         assertTrue(!isNull(controlarProducto.controlarErrores()));
-        assertTrue (!isNull (ManejadorProductos.getInstance().obtenerProductos()));
+        assertTrue (!isNull (ManejadorProductos.getInstance().obtenerProductos())); 
+         assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getIdEspecifico(), "idesp1");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getDescripcion(), "descripcion 1");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getNombre(), "Producto1");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getNroReferencia(), "prod1");
+        assertTrue ((ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getPrecio() == (float) 12.0) );
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getDataProveedor().getLinkSitio(), "www.alpiste.com");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getDataProveedor().getNombreCompania(), "Alpiste");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getDataProveedor().getNombre(), "Gallo");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getDataProveedor().getApellido(), "Claudio");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getDataProveedor().getNickname(), "gclaud");
+        Date fecha = new Date(1981, 06, 07);
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(11).getEspecificacionProducto().getDataProveedor().getFechaNacimiento(), fecha);
+    }
+    
+    public void TestModificarProducto() {
         
+        Integer idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
+        IControladorUsuarios controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
+        Integer idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
+        IControladorProductos controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
+
+        controlarUsuario.ingresarDatosProveedor(new DataProveedor("gclaud", "Gallo", "Claudio", "gclaudio@mail.com", new Date(1981, 06, 07), "Alpiste", "www.alpiste.com"));
+        controlarUsuario.guardarUsuario();
+
+        DataCategoria cat1 = new DataCategoria("cat1", null);
+        controlarProducto.ingresarDatosCategoria(cat1);
+        controlarProducto.guardarCategoria();
+
+        controlarProducto.elegirProveedor("gclaud");
+        DataProveedor proveedor = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("gclaud"));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float) 12.0, proveedor, new ArrayList<>(), new ArrayList<>(), Collections.synchronizedMap(new HashMap()));
+        controlarProducto.ingresarDatosProductos(espProducto);
+        controlarProducto.ingresarEspecificacion("estado", "nuevo");
+        controlarProducto.ingresarEspecificacion("color", "gris");
+        DataProducto prodUnidad = new DataProducto(5, "idesp1", espProducto);
+        controlarProducto.ingresarDatosUnidad(prodUnidad);
+        controlarProducto.agregarCategoriaAEspecificacion("cat1");
+        controlarProducto.agregarImagen("img");
+        controlarProducto.guardarProducto();        
+        
+        //Modificar Producto
+
+        DataEspecificacionProducto espProducto2 = new DataEspecificacionProducto("prod1", "Cambio", "nuevo", Collections.synchronizedMap(new HashMap()), (float) 2500.0, proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
+
+        controlarProducto.modificarDatosEspecificacionProducto(espProducto2);       
+
+        if(controlarProducto.validarInfo())
+            controlarProducto.guardarEspProductoModificado();
+        
+        assertTrue (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(5).getEspecificacionProducto().getPrecio() == (float) 2500); 
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(5).getEspecificacionProducto().getDescripcion(), "nuevo");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(5).getEspecificacionProducto().getNombre(), "Cambio");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("prod1").getListaProductos().get(5).getEspecificacionProducto().getNroReferencia(), "prod1");
     }
 
 }
