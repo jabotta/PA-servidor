@@ -8,6 +8,7 @@ import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.Clases.ManejadorCategorias;
+import Controlador.Clases.ManejadorEspProductos;
 import Controlador.Clases.ManejadorProductos;
 import Controlador.Clases.ManejadorUsuarios;
 import Controlador.DataTypes.DataCategoria;
@@ -94,10 +95,9 @@ public class TestControladorProducto {
         assertTrue(!isNull(controlarProducto.getId()));
         assertTrue(!isNull(controlarProducto.controlarErrores()));
         assertTrue(!isNull(controlarProducto.elegirTipoProducto()));
-        //assertEquals (ManejadorProductos.getInstance().getProducto(1).getIdEspecifico(), "idSpec");
-        //assertEquals (ManejadorProductos.getInstance().getProducto(1).getEspecificacionProducto().getDescripcion(), "nuevo");
-        //assertEquals (ManejadorProductos.getInstance().getProducto(1).getDataEspecificacionProducto().getEspecificacion(), "idSpec");
-        //assertEquals (ManejadorProductos.getInstance().getProducto(1).getEspecificacionProducto().getNombre(), "prod1");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getIdEspecifico(), "idSpec");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getDescripcion(), "nuevo");
+        assertEquals (ManejadorEspProductos.getInstance().getEspecificacionProducto("nroref1").getListaProductos().get(1).getEspecificacionProducto().getNombre(), "prod1");
         
     }
 
