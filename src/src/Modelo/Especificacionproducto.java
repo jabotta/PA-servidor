@@ -51,7 +51,7 @@ public class Especificacionproducto implements Serializable {
     @Column(name = "PROVEEDOR_ID", length = 255)
     private String proveedorId;
     @ManyToMany(mappedBy = "especificacionproductoCollection")
-    private Collection<Categoria> categoriaCollection;
+    private Collection<Categoria2> categoriaCollection;
 
     public Especificacionproducto() {
     }
@@ -101,11 +101,11 @@ public class Especificacionproducto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Categoria> getCategoriaCollection() {
+    public Collection<Categoria2> getCategoriaCollection() {
         return categoriaCollection;
     }
 
-    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
+    public void setCategoriaCollection(Collection<Categoria2> categoriaCollection) {
         this.categoriaCollection = categoriaCollection;
     }
 
