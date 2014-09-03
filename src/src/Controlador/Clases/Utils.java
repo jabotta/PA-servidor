@@ -113,6 +113,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "IPH5");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put(
@@ -126,6 +127,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "IPH4");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put(
@@ -137,6 +139,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "NEX4");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put(
@@ -148,6 +151,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "GA3");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put(
@@ -159,6 +163,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "GA4");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put(
@@ -170,6 +175,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "AS5");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put(
@@ -179,6 +185,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "PCG");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put(
@@ -188,6 +195,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "PMH");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put("Apple", ManejadorCategorias.getInstance().getCategoria("Apple"));
@@ -197,6 +205,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "IRD");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put("Apple", ManejadorCategorias.getInstance().getCategoria("Apple"));
@@ -206,6 +215,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "IM");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put("Xbox", ManejadorCategorias.getInstance().getCategoria("Xbox"));
@@ -214,6 +224,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "RIX");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put("Xbox", ManejadorCategorias.getInstance().getCategoria("Xbox"));
@@ -222,6 +233,7 @@ public class Utils {
         controlarProducto.elegirEspProducto(
                 "CIX");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put("Playstation", ManejadorCategorias.getInstance().getCategoria("Playstation"));
@@ -229,42 +241,43 @@ public class Utils {
 
         controlarProducto.elegirEspProducto("CHP");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
+        controlarProducto.guardarProducto();
         cat1 = Collections.synchronizedMap(new HashMap());
 
         cat1.put("Playstation", ManejadorCategorias.getInstance().getCategoria("Playstation"));
         EspecificacionProducto pr14 = new EspecificacionProducto("CP3", "Control para PS3", "Control inalámbrico Dualshock 3 de color azul para Playstation 3", esp3, (float) 30.8, p3, cat1, prod3);
 
-        controlarProducto.elegirEspProducto(
-                "CP3");
+        controlarProducto.elegirEspProducto("CP3");
         controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr1);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr2);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr3);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr4);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr5);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr6);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr7);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr8);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr9);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr10);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr11);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr12);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr13);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr14);
+        controlarProducto.guardarProducto();
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr1);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr2);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr3);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr4);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr5);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr6);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr7);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr8);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr9);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr10);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr11);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr12);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr13);
+//        ManejadorEspProductos.getInstance()
+//                .agregarEspecificacionProducto(pr14);
 
         controlarOrden.elegirCliente("Dan");
         controlarOrden.elegirEspecificacionProducto("IPH5");
