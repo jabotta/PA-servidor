@@ -18,6 +18,7 @@ public class DataProveedor extends DataUsuario{
         super(p.getNickname(), p.getNombre(), p.getApellido(), p.getEmail(), p.getFechaNacimiento());
         this.nombreCompania = p.getNombreCompania();
         this.linkSitio = p.getLinkSitio();
+         this.setImagenes(p.getImagenes());
     }
 
     public String getNombreCompania() {

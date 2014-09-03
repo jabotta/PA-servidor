@@ -11,13 +11,14 @@ public class Proveedor extends Usuario{
     public Proveedor(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String nombreCompania, String linkSitio) {
         super(nickname, nombre, apellido, email, fechaNacimiento);
         this.nombreCompania = nombreCompania;
-        this.linkSitio = linkSitio;
+        this.linkSitio = linkSitio; 
     }
     
     public Proveedor(DataProveedor dp) {
         super(dp.getNickname(), dp.getNombre(), dp.getApellido(), dp.getEmail(), dp.getFechaNacimiento());
         this.nombreCompania = dp.getNombreCompania();
         this.linkSitio = dp.getLinkSitio();
+        this.setImagenes(dp.getImagenes());
     }
     
     public String getNombreCompania() {
@@ -42,7 +43,7 @@ public class Proveedor extends Usuario{
     
     @Override
     public String toString() {
-        return this.getNickname() + "  --  " + this.getNombre() + "  --  " + this.getApellido();
+        return this.getNickname() + "  --  " + this.getNombre() + "  --  " + this.getApellido()+" -- "+this.getImagenes();
     }
     
 }

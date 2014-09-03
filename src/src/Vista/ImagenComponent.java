@@ -77,7 +77,9 @@ public class ImagenComponent extends JPanel {
         });
 
     }
-
+    public void setAllowDelete(Boolean d){
+           deleteBtn.setVisible(d);
+    }
     private void ver(ActionEvent e) {
         JDialog dialog = new JDialog();
         dialog.setTitle("Visor Imagenes"+f.getName());

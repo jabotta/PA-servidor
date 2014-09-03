@@ -93,9 +93,9 @@ class VerInformacionProveedorForm extends JInternalFrame {
             }
         });
         
-         JButton verimagen = new JButton("Ver");
+         JButton verimagen = new JButton("Ver Imagen");
         verimagen.setSize(100, 40);
-        verimagen.setLocation(200, 0);
+        verimagen.setLocation(370, 0);
         verimagen.addActionListener(new ActionListener() {
 
             @Override

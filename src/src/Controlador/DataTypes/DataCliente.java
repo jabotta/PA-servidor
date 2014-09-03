@@ -7,10 +7,12 @@ public class DataCliente extends DataUsuario{
 
     public DataCliente(Cliente c) {
         super(c.getNickname(), c.getNombre(), c.getApellido(), c.getEmail(), c.getFechaNacimiento());
+        this.setImagenes(c.getImagenes());
     }
 
     public DataCliente(String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
         super(nickname, nombre, apellido, email, fechaNacimiento);
+        
     }
     
     @Override
