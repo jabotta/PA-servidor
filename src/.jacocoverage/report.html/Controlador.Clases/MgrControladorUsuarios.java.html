@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MgrControladorUsuarios.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controlador.Clases</a> &gt; <span class="el_source">MgrControladorUsuarios.java</span></div><h1>MgrControladorUsuarios.java</h1><pre class="source lang-java linenums">package Controlador.Clases;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MgrControladorUsuarios {
+    
+<span class="fc" id="L9">    private static MgrControladorUsuarios instance = null; </span>
+    private Map&lt;Integer,ControladorUsuarios&gt; controladorColection;
+    
+    public static MgrControladorUsuarios getInstance(){
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        if(MgrControladorUsuarios.instance == null){</span>
+<span class="fc" id="L14">            MgrControladorUsuarios.instance = new MgrControladorUsuarios();</span>
+<span class="fc" id="L15">            MgrControladorUsuarios.instance.controladorColection = Collections.synchronizedMap(new HashMap());</span>
+        }
+<span class="fc" id="L17">        return MgrControladorUsuarios.instance;</span>
+    }
+    
+<span class="fc" id="L20">    private MgrControladorUsuarios(){</span>
+    
+<span class="fc" id="L22">    }</span>
+    
+    public ControladorUsuarios getController(Integer idController) {
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(controladorColection.containsKey(idController)){</span>
+<span class="fc" id="L26">            return controladorColection.get(idController);</span>
+        }else{
+<span class="fc" id="L28">            ControladorUsuarios newController = new ControladorUsuarios();</span>
+<span class="fc" id="L29">            newController.setId(idController);</span>
+<span class="fc" id="L30">            controladorColection.put(idController, newController);</span>
+<span class="fc" id="L31">            return newController;</span>
+        }
+    }
+    
+    public Integer getSiguienteKey(){
+<span class="fc" id="L36">        return controladorColection.keySet().size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

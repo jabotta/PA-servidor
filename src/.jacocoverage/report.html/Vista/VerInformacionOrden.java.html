@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VerInformacionOrden.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Vista</a> &gt; <span class="el_source">VerInformacionOrden.java</span></div><h1>VerInformacionOrden.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Vista;
+
+import Controlador.Clases.Categoria;
+import Controlador.Clases.Cliente;
+import Controlador.Clases.EspecificacionProducto;
+import Controlador.Clases.IControladorOrdenes;
+import Controlador.Clases.ManejadorCategorias;
+import Controlador.Clases.ManejadorEspProductos;
+import Controlador.Clases.ManejadorOrdenes;
+import Controlador.Clases.ManejadorProductos;
+import Controlador.Clases.ManejadorUsuarios;
+import Controlador.Clases.Producto;
+import Controlador.Clases.Proveedor;
+import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataOrdenCompra;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDayChooser;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+/**
+ *
+ * @author darius
+ */
+public class VerInformacionOrden extends JInternalFrame{
+    
+    private final IControladorOrdenes controlarOrden;
+    private final JPanel contenedor ;
+    private final JList ordenList;
+    private final JLabel nroRef;
+    private final JLabel fechaVenta;
+    private final JLabel precioTotal;
+    private final JLabel cliente;
+    private final JLabel productos;
+    private final JTextField precioTotalText;
+    private final JTextField nroRefText;
+    private final JTextField clienteText;
+    private JList productosList;
+    private final JCalendar fechaVentaText;
+    private final JButton cancelarBtn;
+    private final JDayChooser as;
+    
+<span class="nc" id="L63">    public VerInformacionOrden(IControladorOrdenes ICO){</span>
+<span class="nc" id="L64">        controlarOrden = ICO;</span>
+<span class="nc" id="L65">        System.out.println(&quot;Orden de Compra: &quot;);</span>
+<span class="nc" id="L66">        System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(1));</span>
+<span class="nc" id="L67">        setBounds(50, 50, 700, 400);</span>
+<span class="nc" id="L68">        setVisible(true);</span>
+<span class="nc" id="L69">        setLayout(null);</span>
+<span class="nc" id="L70">        contenedor = new JPanel();</span>
+<span class="nc" id="L71">        contenedor.setLayout(null);</span>
+<span class="nc" id="L72">        contenedor.setSize(700, 400);</span>
+<span class="nc" id="L73">        contenedor.setLocation(10, 0);</span>
+<span class="nc" id="L74">        add(contenedor);</span>
+        
+<span class="nc" id="L76">        JLabel elegirUsuarioLabel = new JLabel(&quot;Elegir Orden De Compra:&quot;);</span>
+<span class="nc" id="L77">        elegirUsuarioLabel.setVisible(true);</span>
+<span class="nc" id="L78">        elegirUsuarioLabel.setBounds(0, 10, 150, 20);</span>
+<span class="nc" id="L79">        contenedor.add(elegirUsuarioLabel);</span>
+
+<span class="nc" id="L81">        DefaultListModel tes = new DefaultListModel();</span>
+<span class="nc" id="L82">        ArrayList&lt;DataOrdenCompra&gt; ordenes = controlarOrden.listarOrdenes();</span>
+<span class="nc" id="L83">        ordenes.stream().forEach((orden) -&gt; {</span>
+            tes.addElement(orden);
+        });
+<span class="nc" id="L86">        ordenList = new JList(tes);</span>
+<span class="nc" id="L87">        ordenList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);</span>
+<span class="nc" id="L88">        ordenList.setBounds(0, 50, 200, 300);</span>
+<span class="nc" id="L89">        ordenList.addListSelectionListener(new ListSelectionListener(){</span>
+            @Override
+            public void valueChanged(ListSelectionEvent evt){
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                if(evt.getValueIsAdjusting())</span>
+<span class="nc" id="L93">                    return;</span>
+<span class="nc" id="L94">                DataOrdenCompra aux = (DataOrdenCompra)ordenList.getSelectedValue();</span>
+<span class="nc" id="L95">                controlarOrden.elegirOrden(aux.getNroOrden());</span>
+<span class="nc" id="L96">                nroRefText.setText(String.valueOf(aux.getNroOrden()));</span>
+<span class="nc" id="L97">                fechaVentaText.setDate(aux.getFecha());</span>
+<span class="nc" id="L98">                precioTotalText.setText(String.valueOf(aux.getPrecioTotal()));</span>
+<span class="nc" id="L99">                clienteText.setText(aux.getClienteCompraProducto().get(0).getCliente().getNickname());</span>
+<span class="nc" id="L100">                DefaultListModel tes2 = new DefaultListModel();</span>
+<span class="nc" id="L101">                ArrayList&lt;DataEspecificacionProducto&gt; productosLst = controlarOrden.listarProductosEnOrden();</span>
+                
+<span class="nc" id="L103">                productosLst.stream().forEach((producto) -&gt; {</span>
+                    tes2.addElement(producto.getNroReferencia() + &quot; - &quot;+producto.getNombre() + &quot; - $&quot;+producto.getPrecio());
+                });
+<span class="nc" id="L106">                productosList.setModel(tes2);</span>
+<span class="nc" id="L107">            }</span>
+        });
+<span class="nc" id="L109">        contenedor.add(ordenList);</span>
+        
+<span class="nc" id="L111">        nroRef = new JLabel(&quot;Numero de referencia&quot;);</span>
+<span class="nc" id="L112">        nroRef.setVisible(true);</span>
+<span class="nc" id="L113">        nroRef.setBounds(220, 60, 150, 10);</span>
+<span class="nc" id="L114">        contenedor.add(nroRef);</span>
+        
+<span class="nc" id="L116">        nroRefText = new JTextField();</span>
+<span class="nc" id="L117">        nroRefText.setBounds(370, 50, 300, 30);</span>
+<span class="nc" id="L118">        contenedor.add(nroRefText);</span>
+        
+<span class="nc" id="L120">        fechaVenta = new JLabel(&quot;Fecha de venta&quot;);</span>
+<span class="nc" id="L121">        fechaVenta.setVisible(true);</span>
+<span class="nc" id="L122">        fechaVenta.setBounds(220, 100, 150, 10);</span>
+<span class="nc" id="L123">        contenedor.add(fechaVenta);</span>
+<span class="nc" id="L124">        as = new JDayChooser();</span>
+                
+<span class="nc" id="L126">        fechaVentaText = new JCalendar();</span>
+         
+<span class="nc" id="L128">        fechaVentaText.setBounds(370, 90, 300, 30);</span>
+<span class="nc" id="L129">        contenedor.add(fechaVentaText);</span>
+        
+<span class="nc" id="L131">        precioTotal = new JLabel(&quot;Precio total&quot;);</span>
+<span class="nc" id="L132">        precioTotal.setVisible(true);</span>
+<span class="nc" id="L133">        precioTotal.setBounds(220, 140, 150, 10);</span>
+<span class="nc" id="L134">        contenedor.add(precioTotal);</span>
+        
+<span class="nc" id="L136">        precioTotalText = new JTextField();</span>
+<span class="nc" id="L137">        precioTotalText.setBounds(370, 130, 300, 30);</span>
+<span class="nc" id="L138">        contenedor.add(precioTotalText);</span>
+        
+<span class="nc" id="L140">        cliente = new JLabel(&quot;Cliente&quot;);</span>
+<span class="nc" id="L141">        cliente.setVisible(true);</span>
+<span class="nc" id="L142">        cliente.setBounds(220, 180, 150, 10);</span>
+<span class="nc" id="L143">        contenedor.add(cliente);</span>
+        
+<span class="nc" id="L145">        clienteText = new JTextField();</span>
+<span class="nc" id="L146">        clienteText.setBounds(370, 170, 300, 30);</span>
+<span class="nc" id="L147">        contenedor.add(clienteText);</span>
+        
+<span class="nc" id="L149">        productos = new JLabel(&quot;Productos&quot;);</span>
+<span class="nc" id="L150">        productos.setVisible(true);</span>
+<span class="nc" id="L151">        productos.setBounds(220, 220, 150, 10);</span>
+<span class="nc" id="L152">        contenedor.add(productos);</span>
+        
+<span class="nc" id="L154">        productosList = new JList(new DefaultListModel());</span>
+<span class="nc" id="L155">        productosList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);</span>
+<span class="nc" id="L156">        productosList.setBounds(220, 240, 450, 80);</span>
+<span class="nc" id="L157">        contenedor.add(productosList);</span>
+       
+<span class="nc" id="L159">        cancelarBtn = new JButton(&quot;Cancelar&quot;);</span>
+       
+<span class="nc" id="L161">        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L164">                 cancelar(e);</span>
+<span class="nc" id="L165">            }</span>
+        });
+        
+<span class="nc" id="L168">        cancelarBtn.setBounds(250, 330, 100, 40);</span>
+<span class="nc" id="L169">        contenedor.add(cancelarBtn);</span>
+        
+        
+<span class="nc" id="L172">    }</span>
+    
+    private void guardarCategoria(ActionEvent evt) {
+<span class="nc" id="L175">        Integer nroOrden = Integer.valueOf(nroRefText.getText());</span>
+        
+<span class="nc" id="L177">        controlarOrden.elegirOrden(nroOrden);</span>
+<span class="nc" id="L178">        controlarOrden.borrarOrdenCompra();</span>
+<span class="nc" id="L179">        setVisible(false);</span>
+<span class="nc" id="L180">        nroRefText.setText(&quot;&quot;);</span>
+<span class="nc" id="L181">    }</span>
+
+    private void cancelar(ActionEvent evt) {
+<span class="nc" id="L184">        setVisible(false);</span>
+<span class="nc" id="L185">        nroRefText.setText(&quot;&quot;);</span>
+<span class="nc" id="L186">        fechaVentaText.setDate(new Date());</span>
+<span class="nc" id="L187">        precioTotalText.setText(&quot;&quot;);</span>
+<span class="nc" id="L188">        clienteText.setText(&quot;&quot;);</span>
+<span class="nc" id="L189">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

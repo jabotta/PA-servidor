@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManejadorEspProductos.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controlador.Clases</a> &gt; <span class="el_source">ManejadorEspProductos.java</span></div><h1>ManejadorEspProductos.java</h1><pre class="source lang-java linenums">package Controlador.Clases;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ManejadorEspProductos {
+    
+<span class="nc" id="L9">    private static ManejadorEspProductos instance = null;</span>
+<span class="nc" id="L10">    Map&lt;String,EspecificacionProducto&gt; especificacionProductos = Collections.synchronizedMap(new HashMap());</span>
+    
+    public static ManejadorEspProductos getInstance(){
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        if(ManejadorEspProductos.instance == null){</span>
+            
+<span class="nc" id="L15">            ManejadorEspProductos.instance = new ManejadorEspProductos();</span>
+        }
+<span class="nc" id="L17">        return ManejadorEspProductos.instance;</span>
+    }
+    
+<span class="nc" id="L20">    private ManejadorEspProductos(){</span>
+    
+<span class="nc" id="L22">    }</span>
+    
+    public void agregarEspecificacionProducto(EspecificacionProducto especificacionProducto){
+<span class="nc" id="L25">        especificacionProductos.put(especificacionProducto.getNroReferencia(), especificacionProducto);</span>
+<span class="nc" id="L26">        especificacionProducto.getCategorias().entrySet().stream().map((categoria) -&gt; categoria.getValue()).forEach((valor) -&gt; {    </span>
+         
+            ManejadorCategorias.getInstance().getCategoria(valor.getNombre()).agregarProducto(especificacionProducto);
+//            System.out.println(valor.getNombre()+&quot; &quot;+ManejadorCategorias.getInstance().getCategoria(valor.getNombre()).getListaProductos().size());
+        });
+        
+<span class="nc" id="L32">    }</span>
+    
+    public Map&lt;String,EspecificacionProducto&gt; obtenerEspecificacionProductos(){
+<span class="nc" id="L35">        return especificacionProductos;</span>
+    }
+    
+    public EspecificacionProducto getEspecificacionProducto(String nroRef){
+<span class="nc" id="L39">        return this.obtenerEspecificacionProductos().get(nroRef);</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

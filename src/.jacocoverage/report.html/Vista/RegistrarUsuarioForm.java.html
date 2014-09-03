@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RegistrarUsuarioForm.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Vista</a> &gt; <span class="el_source">RegistrarUsuarioForm.java</span></div><h1>RegistrarUsuarioForm.java</h1><pre class="source lang-java linenums">package Vista;
+
+import Controlador.Clases.IControladorUsuarios;
+import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataProveedor;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDayChooser;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.xml.datatype.DatatypeConstants;
+
+class RegistrarUsuarioForm extends JInternalFrame {
+    
+    private final JPanel contenedor ;
+    private final JLabel nickname;
+    private final JLabel nombre;
+    private final JLabel apellido;
+    private final JLabel fNac;
+    private final JLabel email;
+    private final JLabel nombreCompania;
+    private final JLabel linkSitio;
+    private final JTextField nicknameText;
+    private final JTextField emailText;
+    private final JCalendar fNacText;
+    private final JTextField apellidoText;
+    private final JTextField nombreText;
+    private final JTextField nombreCompaniaText;
+    private final JTextField linkSitioText;
+    private final JButton guardarBtn;
+    private final JButton cancelarBtn;
+    private final JCheckBox esProveedor;
+    private final IControladorUsuarios controlarUsuario;
+    private final JDayChooser as;
+    
+<span class="fc" id="L42">    public RegistrarUsuarioForm(IControladorUsuarios ICU) {</span>
+        
+<span class="fc" id="L44">        controlarUsuario = ICU;</span>
+        
+<span class="fc" id="L46">        setBounds(50, 50, 700, 400);</span>
+<span class="fc" id="L47">        setVisible(true);</span>
+<span class="fc" id="L48">        setLayout(null);</span>
+<span class="fc" id="L49">        contenedor = new JPanel();</span>
+<span class="fc" id="L50">        contenedor.setLayout(null);</span>
+<span class="fc" id="L51">        contenedor.setSize(700, 400);</span>
+<span class="fc" id="L52">        contenedor.setLocation(10, 0);</span>
+<span class="fc" id="L53">        add(contenedor);</span>
+        
+<span class="fc" id="L55">        JLabel proveedorlabel = new JLabel(&quot;Es proovedor?:&quot;);</span>
+<span class="fc" id="L56">        proveedorlabel.setVisible(true);</span>
+<span class="fc" id="L57">        proveedorlabel.setBounds(0, 10, 150, 20);</span>
+<span class="fc" id="L58">        contenedor.add(proveedorlabel);</span>
+
+<span class="fc" id="L60">        esProveedor = new JCheckBox();</span>
+<span class="fc" id="L61">        esProveedor.setName(&quot;Elegir si el usuario es provedor&quot;);</span>
+<span class="fc" id="L62">        esProveedor.setLocation(100, 5);</span>
+<span class="fc" id="L63">        esProveedor.setSize(30, 30);</span>
+<span class="fc" id="L64">        esProveedor.setVisible(true);</span>
+<span class="fc" id="L65">        esProveedor.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+<span class="nc" id="L68">                cambiarTipoFormulario(evt);</span>
+<span class="nc" id="L69">            }</span>
+
+        });
+<span class="fc" id="L72">        contenedor.add(esProveedor);</span>
+
+<span class="fc" id="L74">        nickname = new JLabel(&quot;Nickname&quot;);</span>
+<span class="fc" id="L75">        nickname.setVisible(true);</span>
+<span class="fc" id="L76">        nickname.setBounds(0, 60, 150, 10);</span>
+<span class="fc" id="L77">        contenedor.add(nickname);</span>
+
+<span class="fc" id="L79">        nicknameText = new JTextField();</span>
+<span class="fc" id="L80">        nicknameText.setBounds(150, 50, 300, 30);</span>
+<span class="fc" id="L81">        contenedor.add(nicknameText);</span>
+
+<span class="fc" id="L83">        nombre = new JLabel(&quot;Nombre&quot;);</span>
+<span class="fc" id="L84">        nombre.setVisible(true);</span>
+<span class="fc" id="L85">        nombre.setBounds(0, 90, 150, 10);</span>
+<span class="fc" id="L86">        contenedor.add(nombre);</span>
+
+<span class="fc" id="L88">        nombreText = new JTextField();</span>
+<span class="fc" id="L89">        nombreText.setBounds(150, 80, 300, 30);</span>
+<span class="fc" id="L90">        contenedor.add(nombreText);</span>
+
+<span class="fc" id="L92">        apellido = new JLabel(&quot;Apellido&quot;);</span>
+<span class="fc" id="L93">        apellido.setVisible(true);</span>
+<span class="fc" id="L94">        apellido.setBounds(0, 120, 150, 10);</span>
+<span class="fc" id="L95">        contenedor.add(apellido);</span>
+
+<span class="fc" id="L97">        apellidoText = new JTextField();</span>
+<span class="fc" id="L98">        apellidoText.setBounds(150, 110, 300, 30);</span>
+<span class="fc" id="L99">        contenedor.add(apellidoText);</span>
+
+<span class="fc" id="L101">        fNac = new JLabel(&quot;Fecha de nacimiento&quot;);</span>
+<span class="fc" id="L102">        fNac.setVisible(true);</span>
+<span class="fc" id="L103">        fNac.setBounds(0, 150, 150, 10);</span>
+<span class="fc" id="L104">        contenedor.add(fNac);</span>
+<span class="fc" id="L105">        as = new JDayChooser();</span>
+                
+<span class="fc" id="L107">        fNacText = new JCalendar();</span>
+         
+<span class="fc" id="L109">        fNacText.setBounds(150, 140, 300, 30);</span>
+<span class="fc" id="L110">        contenedor.add(fNacText);</span>
+
+<span class="fc" id="L112">        email = new JLabel(&quot;Correo electronico&quot;);</span>
+<span class="fc" id="L113">        email.setVisible(true);</span>
+<span class="fc" id="L114">        email.setBounds(0, 180, 150, 10);</span>
+<span class="fc" id="L115">        contenedor.add(email);</span>
+
+<span class="fc" id="L117">        emailText = new JTextField();</span>
+<span class="fc" id="L118">        emailText.setBounds(150, 170, 300, 30);</span>
+<span class="fc" id="L119">        contenedor.add(emailText);</span>
+
+<span class="fc" id="L121">        nombreCompania = new JLabel(&quot;Nombre Compania&quot;);</span>
+<span class="fc" id="L122">        nombreCompania.setVisible(false);</span>
+<span class="fc" id="L123">        nombreCompania.setBounds(0, 205, 150, 15);</span>
+<span class="fc" id="L124">        contenedor.add(nombreCompania);</span>
+
+<span class="fc" id="L126">        nombreCompaniaText = new JTextField();</span>
+<span class="fc" id="L127">        nombreCompaniaText.setBounds(150, 200, 300, 30);</span>
+<span class="fc" id="L128">        nombreCompaniaText.setVisible(false);</span>
+<span class="fc" id="L129">        contenedor.add(nombreCompaniaText);</span>
+
+<span class="fc" id="L131">        linkSitio = new JLabel(&quot;Link Sitio&quot;);</span>
+<span class="fc" id="L132">        linkSitio.setVisible(false);</span>
+<span class="fc" id="L133">        linkSitio.setBounds(0, 240, 150, 10);</span>
+<span class="fc" id="L134">        contenedor.add(linkSitio);</span>
+
+<span class="fc" id="L136">        linkSitioText = new JTextField();</span>
+<span class="fc" id="L137">        linkSitioText.setBounds(150, 230, 300, 30);</span>
+<span class="fc" id="L138">        linkSitioText.setVisible(false);</span>
+<span class="fc" id="L139">        contenedor.add(linkSitioText);</span>
+
+<span class="fc" id="L141">        guardarBtn = new JButton(&quot;Guardar&quot;);</span>
+<span class="fc" id="L142">        cancelarBtn = new JButton(&quot;Cancelar&quot;);</span>
+
+<span class="fc" id="L144">        guardarBtn.addActionListener(new java.awt.event.ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="fc" id="L147">                guardarUsuario(e);</span>
+<span class="fc" id="L148">            }</span>
+        });
+
+<span class="fc" id="L151">        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L154">                cancelar(e);</span>
+<span class="nc" id="L155">            }</span>
+        });
+
+<span class="fc" id="L158">        guardarBtn.setBounds(200, 260, 100, 40);</span>
+<span class="fc" id="L159">        cancelarBtn.setBounds(320, 260, 100, 40);</span>
+<span class="fc" id="L160">        contenedor.add(guardarBtn);</span>
+<span class="fc" id="L161">        contenedor.add(cancelarBtn);</span>
+<span class="fc" id="L162">    }</span>
+
+    private void guardarUsuario(ActionEvent evt) {
+<span class="fc" id="L165">        String nickname = nicknameText.getText();</span>
+<span class="fc" id="L166">        String email = emailText.getText();</span>
+<span class="fc" id="L167">        Date fnac = fNacText.getDate();</span>
+<span class="fc" id="L168">        String apellido = apellidoText.getText();</span>
+<span class="fc" id="L169">        String nombre = nombreText.getText();</span>
+<span class="fc" id="L170">        String nombreCompania = nombreCompaniaText.getText();</span>
+<span class="fc" id="L171">        String linkSitio = linkSitioText.getText();</span>
+
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">        if (!esProveedor.isSelected()) {</span>
+<span class="fc" id="L174">            DataCliente cliente = new DataCliente(nickname, nombre, apellido, email, fnac);</span>
+<span class="fc" id="L175">            controlarUsuario.ingresarDatosCliente(cliente);</span>
+<span class="fc" id="L176">        } else {</span>
+<span class="nc" id="L177">            DataProveedor proveedor = new DataProveedor(nickname, nombre, apellido, email, fnac, nombreCompania, linkSitio);</span>
+<span class="nc" id="L178">            controlarUsuario.ingresarDatosProveedor(proveedor);</span>
+        }
+
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">        if (controlarUsuario.validarDatosUsuario()) {</span>
+<span class="nc" id="L182">            System.out.println(&quot;Ya existe el usuario&quot;);</span>
+        } else {
+<span class="fc" id="L184">            setVisible(false);</span>
+<span class="fc" id="L185">            controlarUsuario.guardarUsuario();</span>
+<span class="fc" id="L186">            nicknameText.setText(&quot;&quot;);</span>
+<span class="fc" id="L187">            emailText.setText(&quot;&quot;);</span>
+  
+<span class="fc" id="L189">            fNacText.setDate( new Date());</span>
+<span class="fc" id="L190">            apellidoText.setText(&quot;&quot;);</span>
+<span class="fc" id="L191">            nombreText.setText(&quot;&quot;);</span>
+<span class="fc" id="L192">            nombreCompaniaText.setText(&quot;&quot;);</span>
+<span class="fc" id="L193">            linkSitioText.setText(&quot;&quot;);</span>
+        }
+<span class="fc" id="L195">    }</span>
+
+    private void cancelar(ActionEvent evt) {
+<span class="nc" id="L198">        setVisible(false);</span>
+<span class="nc" id="L199">        nicknameText.setText(&quot;&quot;);</span>
+<span class="nc" id="L200">        emailText.setText(&quot;&quot;);</span>
+<span class="nc" id="L201">        fNacText.setDate(new Date());</span>
+<span class="nc" id="L202">        apellidoText.setText(&quot;&quot;);</span>
+<span class="nc" id="L203">        nombreText.setText(&quot;&quot;);</span>
+<span class="nc" id="L204">        nombreCompaniaText.setText(&quot;&quot;);</span>
+<span class="nc" id="L205">        linkSitioText.setText(&quot;&quot;);</span>
+<span class="nc" id="L206">    }</span>
+
+    private void cambiarTipoFormulario(ActionEvent evt) {
+        
+<span class="nc" id="L210">        Boolean display = esProveedor.isSelected();</span>
+<span class="nc" id="L211">        nombreCompania.setVisible(display);</span>
+<span class="nc" id="L212">        nombreCompaniaText.setVisible(display);</span>
+<span class="nc" id="L213">        linkSitio.setVisible(display);</span>
+<span class="nc" id="L214">        linkSitioText.setVisible(display);</span>
+
+<span class="nc" id="L216">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

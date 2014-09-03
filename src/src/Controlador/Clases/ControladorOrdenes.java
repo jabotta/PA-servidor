@@ -100,11 +100,11 @@ public class ControladorOrdenes implements IControladorOrdenes{
     }
     @Override
     public void elegirCantidadProducto(Integer cantidad){
-        
+         System.out.println(cantidad+" cantidad<<<<");
         Iterator it =  espProdElegido.getListaProductos().values().iterator();
         int indice = 0;
         while(it.hasNext() && indice<cantidad){
-            
+            System.out.println(" producto "+(Producto) it.next());
             productosElegidos.add((Producto) it.next());
             indice++;
         }
@@ -112,6 +112,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     @Override
     public void generarItemOrden(){
         productosElegidos.stream().forEach((productoElegido) -> {
+            
             cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio()));
         });
         productosElegidos = new ArrayList<>();
@@ -121,11 +122,15 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public void guardarOrden(DataOrdenCompra dataOrden){
         OrdenCompra orden = new OrdenCompra(dataOrden);
         ArrayList<ClienteCompraProducto> cliComProd = new ArrayList<>();
-        Float tempSumTotal = 0.0f;
+        
+        Float tempSumTotal = 0.0f; 
         for(ClienteCompraProducto cliProd : cliComProds){
+            
             cliComProd.add(cliProd);
             tempSumTotal += cliProd.getPrecio();
         }
+        
+        System.out.println(cliComProds+" >clicom");
         orden.setPrecioTotal(tempSumTotal);
         orden.setClienteCompraProducto(cliComProd);
         ManejadorOrdenes.getInstance().agregarOrden(orden);

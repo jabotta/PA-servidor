@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SpringUtilities.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Vista</a> &gt; <span class="el_source">SpringUtilities.java</span></div><h1>SpringUtilities.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Vista;
+ 
+ 
+
+import javax.swing.*;
+import javax.swing.SpringLayout;
+import java.awt.*;
+
+/**
+ * A 1.4 file that provides utility methods for
+ * creating form- or grid-style layouts with SpringLayout.
+ * These utilities are used by several programs, such as
+ * SpringBox and SpringCompactGrid.
+ */
+<span class="nc" id="L21">public class SpringUtilities {</span>
+    /**
+     * A debugging utility that prints to stdout the component's
+     * minimum, preferred, and maximum sizes.
+     */
+    public static void printSizes(Component c) {
+<span class="nc" id="L27">        System.out.println(&quot;minimumSize = &quot; + c.getMinimumSize());</span>
+<span class="nc" id="L28">        System.out.println(&quot;preferredSize = &quot; + c.getPreferredSize());</span>
+<span class="nc" id="L29">        System.out.println(&quot;maximumSize = &quot; + c.getMaximumSize());</span>
+<span class="nc" id="L30">    }</span>
+
+    /**
+     * Aligns the first &lt;code&gt;rows&lt;/code&gt; * &lt;code&gt;cols&lt;/code&gt;
+     * components of &lt;code&gt;parent&lt;/code&gt; in
+     * a grid. Each component is as big as the maximum
+     * preferred width and height of the components.
+     * The parent is made just big enough to fit them all.
+     *
+     * @param rows number of rows
+     * @param cols number of columns
+     * @param initialX x location to start the grid at
+     * @param initialY y location to start the grid at
+     * @param xPad x padding between cells
+     * @param yPad y padding between cells
+     */
+    public static void makeGrid(Container parent,
+                                int rows, int cols,
+                                int initialX, int initialY,
+                                int xPad, int yPad) {
+        SpringLayout layout;
+        try {
+<span class="nc" id="L52">            layout = (SpringLayout)parent.getLayout();</span>
+<span class="nc" id="L53">        } catch (ClassCastException exc) {</span>
+<span class="nc" id="L54">            System.err.println(&quot;The first argument to makeGrid must use SpringLayout.&quot;);</span>
+<span class="nc" id="L55">            return;</span>
+<span class="nc" id="L56">        }</span>
+
+<span class="nc" id="L58">        Spring xPadSpring = Spring.constant(xPad);</span>
+<span class="nc" id="L59">        Spring yPadSpring = Spring.constant(yPad);</span>
+<span class="nc" id="L60">        Spring initialXSpring = Spring.constant(initialX);</span>
+<span class="nc" id="L61">        Spring initialYSpring = Spring.constant(initialY);</span>
+<span class="nc" id="L62">        int max = rows * cols;</span>
+
+        //Calculate Springs that are the max of the width/height so that all
+        //cells have the same size.
+<span class="nc" id="L66">        Spring maxWidthSpring = layout.getConstraints(parent.getComponent(0)).</span>
+<span class="nc" id="L67">                                    getWidth();</span>
+<span class="nc" id="L68">        Spring maxHeightSpring = layout.getConstraints(parent.getComponent(0)).</span>
+<span class="nc" id="L69">                                    getHeight();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        for (int i = 1; i &lt; max; i++) {</span>
+<span class="nc" id="L71">            SpringLayout.Constraints cons = layout.getConstraints(</span>
+<span class="nc" id="L72">                                            parent.getComponent(i));</span>
+
+<span class="nc" id="L74">            maxWidthSpring = Spring.max(maxWidthSpring, cons.getWidth());</span>
+<span class="nc" id="L75">            maxHeightSpring = Spring.max(maxHeightSpring, cons.getHeight());</span>
+        }
+
+        //Apply the new width/height Spring. This forces all the
+        //components to have the same size.
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        for (int i = 0; i &lt; max; i++) {</span>
+<span class="nc" id="L81">            SpringLayout.Constraints cons = layout.getConstraints(</span>
+<span class="nc" id="L82">                                            parent.getComponent(i));</span>
+
+<span class="nc" id="L84">            cons.setWidth(maxWidthSpring);</span>
+<span class="nc" id="L85">            cons.setHeight(maxHeightSpring);</span>
+        }
+
+        //Then adjust the x/y constraints of all the cells so that they
+        //are aligned in a grid.
+<span class="nc" id="L90">        SpringLayout.Constraints lastCons = null;</span>
+<span class="nc" id="L91">        SpringLayout.Constraints lastRowCons = null;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        for (int i = 0; i &lt; max; i++) {</span>
+<span class="nc" id="L93">            SpringLayout.Constraints cons = layout.getConstraints(</span>
+<span class="nc" id="L94">                                                 parent.getComponent(i));</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (i % cols == 0) { //start of new row</span>
+<span class="nc" id="L96">                lastRowCons = lastCons;</span>
+<span class="nc" id="L97">                cons.setX(initialXSpring);</span>
+            } else { //x position depends on previous component
+<span class="nc" id="L99">                cons.setX(Spring.sum(lastCons.getConstraint(SpringLayout.EAST),</span>
+                                     xPadSpring));
+            }
+
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if (i / cols == 0) { //first row</span>
+<span class="nc" id="L104">                cons.setY(initialYSpring);</span>
+            } else { //y position depends on previous row
+<span class="nc" id="L106">                cons.setY(Spring.sum(lastRowCons.getConstraint(SpringLayout.SOUTH),</span>
+                                     yPadSpring));
+            }
+<span class="nc" id="L109">            lastCons = cons;</span>
+        }
+
+        //Set the parent's size.
+<span class="nc" id="L113">        SpringLayout.Constraints pCons = layout.getConstraints(parent);</span>
+<span class="nc" id="L114">        pCons.setConstraint(SpringLayout.SOUTH,</span>
+<span class="nc" id="L115">                            Spring.sum(</span>
+<span class="nc" id="L116">                                Spring.constant(yPad),</span>
+<span class="nc" id="L117">                                lastCons.getConstraint(SpringLayout.SOUTH)));</span>
+<span class="nc" id="L118">        pCons.setConstraint(SpringLayout.EAST,</span>
+<span class="nc" id="L119">                            Spring.sum(</span>
+<span class="nc" id="L120">                                Spring.constant(xPad),</span>
+<span class="nc" id="L121">                                lastCons.getConstraint(SpringLayout.EAST)));</span>
+<span class="nc" id="L122">    }</span>
+
+    /* Used by makeCompactGrid. */
+    private static SpringLayout.Constraints getConstraintsForCell(
+                                                int row, int col,
+                                                Container parent,
+                                                int cols) {
+<span class="nc" id="L129">        SpringLayout layout = (SpringLayout) parent.getLayout();</span>
+<span class="nc" id="L130">        Component c = parent.getComponent(row * cols + col);</span>
+<span class="nc" id="L131">        return layout.getConstraints(c);</span>
+    }
+
+    /**
+     * Aligns the first &lt;code&gt;rows&lt;/code&gt; * &lt;code&gt;cols&lt;/code&gt;
+     * components of &lt;code&gt;parent&lt;/code&gt; in
+     * a grid. Each component in a column is as wide as the maximum
+     * preferred width of the components in that column;
+     * height is similarly determined for each row.
+     * The parent is made just big enough to fit them all.
+     *
+     * @param rows number of rows
+     * @param cols number of columns
+     * @param initialX x location to start the grid at
+     * @param initialY y location to start the grid at
+     * @param xPad x padding between cells
+     * @param yPad y padding between cells
+     */
+    public static void makeCompactGrid(Container parent,
+                                       int rows, int cols,
+                                       int initialX, int initialY,
+                                       int xPad, int yPad) {
+        SpringLayout layout;
+        try {
+<span class="nc" id="L155">            layout = (SpringLayout)parent.getLayout();</span>
+<span class="nc" id="L156">        } catch (ClassCastException exc) {</span>
+<span class="nc" id="L157">            System.err.println(&quot;The first argument to makeCompactGrid must use SpringLayout.&quot;);</span>
+<span class="nc" id="L158">            return;</span>
+<span class="nc" id="L159">        }</span>
+
+        //Align all cells in each column and make them the same width.
+<span class="nc" id="L162">        Spring x = Spring.constant(initialX);</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        for (int c = 0; c &lt; cols; c++) {</span>
+<span class="nc" id="L164">            Spring width = Spring.constant(0);</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">            for (int r = 0; r &lt; rows; r++) {</span>
+<span class="nc" id="L166">                width = Spring.max(width,</span>
+<span class="nc" id="L167">                                   getConstraintsForCell(r, c, parent, cols).</span>
+<span class="nc" id="L168">                                       getWidth());</span>
+            }
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            for (int r = 0; r &lt; rows; r++) {</span>
+<span class="nc" id="L171">                SpringLayout.Constraints constraints =</span>
+<span class="nc" id="L172">                        getConstraintsForCell(r, c, parent, cols);</span>
+<span class="nc" id="L173">                constraints.setX(x);</span>
+<span class="nc" id="L174">                constraints.setWidth(width);</span>
+            }
+<span class="nc" id="L176">            x = Spring.sum(x, Spring.sum(width, Spring.constant(xPad)));</span>
+        }
+
+        //Align all cells in each row and make them the same height.
+<span class="nc" id="L180">        Spring y = Spring.constant(initialY);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        for (int r = 0; r &lt; rows; r++) {</span>
+<span class="nc" id="L182">            Spring height = Spring.constant(0);</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">            for (int c = 0; c &lt; cols; c++) {</span>
+<span class="nc" id="L184">                height = Spring.max(height,</span>
+<span class="nc" id="L185">                                    getConstraintsForCell(r, c, parent, cols).</span>
+<span class="nc" id="L186">                                        getHeight());</span>
+            }
+<span class="nc bnc" id="L188" title="All 2 branches missed.">            for (int c = 0; c &lt; cols; c++) {</span>
+<span class="nc" id="L189">                SpringLayout.Constraints constraints =</span>
+<span class="nc" id="L190">                        getConstraintsForCell(r, c, parent, cols);</span>
+<span class="nc" id="L191">                constraints.setY(y);</span>
+<span class="nc" id="L192">                constraints.setHeight(height);</span>
+            }
+<span class="nc" id="L194">            y = Spring.sum(y, Spring.sum(height, Spring.constant(yPad)));</span>
+        }
+
+        //Set the parent's size.
+<span class="nc" id="L198">        SpringLayout.Constraints pCons = layout.getConstraints(parent);</span>
+<span class="nc" id="L199">        pCons.setConstraint(SpringLayout.SOUTH, y);</span>
+<span class="nc" id="L200">        pCons.setConstraint(SpringLayout.EAST, x);</span>
+<span class="nc" id="L201">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

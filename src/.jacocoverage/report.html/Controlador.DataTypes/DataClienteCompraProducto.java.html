@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DataClienteCompraProducto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controlador.DataTypes</a> &gt; <span class="el_source">DataClienteCompraProducto.java</span></div><h1>DataClienteCompraProducto.java</h1><pre class="source lang-java linenums">package Controlador.DataTypes;
+
+import Controlador.Clases.ClienteCompraProducto;
+
+public class DataClienteCompraProducto {
+    
+    private DataCliente cliente;
+    private DataProducto producto;
+    private Float precio;
+    
+<span class="nc" id="L11">    public DataClienteCompraProducto(ClienteCompraProducto cp) {</span>
+<span class="nc" id="L12">        this.cliente = cp.getDataCliente();</span>
+<span class="nc" id="L13">        this.producto = cp.getDataProducto();</span>
+<span class="nc" id="L14">        this.precio = cp.getPrecio();</span>
+<span class="nc" id="L15">    }</span>
+    
+<span class="nc" id="L17">    public DataClienteCompraProducto(DataCliente cliente, DataProducto producto, Float precio) {</span>
+<span class="nc" id="L18">        this.cliente = cliente;</span>
+<span class="nc" id="L19">        this.producto = producto;</span>
+<span class="nc" id="L20">        this.precio = precio;</span>
+<span class="nc" id="L21">    }</span>
+
+    public DataCliente getCliente() {
+<span class="nc" id="L24">        return cliente;</span>
+    }
+    
+    public void setCliente(DataCliente cliente) {
+<span class="nc" id="L28">        this.cliente = cliente;</span>
+<span class="nc" id="L29">    }</span>
+    
+    public DataProducto getProducto() {
+<span class="nc" id="L32">        return producto;</span>
+    }
+
+    public void setProducto(DataProducto producto) {
+<span class="nc" id="L36">        this.producto = producto;</span>
+<span class="nc" id="L37">    }</span>
+    
+    public Float getPrecio() {
+<span class="nc" id="L40">        return precio;</span>
+    }
+
+    public void setPrecio(Float precio) {
+<span class="nc" id="L44">        this.precio = precio;</span>
+<span class="nc" id="L45">    }</span>
+    
+    @Override
+    public String toString() {
+<span class="nc" id="L49">        return this.getCliente() + &quot;  --  &quot; + this.getProducto() + &quot;  --  &quot; + this.getPrecio() ;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

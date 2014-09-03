@@ -9,6 +9,7 @@ import Controlador.Clases.IControladorOrdenes;
 import Controlador.Clases.ManejadorOrdenes;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
+import Modelo.Especificacionproducto_;
 import static Vista.VentanaPrincipal.controlarProducto;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -191,6 +192,7 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
         int row = listarClientes.getSelectedRow();
         String Nickname = (String) model.getValueAt(row, 0);
         String Email = (String) model.getValueAt(row, 1);
+        System.out.print(Nickname);
         controlarOrden.elegirCliente(Nickname); 
     }
     private void cancel() {
@@ -202,7 +204,7 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
         DataOrdenCompra dataOrden = new DataOrdenCompra(id);
         controlarOrden.guardarOrden(dataOrden);
         
-        System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(id));
+        System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(id)+" orden");
         JOptionPane.showMessageDialog(this, "Su Orden se ha creado correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
 
         dispose();
@@ -326,6 +328,7 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
     public void agregar() {
 
         String cantidad = ((JTextField) form.getComponentByName("Cantidad")).getText();
+        System.out.println(cantidad+" <real");
         Integer cantidadReal = null;
 
         try {
@@ -335,6 +338,7 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
 
             } else {
                 currentItem.cantidad = cantidadReal;
+                System.out.println(cantidadReal+" nroref "+currentItem.nroRef);
                 controlarOrden.elegirEspecificacionProducto(currentItem.nroRef);
                 controlarOrden.elegirCantidadProducto(currentItem.cantidad);
                 controlarOrden.generarItemOrden();
