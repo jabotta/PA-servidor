@@ -19,16 +19,16 @@ public class DataCategoria {
             this.padre = c.getDataPadre();
         }
         this.listaProductos = Collections.synchronizedMap(new HashMap());
-        if(conProductos)
+        if(conProductos){
             c.getListaProductos().entrySet().forEach((producto) -> {
                this.listaProductos.put(producto.getKey(),new DataEspecificacionProducto(producto.getValue(),true));
             });
+        }
     }
        
     public DataCategoria(String nombre, DataCategoria padre) {
         this.nombre = nombre;
         this.padre = padre;
-        this.listaProductos = Collections.synchronizedMap(new HashMap());
     }
 
     public String getNombre() {
