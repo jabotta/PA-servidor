@@ -1,15 +1,40 @@
 package Vista;
 
+import Controlador.Clases.Categoria;
+import Controlador.Clases.Cliente;
+import Controlador.Clases.EspecificacionProducto;
 import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorOrdenes;
 import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.IControladorUsuarios;
+import static Controlador.Clases.Main.controlarOrden;
+import static Controlador.Clases.Main.controlarProducto;
+import static Controlador.Clases.Main.controlarUsuario;
+import static Controlador.Clases.Main.idOrdenesControlador;
+import static Controlador.Clases.Main.idProductosControlador;
+import static Controlador.Clases.Main.idUsuariosControlador;
+import Controlador.Clases.ManejadorCategorias;
+import Controlador.Clases.ManejadorEspProductos;
+import Controlador.Clases.ManejadorUsuarios;
+import Controlador.Clases.Producto;
+import Controlador.Clases.Proveedor;
 import Controlador.Clases.Utils;
+import Controlador.DataTypes.DataOrdenCompra;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.GroupLayout;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 //import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
@@ -47,6 +72,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private JInternalFrame registrarProductoVentana;
     private JInternalFrame verInfoClienteVentana;
     private JInternalFrame verInfoProveedorVentana;
+    private JMenuItem cargarDatosDePrueba;
 
     /**
      * Creates new form MainWindow
@@ -188,7 +214,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         casosUsoMenu.add(ordenMenu);
 
         menuBar.add(casosUsoMenu);
+        cargarDatosDePrueba = new javax.swing.JMenuItem();
+        cargarDatosDePrueba.setText("Cargar datos de Prueba");
+        cargarDatosDePrueba.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadTestData();
+            }
+
+        });
+
+        menuBar.add(cargarDatosDePrueba);
         setJMenuBar(menuBar);
 
         layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,6 +266,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         registrarProductoVentana = new RegistrarProducto(controlarProducto);
 
         desktopPane.add(registrarProductoVentana);
+    }
+
+    private void loadTestData() {
+        cargarDatosDePrueba.setEnabled(false);
+        Utils.generarDatosDePrueba();
+        JOptionPane.showMessageDialog(this, "Se cargaron los datos de prueba", "Datos de Prueba", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void altaCategoriaOptActionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,7 +408,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 new VentanaPrincipal().setVisible(true);
             }
         });
-//        Utils.generarCategoriasDePrueba();
+
     }
 
 }

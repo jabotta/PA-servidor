@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Producto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controlador.Clases</a> &gt; <span class="el_source">Producto.java</span></div><h1>Producto.java</h1><pre class="source lang-java linenums">package Controlador.Clases;
+
+import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataProducto;
+import java.util.ArrayList;
+
+public class Producto {
+    
+    private Integer id;
+    private String idEspecifico;
+    private EspecificacionProducto especificacionProducto;
+
+<span class="nc" id="L13">    public Producto(Integer id, EspecificacionProducto especificacionProducto) {</span>
+<span class="nc" id="L14">        this.id = id;</span>
+<span class="nc" id="L15">        this.idEspecifico = null;</span>
+<span class="nc" id="L16">        this.especificacionProducto = especificacionProducto;</span>
+<span class="nc" id="L17">    }</span>
+    
+<span class="nc" id="L19">    public Producto(Integer id, String idEspecifico, EspecificacionProducto especificacionProducto) {</span>
+<span class="nc" id="L20">        this.id = id;</span>
+<span class="nc" id="L21">        this.idEspecifico = idEspecifico;</span>
+<span class="nc" id="L22">        this.especificacionProducto = especificacionProducto;</span>
+<span class="nc" id="L23">    }</span>
+    
+<span class="nc" id="L25">    public Producto(DataProducto dp) {</span>
+<span class="nc" id="L26">        this.id = dp.getId();</span>
+<span class="nc" id="L27">        this.idEspecifico = dp.getIdEspecifico();</span>
+<span class="nc" id="L28">        this.especificacionProducto = dp.getObjectEspecificacionProducto();</span>
+<span class="nc" id="L29">    }</span>
+
+    public Integer getId() {
+<span class="nc" id="L32">        return id;</span>
+    }
+    
+    public void setId(Integer id) {
+<span class="nc" id="L36">        this.id = id;</span>
+<span class="nc" id="L37">    }</span>
+    
+    public String getIdEspecifico() {
+<span class="nc" id="L40">        return idEspecifico;</span>
+    }
+    
+    public void setId(String id) {
+<span class="nc" id="L44">        this.idEspecifico = id;</span>
+<span class="nc" id="L45">    }</span>
+    
+    public EspecificacionProducto getEspecificacionProducto() {
+<span class="nc" id="L48">        return especificacionProducto;</span>
+    }
+    
+    public DataEspecificacionProducto getDataEspecificacionProducto() {
+<span class="nc" id="L52">        return new DataEspecificacionProducto(especificacionProducto,true);</span>
+    }
+    
+    public void setEspecificacionProducto(EspecificacionProducto especificacionProducto) {
+<span class="nc" id="L56">        this.especificacionProducto = especificacionProducto;</span>
+<span class="nc" id="L57">    }</span>
+    
+    @Override
+    public String toString() {
+<span class="nc" id="L61">        return this.getId() + &quot;  --  &quot; + this.getEspecificacionProducto();</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

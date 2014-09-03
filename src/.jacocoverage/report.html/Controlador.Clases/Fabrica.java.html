@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Fabrica.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controlador.Clases</a> &gt; <span class="el_source">Fabrica.java</span></div><h1>Fabrica.java</h1><pre class="source lang-java linenums">package Controlador.Clases;
+
+public class Fabrica {
+    
+<span class="fc" id="L5">    private static Fabrica instance= null;</span>
+    
+<span class="fc" id="L7">    private Fabrica(){</span>
+    
+<span class="fc" id="L9">    }</span>
+    
+    public static Fabrica getInstance(){
+<span class="fc bfc" id="L12" title="All 2 branches covered.">        if(Fabrica.instance == null){</span>
+<span class="fc" id="L13">            Fabrica.instance = new Fabrica();</span>
+        }
+<span class="fc" id="L15">        return Fabrica.instance;</span>
+    }
+    
+    public IControladorOrdenes getControladorOrdenes(Integer idController){
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        if (idController == null) {</span>
+<span class="fc" id="L20">            Integer nextKey = MgrControladorOrdenes.getInstance().getSiguienteKey();</span>
+<span class="fc" id="L21">            return MgrControladorOrdenes.getInstance().getController(nextKey);</span>
+        }
+<span class="fc" id="L23">        return MgrControladorOrdenes.getInstance().getController(idController);</span>
+    }
+    
+    public IControladorProductos getControladorProductos(Integer idController){
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if(idController == null){</span>
+<span class="fc" id="L28">            Integer nextKey = MgrControladorProductos.getInstance().getSiguienteKey();</span>
+<span class="fc" id="L29">            return MgrControladorProductos.getInstance().getController(nextKey);</span>
+        }
+<span class="fc" id="L31">        return MgrControladorProductos.getInstance().getController(idController);</span>
+    }
+    
+    public IControladorUsuarios getControladorUsuarios(Integer idController){
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if(idController == null){</span>
+<span class="fc" id="L36">            Integer nextKey = MgrControladorUsuarios.getInstance().getSiguienteKey();</span>
+<span class="fc" id="L37">            return MgrControladorUsuarios.getInstance().getController(nextKey);</span>
+        }
+<span class="fc" id="L39">        return MgrControladorUsuarios.getInstance().getController(idController);</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

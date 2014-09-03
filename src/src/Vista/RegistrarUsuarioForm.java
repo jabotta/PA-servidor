@@ -8,6 +8,8 @@ import com.toedter.calendar.JDayChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JInternalFrame;
@@ -17,8 +19,8 @@ import javax.swing.JTextField;
 import javax.xml.datatype.DatatypeConstants;
 
 class RegistrarUsuarioForm extends JInternalFrame {
-    
-    private final JPanel contenedor ;
+
+    private final JPanel contenedor;
     private final JLabel nickname;
     private final JLabel nombre;
     private final JLabel apellido;
@@ -38,11 +40,12 @@ class RegistrarUsuarioForm extends JInternalFrame {
     private final JCheckBox esProveedor;
     private final IControladorUsuarios controlarUsuario;
     private final JDayChooser as;
-    
+    private final SelectorDeImagenes sdi;
+
     public RegistrarUsuarioForm(IControladorUsuarios ICU) {
-        
+
         controlarUsuario = ICU;
-        
+
         setBounds(50, 50, 700, 400);
         setVisible(true);
         setLayout(null);
@@ -51,7 +54,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
         contenedor.setSize(700, 400);
         contenedor.setLocation(10, 0);
         add(contenedor);
-        
+
         JLabel proveedorlabel = new JLabel("Es proovedor?:");
         proveedorlabel.setVisible(true);
         proveedorlabel.setBounds(0, 10, 150, 20);
@@ -103,9 +106,9 @@ class RegistrarUsuarioForm extends JInternalFrame {
         fNac.setBounds(0, 150, 150, 10);
         contenedor.add(fNac);
         as = new JDayChooser();
-                
+
         fNacText = new JCalendar();
-         
+
         fNacText.setBounds(150, 140, 300, 30);
         contenedor.add(fNacText);
 
@@ -157,6 +160,10 @@ class RegistrarUsuarioForm extends JInternalFrame {
 
         guardarBtn.setBounds(200, 260, 100, 40);
         cancelarBtn.setBounds(320, 260, 100, 40);
+
+        sdi = new SelectorDeImagenes();
+        sdi.setBounds(0, 260, 200, 200);
+        contenedor.add(sdi);
         contenedor.add(guardarBtn);
         contenedor.add(cancelarBtn);
     }
@@ -169,12 +176,20 @@ class RegistrarUsuarioForm extends JInternalFrame {
         String nombre = nombreText.getText();
         String nombreCompania = nombreCompaniaText.getText();
         String linkSitio = linkSitioText.getText();
-
+        String imagen = "";
+         HashSet<String> imagenes = this.sdi.getListaDeImagenes();
+            Iterator it = imagenes.iterator();
+            if (it.hasNext()) {
+               imagen = (String) it.next();
+                System.out.println(imagen+" ;");
+            }
         if (!esProveedor.isSelected()) {
             DataCliente cliente = new DataCliente(nickname, nombre, apellido, email, fnac);
+            cliente.setImagenes(imagen);
             controlarUsuario.ingresarDatosCliente(cliente);
         } else {
             DataProveedor proveedor = new DataProveedor(nickname, nombre, apellido, email, fnac, nombreCompania, linkSitio);
+            proveedor.setImagenes(imagen);
             controlarUsuario.ingresarDatosProveedor(proveedor);
         }
 
@@ -185,16 +200,20 @@ class RegistrarUsuarioForm extends JInternalFrame {
             controlarUsuario.guardarUsuario();
             nicknameText.setText("");
             emailText.setText("");
-  
-            fNacText.setDate( new Date());
+
+            fNacText.setDate(new Date());
             apellidoText.setText("");
             nombreText.setText("");
             nombreCompaniaText.setText("");
             linkSitioText.setText("");
-        }
+
+           
+        };
+
     }
 
-    private void cancelar(ActionEvent evt) {
+
+private void cancelar(ActionEvent evt) {
         setVisible(false);
         nicknameText.setText("");
         emailText.setText("");

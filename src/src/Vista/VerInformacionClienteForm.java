@@ -6,25 +6,32 @@ import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDayChooser;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.DatatypeConstants.Field;
 
 class VerInformacionClienteForm extends JInternalFrame {
-    
-    private final JPanel contenedor ;
+
+    private final JPanel contenedor;
     private final JList userList;
     private final JLabel nickname;
     private final JLabel nombre;
@@ -39,11 +46,12 @@ class VerInformacionClienteForm extends JInternalFrame {
     private final JButton cerrarBtn;
     private final IControladorUsuarios controlarUsuario;
     private final JDayChooser as;
-    
+    private String imagen;
+
     public VerInformacionClienteForm(IControladorUsuarios ICU) {
-        
+
         controlarUsuario = ICU;
-        
+
         setBounds(50, 50, 700, 400);
         setVisible(true);
         setLayout(null);
@@ -52,7 +60,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.setSize(700, 400);
         contenedor.setLocation(10, 0);
         add(contenedor);
-        
+
         JLabel elegirUsuarioLabel = new JLabel("Elegir Cliente:");
         elegirUsuarioLabel.setVisible(true);
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
@@ -66,20 +74,40 @@ class VerInformacionClienteForm extends JInternalFrame {
         userList = new JList(tes);
         userList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         userList.setBounds(0, 50, 200, 300);
-        userList.addListSelectionListener(new ListSelectionListener(){
+        userList.addListSelectionListener(new ListSelectionListener() {
+
             @Override
-            public void valueChanged(ListSelectionEvent evt){
-                if(evt.getValueIsAdjusting())
+            public void valueChanged(ListSelectionEvent evt) {
+                if (evt.getValueIsAdjusting()) {
                     return;
-                DataCliente aux = (DataCliente)userList.getSelectedValue();
+                }
+                DataCliente aux = (DataCliente) userList.getSelectedValue();
                 nicknameText.setText(aux.getNickname());
                 emailText.setText(aux.getEmail());
                 fNacText.setDate(aux.getFechaNacimiento());
                 apellidoText.setText(aux.getApellido());
                 nombreText.setText(aux.getNombre());
-                
+                imagen = aux.getImagenes();
+                System.out.print(imagen+"asdf");
+                     
+
             }
         });
+
+        JButton verimagen = new JButton("Ver");
+        verimagen.setSize(100, 40);
+        verimagen.setLocation(200, 0);
+        verimagen.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ver(e);
+            }
+
+        });
+
+        contenedor.add(verimagen);
+
         contenedor.add(userList);
 
         nickname = new JLabel("Nickname");
@@ -114,9 +142,9 @@ class VerInformacionClienteForm extends JInternalFrame {
         fNac.setBounds(220, 150, 150, 10);
         contenedor.add(fNac);
         as = new JDayChooser();
-                
+
         fNacText = new JCalendar();
-         
+
         fNacText.setBounds(370, 140, 300, 30);
         contenedor.add(fNacText);
 
@@ -131,7 +159,6 @@ class VerInformacionClienteForm extends JInternalFrame {
 
         cerrarBtn = new JButton("Cerrar");
 
-
         cerrarBtn.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,6 +170,27 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.add(cerrarBtn);
     }
 
+    private void ver(ActionEvent e) {
+        JDialog dialog = new JDialog();
+        if (imagen != null) {
+            File   f = new File(imagen);
+    
+            dialog.setTitle("Visor Imagenes" + f.getName());
+
+            ImagePanel p = new ImagePanel(f.getAbsolutePath());
+            p.setSize(400, 400);
+            dialog.getContentPane().setSize(400, 400);
+            dialog.getContentPane().add(p, BorderLayout.CENTER);
+            dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            dialog.setSize(new Dimension(400, 400));
+            dialog.setLocationRelativeTo(getParent().getParent().getParent());
+            dialog.setModal(true);
+            dialog.setVisible(true);
+
+            dialog.setSize(new Dimension(500, 500));
+        }
+    }
+
     private void cerrar(ActionEvent evt) {
         setVisible(false);
         nicknameText.setText("");
@@ -151,6 +199,5 @@ class VerInformacionClienteForm extends JInternalFrame {
         apellidoText.setText("");
         nombreText.setText("");
     }
-    
 
 }

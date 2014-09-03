@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VerInformacionClienteForm.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Vista</a> &gt; <span class="el_source">VerInformacionClienteForm.java</span></div><h1>VerInformacionClienteForm.java</h1><pre class="source lang-java linenums">package Vista;
+
+import Controlador.Clases.Cliente;
+import Controlador.Clases.IControladorUsuarios;
+import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataProveedor;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDayChooser;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+class VerInformacionClienteForm extends JInternalFrame {
+    
+    private final JPanel contenedor ;
+    private final JList userList;
+    private final JLabel nickname;
+    private final JLabel nombre;
+    private final JLabel apellido;
+    private final JLabel fNac;
+    private final JLabel email;
+    private final JTextField nicknameText;
+    private final JTextField emailText;
+    private final JCalendar fNacText;
+    private final JTextField apellidoText;
+    private final JTextField nombreText;
+    private final JButton cerrarBtn;
+    private final IControladorUsuarios controlarUsuario;
+    private final JDayChooser as;
+    
+<span class="nc" id="L43">    public VerInformacionClienteForm(IControladorUsuarios ICU) {</span>
+        
+<span class="nc" id="L45">        controlarUsuario = ICU;</span>
+        
+<span class="nc" id="L47">        setBounds(50, 50, 700, 400);</span>
+<span class="nc" id="L48">        setVisible(true);</span>
+<span class="nc" id="L49">        setLayout(null);</span>
+<span class="nc" id="L50">        contenedor = new JPanel();</span>
+<span class="nc" id="L51">        contenedor.setLayout(null);</span>
+<span class="nc" id="L52">        contenedor.setSize(700, 400);</span>
+<span class="nc" id="L53">        contenedor.setLocation(10, 0);</span>
+<span class="nc" id="L54">        add(contenedor);</span>
+        
+<span class="nc" id="L56">        JLabel elegirUsuarioLabel = new JLabel(&quot;Elegir Cliente:&quot;);</span>
+<span class="nc" id="L57">        elegirUsuarioLabel.setVisible(true);</span>
+<span class="nc" id="L58">        elegirUsuarioLabel.setBounds(0, 10, 150, 20);</span>
+<span class="nc" id="L59">        contenedor.add(elegirUsuarioLabel);</span>
+
+<span class="nc" id="L61">        DefaultListModel tes = new DefaultListModel();</span>
+<span class="nc" id="L62">        ArrayList&lt;DataCliente&gt; clientes = ICU.listarClientes();</span>
+<span class="nc" id="L63">        clientes.stream().forEach((cliente) -&gt; {</span>
+            tes.addElement(cliente);
+        });
+<span class="nc" id="L66">        userList = new JList(tes);</span>
+<span class="nc" id="L67">        userList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);</span>
+<span class="nc" id="L68">        userList.setBounds(0, 50, 200, 300);</span>
+<span class="nc" id="L69">        userList.addListSelectionListener(new ListSelectionListener(){</span>
+            @Override
+            public void valueChanged(ListSelectionEvent evt){
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                if(evt.getValueIsAdjusting())</span>
+<span class="nc" id="L73">                    return;</span>
+<span class="nc" id="L74">                DataCliente aux = (DataCliente)userList.getSelectedValue();</span>
+<span class="nc" id="L75">                nicknameText.setText(aux.getNickname());</span>
+<span class="nc" id="L76">                emailText.setText(aux.getEmail());</span>
+<span class="nc" id="L77">                fNacText.setDate(aux.getFechaNacimiento());</span>
+<span class="nc" id="L78">                apellidoText.setText(aux.getApellido());</span>
+<span class="nc" id="L79">                nombreText.setText(aux.getNombre());</span>
+                
+<span class="nc" id="L81">            }</span>
+        });
+<span class="nc" id="L83">        contenedor.add(userList);</span>
+
+<span class="nc" id="L85">        nickname = new JLabel(&quot;Nickname&quot;);</span>
+<span class="nc" id="L86">        nickname.setVisible(true);</span>
+<span class="nc" id="L87">        nickname.setBounds(220, 60, 150, 10);</span>
+<span class="nc" id="L88">        contenedor.add(nickname);</span>
+
+<span class="nc" id="L90">        nicknameText = new JTextField();</span>
+<span class="nc" id="L91">        nicknameText.setBounds(370, 50, 300, 30);</span>
+<span class="nc" id="L92">        contenedor.add(nicknameText);</span>
+
+<span class="nc" id="L94">        nombre = new JLabel(&quot;Nombre&quot;);</span>
+<span class="nc" id="L95">        nombre.setVisible(true);</span>
+<span class="nc" id="L96">        nombre.setBounds(220, 90, 150, 10);</span>
+<span class="nc" id="L97">        contenedor.add(nombre);</span>
+
+<span class="nc" id="L99">        nombreText = new JTextField();</span>
+<span class="nc" id="L100">        nombreText.setBounds(370, 80, 300, 30);</span>
+<span class="nc" id="L101">        contenedor.add(nombreText);</span>
+
+<span class="nc" id="L103">        apellido = new JLabel(&quot;Apellido&quot;);</span>
+<span class="nc" id="L104">        apellido.setVisible(true);</span>
+<span class="nc" id="L105">        apellido.setBounds(220, 120, 150, 10);</span>
+<span class="nc" id="L106">        contenedor.add(apellido);</span>
+
+<span class="nc" id="L108">        apellidoText = new JTextField();</span>
+<span class="nc" id="L109">        apellidoText.setBounds(370, 110, 300, 30);</span>
+<span class="nc" id="L110">        contenedor.add(apellidoText);</span>
+
+<span class="nc" id="L112">        fNac = new JLabel(&quot;Fecha de nacimiento&quot;);</span>
+<span class="nc" id="L113">        fNac.setVisible(true);</span>
+<span class="nc" id="L114">        fNac.setBounds(220, 150, 150, 10);</span>
+<span class="nc" id="L115">        contenedor.add(fNac);</span>
+<span class="nc" id="L116">        as = new JDayChooser();</span>
+                
+<span class="nc" id="L118">        fNacText = new JCalendar();</span>
+         
+<span class="nc" id="L120">        fNacText.setBounds(370, 140, 300, 30);</span>
+<span class="nc" id="L121">        contenedor.add(fNacText);</span>
+
+<span class="nc" id="L123">        email = new JLabel(&quot;Correo electronico&quot;);</span>
+<span class="nc" id="L124">        email.setVisible(true);</span>
+<span class="nc" id="L125">        email.setBounds(220, 180, 150, 10);</span>
+<span class="nc" id="L126">        contenedor.add(email);</span>
+
+<span class="nc" id="L128">        emailText = new JTextField();</span>
+<span class="nc" id="L129">        emailText.setBounds(370, 170, 300, 30);</span>
+<span class="nc" id="L130">        contenedor.add(emailText);</span>
+
+<span class="nc" id="L132">        cerrarBtn = new JButton(&quot;Cerrar&quot;);</span>
+
+
+<span class="nc" id="L135">        cerrarBtn.addActionListener(new java.awt.event.ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L138">                cerrar(e);</span>
+<span class="nc" id="L139">            }</span>
+        });
+
+<span class="nc" id="L142">        cerrarBtn.setBounds(320, 260, 100, 40);</span>
+<span class="nc" id="L143">        contenedor.add(cerrarBtn);</span>
+<span class="nc" id="L144">    }</span>
+
+    private void cerrar(ActionEvent evt) {
+<span class="nc" id="L147">        setVisible(false);</span>
+<span class="nc" id="L148">        nicknameText.setText(&quot;&quot;);</span>
+<span class="nc" id="L149">        emailText.setText(&quot;&quot;);</span>
+<span class="nc" id="L150">        fNacText.setDate(new Date());</span>
+<span class="nc" id="L151">        apellidoText.setText(&quot;&quot;);</span>
+<span class="nc" id="L152">        nombreText.setText(&quot;&quot;);</span>
+<span class="nc" id="L153">    }</span>
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

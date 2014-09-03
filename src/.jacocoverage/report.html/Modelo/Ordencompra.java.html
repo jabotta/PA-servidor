@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Ordencompra.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Modelo</a> &gt; <span class="el_source">Ordencompra.java</span></div><h1>Ordencompra.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Modelo;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ *
+ * @author rodro
+ */
+@Entity
+@Table(catalog = &quot;PROG1&quot;, schema = &quot;PUBLIC&quot;)
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = &quot;Ordencompra.findAll&quot;, query = &quot;SELECT o FROM Ordencompra o&quot;),
+    @NamedQuery(name = &quot;Ordencompra.findByNroOrden&quot;, query = &quot;SELECT o FROM Ordencompra o WHERE o.nroOrden = :nroOrden&quot;),
+    @NamedQuery(name = &quot;Ordencompra.findByFecha&quot;, query = &quot;SELECT o FROM Ordencompra o WHERE o.fecha = :fecha&quot;),
+    @NamedQuery(name = &quot;Ordencompra.findByPrecio&quot;, query = &quot;SELECT o FROM Ordencompra o WHERE o.precio = :precio&quot;)})
+public class Ordencompra implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = &quot;NRO_ORDEN&quot;, nullable = false)
+    private Long nroOrden;
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(precision = 65535, scale = 32767)
+    private BigDecimal precio;
+
+<span class="nc" id="L50">    public Ordencompra() {</span>
+<span class="nc" id="L51">    }</span>
+
+<span class="nc" id="L53">    public Ordencompra(Long nroOrden) {</span>
+<span class="nc" id="L54">        this.nroOrden = nroOrden;</span>
+<span class="nc" id="L55">    }</span>
+
+    public Long getNroOrden() {
+<span class="nc" id="L58">        return nroOrden;</span>
+    }
+
+    public void setNroOrden(Long nroOrden) {
+<span class="nc" id="L62">        this.nroOrden = nroOrden;</span>
+<span class="nc" id="L63">    }</span>
+
+    public Date getFecha() {
+<span class="nc" id="L66">        return fecha;</span>
+    }
+
+    public void setFecha(Date fecha) {
+<span class="nc" id="L70">        this.fecha = fecha;</span>
+<span class="nc" id="L71">    }</span>
+
+    public BigDecimal getPrecio() {
+<span class="nc" id="L74">        return precio;</span>
+    }
+
+    public void setPrecio(BigDecimal precio) {
+<span class="nc" id="L78">        this.precio = precio;</span>
+<span class="nc" id="L79">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L83">        int hash = 0;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        hash += (nroOrden != null ? nroOrden.hashCode() : 0);</span>
+<span class="nc" id="L85">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (!(object instanceof Ordencompra)) {</span>
+<span class="nc" id="L92">            return false;</span>
+        }
+<span class="nc" id="L94">        Ordencompra other = (Ordencompra) object;</span>
+<span class="nc bnc" id="L95" title="All 8 branches missed.">        if ((this.nroOrden == null &amp;&amp; other.nroOrden != null) || (this.nroOrden != null &amp;&amp; !this.nroOrden.equals(other.nroOrden))) {</span>
+<span class="nc" id="L96">            return false;</span>
+        }
+<span class="nc" id="L98">        return true;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L103">        return &quot;Modelo.Ordencompra[ nroOrden=&quot; + nroOrden + &quot; ]&quot;;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

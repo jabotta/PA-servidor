@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ControladorOrdenes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProgramacionApp&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controlador.Clases</a> &gt; <span class="el_source">ControladorOrdenes.java</span></div><h1>ControladorOrdenes.java</h1><pre class="source lang-java linenums">package Controlador.Clases;
+
+import Controlador.DataTypes.DataCategoria;
+import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataOrdenCompra;
+import Controlador.DataTypes.DataProducto;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+<span class="fc" id="L12">public class ControladorOrdenes implements IControladorOrdenes{</span>
+    
+    private Integer id;
+    private Cliente clienteElegido;
+    private Categoria categoriaElegida;
+    private EspecificacionProducto espProdElegido;
+<span class="fc" id="L18">    private ArrayList&lt;Producto&gt; productosElegidos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L19">    private ArrayList&lt;ClienteCompraProducto&gt; cliComProds = new ArrayList&lt;&gt;();</span>
+//    private OrdenCompra nuevaOrden;
+    private OrdenCompra ordenElegida;
+    
+    @Override
+    public Integer getId(){
+<span class="fc" id="L25">        return this.id;</span>
+    }
+    
+    @Override
+    public void setId(Integer id){
+<span class="fc" id="L30">        this.id = id;</span>
+<span class="fc" id="L31">    }</span>
+    
+    @Override
+    public ArrayList&lt;DataCliente&gt; listarClientes(){
+<span class="nc" id="L35">        ArrayList&lt;DataCliente&gt; dataCliente = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L36">        ManejadorUsuarios.getInstance().obtenerClientes().entrySet().stream().map((cliente) -&gt; cliente.getValue()).forEach((valor) -&gt; {</span>
+            dataCliente.add(new DataCliente(valor));
+        });
+<span class="nc" id="L39">        return dataCliente;</span>
+    }
+    
+    @Override
+    public void elegirCliente(String nickname){
+<span class="nc" id="L44">        clienteElegido = ManejadorUsuarios.getInstance().getCliente(nickname);</span>
+<span class="nc" id="L45">    }</span>
+    
+    @Override
+    public ArrayList&lt;DataCategoria&gt; listarCategorias(){
+<span class="nc" id="L49">        ArrayList&lt;DataCategoria&gt; dataCategoria = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L50">        ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -&gt; categoria.getValue()).forEach((valor) -&gt; {</span>
+            dataCategoria.add(new DataCategoria(valor,true));
+        });
+<span class="nc" id="L53">        return dataCategoria;</span>
+    }
+    
+    @Override
+    public void elegirCategoria(String categoria){
+<span class="nc" id="L58">        categoriaElegida = ManejadorCategorias.getInstance().getCategoria(categoria);</span>
+<span class="nc" id="L59">    }</span>
+    
+    @Override
+    public ArrayList&lt;DataEspecificacionProducto&gt; listarEspecificacionProductos(){
+<span class="nc" id="L63">        ArrayList&lt;DataEspecificacionProducto&gt; dataEspecificacionProducto = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L64">        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -&gt; espProducto.getValue()).forEach((valor) -&gt; {</span>
+            if(valor.getCategorias().containsValue(categoriaElegida)){
+                dataEspecificacionProducto.add(new DataEspecificacionProducto(valor,true));
+            }
+        });
+<span class="nc" id="L69">        return dataEspecificacionProducto;</span>
+    }
+    
+    @Override
+    public void elegirEspecificacionProducto(String nroRef){
+<span class="nc" id="L74">        espProdElegido = ManejadorEspProductos.getInstance().getEspecificacionProducto(nroRef);</span>
+<span class="nc" id="L75">    }</span>
+    
+    @Override
+    public void removerEspecificacionProducto(String nroRef){
+<span class="nc" id="L79">            espProdElegido = null;</span>
+<span class="nc" id="L80">    }</span>
+    //@Override
+//    public void elegirMetodoDeSeleccion(String metodo){
+//        
+//    }
+    
+    @Override
+    public ArrayList&lt;DataEspecificacionProducto&gt; listarProductosEnOrden(){
+<span class="nc" id="L88">        ArrayList&lt;DataEspecificacionProducto&gt; dataProductos = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L89">        ordenElegida.getDataClienteCompraProducto().stream().forEach((clienteproducto) -&gt; {</span>
+            DataEspecificacionProducto aux = clienteproducto.getProducto().getEspecificacionProducto();
+            aux.setPrecio(clienteproducto.getPrecio()); //precio al momento de realizar la compra
+            dataProductos.add(clienteproducto.getProducto().getEspecificacionProducto());
+        });
+<span class="nc" id="L94">        return dataProductos;</span>
+    }
+    
+    @Override
+    public void elegirProducto(Integer id){
+<span class="nc" id="L99">        productosElegidos.add(espProdElegido.getListaProductos().get(id));</span>
+<span class="nc" id="L100">    }</span>
+    @Override
+    public void elegirCantidadProducto(Integer cantidad){
+        
+<span class="nc" id="L104">        Iterator it =  espProdElegido.getListaProductos().values().iterator();</span>
+<span class="nc" id="L105">        int indice = 0;</span>
+<span class="nc bnc" id="L106" title="All 4 branches missed.">        while(it.hasNext() &amp;&amp; indice&lt;cantidad){</span>
+            
+<span class="nc" id="L108">            productosElegidos.add((Producto) it.next());</span>
+<span class="nc" id="L109">            indice++;</span>
+        }
+<span class="nc" id="L111">    }</span>
+    @Override
+    public void generarItemOrden(){
+<span class="nc" id="L114">        productosElegidos.stream().forEach((productoElegido) -&gt; {</span>
+            cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio()));
+        });
+<span class="nc" id="L117">        productosElegidos = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L118">    }</span>
+    
+    @Override
+    public void guardarOrden(DataOrdenCompra dataOrden){
+<span class="nc" id="L122">        OrdenCompra orden = new OrdenCompra(dataOrden);</span>
+<span class="nc" id="L123">        ArrayList&lt;ClienteCompraProducto&gt; cliComProd = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L124">        Float tempSumTotal = 0.0f;</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        for(ClienteCompraProducto cliProd : cliComProds){</span>
+<span class="nc" id="L126">            cliComProd.add(cliProd);</span>
+<span class="nc" id="L127">            tempSumTotal += cliProd.getPrecio();</span>
+<span class="nc" id="L128">        }</span>
+<span class="nc" id="L129">        orden.setPrecioTotal(tempSumTotal);</span>
+<span class="nc" id="L130">        orden.setClienteCompraProducto(cliComProd);</span>
+<span class="nc" id="L131">        ManejadorOrdenes.getInstance().agregarOrden(orden);</span>
+<span class="nc" id="L132">        cliComProds = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L133">    }</span>
+    
+    //@Override
+//    public void imprimirDatosOrden(){
+//        
+//    }
+    @Override
+    public Integer getNextId(){
+<span class="nc" id="L141">        return ManejadorOrdenes.getInstance().obtenerOrdenes().keySet().size();</span>
+    }
+    @Override
+    public ArrayList&lt;DataOrdenCompra&gt; listarOrdenes(){
+<span class="nc" id="L145">        ArrayList&lt;DataOrdenCompra&gt; dataOrdenCompra = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L146">        ManejadorOrdenes.getInstance().obtenerOrdenes().entrySet().stream().map((orden) -&gt; orden.getValue()).forEach((valor) -&gt; {</span>
+            dataOrdenCompra.add(new DataOrdenCompra(valor));
+        });
+<span class="nc" id="L149">        return dataOrdenCompra;</span>
+    }
+    
+    @Override
+    public void elegirOrden(Integer nroOrden){
+<span class="nc" id="L154">        ordenElegida = ManejadorOrdenes.getInstance().getOrden(nroOrden);</span>
+<span class="nc" id="L155">    }</span>
+    
+//    @Override
+//    public Boolean confirmarEliminacion(){
+//        return true;
+//    }
+    
+    @Override
+    public void borrarOrdenCompra(){
+<span class="nc" id="L164">        ManejadorOrdenes.getInstance().eliminarOrden(ordenElegida.getNroOrden());</span>
+<span class="nc" id="L165">        System.out.println(&quot;Borrar orden: &quot; + ordenElegida);</span>
+<span class="nc" id="L166">    }</span>
+    
+    @Override
+    public DataOrdenCompra mostrarDatosOrden(){
+<span class="nc" id="L170">        DataOrdenCompra dataOrden = new DataOrdenCompra(ordenElegida);</span>
+<span class="nc" id="L171">        return dataOrden;</span>
+    }
+
+   
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
