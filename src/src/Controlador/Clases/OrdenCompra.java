@@ -52,7 +52,8 @@ public class OrdenCompra {
     
     public ArrayList<DataClienteCompraProducto> getDataClienteCompraProducto() {
         ArrayList<DataClienteCompraProducto> dataClienteCompraProducto = new ArrayList<>();
-        clienteCompraProducto.stream().forEach((cliProd) -> {
+        clienteCompraProducto.forEach((cliProd) -> {
+            System.out.println(cliProd+"<<>>");
             dataClienteCompraProducto.add(new DataClienteCompraProducto(cliProd));
         });
         return dataClienteCompraProducto;
