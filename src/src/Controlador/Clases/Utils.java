@@ -105,6 +105,10 @@ public class Utils {
         Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 1
+        esp3.put("Capacidad", "16 GB");
+        esp3.put("Peso", "112 g");
+        esp3.put("Pantalla", "4”");
+        esp3.put("Versiones de Wifi", "a/b/g/n");
         cat1.put ("iPhone",ManejadorCategorias.getInstance().getCategoria("iPhone"));
         cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
         cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
@@ -118,6 +122,10 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 2
+        esp3.put("Capacidad", "16 GB");
+        esp3.put("Peso", "140 g");
+        esp3.put("Pantalla", "3.5”");
+        esp3.put("Versiones de Wifi", "b/g/n");
         cat1.put ("iPhone",ManejadorCategorias.getInstance().getCategoria("iPhone"));
         cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
         cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
@@ -132,6 +140,10 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 3
+        esp3.put("Capacidad", "8 GB");
+        esp3.put("Peso", "139 g");
+        esp3.put("Pantalla", "4.7”");
+        esp3.put("Versión de Android", "4.3");
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
         cat1.put ("Nexus",ManejadorCategorias.getInstance().getCategoria("Nexus"));
         EspecificacionProducto pr3 = new EspecificacionProducto("NEX4", "Nexus4", "El celular de Google", esp3, (float) 299.0, p2, cat1, prod3);
@@ -145,6 +157,10 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 4
+        esp3.put("Dimensiones", "136.6 x 70.6 x 8.6 mm");
+        esp3.put("Peso", "133 g");
+        esp3.put("Pantalla", "4.8”");
+        esp3.put("Versión de Android", "4.0.4");
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
         cat1.put ("Galaxy S3",ManejadorCategorias.getInstance().getCategoria("Galaxy S3"));
         EspecificacionProducto pr4 = new EspecificacionProducto("GA3", "Samsung Galaxy S3", "La versión S3 de la línea Samsung Galaxy", esp3, (float) 415.0, p2, cat1, prod3);
@@ -158,6 +174,10 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 5
+        esp3.put("Dimensiones", "136.6 x 69.8 x 7.9 mm");
+        esp3.put("Peso", "130 g");
+        esp3.put("Pantalla", "4.99”");
+        esp3.put("Versión de Android", "4.2.2");
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
         cat1.put ("Galaxy S4",ManejadorCategorias.getInstance().getCategoria("Galaxy S4"));
         EspecificacionProducto pr5 = new EspecificacionProducto("GA4", "Samsung Galaxy S4", "La versión S4 de la línea Samsung Galaxy", esp3, (float) 839.99, p2, cat1, prod3);
@@ -171,6 +191,10 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 6
+        esp3.put("Dimensiones", "112.4 x 59.9 x 11.5 mm");
+        esp3.put("Peso", "113 g");
+        esp3.put("Pantalla", ": 3.5”");
+        esp3.put("Versión de Android", "2.3");
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
         cat1.put ("Galaxy Ace",ManejadorCategorias.getInstance().getCategoria("Galaxy Ace"));
         EspecificacionProducto pr6 = new EspecificacionProducto("AS5", "Galaxy Ace S5830", "La versión Ace de la línea Samsung Galaxy", esp3, (float) 237.0, p2, cat1, prod3);
@@ -185,6 +209,8 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 7
+        esp3.put("Dimensiones", "12.5 cm x 6.7 cm x 2.0 cm");
+        esp3.put("Peso", "44 g");
         cat1.put ("Protectores",ManejadorCategorias.getInstance().getCategoria("Protectores"));
         EspecificacionProducto pr7 = new EspecificacionProducto("PCG", "Protector de cuero para Galaxy", "Asombroso protector de cuero para Samsung Galaxy I900", esp3, (float) 3.5, p2, cat1, prod3);
         controlarProducto.elegirEspProducto ("PCG");
@@ -197,6 +223,8 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 8
+        esp3.put("Dimensiones", "12.4 cm x 7.0 cm x 1.3 cm");
+        esp3.put("Peso", "26 g");
         cat1.put ("Protectores",ManejadorCategorias.getInstance().getCategoria("Protectores"));
         EspecificacionProducto pr8 = new EspecificacionProducto("PMH", "Protector de aluminio para HTC", "El mejor protector de aluminio para HTC Desire HD", esp3, (float) 3.4, p5, cat1, prod3);
         controlarProducto.elegirEspProducto ("PMH");
@@ -209,6 +237,10 @@ public class Utils {
         esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 9
+        esp3.put("Capacidad", "16 GB");
+        esp3.put("Peso", "652 g");
+        esp3.put("Pantalla", "9.7”");
+        esp3.put("Procesador", "A6X");
         cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
         cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
         EspecificacionProducto pr9 = new EspecificacionProducto("IRD", "iPad Retina Display", "La última tableta de Apple con pantalla Retina", esp3, (float) 499.0, p1, cat1, prod3);
@@ -219,8 +251,13 @@ public class Utils {
         }
         pr9.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 10
+        esp3.put("Capacidad", "16 GB");
+        esp3.put("Peso", "308 g");
+        esp3.put("Pantalla", "7.9”");
+        esp3.put("Procesador", "A5");
         cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
         cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
         EspecificacionProducto pr10 = new EspecificacionProducto("IM", "iPad Mini", "La primera tableta chica de Apple", esp3, (float) 329.0, p1, cat1, prod3);
@@ -231,8 +268,11 @@ public class Utils {
         }
         pr10.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 11
+        esp3.put("Dimensiones", "7.5 cm x 4.2 cm x 1.8 cm");
+        esp3.put("Peso", "111 g");
         cat1.put ("Xbox",ManejadorCategorias.getInstance().getCategoria("Xbox"));
         EspecificacionProducto pr11 = new EspecificacionProducto("RIX", "Receptor inalámbrico para Xbox", "Receptor inalámbrico de color negro para controles de Xbox 360", esp3, (float) 10.99, p4, cat1, prod3);
         controlarProducto.elegirEspProducto ("RIX");
@@ -242,8 +282,12 @@ public class Utils {
         }
         pr11.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 12
+        esp3.put("Garantía", "3 meses");
+        esp3.put("Dimensiones", "5.91 in x 4.33 in x 1.77 in");
+        esp3.put("Peso", "7.83 oz");
         cat1.put ("Xbox",ManejadorCategorias.getInstance().getCategoria("Xbox"));
         EspecificacionProducto pr12 = new EspecificacionProducto("CIX", "Control inalámbrico para Xbox", "Control inalámbrico de 2.4 GHz para Xbox 360 ", esp3, (float) 27.27, p4, cat1, prod3);
 
@@ -254,8 +298,11 @@ public class Utils {
         }
         pr12.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 13
+        esp3.put("Dimensiones", "0 in x 0 in x 0 in");
+        esp3.put("Peso", "7.83 oz");
         cat1.put ("Playstation",ManejadorCategorias.getInstance().getCategoria("Playstation"));
         EspecificacionProducto pr13 = new EspecificacionProducto("CHP", "Cable HDMI para PS3", "Es un cable HDMI para PS3", esp3, (float) 7.99, p3, cat1, prod3);
         controlarProducto.elegirEspProducto("CHP");
@@ -265,8 +312,11 @@ public class Utils {
         }
         pr13.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
-        /////////////////Producto 1
+        /////////////////Producto 14
+        esp3.put("Dimensiones", "16.0 cm x 9.5 cm x 5.0 cm");
+        esp3.put("Peso", "184 g");
         cat1.put ("Playstation",ManejadorCategorias.getInstance().getCategoria("Playstation"));
         EspecificacionProducto pr14 = new EspecificacionProducto("CP3", "Control para PS3", "Control inalámbrico Dualshock 3 de color azul para Playstation 3", esp3, (float) 30.8, p3, cat1, prod3);
         controlarProducto.elegirEspProducto ("CP3");
