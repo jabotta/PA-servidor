@@ -7,6 +7,7 @@ import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDayChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.xml.datatype.DatatypeConstants;
 
 class RegistrarUsuarioForm extends JInternalFrame {
 
@@ -172,7 +172,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
     private void guardarUsuario(ActionEvent evt) {
         String nickname = nicknameText.getText();
         String email = emailText.getText();
-        Date fnac = fNacText.getDate();
+        Calendar fnac = fNacText.getCalendar();
         String apellido = apellidoText.getText();
         String nombre = nombreText.getText();
         String nombreCompania = nombreCompaniaText.getText();
@@ -196,11 +196,11 @@ class RegistrarUsuarioForm extends JInternalFrame {
         
         if (!esProveedor.isSelected()) {
             DataCliente cliente = new DataCliente(nickname, nombre, apellido, email, fnac);
-            cliente.setImagenes(imagen);
+            cliente.setImagen(imagen);
             controlarUsuario.ingresarDatosCliente(cliente);
         } else {
             DataProveedor proveedor = new DataProveedor(nickname, nombre, apellido, email, fnac, nombreCompania, linkSitio);
-            proveedor.setImagenes(imagen);
+            proveedor.setImagen(imagen);
             controlarUsuario.ingresarDatosProveedor(proveedor);
         }
 

@@ -1,8 +1,8 @@
 package Controlador.Clases;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -13,14 +13,13 @@ import javax.persistence.Query;
 public class ManejadorCategorias {
     
     private static ManejadorCategorias instance = null;
-    Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap());
+    Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap<String, Categoria>());
     
     EntityManagerFactory EntityManagerFactory = Persistence.createEntityManagerFactory("ProgramacionAppPU");
     EntityManager entityManager = EntityManagerFactory.createEntityManager();
     
     public static ManejadorCategorias getInstance(){
         if(ManejadorCategorias.instance == null){
-            
             ManejadorCategorias.instance = new ManejadorCategorias();
         }
         return ManejadorCategorias.instance;
@@ -43,12 +42,11 @@ public class ManejadorCategorias {
         entityManager.persist(categoria);
         entityManager.getTransaction().commit();
         entityManager.close();
-        
     }
     
     public Map<String,Categoria> obtenerCategorias(){
         //obtengo todas las categorias de la bd
-        Query query = entityManager.createQuery("SELECT c FROM Categoria c");
+        Query query = entityManager.createQuery("SELECT c FROM Categoria c", Categoria.class);
         
         //las guardo en la colecion
         List<Categoria> listCategorias = query.getResultList();

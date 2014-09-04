@@ -17,7 +17,6 @@ import Controlador.Clases.ManejadorProductos;
 import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.Producto;
 import Controlador.Clases.Proveedor;
-import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import com.toedter.calendar.JCalendar;
@@ -64,107 +63,7 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
     
     public CancelarOrdenDeCompra(IControladorOrdenes ICO){
         controlarOrden = ICO;
-        ManejadorUsuarios.getInstance().agregarUsuario(new Cliente("abotta", "Andres", "Botta", "abotta@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario(new Cliente("dlevy", "Dario", "Levy", "dlevy@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario(new Cliente("rrossi", "Rodrigo", "Rossi", "rrossi@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario(new Cliente("ldeniz", "Leroy", "Deniz", "ldeniz@mail.com", new Date(1987, 02, 22)));
-        ManejadorUsuarios.getInstance().agregarUsuario(new Cliente("mbergalli", "Mauro", "Bergalli", "mbergalli@mail.com", new Date(1987, 02, 22)));
 
-        ManejadorUsuarios.getInstance().agregarUsuario(new Proveedor("prov1", "Proveedor 1", "", "prov1@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-        ManejadorUsuarios.getInstance().agregarUsuario(new Proveedor("prov2", "Proveedor 2", "", "prov2@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-        ManejadorUsuarios.getInstance().agregarUsuario(new Proveedor("prov3", "Proveedor 3", "", "prov3@mail.com", new Date(1987, 02, 22), "apple", "www.apple.com"));
-
-        ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat1", null));
-        ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat2", null));
-        ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat3", null));
-        ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat4", null));
-        ManejadorCategorias.getInstance().agregarCategoria(new Categoria("cat5", null));
-
-        Map<String,Categoria> cat1 = Collections.synchronizedMap(new HashMap());
-        cat1.put("cat1",ManejadorCategorias.getInstance().getCategoria("cat1"));
-        cat1.put("cat5",ManejadorCategorias.getInstance().getCategoria("cat5"));
-        Map<String,String> esp1 = Collections.synchronizedMap(new HashMap());
-        esp1.put("Esp1","Espacificacion 1");
-        esp1.put("Esp1","Espacificacion 2");
-        Proveedor prov1 = ManejadorUsuarios.getInstance().getProveedor("prov1");
-        Map<Integer,Producto> prod1 = Collections.synchronizedMap(new HashMap());
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a1", "Iphone", "Lindo y de alta gama", esp1, (float) 10.5, prov1, cat1,prod1));
-        
-        prod1.put(0,new Producto(0, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        prod1.put(1,new Producto(1, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1")));
-        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a1").setListaProductos(prod1);
-        
-        Map<String,Categoria> cat2 = Collections.synchronizedMap(new HashMap());
-        cat2.put("cat1",ManejadorCategorias.getInstance().getCategoria("cat1"));
-        cat2.put("cat3",ManejadorCategorias.getInstance().getCategoria("cat3"));
-        Map<String,String> esp2 = Collections.synchronizedMap(new HashMap());
-        esp2.put("Esp1","Espacificacion 1");
-        Proveedor prov2 = ManejadorUsuarios.getInstance().getProveedor("prov2");
-        Map<Integer,Producto> prod2 = Collections.synchronizedMap(new HashMap());
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a2", "Samsung Galaxy", "Lindo, grande y de alta gama", esp2, (float) 8.5, prov2, cat2,prod2));
-        prod2.put(2,new Producto(2, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
-        prod2.put(3,new Producto(3, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2")));
-        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a2").setListaProductos(prod2);
-        
-        Map<String,Categoria> cat3 = Collections.synchronizedMap(new HashMap());
-        cat3.put("cat4",ManejadorCategorias.getInstance().getCategoria("cat4"));
-        Map<String,String> esp3 = Collections.synchronizedMap(new HashMap());
-        esp3.put("Esp1","Espacificacion 1");
-        Proveedor prov3 = ManejadorUsuarios.getInstance().getProveedor("prov3");
-        Map<Integer,Producto> prod3 = Collections.synchronizedMap(new HashMap());
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(new EspecificacionProducto("a3", "Sony Vaio", "Buena pc", esp3, (float) 15.5, prov3, cat3,prod3));
-        prod3.put(2,new Producto(4, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
-        prod3.put(3,new Producto(5, ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3")));
-        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get("a3").setListaProductos(prod3);
-        
-        ManejadorProductos.getInstance().agregarProducto(new Producto(1, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(2, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(3, ManejadorEspProductos.getInstance().getEspecificacionProducto("a1")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(4, ManejadorEspProductos.getInstance().getEspecificacionProducto("a2")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(5, ManejadorEspProductos.getInstance().getEspecificacionProducto("a2")));
-        ManejadorProductos.getInstance().agregarProducto(new Producto(6, ManejadorEspProductos.getInstance().getEspecificacionProducto("a3")));
-        System.out.println("**************************** Generar orden de compra ****************************");
-        
-        //Listar clientes
-        controlarOrden.listarClientes().stream().forEach((cliente) -> {
-            System.out.println(cliente);
-        });
-
-        //Cliente Seleccionado
-        controlarOrden.elegirCliente("abotta");
-        
-        //Listar categorias
-        controlarOrden.listarCategorias().stream().forEach((categoria) -> {
-            System.out.println(categoria);
-        });
-        
-        //Categoria Seleccionado
-        controlarOrden.elegirCategoria("cat1");
-        
-        //Listar especificaciones de categoria seleccionada
-        controlarOrden.listarEspecificacionProductos().stream().forEach((espProducto) -> {
-            System.out.println(espProducto);
-        });
-        
-        //Especificacion Producto seleccionado
-        controlarOrden.elegirEspecificacionProducto("a1");
-        
-        //Listar productos de la especificacion seleccionada
-
-        
-        //Producto seleccionado
-        controlarOrden.elegirProducto(1);
-        controlarOrden.elegirProducto(3);
-        
-        //Generar item Orden
-        controlarOrden.generarItemOrden();
-        
-        //Guardar Orden
-        DataOrdenCompra dataOrden = new DataOrdenCompra(1);
-        controlarOrden.guardarOrden(dataOrden);
-        
-        System.out.println("Orden de Compra: ");
-        System.out.println(ManejadorOrdenes.getInstance().obtenerOrdenes().get(1));
         setBounds(50, 50, 700, 400);
         setVisible(true);
         setLayout(null);

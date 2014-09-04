@@ -15,8 +15,8 @@ import static Vista.VentanaPrincipal.idUsuariosControlador;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,23 +42,41 @@ public class Utils {
         controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
         controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
+        
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(1960, 11, 1);
+        Proveedor p1 = new Proveedor("Tim1", "Tim", "Cook", "tim.cook@apple.com", cal1, "Apple", " http://www.apple.com");
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(1965, 9, 2);
+        Proveedor p2 = new Proveedor("Eddy", "Eduardo", "Cue", "eddy.cue@samsung.com", cal2, "Samsung", "http://www.samsung.com");
+        Calendar cal3 = Calendar.getInstance();
+        cal3.set(1965, 9, 2);
+        Proveedor p3 = new Proveedor("CraigX", "Craig", "Federighi", "craig.feder@sony.com", cal3, "Sony", "http://us.playstation.com");
+        Calendar cal4 = Calendar.getInstance();
+        cal4.set(1967, 2, 12);
+        Proveedor p4 = new Proveedor("Johnny", "Jonathan", "Ive", "johnny.ive@outlook.com", cal4, "Microsoft", "http://www.xbox.com");
+        Calendar cal5 = Calendar.getInstance();
+        cal5.set(1963, 8, 5);
+        Proveedor p5 = new Proveedor("OpenPeter", "Peter", "Oppenhemier", "peter.open@htc.com", cal5, "HTC", "http://www.htc.com");
+        
+        Calendar cal6 = Calendar.getInstance();
+        cal6.set(1963, 7, 5);
+        Cliente c1 = new Cliente("Dan", "Daniel", "Riccio", "dan.riccio@gmail.com", cal6);
+        Calendar cal7 = Calendar.getInstance();
+        cal7.set(1961, 10, 7);
+        Cliente c2 = new Cliente("Phil", "Philip", "Schiller", "phil.schiller@gmail.com", cal7);
+        Calendar cal8 = Calendar.getInstance();
+        cal8.set(1959, 12, 3);
+        Cliente c3 = new Cliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com", cal8);
+        Calendar cal9 = Calendar.getInstance();
+        cal9.set(1964, 11, 27);
+        Cliente c4 = new Cliente("JeffW", "Jeff", "Wiliams", "jeff.williams@gmail.com", cal9);
 
-        Proveedor p1 = new Proveedor("Tim1", "Tim", "Cook", "tim.cook@apple.com", new Date(1960, 11, 1), "Apple", " http://www.apple.com");
-        Proveedor p2 = new Proveedor("Eddy", "Eduardo", "Cue", "eddy.cue@samsung.com", new Date(1965, 9, 2), "Samsung", "http://www.samsung.com");
-        Proveedor p3 = new Proveedor("CraigX", "Craig", "Federighi", "craig.feder@sony.com", new Date(1970, 5, 4), "Sony", "http://us.playstation.com");
-        Proveedor p4 = new Proveedor("Johnny", "Jonathan", "Ive", "johnny.ive@outlook.com", new Date(1967, 2, 12), "Microsoft", "http://www.xbox.com");
-        Proveedor p5 = new Proveedor("OpenPeter", "Peter", "Oppenhemier", "peter.open@htc.com", new Date(1963, 8, 5), "HTC", "http://www.htc.com");
-
-        Cliente c1 = new Cliente("Dan", "Daniel", "Riccio", "dan.riccio@gmail.com", new Date(1963, 7, 5));
-        Cliente c2 = new Cliente("Phil", "Philip", "Schiller", "phil.schiller@gmail.com", new Date(1961, 10, 7));
-        Cliente c3 = new Cliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com", new Date(1959, 12, 3));
-        Cliente c4 = new Cliente("JeffW", "Jeff", "Wiliams", "jeff.williams@gmail.com", new Date(1964, 11, 27));
-
-        p1.setImagenes("/home/tecnoinf/Escritorio/imag/cook.jpg");
-        p2.setImagenes("/home/tecnoinf/Escritorio/imag/cue.jpg");
-        p3.setImagenes("/home/tecnoinf/Escritorio/imag/federighi.jpg");
-        p4.setImagenes("/home/tecnoinf/Escritorio/imag/ive.jpg");
-        c2.setImagenes("/home/tecnoinf/Escritorio/imag/schiller.jpg");
+        p1.setImagen("/home/tecnoinf/Escritorio/imag/cook.jpg");
+        p2.setImagen("/home/tecnoinf/Escritorio/imag/cue.jpg");
+        p3.setImagen("/home/tecnoinf/Escritorio/imag/federighi.jpg");
+        p4.setImagen("/home/tecnoinf/Escritorio/imag/ive.jpg");
+        c2.setImagen("/home/tecnoinf/Escritorio/imag/schiller.jpg");
 
         ManejadorUsuarios.getInstance().agregarUsuario(p1);
         ManejadorUsuarios.getInstance().agregarUsuario(p2);

@@ -1,14 +1,14 @@
 package Controlador.DataTypes;
 
 import Controlador.Clases.Proveedor;
-import java.util.Date;
+import java.util.Calendar;
 
 public class DataProveedor extends DataUsuario{
     
     private String nombreCompania;
     private String linkSitio;
     
-    public DataProveedor(String nickname, String nombre, String apellido, String email, Date fechaNacimiento, String nombreCompania, String linkSitio) {
+    public DataProveedor(String nickname, String nombre, String apellido, String email, Calendar fechaNacimiento, String nombreCompania, String linkSitio) {
         super(nickname, nombre, apellido, email, fechaNacimiento);
         this.nombreCompania = nombreCompania;
         this.linkSitio = linkSitio;
@@ -18,7 +18,7 @@ public class DataProveedor extends DataUsuario{
         super(p.getNickname(), p.getNombre(), p.getApellido(), p.getEmail(), p.getFechaNacimiento());
         this.nombreCompania = p.getNombreCompania();
         this.linkSitio = p.getLinkSitio();
-         this.setImagenes(p.getImagenes());
+        this.setImagen(p.getImagen());
     }
 
     public String getNombreCompania() {

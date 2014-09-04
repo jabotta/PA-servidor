@@ -17,11 +17,11 @@ public class Categoria implements Serializable{
     
     @Id
     private String nombre;
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "PADRE")
     private Categoria padre;
     @Transient
-    private Map<String,EspecificacionProducto> listaProductos = Collections.synchronizedMap(new HashMap());;
+    private Map<String,EspecificacionProducto> listaProductos = Collections.synchronizedMap(new HashMap<String,EspecificacionProducto>());
 
     public Categoria() {
         

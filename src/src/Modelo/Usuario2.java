@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByApellido", query = "SELECT u FROM Usuario u WHERE u.apellido = :apellido"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
     @NamedQuery(name = "Usuario.findByFechanacimiento", query = "SELECT u FROM Usuario u WHERE u.fechanacimiento = :fechanacimiento")})
-public class Usuario implements Serializable {
+public class Usuario2 implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -45,14 +45,14 @@ public class Usuario implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechanacimiento;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Proveedor proveedor;
+    private Proveedor2 proveedor;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Cliente cliente;
+    private Cliente2 cliente;
 
-    public Usuario() {
+    public Usuario2() {
     }
 
-    public Usuario(String nickname) {
+    public Usuario2(String nickname) {
         this.nickname = nickname;
     }
 
@@ -96,19 +96,19 @@ public class Usuario implements Serializable {
         this.fechanacimiento = fechanacimiento;
     }
 
-    public Proveedor getProveedor() {
+    public Proveedor2 getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(Proveedor proveedor) {
+    public void setProveedor(Proveedor2 proveedor) {
         this.proveedor = proveedor;
     }
 
-    public Cliente getCliente() {
+    public Cliente2 getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Cliente2 cliente) {
         this.cliente = cliente;
     }
 
@@ -122,10 +122,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof Usuario2)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        Usuario2 other = (Usuario2) object;
         if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname))) {
             return false;
         }

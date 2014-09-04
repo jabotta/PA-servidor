@@ -7,10 +7,12 @@ import Controlador.Clases.ManejadorEspProductos;
 import Controlador.Clases.ManejadorProductos;
 import Controlador.Clases.ManejadorUsuarios;
 import Controlador.DataTypes.DataCategoria;
+import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -64,10 +66,12 @@ public class TestControladorProducto {
         Integer idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
         IControladorUsuarios controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
 
-        DataProveedor proveedor1 = new DataProveedor("pperez", "Pedro", "Perez", "perez@gmail.com", new Date(1990, 03, 02), "Pcel", "www.pcel.com");
+        Calendar cal = Calendar.getInstance();
+        cal.set(1960, 11, 1);
+        DataProveedor proveedor1 = new DataProveedor("pperez", "Pedro", "Perez", "perez@gmail.com", cal, "Pcel", "www.pcel.com");
         controlarUsuario.ingresarDatosProveedor(proveedor1);
         controlarUsuario.guardarUsuario();
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("nroref1", "prod1", "nuevo", Collections.synchronizedMap(new HashMap()), (float) 2500.0, proveedor1, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("nroref1", "prod1", "nuevo", Collections.synchronizedMap(new HashMap()), (float) 2500.0, proveedor1, new ArrayList<>(), new ArrayList<>(), Collections.synchronizedMap(new HashMap()));
 
         //Crear producto id=1 y especificacion espProducto
         DataProducto producto1 = new DataProducto(1, "idSpec", espProducto);
@@ -113,8 +117,10 @@ public class TestControladorProducto {
         IControladorUsuarios controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
         Integer idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
         IControladorProductos controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
-
-        controlarUsuario.ingresarDatosProveedor(new DataProveedor("gclaud", "Gallo", "Claudio", "gclaudio@mail.com", new Date(1981, 06, 07), "Alpiste", "www.alpiste.com"));
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosProveedor(new DataProveedor("gclaud", "Gallo", "Claudio", "gclaudio@mail.com", cal, "Alpiste", "www.alpiste.com"));
         controlarUsuario.guardarUsuario();
 
         DataCategoria cat1 = new DataCategoria("cat1", null);
@@ -155,8 +161,10 @@ public class TestControladorProducto {
         IControladorUsuarios controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
         Integer idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
         IControladorProductos controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
-
-        controlarUsuario.ingresarDatosProveedor(new DataProveedor("gclaud", "Gallo", "Claudio", "gclaudio@mail.com", new Date(1981, 06, 07), "Alpiste", "www.alpiste.com"));
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosProveedor(new DataProveedor("gclaud", "Gallo", "Claudio", "gclaudio@mail.com", cal, "Alpiste", "www.alpiste.com"));
         controlarUsuario.guardarUsuario();
 
         DataCategoria cat1 = new DataCategoria("cat1", null);
