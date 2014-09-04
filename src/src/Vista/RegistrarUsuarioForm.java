@@ -5,6 +5,7 @@ import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDayChooser;
+import Vista.DateChosserPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -31,7 +32,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
     private final JLabel linkSitio;
     private final JTextField nicknameText;
     private final JTextField emailText;
-    private final JCalendar fNacText;
+    private final DateChosserPanel fNacText;
     private final JTextField apellidoText;
     private final JTextField nombreText;
     private final JTextField nombreCompaniaText;
@@ -40,7 +41,6 @@ class RegistrarUsuarioForm extends JInternalFrame {
     private final JButton cancelarBtn;
     private final JCheckBox esProveedor;
     private final IControladorUsuarios controlarUsuario;
-    private final JDayChooser as;
     private final SelectorDeImagenes sdi;
 
     public RegistrarUsuarioForm(IControladorUsuarios ICU) {
@@ -106,10 +106,8 @@ class RegistrarUsuarioForm extends JInternalFrame {
         fNac.setVisible(true);
         fNac.setBounds(0, 150, 150, 10);
         contenedor.add(fNac);
-        as = new JDayChooser();
-
-        fNacText = new JCalendar();
-
+ 
+        fNacText= new DateChosserPanel();
         fNacText.setBounds(150, 140, 300, 30);
         contenedor.add(fNacText);
 
@@ -167,6 +165,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
         contenedor.add(sdi);
         contenedor.add(guardarBtn);
         contenedor.add(cancelarBtn);
+        
     }
 
     private void guardarUsuario(ActionEvent evt) {
