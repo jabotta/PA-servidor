@@ -196,9 +196,13 @@ public class ControladorProductos implements IControladorProductos{
         Categoria catPadre = ManejadorCategorias.getInstance().getCategoria(padre.getNombre());
         nuevaCategoria.setPadre(catPadre);
     }
+    @Override 
+    public Boolean categoryAlreadyExist(String categoria){
+        return  ManejadorCategorias.getInstance().getCategoria(categoria) != null;
     
+    }
     @Override
-    public void guardarCategoria(){
+    public void guardarCategoria(){   
         ManejadorCategorias.getInstance().agregarCategoria(nuevaCategoria);
     }
     

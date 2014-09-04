@@ -43,5 +43,6 @@ public interface IControladorProductos {
     public ArrayList<DataCategoria> listarCategoriasAModificar();
     public void borrarCategoriaAEspecificacion(String categoria);
     public void guardarEspProductoModificado();
+    public Boolean categoryAlreadyExist(String categoria);
     
 }
