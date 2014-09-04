@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  */
 public class Utils {
 
-    public static final void generarDatosDePrueba() {
+    public static final void generarDatosDePrueba() throws ParseException {
         try {
             idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
             idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
@@ -47,17 +47,17 @@ public class Utils {
         controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
         controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM,dd");
+        Proveedor p1 = new Proveedor("Tim1", "Tim", "Cook", "tim.cook@apple.com", sdf.parse("1960, 11, 1"), "Apple", " http://www.apple.com");
+        Proveedor p2 = new Proveedor("Eddy", "Eduardo", "Cue", "eddy.cue@samsung.com", sdf.parse("1965, 9, 2"), "Samsung", "http://www.samsung.com");
+        Proveedor p3 = new Proveedor("CraigX", "Craig", "Federighi", "craig.feder@sony.com", sdf.parse("1970, 5, 4"), "Sony", "http://us.playstation.com");
+        Proveedor p4 = new Proveedor("Johnny", "Jonathan", "Ive", "johnny.ive@outlook.com", sdf.parse("1967, 2, 12"), "Microsoft", "http://www.xbox.com");
+        Proveedor p5 = new Proveedor("OpenPeter", "Peter", "Oppenhemier", "peter.open@htc.com", sdf.parse("1963, 8, 5"), "HTC", "http://www.htc.com");
 
-        Proveedor p1 = new Proveedor("Tim1", "Tim", "Cook", "tim.cook@apple.com", new Date(1960, 11, 1), "Apple", " http://www.apple.com");
-        Proveedor p2 = new Proveedor("Eddy", "Eduardo", "Cue", "eddy.cue@samsung.com", new Date(1965, 9, 2), "Samsung", "http://www.samsung.com");
-        Proveedor p3 = new Proveedor("CraigX", "Craig", "Federighi", "craig.feder@sony.com", new Date(1970, 5, 4), "Sony", "http://us.playstation.com");
-        Proveedor p4 = new Proveedor("Johnny", "Jonathan", "Ive", "johnny.ive@outlook.com", new Date(1967, 2, 12), "Microsoft", "http://www.xbox.com");
-        Proveedor p5 = new Proveedor("OpenPeter", "Peter", "Oppenhemier", "peter.open@htc.com", new Date(1963, 8, 5), "HTC", "http://www.htc.com");
-
-        Cliente c1 = new Cliente("Dan", "Daniel", "Riccio", "dan.riccio@gmail.com", new Date(1963, 7, 5));
-        Cliente c2 = new Cliente("Phil", "Philip", "Schiller", "phil.schiller@gmail.com", new Date(1961, 10, 7));
-        Cliente c3 = new Cliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com", new Date(1959, 12, 3));
-        Cliente c4 = new Cliente("JeffW", "Jeff", "Wiliams", "jeff.williams@gmail.com", new Date(1964, 11, 27));
+        Cliente c1 = new Cliente("Dan", "Daniel", "Riccio", "dan.riccio@gmail.com", sdf.parse("1963, 7, 5"));
+        Cliente c2 = new Cliente("Phil", "Philip", "Schiller", "phil.schiller@gmail.com", sdf.parse("1961, 10, 7"));
+        Cliente c3 = new Cliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com", sdf.parse("1959, 12, 3"));
+        Cliente c4 = new Cliente("JeffW", "Jeff", "Wiliams", "jeff.williams@gmail.com", sdf.parse("1964, 11, 27"));
 
         p1.setImagenes("/home/tecnoinf/Escritorio/imag/cook.jpg");
         p2.setImagenes("/home/tecnoinf/Escritorio/imag/cue.jpg");
