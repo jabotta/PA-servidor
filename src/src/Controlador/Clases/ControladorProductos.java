@@ -69,8 +69,10 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void agregarMultiplesProductosAutogenerados(Integer cantidad){
+        int newId = ManejadorProductos.getInstance().obtenerProductos().keySet().size();
         for(Integer i = 0; i < cantidad; i++){
-            productosAAgregar.put(i, new Producto(i, nuevoEspProducto));
+            productosAAgregar.put(i, new Producto(newId, nuevoEspProducto));
+            newId++;
         }
     }
     
@@ -157,9 +159,11 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void guardarProducto(){
+        
+        System.err.println("prod ");
         nuevoEspProducto.setCategorias(categoriasElegidas);
         nuevoEspProducto.setEspecificacion(especificaciones);
-     
+        System.err.println("prod "+productosAAgregar);
         nuevoEspProducto.setImagenes(imagenes);
         nuevoEspProducto.setListaProductos(productosAAgregar);
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(nuevoEspProducto);

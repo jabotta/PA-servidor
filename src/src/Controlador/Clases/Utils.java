@@ -50,7 +50,7 @@ public class Utils {
         Proveedor p5 = new Proveedor("OpenPeter", "Peter", "Oppenhemier", "peter.open@htc.com", new Date(1963, 8, 5), "HTC", "http://www.htc.com");
 
         Cliente c1 = new Cliente("Dan", "Daniel", "Riccio", "dan.riccio@gmail.com", new Date(1963, 7, 5));
-        Cliente c2 = new Cliente("Phill", "Philip", "Schiller", "phil.schiller@gmail.com", new Date(1961, 10, 7));
+        Cliente c2 = new Cliente("Phil", "Philip", "Schiller", "phil.schiller@gmail.com", new Date(1961, 10, 7));
         Cliente c3 = new Cliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com", new Date(1959, 12, 3));
         Cliente c4 = new Cliente("JeffW", "Jeff", "Wiliams", "jeff.williams@gmail.com", new Date(1964, 11, 27));
 
@@ -99,172 +99,190 @@ public class Utils {
          * productos*
          */
 
-        Map<String, String> esp3 = Collections.synchronizedMap(new HashMap());
+        Map<String,String> esp3= Collections.synchronizedMap(new HashMap());
         Map<Integer, Producto> prod3 = Collections.synchronizedMap(new HashMap());
         Map<String, Categoria> cat1 = Collections.synchronizedMap(new HashMap());
+        Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap());
 
-        cat1.put(
-                "iPhone", ManejadorCategorias.getInstance().getCategoria("iPhone"));
-        cat1.put(
-                "iOS", ManejadorCategorias.getInstance().getCategoria("iOS"));
-        cat1.put("Apple", ManejadorCategorias.getInstance().getCategoria("Apple"));
+        /////////////////Producto 1
+        cat1.put ("iPhone",ManejadorCategorias.getInstance().getCategoria("iPhone"));
+        cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
+        cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
+        EspecificacionProducto pr1 = new EspecificacionProducto("IPH5", "iPhone 5", "El último celular de Apple", esp3, (float) 199.0, p1, cat1, prod3); 
+        controlarProducto.elegirEspProducto ("IPH5");
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr1));
+        }
+        pr1.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        EspecificacionProducto pr1 = new EspecificacionProducto("IPH5", "iPhone 5", "El último celular de Apple", esp3, (float) 199.0, p1, cat1, prod3);
-        controlarProducto.elegirEspProducto(
-                "IPH5");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put(
-                "iPhone", ManejadorCategorias.getInstance().getCategoria("iPhone"));
-        cat1.put(
-                "iOS", ManejadorCategorias.getInstance().getCategoria("iOS"));
-        cat1.put(
-                "Apple", ManejadorCategorias.getInstance().getCategoria("Apple"));
+        /////////////////Producto 2
+        cat1.put ("iPhone",ManejadorCategorias.getInstance().getCategoria("iPhone"));
+        cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
+        cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
         EspecificacionProducto pr2 = new EspecificacionProducto("IPH4", "iPhone 4S", "El siguiente celular al iPhone 4", esp3, (float) 99.0, p1, cat1, prod3);
+        controlarProducto.elegirEspProducto ("IPH4");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr2));
+        }
+        pr2.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "IPH4");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put(
-                "Android", ManejadorCategorias.getInstance().getCategoria("Android"));
-        cat1.put(
-                "Nexus", ManejadorCategorias.getInstance().getCategoria("Nexus"));
-
+        /////////////////Producto 3
+        cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
+        cat1.put ("Nexus",ManejadorCategorias.getInstance().getCategoria("Nexus"));
         EspecificacionProducto pr3 = new EspecificacionProducto("NEX4", "Nexus4", "El celular de Google", esp3, (float) 299.0, p2, cat1, prod3);
-        controlarProducto.elegirEspProducto(
-                "NEX4");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
+        controlarProducto.elegirEspProducto ("NEX4");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr3));
+        }
+        pr3.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        cat1.put(
-                "Android", ManejadorCategorias.getInstance().getCategoria("Android"));
-        cat1.put(
-                "Galaxy S3", ManejadorCategorias.getInstance().getCategoria("Galaxy S3"));
+        /////////////////Producto 4
+        cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
+        cat1.put ("Galaxy S3",ManejadorCategorias.getInstance().getCategoria("Galaxy S3"));
         EspecificacionProducto pr4 = new EspecificacionProducto("GA3", "Samsung Galaxy S3", "La versión S3 de la línea Samsung Galaxy", esp3, (float) 415.0, p2, cat1, prod3);
+        controlarProducto.elegirEspProducto ("GA3");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr4));
+        }
+        pr4.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "GA3");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put(
-                "Android", ManejadorCategorias.getInstance().getCategoria("Android"));
-        cat1.put(
-                "Galaxy S4", ManejadorCategorias.getInstance().getCategoria("Galaxy S4"));
+        /////////////////Producto 5
+        cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
+        cat1.put ("Galaxy S4",ManejadorCategorias.getInstance().getCategoria("Galaxy S4"));
         EspecificacionProducto pr5 = new EspecificacionProducto("GA4", "Samsung Galaxy S4", "La versión S4 de la línea Samsung Galaxy", esp3, (float) 839.99, p2, cat1, prod3);
+        controlarProducto.elegirEspProducto ("GA4");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr5));
+        }
+        pr5.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "GA4");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put(
-                "Android", ManejadorCategorias.getInstance().getCategoria("Android"));
-        cat1.put(
-                "Galaxy Ace", ManejadorCategorias.getInstance().getCategoria("Galaxy Ace"));
+        /////////////////Producto 6
+        cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
+        cat1.put ("Galaxy Ace",ManejadorCategorias.getInstance().getCategoria("Galaxy Ace"));
         EspecificacionProducto pr6 = new EspecificacionProducto("AS5", "Galaxy Ace S5830", "La versión Ace de la línea Samsung Galaxy", esp3, (float) 237.0, p2, cat1, prod3);
 
-        controlarProducto.elegirEspProducto(
-                "AS5");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
+        controlarProducto.elegirEspProducto ("AS5");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr6));
+        }
+        pr6.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        cat1.put(
-                "Protectores", ManejadorCategorias.getInstance().getCategoria("Protectores"));
+        /////////////////Producto 7
+        cat1.put ("Protectores",ManejadorCategorias.getInstance().getCategoria("Protectores"));
         EspecificacionProducto pr7 = new EspecificacionProducto("PCG", "Protector de cuero para Galaxy", "Asombroso protector de cuero para Samsung Galaxy I900", esp3, (float) 3.5, p2, cat1, prod3);
+        controlarProducto.elegirEspProducto ("PCG");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr7));
+        }
+        pr7.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "PCG");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put(
-                "Protectores", ManejadorCategorias.getInstance().getCategoria("Protectores"));
+        /////////////////Producto 8
+        cat1.put ("Protectores",ManejadorCategorias.getInstance().getCategoria("Protectores"));
         EspecificacionProducto pr8 = new EspecificacionProducto("PMH", "Protector de aluminio para HTC", "El mejor protector de aluminio para HTC Desire HD", esp3, (float) 3.4, p5, cat1, prod3);
+        controlarProducto.elegirEspProducto ("PMH");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr8));
+        }
+        pr8.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "PMH");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put("Apple", ManejadorCategorias.getInstance().getCategoria("Apple"));
-        cat1.put("iOS", ManejadorCategorias.getInstance().getCategoria("iOS"));
+        /////////////////Producto 9
+        cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
+        cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
         EspecificacionProducto pr9 = new EspecificacionProducto("IRD", "iPad Retina Display", "La última tableta de Apple con pantalla Retina", esp3, (float) 499.0, p1, cat1, prod3);
+        controlarProducto.elegirEspProducto ("IRD");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr9));
+        }
+        pr9.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "IRD");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put("Apple", ManejadorCategorias.getInstance().getCategoria("Apple"));
-        cat1.put("iOS", ManejadorCategorias.getInstance().getCategoria("iOS"));
+        /////////////////Producto 10
+        cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
+        cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
         EspecificacionProducto pr10 = new EspecificacionProducto("IM", "iPad Mini", "La primera tableta chica de Apple", esp3, (float) 329.0, p1, cat1, prod3);
+        controlarProducto.elegirEspProducto ("IM");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr10));
+        }
+        pr10.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "IM");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put("Xbox", ManejadorCategorias.getInstance().getCategoria("Xbox"));
+        /////////////////Producto 11
+        cat1.put ("Xbox",ManejadorCategorias.getInstance().getCategoria("Xbox"));
         EspecificacionProducto pr11 = new EspecificacionProducto("RIX", "Receptor inalámbrico para Xbox", "Receptor inalámbrico de color negro para controles de Xbox 360", esp3, (float) 10.99, p4, cat1, prod3);
+        controlarProducto.elegirEspProducto ("RIX");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr11));
+        }
+        pr11.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        controlarProducto.elegirEspProducto(
-                "RIX");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
-
-        cat1.put("Xbox", ManejadorCategorias.getInstance().getCategoria("Xbox"));
+        /////////////////Producto 12
+        cat1.put ("Xbox",ManejadorCategorias.getInstance().getCategoria("Xbox"));
         EspecificacionProducto pr12 = new EspecificacionProducto("CIX", "Control inalámbrico para Xbox", "Control inalámbrico de 2.4 GHz para Xbox 360 ", esp3, (float) 27.27, p4, cat1, prod3);
 
-        controlarProducto.elegirEspProducto(
-                "CIX");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
+        controlarProducto.elegirEspProducto ("CIX");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr12));
+        }
+        pr12.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        cat1.put("Playstation", ManejadorCategorias.getInstance().getCategoria("Playstation"));
+        /////////////////Producto 13
+        cat1.put ("Playstation",ManejadorCategorias.getInstance().getCategoria("Playstation"));
         EspecificacionProducto pr13 = new EspecificacionProducto("CHP", "Cable HDMI para PS3", "Es un cable HDMI para PS3", esp3, (float) 7.99, p3, cat1, prod3);
-
         controlarProducto.elegirEspProducto("CHP");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        cat1 = Collections.synchronizedMap(new HashMap());
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr13));
+        }
+        pr13.setListaProductos(productosAAgregar);
+        cat1  = Collections.synchronizedMap(new HashMap());
 
-        cat1.put("Playstation", ManejadorCategorias.getInstance().getCategoria("Playstation"));
+        /////////////////Producto 1
+        cat1.put ("Playstation",ManejadorCategorias.getInstance().getCategoria("Playstation"));
         EspecificacionProducto pr14 = new EspecificacionProducto("CP3", "Control para PS3", "Control inalámbrico Dualshock 3 de color azul para Playstation 3", esp3, (float) 30.8, p3, cat1, prod3);
+        controlarProducto.elegirEspProducto ("CP3");
+        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        for(Integer i = 0; i < 10; i++){
+            productosAAgregar.put(i, new Producto(i, pr14));
+        }
+        pr14.setListaProductos(productosAAgregar);
 
-        controlarProducto.elegirEspProducto(
-                "CP3");
-        controlarProducto.agregarMultiplesProductosAutogenerados(10);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr1);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr2);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr3);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr4);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr5);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr6);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr7);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr8);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr9);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr10);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr11);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr12);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr13);
-        ManejadorEspProductos.getInstance()
-                .agregarEspecificacionProducto(pr14);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr1);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr2);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr3);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr4);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr5);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr6);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr7);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr8);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr9);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr10);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr11);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr12);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr13);
+        ManejadorEspProductos.getInstance ().agregarEspecificacionProducto(pr14);
+        
 
         controlarOrden.elegirCliente("Dan");
         controlarOrden.elegirEspecificacionProducto("IPH5");
@@ -279,7 +297,7 @@ public class Utils {
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden = new DataOrdenCompra(1);
         controlarOrden.guardarOrden(dataOrden);
-
+        
         controlarOrden.elegirCliente("Dan");
         controlarOrden.elegirEspecificacionProducto("NEX4");
         controlarOrden.elegirProducto(1);
@@ -298,7 +316,6 @@ public class Utils {
         controlarOrden.elegirProducto(1);
         controlarOrden.elegirProducto(2);
         controlarOrden.elegirProducto(3);
-
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden3 = new DataOrdenCompra(3);
         controlarOrden.guardarOrden(dataOrden3);

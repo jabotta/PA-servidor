@@ -6,104 +6,114 @@ import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
-public class ControladorUsuarios implements IControladorUsuarios{
+public class ControladorUsuarios implements IControladorUsuarios {
+
     private Integer id;
     private Usuario nuevoUsuario;
     private Cliente clienteElegido;
     private Proveedor proveedorElegido;
-    
+    private String Errors;
+
     @Override
-    public Integer getId(){
+    public Integer getId() {
         return this.id;
     }
-    
+
     @Override
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
-    
+
 //    - prvLst : Set<Proveedor> 
-    
     @Override
-    public void ingresarDatosCliente(DataCliente cliente){
+    public void ingresarDatosCliente(DataCliente cliente) {
         nuevoUsuario = new Cliente(cliente);
     }
-    
+
     @Override
-    public void ingresarDatosProveedor(DataProveedor proveedor){
+    public void ingresarDatosProveedor(DataProveedor proveedor) {
         nuevoUsuario = new Proveedor(proveedor);
     }
-    
+
     @Override
-    public Boolean validarDatosUsuario(){
-        for(Entry<String,Usuario> iter : ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet()){
-            if(iter.getValue().getEmail().equals(nuevoUsuario.getEmail()) || iter.getValue().getNickname().equals(nuevoUsuario.getNickname())){
-                return true;
+    public Boolean validarDatosUsuario() {
+        Errors = "";
+        for (Entry<String, Usuario> iter : ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet()) {
+            Boolean validateEmail = iter.getValue().getEmail().equals(nuevoUsuario.getEmail());
+            Boolean valdiateNickname = iter.getValue().getNickname().equals(nuevoUsuario.getNickname());
+            if(valdiateNickname) {
+                Errors = "Nickname";
             }
+            if(validateEmail){
+                Errors += (valdiateNickname)?", Email": "Email";
+            }
+
+            return valdiateNickname || validateEmail;
         }
         return false;
     }
-    
+
     @Override
-    public void guardarUsuario(){
+    public void guardarUsuario() {
         ManejadorUsuarios.getInstance().agregarUsuario(nuevoUsuario);
         System.out.println("Nuevo Usuario " + nuevoUsuario);
     }
-    
+
     //@Override
 //    public void cancelar(){
 //        
 //    }
-    
     @Override
-    public ArrayList<DataCliente> listarClientes(){
+    public ArrayList<DataCliente> listarClientes() {
         ArrayList<DataCliente> dataCliente = new ArrayList<>();
         ManejadorUsuarios.getInstance().obtenerClientes().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
             dataCliente.add(new DataCliente(valor));
         });
         return dataCliente;
     }
-    
+
     @Override
-    public void elegirCliente(String nickname){
+    public void elegirCliente(String nickname) {
         clienteElegido = ManejadorUsuarios.getInstance().getCliente(nickname);
     }
-    
+
     @Override
-    public DataCliente mostrarDatosCliente(){
+    public DataCliente mostrarDatosCliente() {
         DataCliente dataCliente = new DataCliente(clienteElegido);
         return dataCliente;
     }
-    
+
     @Override
-    public ArrayList<DataOrdenCompra> listarOrdenesCliente(){
+    public ArrayList<DataOrdenCompra> listarOrdenesCliente() {
         ArrayList<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
         ManejadorOrdenes.getInstance().obtenerOrdenes().entrySet().stream().map((orden) -> orden.getValue()).forEach((valor) -> {
-            if(valor.getCliente() == clienteElegido){
+            if (valor.getCliente() == clienteElegido) {
                 dataOrdenCompra.add(new DataOrdenCompra(valor));
             }
         });
         return dataOrdenCompra;
     }
-    
+
     @Override
-    public ArrayList<DataProveedor> listarProveedores(){
+    public ArrayList<DataProveedor> listarProveedores() {
         ArrayList<DataProveedor> dataProveedor = new ArrayList<>();
         ManejadorUsuarios.getInstance().obtenerProveedores().entrySet().stream().map((proovedor) -> proovedor.getValue()).forEach((valor) -> {
             dataProveedor.add(new DataProveedor(valor));
         });
         return dataProveedor;
     }
-    
+
     @Override
-    public void elegirProveedor(String nickname){
+    public void elegirProveedor(String nickname) {
         proveedorElegido = ManejadorUsuarios.getInstance().getProveedor(nickname);
     }
-    
+
     @Override
-    public DataProveedor mostrarDatosProveedor(){
+    public DataProveedor mostrarDatosProveedor() {
         DataProveedor dataProveedor = new DataProveedor(proveedorElegido);
         return dataProveedor;
     }
-        
+    public String getErrors(){
+        return this.Errors;
+    }
 }

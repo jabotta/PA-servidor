@@ -32,10 +32,14 @@ public class SelectorDeImagenes extends JPanel {
     private ArrayList<ImagenComponent> imagenes;
     private final JPanel pane;
     private final JPanel paneWrapper;
-    
+    private Boolean justOne;
+    private Boolean firstSelected;
+    private JButton addIMG;
 
-    public SelectorDeImagenes() {
+    public SelectorDeImagenes(Boolean justOne) {
 
+        this.firstSelected = false;
+        this.justOne = justOne;
         setLayout(new BorderLayout());
         paneWrapper = new JPanel();
         paneWrapper.setLayout(new BorderLayout());
@@ -49,7 +53,44 @@ public class SelectorDeImagenes extends JPanel {
         paneWrapper.add(pane, BorderLayout.NORTH);
 
         imagenes = new ArrayList();
-        JButton addIMG = new JButton("Agregar Imagen");
+    
+        if(!justOne){
+            addIMG = new JButton("Agregar Imagen");
+        }else{
+            addIMG = new JButton("Elegir Imagen");
+        }
+        addIMG.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                agregarImgBtnActionPerformed(e);
+            }
+
+        });
+
+        setSize(400, 1200);
+        addIMG.setBounds(100, 20, 0, 0);
+        add(addIMG, BorderLayout.NORTH);
+    }
+
+    public SelectorDeImagenes() {
+
+        this.firstSelected = false;
+        this.justOne = false;
+        setLayout(new BorderLayout());
+        paneWrapper = new JPanel();
+        paneWrapper.setLayout(new BorderLayout());
+
+        add(paneWrapper, BorderLayout.CENTER);
+
+        pane = new JPanel();
+        pane.setLayout(new SpringLayout());
+
+        pane.setLocation(0, 40);
+        paneWrapper.add(pane, BorderLayout.NORTH);
+
+        imagenes = new ArrayList();
+          addIMG = new JButton("Agregar Imagen");
         addIMG.addActionListener(new ActionListener() {
 
             @Override
@@ -65,24 +106,30 @@ public class SelectorDeImagenes extends JPanel {
 
     }
 
- 
     private void agregarImgBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarImgBtnActionPerformed
 
-        JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagenes", "jpg", "gif", "png");
-        chooser.setFileFilter(filter);
-        chooser.setDialogTitle("Eliga una imagen para su producto");
-        int returnVal = chooser.showOpenDialog(this.getParent());
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            addImagenComponent(chooser.getSelectedFile());
+        if (this.justOne && !this.firstSelected || !this.justOne){
+            
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagenes", "jpg", "gif", "png");
+            chooser.setFileFilter(filter);
+            chooser.setDialogTitle("Eliga una imagen para su producto");
+            int returnVal = chooser.showOpenDialog(this.getParent());
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                if(this.justOne){
+                    addIMG.setEnabled(false);
+                }
+                this.firstSelected = true;
+                addImagenComponent(chooser.getSelectedFile());
 
+            }
         }
-
     }
 
     private void addImagenComponent(File f) {
 
         ImagenComponent ic = new ImagenComponent(f);
+        ic.setAllowDelete(!this.justOne);
         imagenes.add(ic);
         pane.setSize(500, imagenes.size() * 50);
         pane.repaint();
@@ -142,8 +189,8 @@ public class SelectorDeImagenes extends JPanel {
     }
 
     void load(ArrayList<String> imagenesPreload) {
-         imagenesPreload.forEach((str)->{ 
+        imagenesPreload.forEach((str) -> {
             addImagenComponent(new File(str));
         });
-     }
+    }
 }

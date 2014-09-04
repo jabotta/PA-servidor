@@ -11,6 +11,8 @@ public class Cliente extends Usuario{
     
     public Cliente(DataCliente dc) {
         super(dc.getNickname(), dc.getNombre(), dc.getApellido(), dc.getEmail(), dc.getFechaNacimiento());
+        this.setImagenes(dc.getImagenes());
+        
     }
     
     public ClienteCompraProducto obtenerClienteCompraProducto() {
@@ -19,7 +21,7 @@ public class Cliente extends Usuario{
     
     @Override
     public String toString() {
-        return this.getNickname() + "  --  " + this.getNombre() + "  --  " + this.getApellido();
+        return this.getNickname() + "  --  " + this.getNombre() + "  --  " + this.getApellido()+" -- "+this.getImagenes();
     }
     
 }

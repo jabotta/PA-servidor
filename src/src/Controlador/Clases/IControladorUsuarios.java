@@ -21,5 +21,6 @@ public interface IControladorUsuarios {
     public ArrayList<DataProveedor> listarProveedores();
     public void elegirProveedor(String nickname);
     public DataProveedor mostrarDatosProveedor();
+    public String getErrors();
     
 }

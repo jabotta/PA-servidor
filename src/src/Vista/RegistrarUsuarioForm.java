@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.xml.datatype.DatatypeConstants;
@@ -46,12 +47,12 @@ class RegistrarUsuarioForm extends JInternalFrame {
 
         controlarUsuario = ICU;
 
-        setBounds(50, 50, 700, 400);
+        setBounds(50, 50, 900, 400);
         setVisible(true);
         setLayout(null);
         contenedor = new JPanel();
         contenedor.setLayout(null);
-        contenedor.setSize(700, 400);
+        contenedor.setSize(1200, 400);
         contenedor.setLocation(10, 0);
         add(contenedor);
 
@@ -161,8 +162,8 @@ class RegistrarUsuarioForm extends JInternalFrame {
         guardarBtn.setBounds(200, 260, 100, 40);
         cancelarBtn.setBounds(320, 260, 100, 40);
 
-        sdi = new SelectorDeImagenes();
-        sdi.setBounds(0, 260, 200, 200);
+        sdi = new SelectorDeImagenes(true);
+        sdi.setLocation(450, 0);
         contenedor.add(sdi);
         contenedor.add(guardarBtn);
         contenedor.add(cancelarBtn);
@@ -177,12 +178,22 @@ class RegistrarUsuarioForm extends JInternalFrame {
         String nombreCompania = nombreCompaniaText.getText();
         String linkSitio = linkSitioText.getText();
         String imagen = "";
-         HashSet<String> imagenes = this.sdi.getListaDeImagenes();
-            Iterator it = imagenes.iterator();
-            if (it.hasNext()) {
-               imagen = (String) it.next();
-                System.out.println(imagen+" ;");
-            }
+        HashSet<String> imagenes = this.sdi.getListaDeImagenes();
+        Iterator it = imagenes.iterator();
+        if (it.hasNext()) {
+            imagen = (String) it.next();
+        }
+        if(nickname==null || nickname.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this, "Nickname es requerido", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(email==null || email.isEmpty()){
+        
+            JOptionPane.showMessageDialog(this, "Email es requerido", "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (!esProveedor.isSelected()) {
             DataCliente cliente = new DataCliente(nickname, nombre, apellido, email, fnac);
             cliente.setImagenes(imagen);
@@ -194,8 +205,11 @@ class RegistrarUsuarioForm extends JInternalFrame {
         }
 
         if (controlarUsuario.validarDatosUsuario()) {
-            System.out.println("Ya existe el usuario");
+            JOptionPane.showMessageDialog(this, "Usiario con " + controlarUsuario.getErrors() + " ya existe", "Validacion", JOptionPane.ERROR_MESSAGE);
+
         } else {
+
+            JOptionPane.showMessageDialog(this, "Su Usuario se creo correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
             controlarUsuario.guardarUsuario();
             nicknameText.setText("");
@@ -207,13 +221,11 @@ class RegistrarUsuarioForm extends JInternalFrame {
             nombreCompaniaText.setText("");
             linkSitioText.setText("");
 
-           
         };
 
     }
 
-
-private void cancelar(ActionEvent evt) {
+    private void cancelar(ActionEvent evt) {
         setVisible(false);
         nicknameText.setText("");
         emailText.setText("");
@@ -225,7 +237,7 @@ private void cancelar(ActionEvent evt) {
     }
 
     private void cambiarTipoFormulario(ActionEvent evt) {
-        
+
         Boolean display = esProveedor.isSelected();
         nombreCompania.setVisible(display);
         nombreCompaniaText.setVisible(display);
