@@ -41,14 +41,15 @@ public class ControladorUsuarios implements IControladorUsuarios {
         for (Entry<String, Usuario> iter : ManejadorUsuarios.getInstance().obtenerUsuarios().entrySet()) {
             Boolean validateEmail = iter.getValue().getEmail().equals(nuevoUsuario.getEmail());
             Boolean valdiateNickname = iter.getValue().getNickname().equals(nuevoUsuario.getNickname());
-            if(valdiateNickname) {
+            if (valdiateNickname) {
                 Errors = "Nickname";
             }
-            if(validateEmail){
-                Errors += (valdiateNickname)?", Email": "Email";
+            if (validateEmail) {
+                Errors += (valdiateNickname) ? ", Email" : "Email";
             }
-
-            return valdiateNickname || validateEmail;
+            if (valdiateNickname || validateEmail) {
+                return true;
+            }
         }
         return false;
     }
@@ -113,7 +114,8 @@ public class ControladorUsuarios implements IControladorUsuarios {
         DataProveedor dataProveedor = new DataProveedor(proveedorElegido);
         return dataProveedor;
     }
-    public String getErrors(){
+
+    public String getErrors() {
         return this.Errors;
     }
 }
