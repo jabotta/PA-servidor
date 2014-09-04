@@ -358,6 +358,7 @@ public class Utils {
         controlarOrden.elegirProducto(2);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden = new DataOrdenCompra(1);
+        dataOrden.setFecha(sdf.parse("2013, 8, 12"));
         controlarOrden.guardarOrden(dataOrden);
 
         controlarOrden.elegirCliente("Dan");
@@ -367,6 +368,7 @@ public class Utils {
         controlarOrden.elegirProducto(3);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden2 = new DataOrdenCompra(2);
+        dataOrden2.setFecha(sdf.parse("2013, 8, 19"));
         controlarOrden.guardarOrden(dataOrden2);
 
         controlarOrden.elegirCliente("Phil");
@@ -380,6 +382,7 @@ public class Utils {
         controlarOrden.elegirProducto(3);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden3 = new DataOrdenCompra(3);
+        dataOrden3.setFecha(sdf.parse("2013, 8, 19"));
         controlarOrden.guardarOrden(dataOrden3);
 
         controlarOrden.elegirCliente("BruceS");
@@ -390,6 +393,7 @@ public class Utils {
         controlarOrden.elegirProducto(4);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden4 = new DataOrdenCompra(4);
+        dataOrden4.setFecha(sdf.parse("2013, 8, 22"));
         controlarOrden.guardarOrden(dataOrden4);
 
         controlarOrden.elegirCliente("JeffW");
@@ -397,6 +401,7 @@ public class Utils {
         controlarOrden.elegirProducto(1);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden5 = new DataOrdenCompra(5);
+        dataOrden5.setFecha(sdf.parse("2013, 8, 25"));
         controlarOrden.guardarOrden(dataOrden5);
 
     }
