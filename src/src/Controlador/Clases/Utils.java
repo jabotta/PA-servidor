@@ -15,6 +15,8 @@ import static Vista.VentanaPrincipal.idUsuariosControlador;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -405,10 +407,12 @@ public class Utils {
         }
         return "";
     }
-    /**
-     * *
-     *
-     * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); Date
-     * date = new Date();
-     */
+    public static String formatDate(Date s) {
+        if (s != null) {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            
+            return dateFormat.format(s);
+        }
+        return "";
+    }
 }

@@ -2,6 +2,7 @@ package Vista;
 
 import Controlador.Clases.Cliente;
 import Controlador.Clases.IControladorUsuarios;
+import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
 import com.toedter.calendar.JCalendar;
@@ -40,12 +41,12 @@ class VerInformacionClienteForm extends JInternalFrame {
     private final JLabel email;
     private final JTextField nicknameText;
     private final JTextField emailText;
-    private final JCalendar fNacText;
+    private final JTextField fNacText;
     private final JTextField apellidoText;
     private final JTextField nombreText;
     private final JButton cerrarBtn;
     private final IControladorUsuarios controlarUsuario;
-    private final JDayChooser as;
+ 
     private String imagen;
 
     public VerInformacionClienteForm(IControladorUsuarios ICU) {
@@ -84,7 +85,7 @@ class VerInformacionClienteForm extends JInternalFrame {
                 DataCliente aux = (DataCliente) userList.getSelectedValue();
                 nicknameText.setText(aux.getNickname());
                 emailText.setText(aux.getEmail());
-                fNacText.setDate(aux.getFechaNacimiento());
+                fNacText.setText(Utils.formatDate(aux.getFechaNacimiento()));
                 apellidoText.setText(aux.getApellido());
                 nombreText.setText(aux.getNombre());
                 imagen = aux.getImagenes(); 
@@ -139,10 +140,9 @@ class VerInformacionClienteForm extends JInternalFrame {
         fNac = new JLabel("Fecha de nacimiento");
         fNac.setVisible(true);
         fNac.setBounds(220, 150, 150, 10);
-        contenedor.add(fNac);
-        as = new JDayChooser();
+        contenedor.add(fNac); 
 
-        fNacText = new JCalendar();
+        fNacText = new JTextField();
 
         fNacText.setBounds(370, 140, 300, 30);
         contenedor.add(fNacText);
@@ -167,6 +167,12 @@ class VerInformacionClienteForm extends JInternalFrame {
 
         cerrarBtn.setBounds(320, 260, 100, 40);
         contenedor.add(cerrarBtn);
+            nicknameText.setEnabled(false);
+        emailText.setEnabled(false);
+        fNacText.setEnabled(false);
+        apellidoText.setEnabled(false);
+        nombreText.setEnabled(false);
+  
     }
 
     private void ver(ActionEvent e) {
@@ -194,7 +200,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         setVisible(false);
         nicknameText.setText("");
         emailText.setText("");
-        fNacText.setDate(new Date());
+        fNacText.setText(Utils.formatDate(new Date()));
         apellidoText.setText("");
         nombreText.setText("");
     }

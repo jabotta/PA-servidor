@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Clases.IControladorUsuarios;
+import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
 import com.toedter.calendar.JCalendar;
@@ -26,8 +27,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 class VerInformacionProveedorForm extends JInternalFrame {
-    
-    private final JPanel contenedor ;
+
+    private final JPanel contenedor;
     private final JList userList;
     private final JLabel nickname;
     private final JLabel nombre;
@@ -38,20 +39,20 @@ class VerInformacionProveedorForm extends JInternalFrame {
     private final JLabel linkSitio;
     private final JTextField nicknameText;
     private final JTextField emailText;
-    private final JCalendar fNacText;
+    private final JTextField fNacText;
     private final JTextField apellidoText;
     private final JTextField nombreText;
     private final JTextField nombreCompaniaText;
     private final JTextField linkSitioText;
     private final JButton cerrarBtn;
     private final IControladorUsuarios controlarUsuario;
-    private final JDayChooser as;
+
     private Object imagen;
-    
+
     public VerInformacionProveedorForm(IControladorUsuarios ICU) {
-        
+
         controlarUsuario = ICU;
-        
+
         setBounds(50, 50, 700, 400);
         setVisible(true);
         setLayout(null);
@@ -60,7 +61,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.setSize(700, 400);
         contenedor.setLocation(10, 0);
         add(contenedor);
-        
+
         JLabel elegirUsuarioLabel = new JLabel("Elegir Proveedor:");
         elegirUsuarioLabel.setVisible(true);
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
@@ -74,26 +75,28 @@ class VerInformacionProveedorForm extends JInternalFrame {
         userList = new JList(tes);
         userList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         userList.setBounds(0, 50, 200, 300);
-        userList.addListSelectionListener(new ListSelectionListener(){
-          
+        userList.addListSelectionListener(new ListSelectionListener() {
+
             @Override
-            public void valueChanged(ListSelectionEvent evt){
-                if(evt.getValueIsAdjusting())
+            public void valueChanged(ListSelectionEvent evt) {
+                if (evt.getValueIsAdjusting()) {
                     return;
-                DataProveedor aux = (DataProveedor)userList.getSelectedValue();
+                }
+                DataProveedor aux = (DataProveedor) userList.getSelectedValue();
                 nicknameText.setText(aux.getNickname());
                 emailText.setText(aux.getEmail());
-                fNacText.setDate(aux.getFechaNacimiento());
+                fNacText.setText(Utils.formatDate(aux.getFechaNacimiento()));
+
                 apellidoText.setText(aux.getApellido());
                 nombreText.setText(aux.getNombre());
                 nombreCompaniaText.setText(aux.getNombreCompania());
                 linkSitioText.setText(aux.getLinkSitio());
-                  imagen = aux.getImagenes();
-                
+                imagen = aux.getImagenes();
+
             }
         });
-        
-         JButton verimagen = new JButton("Ver Imagen");
+
+        JButton verimagen = new JButton("Ver Imagen");
         verimagen.setSize(100, 40);
         verimagen.setLocation(370, 0);
         verimagen.addActionListener(new ActionListener() {
@@ -139,10 +142,9 @@ class VerInformacionProveedorForm extends JInternalFrame {
         fNac.setVisible(true);
         fNac.setBounds(220, 150, 150, 10);
         contenedor.add(fNac);
-        as = new JDayChooser();
-                
-        fNacText = new JCalendar();
-         
+
+        fNacText = new JTextField();
+
         fNacText.setBounds(370, 140, 300, 30);
         contenedor.add(fNacText);
 
@@ -154,7 +156,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         emailText = new JTextField();
         emailText.setBounds(370, 170, 300, 30);
         contenedor.add(emailText);
-        
+
         nombreCompania = new JLabel("Nombre Compania");
         nombreCompania.setVisible(true);
         nombreCompania.setBounds(220, 205, 150, 15);
@@ -164,7 +166,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         nombreCompaniaText.setBounds(370, 200, 300, 30);
         nombreCompaniaText.setVisible(true);
         contenedor.add(nombreCompaniaText);
-        
+
         linkSitio = new JLabel("Link Sitio");
         linkSitio.setVisible(true);
         linkSitio.setBounds(220, 240, 150, 10);
@@ -177,7 +179,6 @@ class VerInformacionProveedorForm extends JInternalFrame {
 
         cerrarBtn = new JButton("Cerrar");
 
-
         cerrarBtn.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -187,12 +188,20 @@ class VerInformacionProveedorForm extends JInternalFrame {
 
         cerrarBtn.setBounds(320, 260, 100, 40);
         contenedor.add(cerrarBtn);
+        nicknameText.setEnabled(false);
+        emailText.setEnabled(false);
+        fNacText.setEnabled(false);
+        apellidoText.setEnabled(false);
+        nombreText.setEnabled(false);
+        nombreCompaniaText.setEnabled(false);
+        linkSitioText.setEnabled(false);
     }
+
     private void ver(ActionEvent e) {
         JDialog dialog = new JDialog();
         if (imagen != null) {
-            File   f = new File((String) imagen);
-    
+            File f = new File((String) imagen);
+
             dialog.setTitle("Visor Imagenes" + f.getName());
 
             ImagePanel p = new ImagePanel(f.getAbsolutePath());
@@ -208,16 +217,16 @@ class VerInformacionProveedorForm extends JInternalFrame {
             dialog.setSize(new Dimension(500, 500));
         }
     }
+
     private void cerrar(ActionEvent evt) {
         setVisible(false);
         nicknameText.setText("");
         emailText.setText("");
-        fNacText.setDate(new Date());
+        fNacText.setText(Utils.formatDate(new Date()));
         apellidoText.setText("");
         nombreText.setText("");
         nombreCompaniaText.setText("");
         linkSitioText.setText("");
     }
-    
 
 }
