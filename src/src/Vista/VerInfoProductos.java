@@ -61,7 +61,7 @@ public class VerInfoProductos extends JInternalFrame {
         this.controlarProducto = controlarProducto;
     
 
-        setBounds(50, 50, 800, 500);
+        setBounds(50, 50, 800, 700);
         setVisible(true);
         setLayout(new SpringLayout());
 
@@ -170,7 +170,7 @@ public class VerInfoProductos extends JInternalFrame {
 
         form.addField("Categorias", "text", null, dataProducto.getCategorias().toString());
         form.addField("Proveedor", "text", null, dataProducto.getProveedor().toString());
-        form.addField("Imagenes", "text", null, dataProducto.getImagenes().toString());
+        form.addIMGField("Imagenes",   dataProducto.getImagenes(),false);
 
         InfoPanel.add(form, BorderLayout.CENTER);
         InfoPanel.revalidate();

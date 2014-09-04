@@ -77,23 +77,70 @@ public class ImagenComponent extends JPanel {
         });
 
     }
-    public void setAllowDelete(Boolean d){
-           deleteBtn.setVisible(d);
+
+    public ImagenComponent(File f, Boolean editable) {
+        this.f = f;
+        this.setSize(400, 100);
+        nombre = new JLabel(f.getName());
+        viewBtn = new JButton("ver");
+        editBtn = new JButton("editar");
+        deleteBtn = new JButton("Borrar");
+        nombre.setVerticalAlignment(0);
+        nombre.setBounds(10, 0, 100, 30);
+        editBtn.setBounds(90, 10, 80, 20);
+        deleteBtn.setBounds(180, 10, 80, 20);
+        this.add(nombre);
+        this.add(viewBtn);
+        if (editable) {
+            this.add(editBtn);
+            this.add(deleteBtn);
+        }
+        repaint();
+
+        editBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editarImagen(e);
+            }
+        });
+        deleteBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                delete(e);
+            }
+
+        });
+        viewBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ver(e);
+            }
+
+        });
+
     }
+
+    public void setAllowDelete(Boolean d) {
+        deleteBtn.setVisible(d);
+    }
+
     private void ver(ActionEvent e) {
         JDialog dialog = new JDialog();
-        dialog.setTitle("Visor Imagenes"+f.getName());
+        dialog.setTitle("Visor Imagenes" + f.getName());
 
         ImagePanel p = new ImagePanel(f.getAbsolutePath());
         p.setSize(400, 400);
-         dialog.getContentPane().setSize(400, 400);
-        dialog.getContentPane().add(p, BorderLayout.CENTER); 
+        dialog.getContentPane().setSize(400, 400);
+        dialog.getContentPane().add(p, BorderLayout.CENTER);
         dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dialog.setSize(new Dimension(400, 400));
         dialog.setLocationRelativeTo(getParent().getParent().getParent());
         dialog.setModal(true);
         dialog.setVisible(true);
-        
+
         dialog.setSize(new Dimension(500, 500));
     }
 
@@ -177,5 +224,10 @@ public class ImagenComponent extends JPanel {
 
     public String getPath() {
         return f.getAbsolutePath();
+    }
+
+    void setReadOnly(Boolean readOnly) {
+        editBtn.setEnabled(readOnly);
+        deleteBtn.setEnabled(readOnly);
     }
 }

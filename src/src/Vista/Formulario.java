@@ -5,12 +5,20 @@
  */
 package Vista;
 
+import Controlador.Clases.Utils;
 import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.demo.DateChooserPanel;
+import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Point;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import javax.swing.*;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -20,8 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.*;
-import java.awt.*;
+import org.eclipse.persistence.internal.core.helper.CoreClassConstants;
 
 /**
  *
@@ -38,7 +45,7 @@ public class Formulario extends JPanel {
         campos = new HashMap();
         setLayout(null);
         setVisible(true);
-        setSize(500, 700);
+        setSize(500, 900);
         JScrollPane scroll = new JScrollPane(this);
         currentHeight = 20;
     }
@@ -58,12 +65,39 @@ public class Formulario extends JPanel {
         this.addField(fieldName, fieldType, null, null);
     }
 
+    public void addIMGField(String fieldName,   ArrayList<String> s,Boolean editable) {
+        JComponent componente;
+        JLabel label = new JLabel();
+        label.setText(fieldName);
+        label.setSize(fieldName.length() * 10, 30);
+        Dimension componentSize = new Dimension(180, 500);
+        componente = new SelectorDeImagenes();
+
+        ((SelectorDeImagenes) componente).setReadOnly(editable);
+        ((SelectorDeImagenes) componente).load(s);
+        componente.setEnabled(isEnabled);
+        componente.setSize(componentSize);
+        campos.put(fieldName, componente);
+
+        Integer currentSize = campos.values().size();
+        label.setLocation(10, currentHeight);
+        componente.setLocation(150, currentHeight);
+        currentHeight += componentSize.height;
+        label.setLabelFor(componente);
+        //  System.out.println(componente.getClass());
+        add(label);
+        add(componente);
+        repaint();
+
+    }
+
     public void addField(String fieldName, String fieldType, Object[] toArray, String value) {
         JComponent componente;
         JLabel label = new JLabel();
         label.setText(fieldName);
         label.setSize(fieldName.length() * 10, 30);
         Dimension componentSize = new Dimension(180, 30);
+
         switch (fieldType) {
 
             case "textarea":
@@ -76,13 +110,16 @@ public class Formulario extends JPanel {
                 break;
             case "combo":
                 componente = new JComboBox(toArray);
-                
+
                 break;
             case "checkbox":
                 componente = new JCheckBox(value);
                 break;
+
             case "Date":
-                componente = new JCalendar();
+                componente = new DateChooserPanel();
+
+                ((DateChooserPanel) componente).setDate(Utils.getDateFromString(value));
                 break;
             case "text":
             default:

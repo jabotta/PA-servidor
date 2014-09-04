@@ -12,4 +12,5 @@ package Controlador.Clases;
  */
 public class Constantes {
     public static final String CATEGORIA_ROOT = "Categorias";
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
 }
