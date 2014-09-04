@@ -162,7 +162,11 @@ public class VerInfoProductos extends JInternalFrame {
         form.addField("Nombre", "text", null, dataProducto.getNombre());
         form.addField("NroRef", "text", null, dataProducto.getNroReferencia());
         form.addField("Descripcion", "text", null, dataProducto.getDescripcion());
-        form.addField("Especificaciones", "text", null, dataProducto.getEspecificacion().values().toString());
+        String especificaciones = "";
+        for(String iter: dataProducto.getEspecificacion().keySet()){
+            especificaciones += iter + ": "+ dataProducto.getEspecificacion().get(iter) + "\n";
+        }
+        form.addField("Especificaciones", "textarea", null, especificaciones);
 
         form.addField("Categorias", "text", null, dataProducto.getCategorias().toString());
         form.addField("Proveedor", "text", null, dataProducto.getProveedor().toString());

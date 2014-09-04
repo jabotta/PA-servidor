@@ -70,6 +70,10 @@ public class Formulario extends JPanel {
                 componente = new JTextArea(value);
                 componentSize.setSize(180, 200);
                 break;
+            case "list":
+                componente = new JList();
+                componentSize.setSize(180, 200);
+                break;
             case "combo":
                 componente = new JComboBox(toArray);
                 

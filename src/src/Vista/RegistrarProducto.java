@@ -179,7 +179,15 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
         controlarProducto.elegirProveedor(Proveedor.getNickname());
         controlarProducto.ingresarDatosProductos(espProducto);
         
-        controlarProducto.ingresarEspecificacion("Especificacion", especificaciones);
+        for(String iter : especificaciones.split("\n")){
+            String[] iter2 = iter.split(":");
+            if (iter2.length != 2) {
+                JOptionPane.showMessageDialog(this, "Las especificaciones deben ingresarse con el formato 'Tipo: Description'", "Validacion", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            controlarProducto.ingresarEspecificacion(iter2[0], iter2[1].trim());
+        }
+       
 
         controlarProducto.agregarMultiplesProductosAutogenerados(stockReal);
 

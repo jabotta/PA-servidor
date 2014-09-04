@@ -115,6 +115,7 @@ public class Utils {
         }
         pr1.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 2
         cat1.put ("iPhone",ManejadorCategorias.getInstance().getCategoria("iPhone"));
@@ -128,6 +129,7 @@ public class Utils {
         }
         pr2.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 3
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
@@ -140,6 +142,7 @@ public class Utils {
         }
         pr3.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 4
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
@@ -152,6 +155,7 @@ public class Utils {
         }
         pr4.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 5
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
@@ -164,6 +168,7 @@ public class Utils {
         }
         pr5.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 6
         cat1.put ("Android",ManejadorCategorias.getInstance().getCategoria("Android"));
@@ -177,6 +182,7 @@ public class Utils {
         }
         pr6.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 7
         cat1.put ("Protectores",ManejadorCategorias.getInstance().getCategoria("Protectores"));
@@ -188,6 +194,7 @@ public class Utils {
         }
         pr7.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 8
         cat1.put ("Protectores",ManejadorCategorias.getInstance().getCategoria("Protectores"));
@@ -199,6 +206,7 @@ public class Utils {
         }
         pr8.setListaProductos(productosAAgregar);
         cat1  = Collections.synchronizedMap(new HashMap());
+        esp3= Collections.synchronizedMap(new HashMap());
 
         /////////////////Producto 9
         cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
