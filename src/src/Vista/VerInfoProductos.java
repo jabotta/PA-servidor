@@ -154,6 +154,8 @@ public class VerInfoProductos extends JInternalFrame {
     }
 
     private void printDataProducto(JTable listaProductos) {
+        InfoPanel.removeAll();
+        
         TableModel model = listaProductos.getModel();
         int row = listaProductos.getSelectedRow();
         String nroRef = (String) model.getValueAt(row, 0);
