@@ -175,7 +175,14 @@ public class ModificarInformacionProducto extends JInternalFrame {
 
             controlarProducto.borrarCategoriaAEspecificacion(cat.getNombre());
         });
-        controlarProducto.ingresarEspecificacion("Especificacion", especificaciones);
+        for(String iter : especificaciones.split("\n")){
+            String[] iter2 = iter.split(":");
+            if (iter2.length != 2) {
+                JOptionPane.showMessageDialog(this, "Las especificaciones deben ingresarse con el formato 'Tipo: Description'", "Validacion", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            controlarProducto.ingresarEspecificacion(iter2[0], iter2[1].trim());
+        }
         controlarProducto.elegirProveedor(Proveedor.getNickname());
         controlarProducto.ingresarDatosProductos(espProducto);
 
@@ -261,12 +268,12 @@ public class ModificarInformacionProducto extends JInternalFrame {
         form.addField("Titulo", "text", null, dataProducto.getNombre());
         form.addField("NroRef", "text", null, dataProducto.getNroReferencia());
         form.addField("Descripcion", "text", null, dataProducto.getDescripcion());
-        Iterator it = dataProducto.getEspecificacion().values().iterator();
-        if (it.hasNext()) {
-            form.addField("Especificaciones", "textarea", null, it.next().toString());
-        } else {
-            form.addField("Especificaciones", "textarea");
+        
+        String especificaciones = "";
+        for(String iter: dataProducto.getEspecificacion().keySet()){
+            especificaciones += iter + ": "+ dataProducto.getEspecificacion().get(iter) + "\n";
         }
+        form.addField("Especificaciones", "textarea", null, especificaciones);
         form.addField("Precio", "text", null, String.valueOf(dataProducto.getPrecio()));
         form.addField("Stock", "text", null, String.valueOf(dataProducto.getProductos().size()));
         form.addField("Proveedor", "combo", controlarProducto.listarProveedores().toArray(), null);

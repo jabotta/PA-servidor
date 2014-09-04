@@ -9,6 +9,7 @@ import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
 import static Controlador.Clases.Main.idUsuariosControlador;
 import Controlador.Clases.Utils;
+import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProveedor;
 import static Vista.VentanaPrincipal.controlarProducto;
@@ -169,9 +170,13 @@ public class VerInfoProductos extends JInternalFrame {
             especificaciones += iter + ": "+ dataProducto.getEspecificacion().get(iter) + "\n";
         }
         form.addField("Especificaciones", "textarea", null, especificaciones);
-
-        form.addField("Categorias", "text", null, dataProducto.getCategorias().toString());
-        form.addField("Proveedor", "text", null, dataProducto.getProveedor().toString());
+        String categorias = "";
+        for(DataCategoria iter: dataProducto.getCategorias()){
+            categorias += iter.getNombre() + "\n";
+        }
+        form.addField("Categorias", "textarea", null, categorias);
+        DataProveedor proveedor = dataProducto.getProveedor();
+        form.addField("Proveedor", "text", null, proveedor.getNickname() + " " + proveedor.getNombre() + " " + proveedor.getApellido());
         form.addIMGField("Imagenes",   dataProducto.getImagenes(),false);
 
         InfoPanel.add(form, BorderLayout.CENTER);
