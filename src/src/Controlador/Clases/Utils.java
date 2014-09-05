@@ -358,7 +358,7 @@ public class Utils {
         controlarOrden.elegirProducto(2);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden = new DataOrdenCompra(1);
-        dataOrden.setFecha(getDateFromString("/12/8/2013"));
+        dataOrden.setFecha(getDateFromString("12/8/2013"));
         controlarOrden.guardarOrden(dataOrden);
 
         controlarOrden.elegirCliente("Dan");

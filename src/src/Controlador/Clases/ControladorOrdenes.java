@@ -104,7 +104,6 @@ public class ControladorOrdenes implements IControladorOrdenes{
         Iterator it =  espProdElegido.getListaProductos().values().iterator();
         int indice = 0;
         while(it.hasNext() && indice<cantidad){
-            System.out.println(" producto "+(Producto) it.next());
             productosElegidos.add((Producto) it.next());
             indice++;
         }
