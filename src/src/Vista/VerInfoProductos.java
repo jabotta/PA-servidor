@@ -7,7 +7,6 @@ package Vista;
 
 import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
-import static Controlador.Clases.Main.idUsuariosControlador;
 import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;

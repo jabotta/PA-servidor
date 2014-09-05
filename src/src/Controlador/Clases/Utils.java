@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  */
 public class Utils {
 
-    public static final void generarDatosDePrueba() throws ParseException {
+    public static final void generarDatosDePrueba(){
         try {
             idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
             idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
@@ -48,16 +48,16 @@ public class Utils {
         controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         controlarOrden = Fabrica.getInstance().getControladorOrdenes(idOrdenesControlador);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy,MM,dd");
-        Proveedor p1 = new Proveedor("Tim1", "Tim", "Cook", "tim.cook@apple.com", sdf.parse("1960, 11, 1"), "Apple", " http://www.apple.com");
-        Proveedor p2 = new Proveedor("Eddy", "Eduardo", "Cue", "eddy.cue@samsung.com", sdf.parse("1965, 9, 2"), "Samsung", "http://www.samsung.com");
-        Proveedor p3 = new Proveedor("CraigX", "Craig", "Federighi", "craig.feder@sony.com", sdf.parse("1970, 5, 4"), "Sony", "http://us.playstation.com");
-        Proveedor p4 = new Proveedor("Johnny", "Jonathan", "Ive", "johnny.ive@outlook.com", sdf.parse("1967, 2, 12"), "Microsoft", "http://www.xbox.com");
-        Proveedor p5 = new Proveedor("OpenPeter", "Peter", "Oppenhemier", "peter.open@htc.com", sdf.parse("1963, 8, 5"), "HTC", "http://www.htc.com");
+        Proveedor p1 = new Proveedor("Tim1", "Tim", "Cook", "tim.cook@apple.com", getDateFromString("1/11/1960"), "Apple", " http://www.apple.com");
+        Proveedor p2 = new Proveedor("Eddy", "Eduardo", "Cue", "eddy.cue@samsung.com", getDateFromString("2/9/1965"), "Samsung", "http://www.samsung.com");
+        Proveedor p3 = new Proveedor("CraigX", "Craig", "Federighi", "craig.feder@sony.com", getDateFromString("4/5/1970"), "Sony", "http://us.playstation.com");
+        Proveedor p4 = new Proveedor("Johnny", "Jonathan", "Ive", "johnny.ive@outlook.com", getDateFromString("12/2/1967"), "Microsoft", "http://www.xbox.com");
+        Proveedor p5 = new Proveedor("OpenPeter", "Peter", "Oppenhemier", "peter.open@htc.com", getDateFromString("5/8/1963"), "HTC", "http://www.htc.com");
 
-        Cliente c1 = new Cliente("Dan", "Daniel", "Riccio", "dan.riccio@gmail.com", sdf.parse("1963, 7, 5"));
-        Cliente c2 = new Cliente("Phil", "Philip", "Schiller", "phil.schiller@gmail.com", sdf.parse("1961, 10, 7"));
-        Cliente c3 = new Cliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com", sdf.parse("1959, 12, 3"));
-        Cliente c4 = new Cliente("JeffW", "Jeff", "Wiliams", "jeff.williams@gmail.com", sdf.parse("1964, 11, 27"));
+        Cliente c1 = new Cliente("Dan", "Daniel", "Riccio", "dan.riccio@gmail.com", getDateFromString("5/7/1963"));
+        Cliente c2 = new Cliente("Phil", "Philip", "Schiller", "phil.schiller@gmail.com", getDateFromString("7/10/1961"));
+        Cliente c3 = new Cliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com", getDateFromString("3/12/1959"));
+        Cliente c4 = new Cliente("JeffW", "Jeff", "Wiliams", "jeff.williams@gmail.com", getDateFromString("27/11/1964"));
 
         p1.setImagenes("/home/tecnoinf/Escritorio/imag/cook.jpg");
         p2.setImagenes("/home/tecnoinf/Escritorio/imag/cue.jpg");
@@ -358,7 +358,7 @@ public class Utils {
         controlarOrden.elegirProducto(2);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden = new DataOrdenCompra(1);
-        dataOrden.setFecha(sdf.parse("2013, 8, 12"));
+        dataOrden.setFecha(getDateFromString("/12/8/2013"));
         controlarOrden.guardarOrden(dataOrden);
 
         controlarOrden.elegirCliente("Dan");
@@ -368,7 +368,7 @@ public class Utils {
         controlarOrden.elegirProducto(3);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden2 = new DataOrdenCompra(2);
-        dataOrden2.setFecha(sdf.parse("2013, 8, 19"));
+        dataOrden2.setFecha(getDateFromString("19/8/2013"));
         controlarOrden.guardarOrden(dataOrden2);
 
         controlarOrden.elegirCliente("Phil");
@@ -382,7 +382,7 @@ public class Utils {
         controlarOrden.elegirProducto(3);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden3 = new DataOrdenCompra(3);
-        dataOrden3.setFecha(sdf.parse("2013, 8, 19"));
+        dataOrden3.setFecha(getDateFromString("19/8/2013"));
         controlarOrden.guardarOrden(dataOrden3);
 
         controlarOrden.elegirCliente("BruceS");
@@ -393,7 +393,7 @@ public class Utils {
         controlarOrden.elegirProducto(4);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden4 = new DataOrdenCompra(4);
-        dataOrden4.setFecha(sdf.parse("2013, 8, 22"));
+        dataOrden4.setFecha(getDateFromString("22/8/2013"));
         controlarOrden.guardarOrden(dataOrden4);
 
         controlarOrden.elegirCliente("JeffW");
@@ -401,7 +401,7 @@ public class Utils {
         controlarOrden.elegirProducto(1);
         controlarOrden.generarItemOrden();
         DataOrdenCompra dataOrden5 = new DataOrdenCompra(5);
-        dataOrden5.setFecha(sdf.parse("2013, 8, 25"));
+        dataOrden5.setFecha(getDateFromString("25/8/2013"));
         controlarOrden.guardarOrden(dataOrden5);
 
     }

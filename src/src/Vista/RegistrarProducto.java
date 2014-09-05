@@ -8,7 +8,6 @@ package Vista;
 import Controlador.Clases.Categoria;
 import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
-import static Controlador.Clases.Main.idUsuariosControlador;
 import Controlador.Clases.ManejadorCategorias;
 import Controlador.Clases.ManejadorEspProductos;
 import Controlador.Clases.Utils;
