@@ -1,12 +1,8 @@
 package Vista;
 
-import Controlador.Clases.Cliente;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataCliente;
-import Controlador.DataTypes.DataProveedor;
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDayChooser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -16,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -27,8 +22,6 @@ import javax.swing.ListSelectionModel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.xml.datatype.DatatypeConstants;
-import javax.xml.datatype.DatatypeConstants.Field;
 
 class VerInformacionClienteForm extends JInternalFrame {
 
@@ -67,7 +60,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
         contenedor.add(elegirUsuarioLabel);
 
-        DefaultListModel tes = new DefaultListModel();
+        DefaultListModel<DataCliente> tes = new DefaultListModel<DataCliente>();
         ArrayList<DataCliente> clientes = ICU.listarClientes();
         clientes.stream().forEach((cliente) -> {
             tes.addElement(cliente);

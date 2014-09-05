@@ -7,7 +7,7 @@ import java.util.Map;
 public class ManejadorEspProductos {
     
     private static ManejadorEspProductos instance = null;
-    Map<String,EspecificacionProducto> especificacionProductos = Collections.synchronizedMap(new HashMap());
+    Map<String,EspecificacionProducto> especificacionProductos = Collections.synchronizedMap(new HashMap<String,EspecificacionProducto>());
     
     public static ManejadorEspProductos getInstance(){
         if(ManejadorEspProductos.instance == null){

@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Objects;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;

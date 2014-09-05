@@ -9,10 +9,6 @@ package Vista;
  
 
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JSpinnerDateEditor;
-import com.toedter.calendar.demo.BirthdayEvaluator;
-import com.toedter.calendar.demo.DemoTable;
-import com.toedter.calendar.demo.TestDateEvaluator;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,7 +17,6 @@ import java.beans.PropertyChangeListener;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**

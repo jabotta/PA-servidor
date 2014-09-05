@@ -9,6 +9,7 @@ import Controlador.Clases.IControladorProductos;
 import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;
+import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -167,7 +167,7 @@ public class ModificarInformacionProducto extends JInternalFrame {
             return;
         }
 
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap<String,String>()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap<Integer,DataProducto>()));
 
         controlarProducto.modificarDatosEspecificacionProducto(espProducto);
 

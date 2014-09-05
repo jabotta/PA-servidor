@@ -6,17 +6,9 @@
 package Vista;
 
 import Controlador.Clases.Utils;
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.demo.DateChooserPanel;
-import java.awt.*;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Point;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.JCheckBox;
@@ -27,8 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
-import org.eclipse.persistence.internal.core.helper.CoreClassConstants;
 
 /**
  *
@@ -42,7 +32,7 @@ public class Formulario extends JPanel {
 
     public Formulario() {
         isEnabled = true;
-        campos = new HashMap();
+        campos = new HashMap<String, JComponent>();
         setLayout(null);
         setVisible(true);
         setSize(500, 900);
@@ -53,7 +43,7 @@ public class Formulario extends JPanel {
     public Formulario(boolean b) {
 
         isEnabled = b;
-        campos = new HashMap();
+        campos = new HashMap<String, JComponent>();
         setLayout(null);
         setVisible(true);
         setSize(500, 700);

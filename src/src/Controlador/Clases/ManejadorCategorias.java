@@ -7,7 +7,7 @@ import java.util.Map;
 public class ManejadorCategorias {
     
     private static ManejadorCategorias instance = null;
-    Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap());
+    Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap<String,Categoria>());
     
     public static ManejadorCategorias getInstance(){
         if(ManejadorCategorias.instance == null){

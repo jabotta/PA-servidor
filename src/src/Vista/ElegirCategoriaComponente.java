@@ -5,23 +5,19 @@
  */
 package Vista;
 
-import Controlador.Clases.Categoria;
 import Controlador.Clases.Constantes;
 import Controlador.Clases.IControladorProductos;
-import Controlador.Clases.ManejadorCategorias;
 import Controlador.DataTypes.DataCategoria;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 /**

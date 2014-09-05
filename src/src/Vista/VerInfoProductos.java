@@ -5,13 +5,10 @@
  */
 package Vista;
 
-import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
-import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProveedor;
-import static Vista.VentanaPrincipal.controlarProducto;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -20,9 +17,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.Instant;
-import java.util.Date;
-import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JInternalFrame;

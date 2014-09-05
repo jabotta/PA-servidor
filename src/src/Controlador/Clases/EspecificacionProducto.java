@@ -29,7 +29,7 @@ public class EspecificacionProducto {
         this.proveedor = proveedor;
         this.categorias = categorias;
         this.listaProductos = listaProductos;
-        this.imagenes = new ArrayList();
+        this.imagenes = new ArrayList<String>();
     }
     
     public EspecificacionProducto(DataEspecificacionProducto espProducto, Proveedor proveedor) {
@@ -39,9 +39,9 @@ public class EspecificacionProducto {
         this.especificacion = espProducto.getEspecificacion();
         this.precio = espProducto.getPrecio();
         this.proveedor = proveedor;
-        this.categorias = Collections.synchronizedMap(new HashMap());
-        this.imagenes = new ArrayList();
-        this.listaProductos = Collections.synchronizedMap(new HashMap());
+        this.categorias = Collections.synchronizedMap(new HashMap<String,Categoria>());
+        this.imagenes = new ArrayList<String>();
+        this.listaProductos = Collections.synchronizedMap(new HashMap<Integer,Producto>());
         espProducto.getProductos().entrySet().forEach((producto) -> {
            this.listaProductos.put(producto.getKey(),new Producto(producto.getKey(),this));
         });

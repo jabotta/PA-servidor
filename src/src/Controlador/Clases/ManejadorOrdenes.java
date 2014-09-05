@@ -7,7 +7,7 @@ import java.util.Map;
 public class ManejadorOrdenes {
     
     private static ManejadorOrdenes instance = null;
-    Map<Integer,OrdenCompra> ordenes = Collections.synchronizedMap(new HashMap());
+    Map<Integer,OrdenCompra> ordenes = Collections.synchronizedMap(new HashMap<Integer,OrdenCompra>());
     
     public static ManejadorOrdenes getInstance(){
         if(ManejadorOrdenes.instance == null){

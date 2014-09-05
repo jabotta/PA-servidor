@@ -30,7 +30,7 @@ public class DataEspecificacionProducto {
             this.categorias = ep.getDataCategorias();
         else
             this.categorias = new ArrayList<DataCategoria>();
-        this.productos = Collections.synchronizedMap(new HashMap());
+        this.productos = Collections.synchronizedMap(new HashMap<Integer,DataProducto>());
         ep.getListaProductos().entrySet().forEach((producto) -> {
            productos.put(producto.getKey(),new DataProducto(producto.getKey(),this));
         });

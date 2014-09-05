@@ -4,7 +4,6 @@ import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
-import Controlador.DataTypes.DataProducto;
 import java.util.ArrayList;
 
 public interface IControladorOrdenes {

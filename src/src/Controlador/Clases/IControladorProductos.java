@@ -5,7 +5,6 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
-import java.util.Map;
 
 public interface IControladorProductos {
     

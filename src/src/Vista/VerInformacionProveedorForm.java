@@ -2,10 +2,7 @@ package Vista;
 
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.Clases.Utils;
-import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDayChooser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

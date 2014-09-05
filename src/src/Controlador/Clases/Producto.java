@@ -2,7 +2,6 @@ package Controlador.Clases;
 
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
-import java.util.ArrayList;
 
 public class Producto {
     

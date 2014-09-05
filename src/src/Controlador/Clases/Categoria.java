@@ -1,7 +1,6 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataCategoria;
-import Controlador.DataTypes.DataEspecificacionProducto;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,7 @@ public class Categoria {
     public Categoria(String nombre, Categoria padre) {
         this.nombre = nombre;
         this.padre = padre;
-        this.listaProductos = Collections.synchronizedMap(new HashMap());
+        this.listaProductos = Collections.synchronizedMap(new HashMap<String,EspecificacionProducto>());
     }
     
     public Categoria(String nombre, Categoria padre, Map<String,EspecificacionProducto> productos) {
@@ -27,7 +26,7 @@ public class Categoria {
     public Categoria(DataCategoria dc) {
         this.nombre = dc.getNombre();
         this.padre = null;
-        this.listaProductos = Collections.synchronizedMap(new HashMap());
+        this.listaProductos = Collections.synchronizedMap(new HashMap<String,EspecificacionProducto>());
         dc.getListaProductos().entrySet().forEach((producto) -> {
            listaProductos.put(producto.getKey(),new EspecificacionProducto(producto.getValue(),new Proveedor(producto.getValue().getProveedor())));
         });

@@ -5,50 +5,28 @@
  */
 package Vista;
 
-import Controlador.Clases.Categoria;
-import Controlador.Clases.Fabrica;
 import Controlador.Clases.IControladorProductos;
-import Controlador.Clases.ManejadorCategorias;
-import Controlador.Clases.ManejadorEspProductos;
 import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTree;
 import javax.swing.SpringLayout;
-import javax.swing.border.Border;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -174,7 +152,7 @@ public class RegistrarProducto extends javax.swing.JInternalFrame {
             return;
         }
 
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap<String,String>()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap<Integer,DataProducto>()));
         controlarProducto.elegirProveedor(Proveedor.getNickname());
         controlarProducto.ingresarDatosProductos(espProducto);
         

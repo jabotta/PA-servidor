@@ -7,7 +7,6 @@ import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import static java.util.Objects.isNull;
@@ -18,13 +17,13 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto espProductoModificada;
     private Proveedor proveedorElegido;
     private EspecificacionProducto espProdElegido;
-    private Map<String,String> especificaciones = Collections.synchronizedMap(new HashMap());
+    private Map<String,String> especificaciones = Collections.synchronizedMap(new HashMap<String,String>());
     private EspecificacionProducto nuevoEspProducto;
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
-    private Map<String,Categoria> categoriasElegidas = Collections.synchronizedMap(new HashMap());
+    private Map<String,Categoria> categoriasElegidas = Collections.synchronizedMap(new HashMap<String,Categoria>());
     private ArrayList<String> imagenes = new ArrayList<>();
-    private Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap());
+    private Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap<Integer,Producto>());
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
@@ -168,9 +167,9 @@ public class ControladorProductos implements IControladorProductos{
         nuevoEspProducto.setListaProductos(productosAAgregar);
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(nuevoEspProducto);
 
-        especificaciones = Collections.synchronizedMap(new HashMap());
+        especificaciones = Collections.synchronizedMap(new HashMap<String,String>());
         imagenes = new ArrayList<>();
-        productosAAgregar = Collections.synchronizedMap(new HashMap());
+        productosAAgregar = Collections.synchronizedMap(new HashMap<Integer,Producto>());
     }
     
     @Override

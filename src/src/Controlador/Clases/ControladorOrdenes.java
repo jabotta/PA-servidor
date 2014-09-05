@@ -4,7 +4,6 @@ import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
-import Controlador.DataTypes.DataProducto;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -101,7 +100,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     @Override
     public void elegirCantidadProducto(Integer cantidad){
          System.out.println(cantidad+" cantidad<<<<");
-        Iterator it =  espProdElegido.getListaProductos().values().iterator();
+        Iterator<Producto> it =  espProdElegido.getListaProductos().values().iterator();
         int indice = 0;
         while(it.hasNext() && indice<cantidad){
             productosElegidos.add((Producto) it.next());

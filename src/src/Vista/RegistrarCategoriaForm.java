@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import javax.swing.text.html.HTMLDocument;
 
 class RegistrarCategoriaForm extends JInternalFrame {
 

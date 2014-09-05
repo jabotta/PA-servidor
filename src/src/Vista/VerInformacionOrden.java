@@ -6,27 +6,15 @@
 
 package Vista;
 
-import Controlador.Clases.Categoria;
-import Controlador.Clases.Cliente;
-import Controlador.Clases.EspecificacionProducto;
 import Controlador.Clases.IControladorOrdenes;
-import Controlador.Clases.ManejadorCategorias;
-import Controlador.Clases.ManejadorEspProductos;
 import Controlador.Clases.ManejadorOrdenes;
-import Controlador.Clases.ManejadorProductos;
-import Controlador.Clases.ManejadorUsuarios;
-import Controlador.Clases.Producto;
-import Controlador.Clases.Proveedor;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDayChooser;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;

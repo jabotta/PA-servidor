@@ -3,9 +3,6 @@ package Vista;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDayChooser;
-import Vista.DateChosserPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -18,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.xml.datatype.DatatypeConstants;
 
 class RegistrarUsuarioForm extends JInternalFrame {
 
