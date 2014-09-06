@@ -150,7 +150,7 @@ class ElegirCategoriaComponente extends JPanel {
         });
 
         categoriasAgregadas.sort(ElegirCategoriaComponente.comp);
-        for (Iterator<NodoCategoria> it = categoriasAgregadas.iterator(); it.hasNext();) {
+        for (Iterator<NodoCategoria> it = (Iterator<NodoCategoria>)categoriasAgregadas.iterator(); it.hasNext();) {
             NodoCategoria current = it.next();
             node.add(current.getSubTree());
         }
@@ -160,7 +160,7 @@ class ElegirCategoriaComponente extends JPanel {
     public NodoCategoria getPadre(String padre) {
         Boolean found = false;
         NodoCategoria encontrado = null;
-        for (Iterator<NodoCategoria> it = categoriasAgregadas.iterator(); it.hasNext() && !found;) {
+        for (Iterator<NodoCategoria> it = (Iterator<NodoCategoria>)categoriasAgregadas.iterator(); it.hasNext() && !found;) {
             NodoCategoria current = it.next();
 
             encontrado = current.find(padre);
@@ -176,7 +176,7 @@ class ElegirCategoriaComponente extends JPanel {
         public String nombre;
 
         public NodoCategoria(String nombre) {
-            this.hijos = new ArrayList();
+            this.hijos = new ArrayList<ElegirCategoriaComponente.NodoCategoria>();
             this.nombre = nombre;
 
         }

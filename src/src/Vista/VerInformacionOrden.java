@@ -34,7 +34,7 @@ public class VerInformacionOrden extends JInternalFrame{
     
     private final IControladorOrdenes controlarOrden;
     private final JPanel contenedor ;
-    private final JList ordenList;
+    private final JList<String> ordenList;
     private final JLabel nroRef;
     private final JLabel fechaVenta;
     private final JLabel precioTotal;
@@ -43,7 +43,7 @@ public class VerInformacionOrden extends JInternalFrame{
     private final JTextField precioTotalText;
     private final JTextField nroRefText;
     private final JTextField clienteText;
-    private JList productosList;
+    private JList<String> productosList;
     private final JCalendar fechaVentaText;
     private final JButton cancelarBtn;
     private final JDayChooser as;
@@ -66,12 +66,12 @@ public class VerInformacionOrden extends JInternalFrame{
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
         contenedor.add(elegirUsuarioLabel);
 
-        DefaultListModel tes = new DefaultListModel();
+        DefaultListModel<String> tes = new DefaultListModel<String>();
         ArrayList<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
         ordenes.stream().forEach((orden) -> {
-            tes.addElement(orden);
+            tes.addElement(orden.getNroOrden() + " - " + orden.getClienteCompraProducto().get(0).getCliente().getNickname() + " - " + orden.getFecha().toString());
         });
-        ordenList = new JList(tes);
+        ordenList = new JList<String>(tes);
         ordenList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         ordenList.setBounds(0, 50, 200, 300);
         ordenList.addListSelectionListener(new ListSelectionListener(){
@@ -79,13 +79,13 @@ public class VerInformacionOrden extends JInternalFrame{
             public void valueChanged(ListSelectionEvent evt){
                 if(evt.getValueIsAdjusting())
                     return;
-                DataOrdenCompra aux = (DataOrdenCompra)ordenList.getSelectedValue();
+                DataOrdenCompra aux = new DataOrdenCompra(ManejadorOrdenes.getInstance().obtenerOrdenes().get(ordenList.getSelectedValue().split("-")[0].trim()));
                 controlarOrden.elegirOrden(aux.getNroOrden());
                 nroRefText.setText(String.valueOf(aux.getNroOrden()));
                 fechaVentaText.setDate(aux.getFecha());
                 precioTotalText.setText(String.valueOf(aux.getPrecioTotal()));
                 clienteText.setText(aux.getClienteCompraProducto().get(0).getCliente().getNickname());
-                DefaultListModel tes2 = new DefaultListModel();
+                DefaultListModel<String> tes2 = new DefaultListModel<String>();
                 ArrayList<DataEspecificacionProducto> productosLst = controlarOrden.listarProductosEnOrden();
                 
                 productosLst.stream().forEach((producto) -> {
@@ -139,7 +139,7 @@ public class VerInformacionOrden extends JInternalFrame{
         productos.setBounds(220, 220, 150, 10);
         contenedor.add(productos);
         
-        productosList = new JList(new DefaultListModel());
+        productosList = new JList<String>(new DefaultListModel<String>());
         productosList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         productosList.setBounds(220, 240, 450, 80);
         contenedor.add(productosList);

@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Clases.IControladorUsuarios;
+import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.Utils;
 import Controlador.DataTypes.DataProveedor;
 import java.awt.BorderLayout;
@@ -26,7 +27,7 @@ import javax.swing.event.ListSelectionListener;
 class VerInformacionProveedorForm extends JInternalFrame {
 
     private final JPanel contenedor;
-    private final JList userList;
+    private final JList<String> userList;
     private final JLabel nickname;
     private final JLabel nombre;
     private final JLabel apellido;
@@ -64,12 +65,12 @@ class VerInformacionProveedorForm extends JInternalFrame {
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
         contenedor.add(elegirUsuarioLabel);
 
-        DefaultListModel tes = new DefaultListModel();
+        DefaultListModel<String> tes = new DefaultListModel<String>();
         ArrayList<DataProveedor> clientes = ICU.listarProveedores();
         clientes.stream().forEach((proveedor) -> {
-            tes.addElement(proveedor);
+            tes.addElement(proveedor.getNickname() + " - "+ proveedor.getNombre() + " " + proveedor.getApellido());
         });
-        userList = new JList(tes);
+        userList = new JList<String>(tes);
         userList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         userList.setBounds(0, 50, 200, 300);
         userList.addListSelectionListener(new ListSelectionListener() {
@@ -79,7 +80,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
                 if (evt.getValueIsAdjusting()) {
                     return;
                 }
-                DataProveedor aux = (DataProveedor) userList.getSelectedValue();
+                DataProveedor aux = new DataProveedor(ManejadorUsuarios.getInstance().obtenerProveedores().get(userList.getSelectedValue().split("-")[0].trim()));
                 nicknameText.setText(aux.getNickname());
                 emailText.setText(aux.getEmail());
                 fNacText.setText(Utils.formatDate(aux.getFechaNacimiento()));

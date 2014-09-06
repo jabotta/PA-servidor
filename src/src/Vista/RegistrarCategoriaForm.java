@@ -112,7 +112,7 @@ class RegistrarCategoriaForm extends JInternalFrame {
 
     private void guardarCategoria(ActionEvent evt) {
         String padre = null;
-        Iterator it = treePane.getSelectedCategories().iterator();
+        Iterator<String> it = (Iterator<String>)treePane.getSelectedCategories().iterator();
         if (it.hasNext()) {
 
             padre = (String) it.next();

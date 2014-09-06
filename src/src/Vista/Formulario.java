@@ -95,7 +95,7 @@ public class Formulario extends JPanel {
                 componentSize.setSize(180, 200);
                 break;
             case "list":
-                componente = new JList();
+                componente = new JList<String>();
                 componentSize.setSize(180, 200);
                 break;
             case "combo":

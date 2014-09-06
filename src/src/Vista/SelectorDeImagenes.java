@@ -50,7 +50,7 @@ public class SelectorDeImagenes extends JPanel {
         pane.setLocation(0, 40);
         paneWrapper.add(pane, BorderLayout.NORTH);
 
-        imagenes = new ArrayList();
+        imagenes = new ArrayList<ImagenComponent>();
 
         if (!justOne) {
             addIMG = new JButton("Agregar Imagen");
@@ -92,7 +92,7 @@ public class SelectorDeImagenes extends JPanel {
         pane.setLocation(0, 40);
         paneWrapper.add(pane, BorderLayout.NORTH);
 
-        imagenes = new ArrayList();
+        imagenes = new ArrayList<ImagenComponent>();
         addIMG = new JButton("Agregar Imagen");
         addIMG.addActionListener(new ActionListener() {
 
@@ -160,10 +160,10 @@ public class SelectorDeImagenes extends JPanel {
     }
 
     public HashSet<String> getListaDeImagenes() {
-        HashSet<String> imgPaths = new HashSet();
-        Iterator it = imagenes.iterator();
+        HashSet<String> imgPaths = new HashSet<String>();
+        Iterator<ImagenComponent> it = imagenes.iterator();
         while (it.hasNext()) {
-            ImagenComponent ic = (ImagenComponent) it.next();
+            ImagenComponent ic = it.next();
             if (!ic.isDeleted()) {
                 imgPaths.add(ic.getPath());
             }
@@ -181,9 +181,9 @@ public class SelectorDeImagenes extends JPanel {
         };
         imagenes.removeIf(p);
         pane.removeAll();
-        Iterator it = imagenes.iterator();
+        Iterator<ImagenComponent> it = imagenes.iterator();
         while (it.hasNext()) {
-            ImagenComponent ic = (ImagenComponent) it.next();
+            ImagenComponent ic = it.next();
             ic.setLocation(10, imagenes.size() * 40);
             pane.add(ic);
             revalidate();

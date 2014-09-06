@@ -64,7 +64,7 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
 
         setTitle("Crear Orden");
 
-        carritoArray = new ArrayList();
+        carritoArray = new ArrayList<GenerarOrdenDeCompra.Item>();
 
         JButton elegirCategoria = new JButton("Elegir Categorias");
         elegirCategoria.setSize(100, 40);

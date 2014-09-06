@@ -174,7 +174,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
         String linkSitio = linkSitioText.getText();
         String imagen = "";
         HashSet<String> imagenes = this.sdi.getListaDeImagenes();
-        Iterator it = imagenes.iterator();
+        Iterator<String> it = imagenes.iterator();
         if (it.hasNext()) {
             imagen = (String) it.next();
         }
