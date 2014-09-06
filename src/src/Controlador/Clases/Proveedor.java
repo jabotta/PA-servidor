@@ -6,6 +6,7 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Proveedor extends Usuario implements Serializable{
@@ -13,7 +14,7 @@ public class Proveedor extends Usuario implements Serializable{
     
     private String nombreCompania;
     private String linkSitio;
-    @JoinColumn(name = "NICKNAME")
+    @PrimaryKeyJoinColumn(name = "NICKNAME")
     @OneToOne
     private Usuario usuario;
     
