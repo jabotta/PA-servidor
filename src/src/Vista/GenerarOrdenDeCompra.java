@@ -7,9 +7,7 @@ package Vista;
 
 import Controlador.Clases.IControladorOrdenes;
 import Controlador.Clases.ManejadorOrdenes;
-import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
-import Modelo.Especificacionproducto_;
 import static Vista.VentanaPrincipal.controlarProducto;
 import java.awt.BorderLayout;
 import java.awt.Dimension;

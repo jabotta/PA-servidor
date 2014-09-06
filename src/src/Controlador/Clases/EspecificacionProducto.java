@@ -3,13 +3,20 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProveedor;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class EspecificacionProducto {
+@Entity
+public class EspecificacionProducto implements Serializable{
+    private static final long serialVersionUID = 1L;
     
+    @Id
     private String nroReferencia;
     private String nombre;
     private String descripcion;
@@ -19,6 +26,9 @@ public class EspecificacionProducto {
     private ArrayList<String> imagenes;
     private Map<String,Categoria> categorias;
     private Map<Integer,Producto> listaProductos;
+
+    public EspecificacionProducto() {
+    }
     
     public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, Map<String,Categoria> categorias,Map<Integer,Producto> listaProductos) {
         this.nroReferencia = nroReferencia;
@@ -138,6 +148,22 @@ public class EspecificacionProducto {
     @Override
     public String toString() {
         return this.getNroReferencia() + "  --  " + this.getNombre();
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (nroReferencia != null ? nroReferencia.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof EspecificacionProducto)) {
+            return false;
+        }
+        EspecificacionProducto other = (EspecificacionProducto) object;
+        return (this.nroReferencia != null || other.nroReferencia == null) && (this.nroReferencia == null || this.nroReferencia.equals(other.nroReferencia));
     }
     
 }

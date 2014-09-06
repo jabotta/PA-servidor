@@ -44,7 +44,7 @@ public class Categoria2 implements Serializable {
         @JoinColumn(name = "CAT_NAME", referencedColumnName = "NOMBRE", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "ESP_NROREF", referencedColumnName = "NROREFERENCIA", nullable = false)})
     @ManyToMany
-    private Collection<Especificacionproducto> especificacionproductoCollection;
+    private Collection<Especificacionproducto2> especificacionproductoCollection;
     private static final long serialVersionUID = 1L;
     @OneToMany(mappedBy = "padre")
     private Collection<Categoria2> categoriaCollection;
@@ -110,11 +110,11 @@ public class Categoria2 implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Especificacionproducto> getEspecificacionproductoCollection() {
+    public Collection<Especificacionproducto2> getEspecificacionproductoCollection() {
         return especificacionproductoCollection;
     }
 
-    public void setEspecificacionproductoCollection(Collection<Especificacionproducto> especificacionproductoCollection) {
+    public void setEspecificacionproductoCollection(Collection<Especificacionproducto2> especificacionproductoCollection) {
         this.especificacionproductoCollection = especificacionproductoCollection;
     }
 

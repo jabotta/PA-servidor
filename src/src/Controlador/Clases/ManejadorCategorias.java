@@ -2,31 +2,27 @@ package Controlador.Clases;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class ManejadorCategorias {
     
     private static ManejadorCategorias instance = null;
     Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap<String, Categoria>());
+    EntityManager entityManager;
     
-    EntityManagerFactory EntityManagerFactory = Persistence.createEntityManagerFactory("ProgramacionAppPU");
-    EntityManager entityManager = EntityManagerFactory.createEntityManager();
     
-    public static ManejadorCategorias getInstance(){
+    public static ManejadorCategorias getInstance(EntityManager em){
         if(ManejadorCategorias.instance == null){
-            ManejadorCategorias.instance = new ManejadorCategorias();
+            ManejadorCategorias.instance = new ManejadorCategorias(em);
         }
         return ManejadorCategorias.instance;
     }
     
-    private ManejadorCategorias(){
-    
+    private ManejadorCategorias(EntityManager em){
+        entityManager = em;
     }
     
     public void agregarCategoria(Categoria categoria){
@@ -41,7 +37,6 @@ public class ManejadorCategorias {
         entityManager.getTransaction().begin();
         entityManager.persist(categoria);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
     
     public Map<String,Categoria> obtenerCategorias(){

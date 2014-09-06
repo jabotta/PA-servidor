@@ -1,7 +1,6 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataCliente;
-import Modelo.Usuario2;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Entity;

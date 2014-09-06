@@ -2,12 +2,20 @@ package Controlador.Clases;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class ManejadorEspProductos {
     
     private static ManejadorEspProductos instance = null;
     Map<String,EspecificacionProducto> especificacionProductos = Collections.synchronizedMap(new HashMap());
+    
+    EntityManagerFactory EntityManagerFactory = Persistence.createEntityManagerFactory("ProgramacionAppPU");
+    EntityManager entityManager = EntityManagerFactory.createEntityManager();
     
     public static ManejadorEspProductos getInstance(){
         if(ManejadorEspProductos.instance == null){
@@ -23,15 +31,26 @@ public class ManejadorEspProductos {
     
     public void agregarEspecificacionProducto(EspecificacionProducto especificacionProducto){
         especificacionProductos.put(especificacionProducto.getNroReferencia(), especificacionProducto);
-        especificacionProducto.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {    
-         
+        especificacionProducto.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
             ManejadorCategorias.getInstance().getCategoria(valor.getNombre()).agregarProducto(especificacionProducto);
-//            System.out.println(valor.getNombre()+" "+ManejadorCategorias.getInstance().getCategoria(valor.getNombre()).getListaProductos().size());
         });
         
+        //guardo la especificacion de producto en bd
+        entityManager.getTransaction().begin();
+        entityManager.persist(especificacionProducto);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
     
     public Map<String,EspecificacionProducto> obtenerEspecificacionProductos(){
+        //obtengo todas las categorias de la bd
+        Query query = entityManager.createQuery("SELECT e FROM EspecificacionProducto e", EspecificacionProducto.class);
+        
+        //las guardo en la colecion
+        List<EspecificacionProducto> listUsuarios = query.getResultList();
+        listUsuarios.stream().forEach((esp) -> {
+            especificacionProductos.put(esp.getNroReferencia(), esp);
+        });
         return especificacionProductos;
     }
     
