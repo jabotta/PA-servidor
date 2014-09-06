@@ -5,24 +5,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class ManejadorCategorias {
     
     private static ManejadorCategorias instance = null;
     Map<String,Categoria> categorias = Collections.synchronizedMap(new HashMap<String, Categoria>());
-    EntityManager entityManager;
     
+    EntityManagerFactory EntityManagerFactory = Persistence.createEntityManagerFactory("ProgramacionAppPU");
+    EntityManager entityManager = EntityManagerFactory.createEntityManager();
     
-    public static ManejadorCategorias getInstance(EntityManager em){
+    public static ManejadorCategorias getInstance(){
         if(ManejadorCategorias.instance == null){
-            ManejadorCategorias.instance = new ManejadorCategorias(em);
+            ManejadorCategorias.instance = new ManejadorCategorias();
         }
         return ManejadorCategorias.instance;
     }
     
-    private ManejadorCategorias(EntityManager em){
-        entityManager = em;
+    private ManejadorCategorias(){
+    
     }
     
     public void agregarCategoria(Categoria categoria){
