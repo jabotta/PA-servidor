@@ -6,12 +6,13 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Cliente extends Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     
-    @JoinColumn(name = "NICKNAME")
+    @PrimaryKeyJoinColumn(name = "NICKNAME")
     @OneToOne
     private Usuario usuario;
     
