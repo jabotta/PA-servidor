@@ -3,10 +3,10 @@
   <persistence-unit name="ProgramacionAppPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Controlador.Clases.Categoria</class>
-<!--    <class>Controlador.Clases.Usuario</class>
+    <class>Controlador.Clases.Usuario</class>
     <class>Controlador.Clases.Proveedor</class>
     <class>Controlador.Clases.Cliente</class>
-    <class>Controlador.Clases.EspecificacionProducto</class>
+   <!-- <class>Controlador.Clases.EspecificacionProducto</class>
     <class>Controlador.Clases.Producto</class>-->
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/prog1"/>

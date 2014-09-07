@@ -35,7 +35,6 @@ public class ManejadorUsuarios {
         entityManager.getTransaction().begin();
         entityManager.persist(usuario);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
     
     public Map<String,Usuario> obtenerUsuarios(){

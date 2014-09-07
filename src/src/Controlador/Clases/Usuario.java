@@ -3,20 +3,31 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataUsuario;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="DTYPE", 
+  discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("BaseUser")
 public abstract class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    private String nickname;
-    private String nombre;
-    private String apellido;
-    private String email;
-    private Calendar fechaNacimiento;
-    private String imagen;
+    protected String nickname;
+    protected String nombre;
+    protected String apellido;
+    protected String email;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    protected Calendar fechaNacimiento;
+    protected String imagen;
 
     public Usuario() {
     }

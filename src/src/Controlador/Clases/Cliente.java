@@ -3,19 +3,20 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCliente;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("Cliente")
 public class Cliente extends Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
-    
-    @PrimaryKeyJoinColumn(name = "NICKNAME")
-    @OneToOne
-    private Usuario usuario;
-    
+   
     public Cliente() {
     }
     

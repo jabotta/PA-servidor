@@ -3,20 +3,20 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataProveedor;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
+@DiscriminatorValue("Proveedor")
 public class Proveedor extends Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private String nombreCompania;
     private String linkSitio;
-    @PrimaryKeyJoinColumn(name = "NICKNAME")
-    @OneToOne
-    private Usuario usuario;
     
     public Proveedor() {
     }
