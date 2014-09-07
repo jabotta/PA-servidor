@@ -59,7 +59,6 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto){
         nuevoEspProducto = new EspecificacionProducto(espProducto,proveedorElegido);
- 
     }
     
     @Override
@@ -117,7 +116,7 @@ public class ControladorProductos implements IControladorProductos{
                 
     @Override
     public ArrayList<DataEspecificacionProducto> listarProductosCategoria(){
-        ArrayList<DataEspecificacionProducto> result = new ArrayList<DataEspecificacionProducto>();
+        ArrayList<DataEspecificacionProducto> result = new ArrayList<>();
         categoriaElegida.getListaProductos().entrySet().stream().map((espProd) -> espProd.getValue()).forEach((valor) -> {
             result.add(new DataEspecificacionProducto(valor,true));
         });

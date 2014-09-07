@@ -3,10 +3,12 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Producto implements Serializable{
@@ -15,8 +17,10 @@ public class Producto implements Serializable{
     @Id
     private Integer id;
     private String idEspecifico;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ID_ESPECIFICO")
+    
+//    @Transient
+    @ManyToOne(cascade={CascadeType.PERSIST})
+    @JoinColumn(name = "ESPECIFICACION")
     private EspecificacionProducto especificacionProducto;
 
     public Producto() {

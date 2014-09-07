@@ -16,10 +16,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 public class EspecificacionProducto implements Serializable{
@@ -29,24 +29,31 @@ public class EspecificacionProducto implements Serializable{
     private String nroReferencia;
     private String nombre;
     private String descripcion;
+    private Float precio;
+    
     @ElementCollection
     @MapKeyColumn(name="NOMBRE")
     @Column(name="VALOR")
     @CollectionTable(name="ESPECIFICACIONES", joinColumns=@JoinColumn(name="NROREFERENCIA"))
     private Map<String,String> especificacion;
-    private Float precio;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "PROVEEDOR_ID")
     private Proveedor proveedor;
+    
     @CollectionTable(
         name="IMAGENES",
         joinColumns=@JoinColumn(name="NROREFERENCIA")
     )
     private ArrayList<String> imagenes;
+    
     @OneToMany(cascade={CascadeType.PERSIST})
     @MapKey(name="NOMBRE")
     @JoinTable(name="CATEGORIA", schema="CNTRCT",
         joinColumns=@JoinColumn(name="NOMBRE"),
         inverseJoinColumns=@JoinColumn(name="NROREFERENCIA"))
     private Map<String,Categoria> categorias;
+    
     @OneToMany(cascade={CascadeType.PERSIST})
     @MapKey(name="ID")
     @JoinTable(name="PRODUCTO", schema="CNTRCT",

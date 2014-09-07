@@ -34,12 +34,11 @@ public class ManejadorEspProductos {
         especificacionProducto.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
             ManejadorCategorias.getInstance().getCategoria(valor.getNombre()).agregarProducto(especificacionProducto);
         });
-        
+
         //guardo la especificacion de producto en bd
         entityManager.getTransaction().begin();
         entityManager.persist(especificacionProducto);
         entityManager.getTransaction().commit();
-        entityManager.close();
     }
     
     public Map<String,EspecificacionProducto> obtenerEspecificacionProductos(){
