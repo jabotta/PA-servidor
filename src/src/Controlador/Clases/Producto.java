@@ -3,7 +3,7 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,11 +16,11 @@ public class Producto implements Serializable{
     
     @Id
     private Integer id;
+    @Column(name="ID_ESPECIFICO")
     private String idEspecifico;
-    
-//    @Transient
-    @ManyToOne(cascade={CascadeType.PERSIST})
-    @JoinColumn(name = "ESPECIFICACION")
+//    @ManyToOne
+//    @JoinColumn(name = "ESPECIFICACION")
+    @Transient
     private EspecificacionProducto especificacionProducto;
 
     public Producto() {

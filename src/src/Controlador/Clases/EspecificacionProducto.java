@@ -26,6 +26,7 @@ public class EspecificacionProducto implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @Column(name = "NROREFERENCIA")
     private String nroReferencia;
     private String nombre;
     private String descripcion;
@@ -37,7 +38,7 @@ public class EspecificacionProducto implements Serializable{
     @CollectionTable(name="ESPECIFICACIONES", joinColumns=@JoinColumn(name="NROREFERENCIA"))
     private Map<String,String> especificacion;
     
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "PROVEEDOR_ID")
     private Proveedor proveedor;
     
@@ -54,11 +55,8 @@ public class EspecificacionProducto implements Serializable{
         inverseJoinColumns=@JoinColumn(name="NROREFERENCIA"))
     private Map<String,Categoria> categorias;
     
-    @OneToMany(cascade={CascadeType.PERSIST})
-    @MapKey(name="ID")
-    @JoinTable(name="PRODUCTO", schema="CNTRCT",
-        joinColumns=@JoinColumn(name="ID"),
-        inverseJoinColumns=@JoinColumn(name="NROREFERENCIA"))
+    @OneToMany(mappedBy = "especificacionProducto")
+    @MapKey(name = "id")
     private Map<Integer,Producto> listaProductos;
 
     public EspecificacionProducto() {
