@@ -16,7 +16,7 @@ public class Producto implements Serializable{
     private Integer id;
     private String idEspecifico;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "ESPECIFICACION")
+    @JoinColumn(name = "ID_ESPECIFICO")
     private EspecificacionProducto especificacionProducto;
 
     public Producto() {

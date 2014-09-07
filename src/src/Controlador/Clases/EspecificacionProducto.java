@@ -8,8 +8,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,11 +29,29 @@ public class EspecificacionProducto implements Serializable{
     private String nroReferencia;
     private String nombre;
     private String descripcion;
+    @ElementCollection
+    @MapKeyColumn(name="NOMBRE")
+    @Column(name="VALOR")
+    @CollectionTable(name="ESPECIFICACIONES", joinColumns=@JoinColumn(name="NROREFERENCIA"))
     private Map<String,String> especificacion;
     private Float precio;
     private Proveedor proveedor;
+    @CollectionTable(
+        name="IMAGENES",
+        joinColumns=@JoinColumn(name="NROREFERENCIA")
+    )
     private ArrayList<String> imagenes;
+    @OneToMany(cascade={CascadeType.PERSIST})
+    @MapKey(name="NOMBRE")
+    @JoinTable(name="CATEGORIA", schema="CNTRCT",
+        joinColumns=@JoinColumn(name="NOMBRE"),
+        inverseJoinColumns=@JoinColumn(name="NROREFERENCIA"))
     private Map<String,Categoria> categorias;
+    @OneToMany(cascade={CascadeType.PERSIST})
+    @MapKey(name="ID")
+    @JoinTable(name="PRODUCTO", schema="CNTRCT",
+        joinColumns=@JoinColumn(name="ID"),
+        inverseJoinColumns=@JoinColumn(name="NROREFERENCIA"))
     private Map<Integer,Producto> listaProductos;
 
     public EspecificacionProducto() {
