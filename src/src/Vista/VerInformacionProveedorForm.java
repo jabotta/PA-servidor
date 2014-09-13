@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -67,7 +68,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.add(elegirUsuarioLabel);
 
         DefaultListModel tes = new DefaultListModel();
-        ArrayList<DataProveedor> clientes = ICU.listarProveedores();
+        List<DataProveedor> clientes = ICU.listarProveedores();
         clientes.stream().forEach((proveedor) -> {
             tes.addElement(proveedor);
         });

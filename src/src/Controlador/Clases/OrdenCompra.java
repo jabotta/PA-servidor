@@ -5,21 +5,30 @@ import Controlador.DataTypes.DataOrdenCompra;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
+@Entity
 public class OrdenCompra {
-    
+    @Id
     private Integer nroOrden;
     private Date fecha;
     private Float precioTotal;
-    private ArrayList<ClienteCompraProducto> clienteCompraProducto;
+    @OneToMany(cascade={CascadeType.PERSIST})
+    @JoinColumn(name="ORDEN_ID")
+    private List<ClienteCompraProducto> clienteCompraProducto;
     
-    public OrdenCompra(Integer nroOrden, ArrayList<ClienteCompraProducto> clienteCompraProducto) {
+    public OrdenCompra(Integer nroOrden, List<ClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = new Date();
         this.clienteCompraProducto = clienteCompraProducto;
     }
     
-    public OrdenCompra(Integer nroOrden, Date fecha, ArrayList<ClienteCompraProducto> clienteCompraProducto) {
+    public OrdenCompra(Integer nroOrden, Date fecha, List<ClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = fecha;
         this.clienteCompraProducto = clienteCompraProducto;
@@ -46,12 +55,12 @@ public class OrdenCompra {
         this.fecha = fecha;
     }
     
-    public ArrayList<ClienteCompraProducto> getClienteCompraProducto() {
+    public List<ClienteCompraProducto> getClienteCompraProducto() {
         return clienteCompraProducto;
     }
     
-    public ArrayList<DataClienteCompraProducto> getDataClienteCompraProducto() {
-        ArrayList<DataClienteCompraProducto> dataClienteCompraProducto = new ArrayList<>();
+    public List<DataClienteCompraProducto> getDataClienteCompraProducto() {
+        List<DataClienteCompraProducto> dataClienteCompraProducto = new ArrayList<>();
         clienteCompraProducto.forEach((cliProd) -> {
             System.out.println(cliProd+"<<>>");
             dataClienteCompraProducto.add(new DataClienteCompraProducto(cliProd));
@@ -59,7 +68,7 @@ public class OrdenCompra {
         return dataClienteCompraProducto;
     }
 
-    public void setClienteCompraProducto(ArrayList<ClienteCompraProducto> clienteCompraProducto) {
+    public void setClienteCompraProducto(List<ClienteCompraProducto> clienteCompraProducto) {
         this.clienteCompraProducto = clienteCompraProducto;
     }
     

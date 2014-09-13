@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -79,7 +80,7 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
         contenedor.add(elegirUsuarioLabel);
 
         DefaultListModel tes = new DefaultListModel();
-        ArrayList<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
+        List<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
         ordenes.stream().forEach((orden) -> {
             tes.addElement(orden);
         });
@@ -98,7 +99,7 @@ public class CancelarOrdenDeCompra extends JInternalFrame{
                 precioTotalText.setText(String.valueOf(aux.getPrecioTotal()));
                 clienteText.setText(aux.getClienteCompraProducto().get(0).getCliente().getNickname());
                 DefaultListModel tes2 = new DefaultListModel();
-                ArrayList<DataEspecificacionProducto> productosLst = controlarOrden.listarProductosEnOrden();
+                List<DataEspecificacionProducto> productosLst = controlarOrden.listarProductosEnOrden();
                 
                 productosLst.stream().forEach((producto) -> {
                     tes2.addElement(producto.getNroReferencia() + " - "+producto.getNombre() + " - $"+producto.getPrecio());

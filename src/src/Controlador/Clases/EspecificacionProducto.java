@@ -7,15 +7,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
@@ -33,40 +36,37 @@ public class EspecificacionProducto implements Serializable{
     private String descripcion;
     private Float precio;
     
-    /*@ElementCollection
+    @ElementCollection
     @MapKeyColumn(name="NOMBRE")
     @Column(name="VALOR")
-    @CollectionTable(name="ESPECIFICACIONES", joinColumns=@JoinColumn(name="NROREFERENCIA"))*/
-    @Transient
+    @CollectionTable(name="ESPECIFICACIONES", joinColumns=@JoinColumn(name="ESPPRID"))
+    //@Transient
     private Map<String,String> especificacion;
     
     @ManyToOne
     @JoinColumn(name = "PROVEEDOR_ID")
     private Proveedor proveedor;
 
-    /*@CollectionTable(name="ESPECIFICACIONPRODUCTO_IMAGENES", joinColumns=@JoinColumn(name="IMAGENES_NROEFERENCIA"))
-    @Column(name="IMAGENES")//the cost (Float)
-    @ElementCollection*/
-    @Transient
-    private ArrayList<String> imagenes;
-    /*
-    @OneToMany(cascade={CascadeType.PERSIST})
-    @MapKey(name="NOMBRE")
-    @JoinTable(name="CATEGORIA", schema="CNTRCT",
-        joinColumns=@JoinColumn(name="NOMBRE"),
-        inverseJoinColumns=@JoinColumn(name="NROREFERENCIA"))*/
-    @Transient
+    //@Transient
+    @ElementCollection
+    @CollectionTable(name="IMAGENES",joinColumns=@JoinColumn(name="PARENTID"))
+    @Column(name="PATH")
+    private List<String> imagenes;
+    
+    @ManyToMany
+    @JoinTable(name="CATEGORIAESPECIFICACIONPROD",
+        joinColumns={@JoinColumn(name="ESP_NROREF", referencedColumnName="NROREFERENCIA")},
+        inverseJoinColumns={@JoinColumn(name="CAT_NAME", referencedColumnName="NOMBRE")})
     private Map<String,Categoria> categorias;
-    /*
-    @OneToMany(mappedBy = "especificacionProducto")
-    @MapKey(name = "id")*/
-    @Transient
-    private Map<Integer,Producto> listaProductos;
+    
+    @OneToMany(cascade={CascadeType.PERSIST},mappedBy="especificacionProducto")
+    @JoinColumn(name="ID")
+    private List<Producto> listaProductos;
 
     public EspecificacionProducto() {
     }
     
-    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, Map<String,Categoria> categorias,Map<Integer,Producto> listaProductos) {
+    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, Map<String,Categoria> categorias,List<Producto> listaProductos) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -85,9 +85,9 @@ public class EspecificacionProducto implements Serializable{
         this.especificacion = espProducto.getEspecificacion();
         this.precio = espProducto.getPrecio();
         this.proveedor = proveedor;
-        this.categorias = Collections.synchronizedMap(new HashMap());
+        this.categorias = new HashMap();
         this.imagenes = new ArrayList();
-        this.listaProductos = Collections.synchronizedMap(new HashMap());
+        this.listaProductos = new ArrayList();
         /*espProducto.getProductos().entrySet().forEach((producto) -> {
            this.listaProductos.put(producto.getKey(),new Producto(producto.getKey(),this));
         });*/
@@ -125,11 +125,11 @@ public class EspecificacionProducto implements Serializable{
         this.especificacion = especificacion;
     }
     
-    public Map<Integer,Producto> getListaProductos() {
+    public List<Producto> getListaProductos() {
         return listaProductos;
     }
 
-    public void setListaProductos(Map<Integer,Producto> listaProductos) {
+    public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }
 
@@ -153,11 +153,11 @@ public class EspecificacionProducto implements Serializable{
         this.proveedor = proveedor;
     }
 
-    public ArrayList<String> getImagenes() {
+    public List<String> getImagenes() {
         return imagenes;
     }
 
-    public void setImagenes(ArrayList<String> imagenes) {
+    public void setImagenes(List<String> imagenes) {
         this.imagenes = imagenes;
     }
     
@@ -165,9 +165,9 @@ public class EspecificacionProducto implements Serializable{
         return categorias;
     }
     
-    public ArrayList<DataCategoria> getDataCategorias() {
-        ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
-       /* this.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+    public List<DataCategoria> getDataCategorias() {
+        List<DataCategoria> dataCategorias = new ArrayList<>();
+        /*this.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
             dataCategorias.add(new DataCategoria(valor, false));
         });*/
         return dataCategorias;

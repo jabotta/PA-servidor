@@ -4,6 +4,7 @@ import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class ControladorUsuarios implements IControladorUsuarios {
@@ -64,8 +65,8 @@ public class ControladorUsuarios implements IControladorUsuarios {
 //        
 //    }
     @Override
-    public ArrayList<DataCliente> listarClientes() {
-        ArrayList<DataCliente> dataCliente = new ArrayList<>();
+    public List<DataCliente> listarClientes() {
+        List<DataCliente> dataCliente = new ArrayList<>();
         ManejadorUsuarios.getInstance().obtenerClientes().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
             dataCliente.add(new DataCliente(valor));
         });
@@ -84,8 +85,8 @@ public class ControladorUsuarios implements IControladorUsuarios {
     }
 
     @Override
-    public ArrayList<DataOrdenCompra> listarOrdenesCliente() {
-        ArrayList<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
+    public List<DataOrdenCompra> listarOrdenesCliente() {
+        List<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
         ManejadorOrdenes.getInstance().obtenerOrdenes().entrySet().stream().map((orden) -> orden.getValue()).forEach((valor) -> {
             if (valor.getCliente() == clienteElegido) {
                 dataOrdenCompra.add(new DataOrdenCompra(valor));
@@ -95,8 +96,8 @@ public class ControladorUsuarios implements IControladorUsuarios {
     }
 
     @Override
-    public ArrayList<DataProveedor> listarProveedores() {
-        ArrayList<DataProveedor> dataProveedor = new ArrayList<>();
+    public List<DataProveedor> listarProveedores() {
+        List<DataProveedor> dataProveedor = new ArrayList<>();
         ManejadorUsuarios.getInstance().obtenerProveedores().entrySet().stream().map((proovedor) -> proovedor.getValue()).forEach((valor) -> {
             dataProveedor.add(new DataProveedor(valor));
         });

@@ -5,9 +5,11 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -20,8 +22,8 @@ public class Categoria implements Serializable{
     @ManyToOne(optional = false)
     @JoinColumn(name = "PADRE")
     private Categoria padre;
-    @Transient
-    private Map<String,EspecificacionProducto> listaProductos = Collections.synchronizedMap(new HashMap<String,EspecificacionProducto>());
+    @ManyToMany(cascade={CascadeType.PERSIST}, mappedBy="categorias")
+    private Map<String,EspecificacionProducto> listaProductos = new HashMap<String,EspecificacionProducto>();
 
     public Categoria() {
         

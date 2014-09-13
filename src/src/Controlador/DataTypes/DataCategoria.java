@@ -18,7 +18,7 @@ public class DataCategoria {
         }else{
             this.padre = c.getDataPadre();
         }
-        this.listaProductos = Collections.synchronizedMap(new HashMap());
+        this.listaProductos = new HashMap();
         if(conProductos){
             c.getListaProductos().entrySet().forEach((producto) -> {
                this.listaProductos.put(producto.getKey(),new DataEspecificacionProducto(producto.getValue(),true));

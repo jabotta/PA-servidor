@@ -12,7 +12,7 @@ import javax.persistence.Query;
 public class ManejadorEspProductos {
     
     private static ManejadorEspProductos instance = null;
-    Map<String,EspecificacionProducto> especificacionProductos = Collections.synchronizedMap(new HashMap());
+    Map<String,EspecificacionProducto> especificacionProductos = new HashMap();
     
     EntityManagerFactory EntityManagerFactory = Persistence.createEntityManagerFactory("ProgramacionAppPU");
     EntityManager entityManager = EntityManagerFactory.createEntityManager();

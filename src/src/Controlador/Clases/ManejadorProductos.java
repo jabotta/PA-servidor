@@ -7,7 +7,7 @@ import java.util.Map;
 public class ManejadorProductos {
     
     private static ManejadorProductos instance = null;
-    Map<Integer,Producto> productos = Collections.synchronizedMap(new HashMap());
+    Map<Integer,Producto> productos = new HashMap();
     
     public static ManejadorProductos getInstance(){
         if(ManejadorProductos.instance == null){

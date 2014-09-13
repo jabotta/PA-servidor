@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -67,7 +68,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.add(elegirUsuarioLabel);
 
         DefaultListModel tes = new DefaultListModel();
-        ArrayList<DataCliente> clientes = ICU.listarClientes();
+        List<DataCliente> clientes = ICU.listarClientes();
         clientes.stream().forEach((cliente) -> {
             tes.addElement(cliente);
         });

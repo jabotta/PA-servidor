@@ -12,7 +12,7 @@ import javax.persistence.Query;
 public class ManejadorUsuarios {
     
     private static ManejadorUsuarios instance = null;
-    Map<String,Usuario> usuarios = Collections.synchronizedMap(new HashMap());
+    Map<String,Usuario> usuarios = new HashMap();
     
     EntityManagerFactory EntityManagerFactory = Persistence.createEntityManagerFactory("ProgramacionAppPU");
     EntityManager entityManager = EntityManagerFactory.createEntityManager();
@@ -54,7 +54,7 @@ public class ManejadorUsuarios {
         Query query = entityManager.createQuery("SELECT c FROM Cliente c");
         
         //las guardo en la colecion
-        Map<String,Cliente> clientes = Collections.synchronizedMap(new HashMap());
+        Map<String,Cliente> clientes = new HashMap();
         List<Cliente> listClientes = query.getResultList();
         listClientes.stream().forEach((cli) -> {
             clientes.put(cli.getNickname(), cli);
@@ -67,7 +67,7 @@ public class ManejadorUsuarios {
         Query query = entityManager.createQuery("SELECT c FROM Proveedor c");
         
         //las guardo en la colecion
-        Map<String,Proveedor> proveedores = Collections.synchronizedMap(new HashMap());
+        Map<String,Proveedor> proveedores = new HashMap();
         List<Proveedor> listProveedores = query.getResultList();
         listProveedores.stream().forEach((pro) -> {
             proveedores.put(pro.getNickname(), pro);

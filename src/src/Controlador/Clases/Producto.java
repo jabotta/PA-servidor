@@ -3,10 +3,13 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -18,9 +21,9 @@ public class Producto implements Serializable{
     private Integer id;
     @Column(name="ID_ESPECIFICO")
     private String idEspecifico;
-//    @ManyToOne
-//    @JoinColumn(name = "ESPECIFICACION")
-    @Transient
+    
+    @ManyToOne
+    @JoinColumn(name="ESPECIFICACION")
     private EspecificacionProducto especificacionProducto;
 
     public Producto() {
