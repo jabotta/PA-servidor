@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.Clases.Utils;
-import com.toedter.calendar.demo.DateChooserPanel;
+
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,12 +27,14 @@ import javax.swing.JTextField;
 public class Formulario extends JPanel {
 
     private HashMap<String, JComponent> campos;
+    private HashMap<String, JLabel> labels;
     private Integer currentHeight;
     private boolean isEnabled;
 
     public Formulario() {
         isEnabled = true;
         campos = new HashMap<String, JComponent>();
+        labels = new HashMap<String, JLabel>();
         setLayout(null);
         setVisible(true);
         setSize(500, 900);
@@ -44,6 +46,7 @@ public class Formulario extends JPanel {
 
         isEnabled = b;
         campos = new HashMap<String, JComponent>();
+        labels = new HashMap<String, JLabel>();
         setLayout(null);
         setVisible(true);
         setSize(500, 700);
@@ -55,7 +58,7 @@ public class Formulario extends JPanel {
         this.addField(fieldName, fieldType, null, null);
     }
 
-    public void addIMGField(String fieldName,   ArrayList<String> s,Boolean editable) {
+    public void addIMGField(String fieldName, ArrayList<String> s, Boolean editable) {
         JComponent componente;
         JLabel label = new JLabel();
         label.setText(fieldName);
@@ -107,9 +110,11 @@ public class Formulario extends JPanel {
                 break;
 
             case "Date":
-                componente = new DateChooserPanel();
-
-                ((DateChooserPanel) componente).setDate(Utils.getDateFromString(value));
+                componente = new DateChosserPanel();
+                componentSize.setSize(180, 30);
+                if (value != null) {
+                    ((DateChosserPanel) componente).setDate(Utils.getDateFromString(value));
+                }
                 break;
             case "text":
             default:
@@ -126,10 +131,11 @@ public class Formulario extends JPanel {
         currentHeight += componentSize.height;
         label.setLabelFor(componente);
         //  System.out.println(componente.getClass());
+        labels.put(fieldName, label);
         add(label);
         add(componente);
     }
-
+    
     @Deprecated
     private void format() {
         int size = campos.values().size();
@@ -144,5 +150,11 @@ public class Formulario extends JPanel {
         }
         return null;
     }
+
+    void toggleVisibility(String nombeField,Boolean display) {
+        
+        campos.get(nombeField).setVisible(display);
+        labels.get(nombeField).setVisible(display);
+     }
 
 }

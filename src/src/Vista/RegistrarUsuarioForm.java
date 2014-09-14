@@ -3,6 +3,8 @@ package Vista;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
+import com.toedter.calendar.demo.DateChooserPanel;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -15,181 +17,124 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 class RegistrarUsuarioForm extends JInternalFrame {
 
-    private final JPanel contenedor;
-    private final JLabel nickname;
-    private final JLabel nombre;
-    private final JLabel apellido;
-    private final JLabel fNac;
-    private final JLabel email;
-    private final JLabel nombreCompania;
-    private final JLabel linkSitio;
-    private final JTextField nicknameText;
-    private final JTextField emailText;
-    private final DateChosserPanel fNacText;
-    private final JTextField apellidoText;
-    private final JTextField nombreText;
-    private final JTextField nombreCompaniaText;
-    private final JTextField linkSitioText;
-    private final JButton guardarBtn;
-    private final JButton cancelarBtn;
-    private final JCheckBox esProveedor;
     private final IControladorUsuarios controlarUsuario;
-    private final SelectorDeImagenes sdi;
+//
+    private final Formulario form;
+//
+    private final SelectorImgUsuario sim;
+    private boolean esProveedor;
 
     public RegistrarUsuarioForm(IControladorUsuarios ICU) {
 
         controlarUsuario = ICU;
 
-        setBounds(50, 50, 900, 400);
+        setBounds(50, 50, 800, 500);
         setVisible(true);
-        setLayout(null);
-        contenedor = new JPanel();
-        contenedor.setLayout(null);
-        contenedor.setSize(1200, 400);
-        contenedor.setLocation(10, 0);
-        add(contenedor);
+        setLayout(new SpringLayout());
+        setTitle("Registrar Usuario");
 
-        JLabel proveedorlabel = new JLabel("Es proovedor?:");
-        proveedorlabel.setVisible(true);
-        proveedorlabel.setBounds(0, 10, 150, 20);
-        contenedor.add(proveedorlabel);
+        form = new Formulario();
+        form.addField("Proveedor", "checkbox");
+        form.addField("Nickname", "text");
+        form.addField("Email", "text");
+        form.addField("Fecha nac", "Date");
+        form.addField("Apellido", "text");
+        form.addField("Nombre", "text");
+        form.addField("Nombre Compania", "text");
+        form.addField("Link Sitio", "text");
+        esProveedor = false;
+        form.toggleVisibility("Nombre Compania",esProveedor);
+        form.toggleVisibility("Link Sitio",esProveedor);
+        ((JTextField) form.getComponentByName("Nombre Compania")).setVisible(esProveedor);
+        ((JTextField) form.getComponentByName("Link Sitio")).setVisible(esProveedor);
 
-        esProveedor = new JCheckBox();
-        esProveedor.setName("Elegir si el usuario es provedor");
-        esProveedor.setLocation(100, 5);
-        esProveedor.setSize(30, 30);
-        esProveedor.setVisible(true);
-        esProveedor.addActionListener(new ActionListener() {
+        ((JCheckBox) form.getComponentByName("Proveedor")).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 cambiarTipoFormulario(evt);
             }
 
         });
-        contenedor.add(esProveedor);
 
-        nickname = new JLabel("Nickname");
-        nickname.setVisible(true);
-        nickname.setBounds(0, 60, 150, 10);
-        contenedor.add(nickname);
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setSize(200, 200);
+        buttonsPanel.setVisible(true);
+        JButton salvar = new JButton("Guardar");
+        salvar.setSize(80, 30);
+        salvar.addActionListener(new ActionListener() {
 
-        nicknameText = new JTextField();
-        nicknameText.setBounds(150, 50, 300, 30);
-        contenedor.add(nicknameText);
-
-        nombre = new JLabel("Nombre");
-        nombre.setVisible(true);
-        nombre.setBounds(0, 90, 150, 10);
-        contenedor.add(nombre);
-
-        nombreText = new JTextField();
-        nombreText.setBounds(150, 80, 300, 30);
-        contenedor.add(nombreText);
-
-        apellido = new JLabel("Apellido");
-        apellido.setVisible(true);
-        apellido.setBounds(0, 120, 150, 10);
-        contenedor.add(apellido);
-
-        apellidoText = new JTextField();
-        apellidoText.setBounds(150, 110, 300, 30);
-        contenedor.add(apellidoText);
-
-        fNac = new JLabel("Fecha de nacimiento");
-        fNac.setVisible(true);
-        fNac.setBounds(0, 150, 150, 10);
-        contenedor.add(fNac);
- 
-        fNacText= new DateChosserPanel();
-        fNacText.setBounds(150, 140, 300, 30);
-        contenedor.add(fNacText);
-
-        email = new JLabel("Correo electronico");
-        email.setVisible(true);
-        email.setBounds(0, 180, 150, 10);
-        contenedor.add(email);
-
-        emailText = new JTextField();
-        emailText.setBounds(150, 170, 300, 30);
-        contenedor.add(emailText);
-
-        nombreCompania = new JLabel("Nombre Compania");
-        nombreCompania.setVisible(false);
-        nombreCompania.setBounds(0, 205, 150, 15);
-        contenedor.add(nombreCompania);
-
-        nombreCompaniaText = new JTextField();
-        nombreCompaniaText.setBounds(150, 200, 300, 30);
-        nombreCompaniaText.setVisible(false);
-        contenedor.add(nombreCompaniaText);
-
-        linkSitio = new JLabel("Link Sitio");
-        linkSitio.setVisible(false);
-        linkSitio.setBounds(0, 240, 150, 10);
-        contenedor.add(linkSitio);
-
-        linkSitioText = new JTextField();
-        linkSitioText.setBounds(150, 230, 300, 30);
-        linkSitioText.setVisible(false);
-        contenedor.add(linkSitioText);
-
-        guardarBtn = new JButton("Guardar");
-        cancelarBtn = new JButton("Cancelar");
-
-        guardarBtn.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 guardarUsuario(e);
             }
         });
+        JButton cancelar = new JButton("Cancelar");
+        cancelar.setSize(80, 30);
+        cancelar.addActionListener(new ActionListener() {
 
-        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cancelar(e);
             }
         });
+        buttonsPanel.add(salvar);
+        buttonsPanel.add(cancelar);
 
-        guardarBtn.setBounds(200, 260, 100, 40);
-        cancelarBtn.setBounds(320, 260, 100, 40);
+        JPanel offsetleft = new JPanel();
+        offsetleft.setLayout(new BorderLayout());
+        offsetleft.setSize(400, 800);
+        offsetleft.setVisible(true);
+        offsetleft.setLocation(0, 10);
+        offsetleft.add(buttonsPanel, BorderLayout.SOUTH);
+        offsetleft.add(form, BorderLayout.CENTER);
 
-        sdi = new SelectorDeImagenes(true);
-        sdi.setLocation(450, 0);
-        contenedor.add(sdi);
-        contenedor.add(guardarBtn);
-        contenedor.add(cancelarBtn);
-        
+        sim = new SelectorImgUsuario();
+        sim.setLocation(700, 10);
+        sim.setSize(400, 400);
+
+        add(offsetleft);
+        add(sim);
+
+        SpringUtilities.makeGrid(this.getContentPane(), 1, 2, 0, 0, 6, 6);
+
+    }
+
+    private void cleanForm() {
+
+        ((JTextField) form.getComponentByName("Nickname")).setText("");
+        ((JTextField) form.getComponentByName("Email")).setText("");
+        ((DateChosserPanel) form.getComponentByName("Fecha nac")).setDate(new Date());
+        ((JTextField) form.getComponentByName("Apellido")).setText("");
+        ((JTextField) form.getComponentByName("Nombre")).setText("");
+        ((JTextField) form.getComponentByName("Nombre Compania")).setText("");
+        ((JTextField) form.getComponentByName("Link Sitio")).setText("");
     }
 
     private void guardarUsuario(ActionEvent evt) {
-        String nickname = nicknameText.getText();
-        String email = emailText.getText();
-        Date fnac = fNacText.getDate();
-        String apellido = apellidoText.getText();
-        String nombre = nombreText.getText();
-        String nombreCompania = nombreCompaniaText.getText();
-        String linkSitio = linkSitioText.getText();
-        String imagen = "";
-        HashSet<String> imagenes = this.sdi.getListaDeImagenes();
-        Iterator<String> it = imagenes.iterator();
-        if (it.hasNext()) {
-            imagen = (String) it.next();
-        }
-        if(nickname==null || nickname.isEmpty()){
-            
+        String nickname = ((JTextField) form.getComponentByName("Nickname")).getText();
+        String email = ((JTextField) form.getComponentByName("Email")).getText();
+        Date fnac = ((DateChosserPanel) form.getComponentByName("Fecha nac")).getDate();
+        String apellido = ((JTextField) form.getComponentByName("Apellido")).getText();
+        String nombre = ((JTextField) form.getComponentByName("Nombre")).getText();
+        String nombreCompania = ((JTextField) form.getComponentByName("Nombre Compania")).getText();
+        String linkSitio = ((JTextField) form.getComponentByName("Link Sitio")).getText();
+        String imagen = ""; //sim.getSelectedIMG();
+        if (nickname == null || nickname.isEmpty()) {
+
             JOptionPane.showMessageDialog(this, "Nickname es requerido", "Validacion", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(email==null || email.isEmpty()){
-        
+        if (email == null || email.isEmpty()) {
+
             JOptionPane.showMessageDialog(this, "Email es requerido", "Validacion", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if (!esProveedor.isSelected()) {
+
+        if (!esProveedor) {
             DataCliente cliente = new DataCliente(nickname, nombre, apellido, email, fnac);
             cliente.setImagenes(imagen);
             controlarUsuario.ingresarDatosCliente(cliente);
@@ -198,23 +143,14 @@ class RegistrarUsuarioForm extends JInternalFrame {
             proveedor.setImagenes(imagen);
             controlarUsuario.ingresarDatosProveedor(proveedor);
         }
-
         if (controlarUsuario.validarDatosUsuario()) {
-            JOptionPane.showMessageDialog(this, "Usiario con " + controlarUsuario.getErrors() + " ya existe", "Validacion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, controlarUsuario.getErrors(), "Validacion", JOptionPane.ERROR_MESSAGE);
 
         } else {
 
-            JOptionPane.showMessageDialog(this, "Su Usuario se creo correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
-            setVisible(false);
+            JOptionPane.showMessageDialog(this, "Su Usuario se creo correctamente", "Validacion", JOptionPane.DEFAULT_OPTION);
             controlarUsuario.guardarUsuario();
-            nicknameText.setText("");
-            emailText.setText("");
-
-            fNacText.setDate(new Date());
-            apellidoText.setText("");
-            nombreText.setText("");
-            nombreCompaniaText.setText("");
-            linkSitioText.setText("");
+            cleanForm();
 
         };
 
@@ -222,23 +158,16 @@ class RegistrarUsuarioForm extends JInternalFrame {
 
     private void cancelar(ActionEvent evt) {
         setVisible(false);
-        nicknameText.setText("");
-        emailText.setText("");
-        fNacText.setDate(new Date());
-        apellidoText.setText("");
-        nombreText.setText("");
-        nombreCompaniaText.setText("");
-        linkSitioText.setText("");
+
     }
 
     private void cambiarTipoFormulario(ActionEvent evt) {
 
-        Boolean display = esProveedor.isSelected();
-        nombreCompania.setVisible(display);
-        nombreCompaniaText.setVisible(display);
-        linkSitio.setVisible(display);
-        linkSitioText.setVisible(display);
-
+        esProveedor = ((JCheckBox) form.getComponentByName("Proveedor")).isSelected();
+        
+        form.toggleVisibility("Nombre Compania",esProveedor);
+        form.toggleVisibility("Link Sitio",esProveedor);
+        
     }
 
 }

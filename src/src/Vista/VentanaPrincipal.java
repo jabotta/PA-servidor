@@ -225,17 +225,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void registrarUsrOptActionPerformed(java.awt.event.ActionEvent evt) {
         registrarUsuarioVentana = new RegistrarUsuarioForm(controlarUsuario);
 
-        javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(registrarUsuarioVentana.getContentPane());
-        registrarUsuarioVentana.getContentPane().setLayout(registrarUsuariosLayout);
-
-        registrarUsuariosLayout.setHorizontalGroup(
-                registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(registrarUsuariosLayout.createSequentialGroup())
-        );
-
-        registrarUsuariosLayout.setVerticalGroup(
-                registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
-
         desktopPane.add(registrarUsuarioVentana);
 
     }
