@@ -107,7 +107,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
 
         ((JTextField) form.getComponentByName("Nickname")).setText("");
         ((JTextField) form.getComponentByName("Email")).setText("");
-        ((DateChosserPanel) form.getComponentByName("Fecha nac")).setDate(new Date());
+        ((DateChosserPanel) form.getComponentByName("Fecha nac")).setDate(null);
         ((JTextField) form.getComponentByName("Apellido")).setText("");
         ((JTextField) form.getComponentByName("Nombre")).setText("");
         ((JTextField) form.getComponentByName("Nombre Compania")).setText("");

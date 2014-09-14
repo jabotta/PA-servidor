@@ -412,7 +412,9 @@ public class Utils {
         }
         return "";
     }
-
+    /**
+     @return Regresa la fecha en formato string 
+    **/
     public static String formatDate(Date s) {
         if (s != null) {
             DateFormat dateFormat = new SimpleDateFormat(Constantes.DATE_FORMAT);
