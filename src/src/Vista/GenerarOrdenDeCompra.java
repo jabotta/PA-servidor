@@ -246,12 +246,12 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
         index = 0;
 
         controlarProducto.listarProductosCategoria().forEach((c) -> {
-            Object[] obj = {c.getNroReferencia(), c.getNombre()};
+            Object[] obj = {c.getNroReferencia(), c.getNombre(),c.getStock()};
 
             rowData[index] = obj;
             index++;
         });
-        String[] columnNames = {"NroRef", "Nombre"};
+        String[] columnNames = {"NroRef", "Nombre","Stock"};
 
         JTable listaProductos = new JTable(rowData, columnNames);
         listaProductos.setPreferredScrollableViewportSize(new Dimension(500, 100));

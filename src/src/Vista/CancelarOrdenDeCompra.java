@@ -171,7 +171,7 @@ public class CancelarOrdenDeCompra extends JInternalFrame {
 
     private void borrarOrden(ActionEvent evt) {
         Integer nroOrden = Integer.valueOf(nroRefText.getText());
-        if (JOptionPane.showConfirmDialog(this, "Esta seguro que desea cancelar la oden de compra? \nEste paso no se puede deshacer","",JOptionPane.OK_CANCEL_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(this, "Esta seguro que desea cancelar la oden de compra? \nEste paso no se puede deshacer","",JOptionPane.WARNING_MESSAGE) == 0) {
             controlarOrden.elegirOrden(nroOrden);
             controlarOrden.borrarOrdenCompra();
              dispose();

@@ -265,35 +265,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void verInfoOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {
-        verOrdenVentana = new VerInformacionOrden(controlarOrden);
-
-        javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(verOrdenVentana.getContentPane());
-        verOrdenVentana.getContentPane().setLayout(registrarUsuariosLayout);
-
-        registrarUsuariosLayout.setHorizontalGroup(
-                registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(registrarUsuariosLayout.createSequentialGroup())
-        );
-
-        registrarUsuariosLayout.setVerticalGroup(
-                registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
-
+        verOrdenVentana = new VerInformacionOrden(controlarOrden,false);
         desktopPane.add(verOrdenVentana);
     }
 
     private void cancelarOrdenOptActionPerformed(java.awt.event.ActionEvent evt) {
-        cancelarOrdenVentana = new CancelarOrdenDeCompra(controlarOrden);
-
-        javax.swing.GroupLayout registrarUsuariosLayout = new javax.swing.GroupLayout(cancelarOrdenVentana.getContentPane());
-        cancelarOrdenVentana.getContentPane().setLayout(registrarUsuariosLayout);
-
-        registrarUsuariosLayout.setHorizontalGroup(
-                registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(registrarUsuariosLayout.createSequentialGroup())
-        );
-
-        registrarUsuariosLayout.setVerticalGroup(
-                registrarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING));
+        cancelarOrdenVentana  = new VerInformacionOrden(controlarOrden,true);
 
         desktopPane.add(cancelarOrdenVentana);
     }

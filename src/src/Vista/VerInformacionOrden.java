@@ -8,10 +8,10 @@ package Vista;
 import Controlador.Clases.IControladorOrdenes;
 import Controlador.Clases.ManejadorOrdenes;
 import Controlador.Clases.Utils;
- 
+
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
- 
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -49,14 +50,18 @@ public class VerInformacionOrden extends JInternalFrame {
     private final JTextField nroRefText;
     private final JTextField clienteText;
     private JList<String> productosList;
-   
+
     private final JButton cancelarBtn;
-   
+
     private JTable listarClientes;
     private JScrollPane scrollPaneTableDetail;
     private final JTextField fechaVentaText;
- 
-    public VerInformacionOrden(IControladorOrdenes ICO) {
+    private final JButton borrarBtn;
+    private boolean modoEdicion;
+
+    public VerInformacionOrden(IControladorOrdenes ICO, boolean modoEdicion) {
+        
+        this.modoEdicion = modoEdicion;
         controlarOrden = ICO;
         setBounds(50, 50, 700, 600);
         setVisible(true);
@@ -72,12 +77,9 @@ public class VerInformacionOrden extends JInternalFrame {
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
         contenedor.add(elegirUsuarioLabel);
 
-        DefaultListModel<String> tes = new DefaultListModel<String>();
-        ArrayList<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
-        ordenes.stream().forEach((orden) -> {
-            tes.addElement(orden.getNroOrden() + " - " + orden.getClienteCompraProducto().get(0).getCliente().getNickname() + " - " + orden.getFecha().toString());
-        });
-        ordenList = new JList<String>(tes);
+       
+        ordenList = new JList<String>();
+        fillOrdenList();
         ordenList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         ordenList.setBounds(0, 50, 200, 300);
         scrollPaneTableDetail = new JScrollPane();
@@ -90,6 +92,7 @@ public class VerInformacionOrden extends JInternalFrame {
                 if (evt.getValueIsAdjusting()) {
                     return;
                 }
+                
                 Integer ordenId = Integer.parseInt(ordenList.getSelectedValue().split("-")[0].trim());
                 DataOrdenCompra aux = new DataOrdenCompra(ManejadorOrdenes.getInstance().obtenerOrdenes().get(ordenId));
 
@@ -132,8 +135,7 @@ public class VerInformacionOrden extends JInternalFrame {
                 repaint();
             }
         });
-        
-        
+
         contenedor.add(ordenList);
 
         nroRef = new JLabel("Numero de referencia");
@@ -149,7 +151,7 @@ public class VerInformacionOrden extends JInternalFrame {
         fechaVenta.setVisible(true);
         fechaVenta.setBounds(220, 100, 150, 10);
         contenedor.add(fechaVenta);
-    
+
         fechaVentaText = new JTextField();
 
         fechaVentaText.setBounds(370, 90, 300, 30);
@@ -186,10 +188,19 @@ public class VerInformacionOrden extends JInternalFrame {
                 cancelar(e);
             }
         });
-
-        cancelarBtn.setBounds(250, 430, 100, 40);
+        borrarBtn = new JButton("Eliminar");
+        if (modoEdicion) {
+            borrarBtn.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    borrarOrden(e);
+                }
+            });
+            borrarBtn.setBounds(250, 430, 100, 40);
+            add(borrarBtn);
+        }
+        cancelarBtn.setBounds(370, 430, 100, 40);
         add(cancelarBtn);
-
     }
 
     private void guardarCategoria(ActionEvent evt) {
@@ -207,6 +218,25 @@ public class VerInformacionOrden extends JInternalFrame {
         fechaVentaText.setText("");
         precioTotalText.setText("");
         clienteText.setText("");
+    }
+
+    private void borrarOrden(ActionEvent evt) {
+        Integer nroOrden = Integer.valueOf(nroRefText.getText());
+        if (JOptionPane.showConfirmDialog(this, "Esta seguro que desea cancelar la oden de compra? \nEste paso no se puede deshacer", "", JOptionPane.WARNING_MESSAGE) == 0) {
+            controlarOrden.elegirOrden(nroOrden);
+            controlarOrden.borrarOrdenCompra();
+            fillOrdenList();
+        }
+    }
+
+    private void fillOrdenList() {
+        DefaultListModel<String> tes = new DefaultListModel<String>();
+        ArrayList<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
+        ordenes.stream().forEach((orden) -> {
+            tes.addElement(orden.getNroOrden() + " - " + orden.getClienteCompraProducto().get(0).getCliente().getNickname() + " - " + orden.getFecha().toString());
+        });
+        ordenList.setModel(tes);
+        ordenList.revalidate();
     }
 
     class DatosProducto {

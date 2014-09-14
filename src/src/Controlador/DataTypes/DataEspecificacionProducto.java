@@ -119,7 +119,11 @@ public class DataEspecificacionProducto {
     public void setProductos(Map<Integer,DataProducto> productos) {
         this.productos = productos;
     }
-    
+    public int getStock(){
+        
+        return productos.values().size();
+            
+    }
     @Override
     public String toString() {
         return this.getNroReferencia() + "  --  " + this.getNombre();
