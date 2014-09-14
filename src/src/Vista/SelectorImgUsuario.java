@@ -145,4 +145,17 @@ public class SelectorImgUsuario extends JPanel {
         }
     }
 
+    void clean() {
+        this.imagePath = "";
+
+        this.image.cleanIMG();
+        this.image.repaint();
+        this.nombre.setText("");
+        revalidate();
+        repaint();
+        if (getParent() != null) {
+            getParent().repaint();
+        }
+    }
+
 }

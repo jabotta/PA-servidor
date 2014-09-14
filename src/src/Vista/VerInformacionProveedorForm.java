@@ -45,13 +45,15 @@ class VerInformacionProveedorForm extends JInternalFrame {
     private final JButton cerrarBtn;
     private final IControladorUsuarios controlarUsuario;
 
-    private Object imagen;
+    private String imagen;
+    private ImagePanel imagePanel;
+    private final JPanel contenedorPic;
 
     public VerInformacionProveedorForm(IControladorUsuarios ICU) {
 
         controlarUsuario = ICU;
 
-        setBounds(50, 50, 700, 400);
+        setBounds(50, 50, 900, 400);
         setVisible(true);
         setLayout(null);
         contenedor = new JPanel();
@@ -90,23 +92,28 @@ class VerInformacionProveedorForm extends JInternalFrame {
                 nombreCompaniaText.setText(aux.getNombreCompania());
                 linkSitioText.setText(aux.getLinkSitio());
                 imagen = aux.getImagenes();
+                
+                 if (imagen != null && !imagen.isEmpty()) {
+                     
+                    contenedorPic.removeAll();
+                      JTextField f =  new JTextField("sapee");
+                    contenedorPic.add(f);
+                    imagePanel = new ImagePanel();
+                    imagePanel.setSize(200, 200);
+                    imagePanel.loadImg(imagen);
+                    imagePanel.repaint();
+                    contenedorPic.add(imagePanel);
+                    contenedorPic.validate();
+                    contenedorPic.repaint();
+                } 
 
             }
         });
 
-        JButton verimagen = new JButton("Ver Imagen");
-        verimagen.setSize(100, 40);
-        verimagen.setLocation(370, 0);
-        verimagen.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ver(e);
-            }
-
-        });
-
-        contenedor.add(verimagen);
+        contenedorPic =  new JPanel(null);
+        contenedorPic.setBounds(650, 50, 300, 300);
+      
+        add(contenedorPic);
         contenedor.add(userList);
 
         nickname = new JLabel("Nickname");
@@ -115,7 +122,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.add(nickname);
 
         nicknameText = new JTextField();
-        nicknameText.setBounds(370, 50, 300, 30);
+        nicknameText.setBounds(370, 50, 200, 30);
         contenedor.add(nicknameText);
 
         nombre = new JLabel("Nombre");
@@ -124,7 +131,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.add(nombre);
 
         nombreText = new JTextField();
-        nombreText.setBounds(370, 80, 300, 30);
+        nombreText.setBounds(370, 80, 200, 30);
         contenedor.add(nombreText);
 
         apellido = new JLabel("Apellido");
@@ -133,7 +140,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.add(apellido);
 
         apellidoText = new JTextField();
-        apellidoText.setBounds(370, 110, 300, 30);
+        apellidoText.setBounds(370, 110, 200, 30);
         contenedor.add(apellidoText);
 
         fNac = new JLabel("Fecha de nacimiento");
@@ -143,7 +150,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
 
         fNacText = new JTextField();
 
-        fNacText.setBounds(370, 140, 300, 30);
+        fNacText.setBounds(370, 140, 200, 30);
         contenedor.add(fNacText);
 
         email = new JLabel("Correo electronico");
@@ -152,7 +159,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.add(email);
 
         emailText = new JTextField();
-        emailText.setBounds(370, 170, 300, 30);
+        emailText.setBounds(370, 170, 200, 30);
         contenedor.add(emailText);
 
         nombreCompania = new JLabel("Nombre Compania");
@@ -161,7 +168,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.add(nombreCompania);
 
         nombreCompaniaText = new JTextField();
-        nombreCompaniaText.setBounds(370, 200, 300, 30);
+        nombreCompaniaText.setBounds(370, 200, 200, 30);
         nombreCompaniaText.setVisible(true);
         contenedor.add(nombreCompaniaText);
 
@@ -171,7 +178,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         contenedor.add(linkSitio);
 
         linkSitioText = new JTextField();
-        linkSitioText.setBounds(370, 230, 300, 30);
+        linkSitioText.setBounds(370, 230, 200, 30);
         linkSitioText.setVisible(true);
         contenedor.add(linkSitioText);
 
@@ -184,7 +191,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
             }
         });
 
-        cerrarBtn.setBounds(320, 260, 100, 40);
+        cerrarBtn.setBounds(320, 280, 100, 40);
         contenedor.add(cerrarBtn);
         nicknameText.setEnabled(false);
         emailText.setEnabled(false);
@@ -194,27 +201,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
         nombreCompaniaText.setEnabled(false);
         linkSitioText.setEnabled(false);
     }
-
-    private void ver(ActionEvent e) {
-        JDialog dialog = new JDialog();
-        if (imagen != null) {
-            File f = new File((String) imagen);
-
-            dialog.setTitle("Visor Imagenes" + f.getName());
-
-            ImagePanel p = new ImagePanel(f.getAbsolutePath());
-            p.setSize(400, 400);
-            dialog.getContentPane().setSize(400, 400);
-            dialog.getContentPane().add(p, BorderLayout.CENTER);
-            dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            dialog.setSize(new Dimension(400, 400));
-            dialog.setLocationRelativeTo(getParent().getParent().getParent());
-            dialog.setModal(true);
-            dialog.setVisible(true);
-
-            dialog.setSize(new Dimension(500, 500));
-        }
-    }
+ 
 
     private void cerrar(ActionEvent evt) {
         setVisible(false);

@@ -112,6 +112,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
         ((JTextField) form.getComponentByName("Nombre")).setText("");
         ((JTextField) form.getComponentByName("Nombre Compania")).setText("");
         ((JTextField) form.getComponentByName("Link Sitio")).setText("");
+        sim.clean();
     }
 
     private void guardarUsuario(ActionEvent evt) {
@@ -122,7 +123,7 @@ class RegistrarUsuarioForm extends JInternalFrame {
         String nombre = ((JTextField) form.getComponentByName("Nombre")).getText();
         String nombreCompania = ((JTextField) form.getComponentByName("Nombre Compania")).getText();
         String linkSitio = ((JTextField) form.getComponentByName("Link Sitio")).getText();
-        String imagen = ""; //sim.getSelectedIMG();
+        String imagen = sim.getSelectedIMG();
         if (nickname == null || nickname.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Nickname es requerido", "Validacion", JOptionPane.ERROR_MESSAGE);

@@ -40,14 +40,14 @@ class VerInformacionClienteForm extends JInternalFrame {
     private final JTextField nombreText;
     private final JButton cerrarBtn;
     private final IControladorUsuarios controlarUsuario;
- 
+
     private String imagen;
+    private final JPanel contenedorPic;
 
     public VerInformacionClienteForm(IControladorUsuarios ICU) {
 
         controlarUsuario = ICU;
-
-        setBounds(50, 50, 700, 400);
+        setBounds(50, 50, 900, 400);
         setVisible(true);
         setLayout(null);
         contenedor = new JPanel();
@@ -64,12 +64,13 @@ class VerInformacionClienteForm extends JInternalFrame {
         DefaultListModel<String> tes = new DefaultListModel<String>();
         ArrayList<DataCliente> clientes = ICU.listarClientes();
         clientes.stream().forEach((cliente) -> {
-            tes.addElement(cliente.getNickname() + " - "+ cliente.getNombre() + " " + cliente.getApellido());
+            tes.addElement(cliente.getNickname() + " - " + cliente.getNombre() + " " + cliente.getApellido());
         });
         userList = new JList<String>(tes);
         userList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         userList.setBounds(0, 50, 200, 300);
         userList.addListSelectionListener(new ListSelectionListener() {
+            private ImagePanel imagePanel;
 
             @Override
             public void valueChanged(ListSelectionEvent evt) {
@@ -82,26 +83,29 @@ class VerInformacionClienteForm extends JInternalFrame {
                 fNacText.setText(Utils.formatDate(aux.getFechaNacimiento()));
                 apellidoText.setText(aux.getApellido());
                 nombreText.setText(aux.getNombre());
-                imagen = aux.getImagenes(); 
-                     
+                imagen = aux.getImagenes();
+
+                if (imagen != null && !imagen.isEmpty()) {
+
+                    contenedorPic.removeAll();
+                    JTextField f = new JTextField("sapee");
+                    contenedorPic.add(f);
+                    imagePanel = new ImagePanel();
+                    imagePanel.setSize(200, 200);
+                    imagePanel.loadImg(imagen);
+                    imagePanel.repaint();
+                    contenedorPic.add(imagePanel);
+                    contenedorPic.validate();
+                    contenedorPic.repaint();
+                }
 
             }
         });
 
-        JButton verimagen = new JButton("Ver Imagen");
-        verimagen.setSize(100, 40);
-        verimagen.setLocation(370, 0);
-        verimagen.addActionListener(new ActionListener() {
+        contenedorPic = new JPanel(null);
+        contenedorPic.setBounds(650, 50, 300, 300);
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ver(e);
-            }
-
-        });
-
-        contenedor.add(verimagen);
-
+        add(contenedorPic);
         contenedor.add(userList);
 
         nickname = new JLabel("Nickname");
@@ -110,7 +114,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.add(nickname);
 
         nicknameText = new JTextField();
-        nicknameText.setBounds(370, 50, 300, 30);
+        nicknameText.setBounds(370, 50, 200, 30);
         contenedor.add(nicknameText);
 
         nombre = new JLabel("Nombre");
@@ -119,7 +123,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.add(nombre);
 
         nombreText = new JTextField();
-        nombreText.setBounds(370, 80, 300, 30);
+        nombreText.setBounds(370, 80, 200, 30);
         contenedor.add(nombreText);
 
         apellido = new JLabel("Apellido");
@@ -128,17 +132,17 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.add(apellido);
 
         apellidoText = new JTextField();
-        apellidoText.setBounds(370, 110, 300, 30);
+        apellidoText.setBounds(370, 110, 200, 30);
         contenedor.add(apellidoText);
 
         fNac = new JLabel("Fecha de nacimiento");
         fNac.setVisible(true);
         fNac.setBounds(220, 150, 150, 10);
-        contenedor.add(fNac); 
+        contenedor.add(fNac);
 
         fNacText = new JTextField();
 
-        fNacText.setBounds(370, 140, 300, 30);
+        fNacText.setBounds(370, 140, 200, 30);
         contenedor.add(fNacText);
 
         email = new JLabel("Correo electronico");
@@ -147,7 +151,7 @@ class VerInformacionClienteForm extends JInternalFrame {
         contenedor.add(email);
 
         emailText = new JTextField();
-        emailText.setBounds(370, 170, 300, 30);
+        emailText.setBounds(370, 170, 200, 30);
         contenedor.add(emailText);
 
         cerrarBtn = new JButton("Cerrar");
@@ -159,21 +163,21 @@ class VerInformacionClienteForm extends JInternalFrame {
             }
         });
 
-        cerrarBtn.setBounds(320, 260, 100, 40);
+        cerrarBtn.setBounds(320, 280, 100, 40);
         contenedor.add(cerrarBtn);
-            nicknameText.setEnabled(false);
+        nicknameText.setEnabled(false);
         emailText.setEnabled(false);
         fNacText.setEnabled(false);
         apellidoText.setEnabled(false);
         nombreText.setEnabled(false);
-  
+
     }
 
     private void ver(ActionEvent e) {
         JDialog dialog = new JDialog();
         if (imagen != null) {
-            File   f = new File(imagen);
-    
+            File f = new File(imagen);
+
             dialog.setTitle("Visor Imagenes" + f.getName());
 
             ImagePanel p = new ImagePanel(f.getAbsolutePath());
