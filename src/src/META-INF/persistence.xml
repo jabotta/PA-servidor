@@ -9,7 +9,7 @@
     <class>Controlador.Clases.EspecificacionProducto</class>
     <class>Controlador.Clases.Producto</class>
     <class>Controlador.Clases.ClienteCompraProducto</class>
-    <class>CControlador.Clases.OrdenCompra</class>
+    <class>Controlador.Clases.OrdenCompra</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/prog1"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>

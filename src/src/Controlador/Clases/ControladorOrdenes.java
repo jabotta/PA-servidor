@@ -114,7 +114,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public void generarItemOrden(){
         productosElegidos.stream().forEach((productoElegido) -> {
             
-            cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio()));
+            cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio(), new OrdenCompra()));
         });
         productosElegidos = new ArrayList<>();
     }
@@ -130,6 +130,11 @@ public class ControladorOrdenes implements IControladorOrdenes{
             cliComProd.add(cliProd);
             tempSumTotal += cliProd.getPrecio();
         }
+        
+        
+        cliComProds.forEach((clienteproducto) -> {
+            clienteproducto.setOrden(orden);
+        });
         
         System.out.println(cliComProds+" >clicom");
         orden.setPrecioTotal(tempSumTotal);

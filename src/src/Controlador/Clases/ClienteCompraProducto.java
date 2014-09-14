@@ -21,11 +21,15 @@ public class ClienteCompraProducto implements Serializable {
     @JoinColumn(name = "PRODUCTO_ID")
     private Producto producto;
     private Float precio;
+    @ManyToOne
+    @JoinColumn(name="ORDEN_ID")
+    private OrdenCompra Orden;
     
-    public ClienteCompraProducto(Cliente cliente, Producto producto, Float precio) {
+    public ClienteCompraProducto(Cliente cliente, Producto producto, Float precio,OrdenCompra Orden) {
         this.cliente = cliente;
         this.producto = producto;
         this.precio = precio;
+        this.Orden = Orden; 
     }
     
     public ClienteCompraProducto(DataClienteCompraProducto dccp) {
@@ -36,6 +40,7 @@ public class ClienteCompraProducto implements Serializable {
         this.precio = 0.0f;
         this.cliente = null;
         this.producto = null;
+        this.Orden = null;
     }
 
     public Cliente getCliente() {
@@ -60,6 +65,14 @@ public class ClienteCompraProducto implements Serializable {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+    
+    public OrdenCompra getOrden() {
+        return Orden;
+    }
+    
+    public void setOrden(OrdenCompra orden) {
+        this.Orden = orden;
     }
     
     public Float getPrecio() {

@@ -2,23 +2,29 @@ package Controlador.Clases;
 
 import Controlador.DataTypes.DataClienteCompraProducto;
 import Controlador.DataTypes.DataOrdenCompra;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 @Entity
-public class OrdenCompra {
+public class OrdenCompra implements Serializable {
     @Id
+    @Column(name="NRO_ORDEN")
     private Integer nroOrden;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
+    @Column(name="PRECIO")
     private Float precioTotal;
-    @OneToMany(cascade={CascadeType.PERSIST})
+    @OneToMany(cascade={CascadeType.PERSIST},mappedBy="Orden")
     @JoinColumn(name="ORDEN_ID")
     private List<ClienteCompraProducto> clienteCompraProducto;
     
@@ -38,6 +44,8 @@ public class OrdenCompra {
         this.nroOrden = doc.getNroOrden();
         this.fecha = doc.getFecha();
     }
+    
+    public OrdenCompra() {}
 
     public Integer getNroOrden() {
         return nroOrden;
@@ -61,10 +69,10 @@ public class OrdenCompra {
     
     public List<DataClienteCompraProducto> getDataClienteCompraProducto() {
         List<DataClienteCompraProducto> dataClienteCompraProducto = new ArrayList<>();
-        clienteCompraProducto.forEach((cliProd) -> {
+        /*clienteCompraProducto.forEach((cliProd) -> {
             System.out.println(cliProd+"<<>>");
             dataClienteCompraProducto.add(new DataClienteCompraProducto(cliProd));
-        });
+        });*/
         return dataClienteCompraProducto;
     }
 
@@ -82,10 +90,10 @@ public class OrdenCompra {
     
     public Cliente getCliente(){
         Iterator<ClienteCompraProducto> it = this.getClienteCompraProducto().iterator();
-        while(it.hasNext()){
+        /*while(it.hasNext()){
             ClienteCompraProducto cliProd = it.next();
             return cliProd.getCliente();
-        }
+        }*/
         return null;
     }
     
