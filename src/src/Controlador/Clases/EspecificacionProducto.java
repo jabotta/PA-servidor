@@ -3,24 +3,70 @@ package Controlador.Clases;
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProveedor;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
-public class EspecificacionProducto {
+@Entity
+public class EspecificacionProducto implements Serializable{
+    private static final long serialVersionUID = 1L;
     
+    @Id
+    @Column(name = "NROREFERENCIA")
     private String nroReferencia;
     private String nombre;
     private String descripcion;
-    private Map<String,String> especificacion;
     private Float precio;
-    private Proveedor proveedor;
-    private ArrayList<String> imagenes;
-    private Map<String,Categoria> categorias;
-    private Map<Integer,Producto> listaProductos;
     
-    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, Map<String,Categoria> categorias,Map<Integer,Producto> listaProductos) {
+    @ElementCollection
+    @MapKeyColumn(name="NOMBRE")
+    @Column(name="VALOR")
+    @CollectionTable(name="ESPECIFICACIONES", joinColumns=@JoinColumn(name="ESPPRID"))
+    //@Transient
+    private Map<String,String> especificacion;
+    
+    @ManyToOne
+    @JoinColumn(name = "PROVEEDOR_ID")
+    private Proveedor proveedor;
+
+    //@Transient
+    @ElementCollection
+    @CollectionTable(name="IMAGENES",joinColumns=@JoinColumn(name="PARENTID"))
+    @Column(name="PATH")
+    private List<String> imagenes;
+    
+    @ManyToMany
+    @JoinTable(name="CATEGORIAESPECIFICACIONPROD",
+        joinColumns={@JoinColumn(name="ESP_NROREF", referencedColumnName="NROREFERENCIA")},
+        inverseJoinColumns={@JoinColumn(name="CAT_NAME", referencedColumnName="NOMBRE")})
+    private Map<String,Categoria> categorias;
+    
+    @OneToMany(cascade={CascadeType.PERSIST},mappedBy="especificacionProducto")
+    @JoinColumn(name="ID")
+    private List<Producto> listaProductos;
+
+    public EspecificacionProducto() {
+    }
+    
+    public EspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, Proveedor proveedor, Map<String,Categoria> categorias,List<Producto> listaProductos) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -39,12 +85,12 @@ public class EspecificacionProducto {
         this.especificacion = espProducto.getEspecificacion();
         this.precio = espProducto.getPrecio();
         this.proveedor = proveedor;
-        this.categorias = Collections.synchronizedMap(new HashMap<String,Categoria>());
-        this.imagenes = new ArrayList<String>();
-        this.listaProductos = Collections.synchronizedMap(new HashMap<Integer,Producto>());
-        espProducto.getProductos().entrySet().forEach((producto) -> {
+        this.categorias = new HashMap();
+        this.imagenes = new ArrayList();
+        this.listaProductos = new ArrayList();
+        /*espProducto.getProductos().entrySet().forEach((producto) -> {
            this.listaProductos.put(producto.getKey(),new Producto(producto.getKey(),this));
-        });
+        });*/
     }
 
     public String getNroReferencia() {
@@ -79,11 +125,11 @@ public class EspecificacionProducto {
         this.especificacion = especificacion;
     }
     
-    public Map<Integer,Producto> getListaProductos() {
+    public List<Producto> getListaProductos() {
         return listaProductos;
     }
 
-    public void setListaProductos(Map<Integer,Producto> listaProductos) {
+    public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }
 
@@ -107,11 +153,11 @@ public class EspecificacionProducto {
         this.proveedor = proveedor;
     }
 
-    public ArrayList<String> getImagenes() {
+    public List<String> getImagenes() {
         return imagenes;
     }
 
-    public void setImagenes(ArrayList<String> imagenes) {
+    public void setImagenes(List<String> imagenes) {
         this.imagenes = imagenes;
     }
     
@@ -119,11 +165,11 @@ public class EspecificacionProducto {
         return categorias;
     }
     
-    public ArrayList<DataCategoria> getDataCategorias() {
-        ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
-        this.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
+    public List<DataCategoria> getDataCategorias() {
+        List<DataCategoria> dataCategorias = new ArrayList<>();
+        /*this.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
             dataCategorias.add(new DataCategoria(valor, false));
-        });
+        });*/
         return dataCategorias;
     }
 
@@ -138,6 +184,22 @@ public class EspecificacionProducto {
     @Override
     public String toString() {
         return this.getNroReferencia() + "  --  " + this.getNombre();
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (nroReferencia != null ? nroReferencia.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof EspecificacionProducto)) {
+            return false;
+        }
+        EspecificacionProducto other = (EspecificacionProducto) object;
+        return (this.nroReferencia != null || other.nroReferencia == null) && (this.nroReferencia == null || this.nroReferencia.equals(other.nroReferencia));
     }
     
 }

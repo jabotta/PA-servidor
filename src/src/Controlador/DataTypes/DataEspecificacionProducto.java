@@ -4,6 +4,7 @@ import Controlador.Clases.EspecificacionProducto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataEspecificacionProducto {
@@ -14,9 +15,9 @@ public class DataEspecificacionProducto {
     private Map<String,String> especificacion;
     private Float precio;
     private DataProveedor proveedor;
-    private ArrayList<String> imagenes;
-    private ArrayList<DataCategoria> categorias;
-    private Map<Integer,DataProducto> productos;
+    private List<String> imagenes;
+    private List<DataCategoria> categorias;
+    private List<DataProducto> productos;
     
     public DataEspecificacionProducto(EspecificacionProducto ep, boolean conCategorias) {
         this.nroReferencia = ep.getNroReferencia();
@@ -30,13 +31,13 @@ public class DataEspecificacionProducto {
             this.categorias = ep.getDataCategorias();
         else
             this.categorias = new ArrayList<DataCategoria>();
-        this.productos = Collections.synchronizedMap(new HashMap<Integer,DataProducto>());
-        ep.getListaProductos().entrySet().forEach((producto) -> {
-           productos.put(producto.getKey(),new DataProducto(producto.getKey(),this));
+        this.productos = new ArrayList();
+        ep.getListaProductos().forEach((producto) -> {
+           productos.add(new DataProducto(producto));
         });
     }
     
-    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias,Map<Integer,DataProducto> productos) {
+    public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias,List<DataProducto> productos) {
         this.nroReferencia = nroReferencia;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -96,32 +97,32 @@ public class DataEspecificacionProducto {
         this.proveedor = proveedor;
     }
 
-    public ArrayList<String> getImagenes() {
+    public List<String> getImagenes() {
         return imagenes;
     }
 
-    public void setImagenes(ArrayList<String> imagenes) {
+    public void setImagenes(List<String> imagenes) {
         this.imagenes = imagenes;
     }
     
-    public ArrayList<DataCategoria> getCategorias() {
+    public List<DataCategoria> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(ArrayList<DataCategoria> categorias) {
+    public void setCategorias(List<DataCategoria> categorias) {
         this.categorias = categorias;
     }
     
-    public Map<Integer,DataProducto> getProductos() {
+    public List<DataProducto> getProductos() {
         return productos;
     }
 
-    public void setProductos(Map<Integer,DataProducto> productos) {
+    public void setProductos(List<DataProducto> productos) {
         this.productos = productos;
     }
     public int getStock(){
         
-        return productos.values().size();
+        return productos.size();
             
     }
     @Override

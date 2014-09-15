@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Especificacionproducto.findByDescripcion", query = "SELECT e FROM Especificacionproducto e WHERE e.descripcion = :descripcion"),
     @NamedQuery(name = "Especificacionproducto.findByPrecio", query = "SELECT e FROM Especificacionproducto e WHERE e.precio = :precio"),
     @NamedQuery(name = "Especificacionproducto.findByProveedorId", query = "SELECT e FROM Especificacionproducto e WHERE e.proveedorId = :proveedorId")})
-public class Especificacionproducto implements Serializable {
+public class Especificacionproducto2 implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -51,12 +51,12 @@ public class Especificacionproducto implements Serializable {
     @Column(name = "PROVEEDOR_ID", length = 255)
     private String proveedorId;
     @ManyToMany(mappedBy = "especificacionproductoCollection")
-    private Collection<Categoria> categoriaCollection;
+    private Collection<Categoria2> categoriaCollection;
 
-    public Especificacionproducto() {
+    public Especificacionproducto2() {
     }
 
-    public Especificacionproducto(String nroreferencia) {
+    public Especificacionproducto2(String nroreferencia) {
         this.nroreferencia = nroreferencia;
     }
 
@@ -101,11 +101,11 @@ public class Especificacionproducto implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Categoria> getCategoriaCollection() {
+    public Collection<Categoria2> getCategoriaCollection() {
         return categoriaCollection;
     }
 
-    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
+    public void setCategoriaCollection(Collection<Categoria2> categoriaCollection) {
         this.categoriaCollection = categoriaCollection;
     }
 
@@ -119,10 +119,10 @@ public class Especificacionproducto implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Especificacionproducto)) {
+        if (!(object instanceof Especificacionproducto2)) {
             return false;
         }
-        Especificacionproducto other = (Especificacionproducto) object;
+        Especificacionproducto2 other = (Especificacionproducto2) object;
         if ((this.nroreferencia == null && other.nroreferencia != null) || (this.nroreferencia != null && !this.nroreferencia.equals(other.nroreferencia))) {
             return false;
         }

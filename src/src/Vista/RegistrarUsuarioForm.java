@@ -3,10 +3,10 @@ package Vista;
 import Controlador.Clases.IControladorUsuarios;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
-import com.toedter.calendar.demo.DateChooserPanel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar; 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -118,7 +118,10 @@ class RegistrarUsuarioForm extends JInternalFrame {
     private void guardarUsuario(ActionEvent evt) {
         String nickname = ((JTextField) form.getComponentByName("Nickname")).getText();
         String email = ((JTextField) form.getComponentByName("Email")).getText();
-        Date fnac = ((DateChosserPanel) form.getComponentByName("Fecha nac")).getDate();
+        Date fnacDate = ((DateChosserPanel) form.getComponentByName("Fecha nac")).getDate();
+        Calendar fnac = Calendar.getInstance();
+        fnac.setTime(fnacDate);
+        
         String apellido = ((JTextField) form.getComponentByName("Apellido")).getText();
         String nombre = ((JTextField) form.getComponentByName("Nombre")).getText();
         String nombreCompania = ((JTextField) form.getComponentByName("Nombre Compania")).getText();
@@ -137,11 +140,11 @@ class RegistrarUsuarioForm extends JInternalFrame {
 
         if (!esProveedor) {
             DataCliente cliente = new DataCliente(nickname, nombre, apellido, email, fnac);
-            cliente.setImagenes(imagen);
+            cliente.setImagen(imagen);
             controlarUsuario.ingresarDatosCliente(cliente);
         } else {
             DataProveedor proveedor = new DataProveedor(nickname, nombre, apellido, email, fnac, nombreCompania, linkSitio);
-            proveedor.setImagenes(imagen);
+            proveedor.setImagen(imagen);
             controlarUsuario.ingresarDatosProveedor(proveedor);
         }
         if (controlarUsuario.validarDatosUsuario()) {

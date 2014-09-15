@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -80,6 +82,7 @@ public class VerInformacionOrden extends JInternalFrame {
        
         ordenList = new JList<String>();
         fillOrdenList();
+ 
         ordenList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         ordenList.setBounds(0, 50, 200, 300);
         scrollPaneTableDetail = new JScrollPane();
@@ -102,9 +105,8 @@ public class VerInformacionOrden extends JInternalFrame {
                 precioTotalText.setText(String.valueOf(aux.getPrecioTotal()));
                 clienteText.setText(aux.getClienteCompraProducto().get(0).getCliente().getNickname());
                 DefaultListModel<String> tes2 = new DefaultListModel<String>();
-                ArrayList<DataEspecificacionProducto> productosLst = controlarOrden.listarProductosEnOrden();
+                List<DataEspecificacionProducto> productosLst = controlarOrden.listarProductosEnOrden();
                 HashMap<String, DatosProducto> mp = new HashMap();
-
                 productosLst.stream().forEach((producto) -> {
 
                     if (!mp.containsKey(producto.getNroReferencia())) {
@@ -230,11 +232,13 @@ public class VerInformacionOrden extends JInternalFrame {
     }
 
     private void fillOrdenList() {
-        DefaultListModel<String> tes = new DefaultListModel<String>();
-        ArrayList<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
+        
+         DefaultListModel tes = new DefaultListModel();
+        List<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
         ordenes.stream().forEach((orden) -> {
-            tes.addElement(orden.getNroOrden() + " - " + orden.getClienteCompraProducto().get(0).getCliente().getNickname() + " - " + orden.getFecha().toString());
+            tes.addElement(orden);
         });
+       
         ordenList.setModel(tes);
         ordenList.revalidate();
     }
@@ -269,3 +273,4 @@ public class VerInformacionOrden extends JInternalFrame {
 
     }
 }
+ 

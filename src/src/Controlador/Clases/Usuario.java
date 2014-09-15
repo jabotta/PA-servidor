@@ -1,18 +1,38 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataUsuario;
-import java.util.Date;
+import java.io.Serializable;
+import java.util.Calendar;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
 
-public abstract class Usuario {
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="DTYPE", 
+  discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("BaseUser")
+public abstract class Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
     
-    private String nickname;
-    private String nombre;
-    private String apellido;
-    private String email;
-    private Date fechaNacimiento;
-    private String imagenes;
+    @Id
+    protected String nickname;
+    protected String nombre;
+    protected String apellido;
+    protected String email;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    protected Calendar fechaNacimiento;
+    protected String imagen;
+
+    public Usuario() {
+    }
     
-    public Usuario(String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public Usuario(String nickname, String nombre, String apellido, String email, Calendar fechaNacimiento) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -60,24 +80,40 @@ public abstract class Usuario {
         this.email = email;
     }
 
-    public Date getFechaNacimiento() {
+    public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getImagenes() {
-        return imagenes;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenes(String imagenes) {
-        this.imagenes = imagenes;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
     
     public boolean validarDatosUsuario(){
         return true;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (nickname != null ? nickname.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Usuario)) {
+            return false;
+        }
+        Usuario other = (Usuario) object;
+        return (this.nickname != null || other.nickname == null) && (this.nickname == null || this.nickname.equals(other.nickname));
     }
     
 }

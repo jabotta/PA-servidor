@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -61,8 +62,8 @@ class VerInformacionClienteForm extends JInternalFrame {
         elegirUsuarioLabel.setBounds(0, 10, 150, 20);
         contenedor.add(elegirUsuarioLabel);
 
-        DefaultListModel<String> tes = new DefaultListModel<String>();
-        ArrayList<DataCliente> clientes = ICU.listarClientes();
+        DefaultListModel tes = new DefaultListModel();
+        List<DataCliente> clientes = ICU.listarClientes();
         clientes.stream().forEach((cliente) -> {
             tes.addElement(cliente.getNickname() + " - " + cliente.getNombre() + " " + cliente.getApellido());
         });
@@ -83,7 +84,8 @@ class VerInformacionClienteForm extends JInternalFrame {
                 fNacText.setText(Utils.formatDate(aux.getFechaNacimiento()));
                 apellidoText.setText(aux.getApellido());
                 nombreText.setText(aux.getNombre());
-                imagen = aux.getImagenes();
+                imagen = aux.getImagen(); 
+         
 
                 if (imagen != null && !imagen.isEmpty()) {
 

@@ -2,12 +2,20 @@ package Controlador.Clases;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class ManejadorUsuarios {
     
     private static ManejadorUsuarios instance = null;
-    Map<String,Usuario> usuarios = Collections.synchronizedMap(new HashMap<String,Usuario>());
+    Map<String,Usuario> usuarios = new HashMap();
+    
+    EntityManagerFactory EntityManagerFactory = Persistence.createEntityManagerFactory("ProgramacionAppPU");
+    EntityManager entityManager = EntityManagerFactory.createEntityManager();
     
     public static ManejadorUsuarios getInstance(){
         if(ManejadorUsuarios.instance == null){
@@ -22,30 +30,49 @@ public class ManejadorUsuarios {
     
     public void agregarUsuario(Usuario usuario){
         usuarios.put(usuario.getNickname(), usuario);
+        
+        //guardo la categoria en bd
+        entityManager.getTransaction().begin();
+        entityManager.persist(usuario);
+        entityManager.getTransaction().commit();
     }
     
     public Map<String,Usuario> obtenerUsuarios(){
+        //obtengo todas las categorias de la bd
+        Query query = entityManager.createQuery("SELECT u FROM Usuario u");
+        
+        //las guardo en la colecion
+        List<Usuario> listUsuarios = query.getResultList();
+        listUsuarios.stream().forEach((usu) -> {
+            usuarios.put(usu.getNickname(), usu);
+        });
         return usuarios;
     }
     
     public Map<String,Cliente> obtenerClientes(){
-        Map<String,Cliente> result = Collections.synchronizedMap(new HashMap<String,Cliente>());
-        usuarios.keySet().stream().forEach((u) -> {
-            if(usuarios.get(u) instanceof Cliente){
-                result.put(u,(Cliente) usuarios.get(u));
-            }
+        //obtengo todas las categorias de la bd
+        Query query = entityManager.createQuery("SELECT c FROM Cliente c");
+        
+        //las guardo en la colecion
+        Map<String,Cliente> clientes = new HashMap();
+        List<Cliente> listClientes = query.getResultList();
+        listClientes.stream().forEach((cli) -> {
+            clientes.put(cli.getNickname(), cli);
         });
-        return result;
+        return clientes;
     }
     
     public Map<String,Proveedor> obtenerProveedores(){
-        Map<String,Proveedor> result = Collections.synchronizedMap(new HashMap<String,Proveedor>());
-        usuarios.keySet().stream().forEach((u) -> {
-            if(usuarios.get(u) instanceof Proveedor){
-                result.put(u,(Proveedor) usuarios.get(u));
-            }
+        //obtengo todas las categorias de la bd
+        Query query = entityManager.createQuery("SELECT c FROM Proveedor c");
+        
+        //las guardo en la colecion
+        Map<String,Proveedor> proveedores = new HashMap();
+        List<Proveedor> listProveedores = query.getResultList();
+        listProveedores.stream().forEach((pro) -> {
+            proveedores.put(pro.getNickname(), pro);
         });
-        return result;
+        return proveedores;
     }
     
     public Cliente getCliente(String nickname){

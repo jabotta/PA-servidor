@@ -1,35 +1,42 @@
 package Controlador.Clases;
 
 import Controlador.DataTypes.DataCategoria;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
-public class Categoria {
+@Entity
+public class Categoria implements Serializable{
+    private static final long serialVersionUID = 1L;
     
+    @Id
     private String nombre;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "PADRE")
     private Categoria padre;
-    private Map<String,EspecificacionProducto> listaProductos;
+    @ManyToMany(cascade={CascadeType.PERSIST}, mappedBy="categorias")
+    private Map<String,EspecificacionProducto> listaProductos = new HashMap<String,EspecificacionProducto>();
+
+    public Categoria() {
+        
+    }
 
     public Categoria(String nombre, Categoria padre) {
         this.nombre = nombre;
         this.padre = padre;
-        this.listaProductos = Collections.synchronizedMap(new HashMap<String,EspecificacionProducto>());
-    }
-    
-    public Categoria(String nombre, Categoria padre, Map<String,EspecificacionProducto> productos) {
-        this.nombre = nombre;
-        this.padre = padre;
-        this.listaProductos = productos;
     }
     
     public Categoria(DataCategoria dc) {
         this.nombre = dc.getNombre();
         this.padre = null;
-        this.listaProductos = Collections.synchronizedMap(new HashMap<String,EspecificacionProducto>());
-        dc.getListaProductos().entrySet().forEach((producto) -> {
-           listaProductos.put(producto.getKey(),new EspecificacionProducto(producto.getValue(),new Proveedor(producto.getValue().getProveedor())));
-        });
     }
 
     public String getNombre() {
@@ -71,6 +78,22 @@ public class Categoria {
 
     public boolean tienePadre() { 
         return this.padre != null;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (nombre != null ? nombre.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Categoria)) {
+            return false;
+        }
+        Categoria other = (Categoria) object;
+        return (this.nombre != null || other.nombre == null) && (this.nombre == null || this.nombre.equals(other.nombre));
     }
     
 }

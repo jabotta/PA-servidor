@@ -11,6 +11,7 @@ import Controlador.Clases.ManejadorUsuarios;
 import Controlador.Clases.Proveedor;
 import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataProveedor;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import static java.util.Objects.isNull;
@@ -32,7 +33,9 @@ public class TestControladorUsuarios {
         Integer idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
         IControladorUsuarios controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
         
-        DataCliente cliente1 = new DataCliente("dduck", "Daffy", "Duck", "dduck@gmail.com", new Date(1995, 01, 01));
+        Calendar cal = Calendar.getInstance();
+        cal.set(1960, 11, 1);
+        DataCliente cliente1 = new DataCliente("dduck", "Daffy", "Duck", "dduck@gmail.com", cal);
         controlarUsuario.ingresarDatosCliente(cliente1);
 
         
@@ -47,7 +50,7 @@ public class TestControladorUsuarios {
         
 
         //agrego un usuario proveedor
-        DataProveedor proveedor1 = new DataProveedor ("pperez", "Pedro", "Perez", "perez@gmail.com", new Date(1990, 03, 02), "Pcel", "www.pcel.com");
+        DataProveedor proveedor1 = new DataProveedor ("pperez", "Pedro", "Perez", "perez@gmail.com", cal, "Pcel", "www.pcel.com");
         controlarUsuario.ingresarDatosProveedor(proveedor1);
         controlarUsuario.guardarUsuario();        
         
@@ -55,7 +58,7 @@ public class TestControladorUsuarios {
         assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").getEmail(), "perez@gmail.com");
         assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").getNombre(), "Pedro");
         assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").getApellido(), "Perez");
-        assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").getFechaNacimiento(), new Date(1990, 03, 02));
+        assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").getFechaNacimiento(), cal);
         assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").getNombreCompania(), "Pcel");
         assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").getLinkSitio(), "www.pcel.com");
         assertEquals (ManejadorUsuarios.getInstance().getProveedor("pperez").validarDatosUsuario(), true);        
@@ -64,7 +67,7 @@ public class TestControladorUsuarios {
         //probar fotos cuando se pueda
         
         //crear usuario con nickname repetido
-        DataCliente cliente2 = new DataCliente("dduck", "Darwin", "Duck", "darwinduck@gmail.com", new Date(1997, 03, 12));
+        DataCliente cliente2 = new DataCliente("dduck", "Darwin", "Duck", "darwinduck@gmail.com", cal);
         controlarUsuario.ingresarDatosCliente(cliente2);
         controlarUsuario.guardarUsuario();        
         
@@ -73,14 +76,14 @@ public class TestControladorUsuarios {
         assertEquals (ManejadorUsuarios.getInstance().getCliente("dduck").getEmail(), "darwinduck@gmail.com");        
         assertEquals (ManejadorUsuarios.getInstance().getCliente("dduck").getNombre(), "Darwin");
         assertEquals (ManejadorUsuarios.getInstance().getCliente("dduck").getApellido(), "Duck");
-        assertEquals (ManejadorUsuarios.getInstance().getCliente("dduck").getFechaNacimiento(), new Date(1997, 03, 12));
+        assertEquals (ManejadorUsuarios.getInstance().getCliente("dduck").getFechaNacimiento(), cal);
         
 
         
         
         //crear usuario con email repetido
         
-        DataCliente cliente3 = new DataCliente("darwind", "Darwin", "Duck", "dduck@gmail.com", new Date(1997, 03, 12));
+        DataCliente cliente3 = new DataCliente("darwind", "Darwin", "Duck", "dduck@gmail.com", cal);
         controlarUsuario.ingresarDatosCliente(cliente3);
         controlarUsuario.guardarUsuario();        
         
@@ -100,9 +103,11 @@ public class TestControladorUsuarios {
         Integer idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
         IControladorUsuarios controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador); 
         
-        DataCliente cliente1 = new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", new Date(1995, 01, 01));
-        DataCliente cliente2 = new DataCliente("pmar", "Pablo", "Marmol", "pmarmol@gmail.com", new Date(1990, 03, 05));        
-        DataCliente cliente3 = new DataCliente("loco", "Pajaro", "Loco", "ploco@gmail.com", new Date(1989, 05, 12));        
+        Calendar cal = Calendar.getInstance();
+        cal.set(1960, 11, 1);
+        DataCliente cliente1 = new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", cal);
+        DataCliente cliente2 = new DataCliente("pmar", "Pablo", "Marmol", "pmarmol@gmail.com", cal);        
+        DataCliente cliente3 = new DataCliente("loco", "Pajaro", "Loco", "ploco@gmail.com", cal);        
         controlarUsuario.ingresarDatosCliente(cliente1);
         controlarUsuario.guardarUsuario();        
         controlarUsuario.ingresarDatosCliente(cliente2);
@@ -126,9 +131,11 @@ public class TestControladorUsuarios {
         Integer idUsuariosControlador = Fabrica.getInstance().getControladorUsuarios(null).getId();
         IControladorUsuarios controlarUsuario = Fabrica.getInstance().getControladorUsuarios(idUsuariosControlador);
         
-        DataProveedor proveed1 = new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", new Date(1990, 07, 21),"Juegos", "www.juegos.com");
-        DataProveedor proveed2 = new DataProveedor("nmar", "Natalia", "Mar", "nmar@gmail.com", new Date(1994, 03, 05), "Newpc", "www.newpc.com");        
-        DataProveedor proveed3 = new DataProveedor("sdum", "Sergio", "Dumas", "sdum@gmail.com", new Date(1981, 02, 12),"Insumos", "www.insumos.com"); 
+        Calendar cal = Calendar.getInstance();
+        cal.set(1960, 11, 1);
+        DataProveedor proveed1 = new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", cal,"Juegos", "www.juegos.com");
+        DataProveedor proveed2 = new DataProveedor("nmar", "Natalia", "Mar", "nmar@gmail.com", cal, "Newpc", "www.newpc.com");        
+        DataProveedor proveed3 = new DataProveedor("sdum", "Sergio", "Dumas", "sdum@gmail.com", cal,"Insumos", "www.insumos.com"); 
         controlarUsuario.ingresarDatosProveedor(proveed1);
         controlarUsuario.guardarUsuario();
         controlarUsuario.ingresarDatosProveedor(proveed2);

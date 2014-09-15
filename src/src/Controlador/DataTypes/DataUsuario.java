@@ -1,7 +1,7 @@
 package Controlador.DataTypes;
 
 import Controlador.Clases.Usuario;
-import java.util.Date;
+import java.util.Calendar;
 
 public class DataUsuario {
     
@@ -9,15 +9,15 @@ public class DataUsuario {
     private String nombre;
     private String apellido;
     private String email;
-    private Date fechaNacimiento;
-    private String imagenes;
+    private Calendar fechaNacimiento;
+    private String imagen;
     
     
     public DataUsuario(Usuario u){
         
     }
     
-    public DataUsuario(String nickname, String nombre, String apellido, String email, Date fechaNacimiento) {
+    public DataUsuario(String nickname, String nombre, String apellido, String email, Calendar fechaNacimiento) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -57,20 +57,20 @@ public class DataUsuario {
         this.email = email;
     }
 
-    public Date getFechaNacimiento() {
+    public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getImagenes() {
-        return imagenes;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenes(String imagenes) {
-        this.imagenes = imagenes;
+    public void setImagen(String imagenes) {
+        this.imagen = imagenes;
     }
     
 }

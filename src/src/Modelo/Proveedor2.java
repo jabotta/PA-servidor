@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Proveedor.findByNombreComp", query = "SELECT p FROM Proveedor p WHERE p.nombreComp = :nombreComp"),
     @NamedQuery(name = "Proveedor.findByLinkSitio", query = "SELECT p FROM Proveedor p WHERE p.linkSitio = :linkSitio"),
     @NamedQuery(name = "Proveedor.findByNickname", query = "SELECT p FROM Proveedor p WHERE p.nickname = :nickname")})
-public class Proveedor implements Serializable {
+public class Proveedor2 implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "NOMBRE_COMP")
     private String nombreComp;
@@ -41,12 +41,12 @@ public class Proveedor implements Serializable {
     private String nickname;
     @JoinColumn(name = "NICKNAME", referencedColumnName = "NICKNAME", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Usuario usuario;
+    private Usuario2 usuario;
 
-    public Proveedor() {
+    public Proveedor2() {
     }
 
-    public Proveedor(String nickname) {
+    public Proveedor2(String nickname) {
         this.nickname = nickname;
     }
 
@@ -74,11 +74,11 @@ public class Proveedor implements Serializable {
         this.nickname = nickname;
     }
 
-    public Usuario getUsuario() {
+    public Usuario2 getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuario2 usuario) {
         this.usuario = usuario;
     }
 
@@ -92,10 +92,10 @@ public class Proveedor implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Proveedor)) {
+        if (!(object instanceof Proveedor2)) {
             return false;
         }
-        Proveedor other = (Proveedor) object;
+        Proveedor2 other = (Proveedor2) object;
         if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname))) {
             return false;
         }

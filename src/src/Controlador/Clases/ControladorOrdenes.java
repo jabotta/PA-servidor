@@ -6,6 +6,7 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class ControladorOrdenes implements IControladorOrdenes{
@@ -14,8 +15,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
     private Cliente clienteElegido;
     private Categoria categoriaElegida;
     private EspecificacionProducto espProdElegido;
-    private ArrayList<Producto> productosElegidos = new ArrayList<>();
-    private ArrayList<ClienteCompraProducto> cliComProds = new ArrayList<>();
+    private List<Producto> productosElegidos = new ArrayList<>();
+    private List<ClienteCompraProducto> cliComProds = new ArrayList<>();
 //    private OrdenCompra nuevaOrden;
     private OrdenCompra ordenElegida;
     
@@ -30,8 +31,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
     }
     
     @Override
-    public ArrayList<DataCliente> listarClientes(){
-        ArrayList<DataCliente> dataCliente = new ArrayList<>();
+    public List<DataCliente> listarClientes(){
+        List<DataCliente> dataCliente = new ArrayList<>();
         ManejadorUsuarios.getInstance().obtenerClientes().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
             dataCliente.add(new DataCliente(valor));
         });
@@ -44,8 +45,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
     }
     
     @Override
-    public ArrayList<DataCategoria> listarCategorias(){
-        ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
+    public List<DataCategoria> listarCategorias(){
+        List<DataCategoria> dataCategoria = new ArrayList<>();
         ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
             dataCategoria.add(new DataCategoria(valor,true));
         });
@@ -58,8 +59,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
     }
     
     @Override
-    public ArrayList<DataEspecificacionProducto> listarEspecificacionProductos(){
-        ArrayList<DataEspecificacionProducto> dataEspecificacionProducto = new ArrayList<>();
+    public List<DataEspecificacionProducto> listarEspecificacionProductos(){
+        List<DataEspecificacionProducto> dataEspecificacionProducto = new ArrayList<>();
         ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
             if(valor.getCategorias().containsValue(categoriaElegida)){
                 dataEspecificacionProducto.add(new DataEspecificacionProducto(valor,true));
@@ -83,8 +84,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
 //    }
     
     @Override
-    public ArrayList<DataEspecificacionProducto> listarProductosEnOrden(){
-        ArrayList<DataEspecificacionProducto> dataProductos = new ArrayList<>();
+    public List<DataEspecificacionProducto> listarProductosEnOrden(){
+        List<DataEspecificacionProducto> dataProductos = new ArrayList<>();
         ordenElegida.getDataClienteCompraProducto().stream().forEach((clienteproducto) -> {
             DataEspecificacionProducto aux = clienteproducto.getProducto().getEspecificacionProducto();
             aux.setPrecio(clienteproducto.getPrecio()); //precio al momento de realizar la compra
@@ -100,7 +101,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     @Override
     public void elegirCantidadProducto(Integer cantidad){
          System.out.println(cantidad+" cantidad<<<<");
-        Iterator<Producto> it =  espProdElegido.getListaProductos().values().iterator();
+        Iterator it =  espProdElegido.getListaProductos().iterator();
         int indice = 0;
         while(it.hasNext() && indice<cantidad){
             productosElegidos.add((Producto) it.next());
@@ -111,7 +112,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public void generarItemOrden(){
         productosElegidos.stream().forEach((productoElegido) -> {
             
-            cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio()));
+            cliComProds.add(new ClienteCompraProducto(clienteElegido, productoElegido, espProdElegido.getPrecio(), new OrdenCompra()));
         });
         productosElegidos = new ArrayList<>();
     }
@@ -119,7 +120,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     @Override
     public void guardarOrden(DataOrdenCompra dataOrden){
         OrdenCompra orden = new OrdenCompra(dataOrden);
-        ArrayList<ClienteCompraProducto> cliComProd = new ArrayList<>();
+        List<ClienteCompraProducto> cliComProd = new ArrayList<>();
         
         Float tempSumTotal = 0.0f; 
         for(ClienteCompraProducto cliProd : cliComProds){
@@ -127,6 +128,11 @@ public class ControladorOrdenes implements IControladorOrdenes{
             cliComProd.add(cliProd);
             tempSumTotal += cliProd.getPrecio();
         }
+        
+        
+        cliComProds.forEach((clienteproducto) -> {
+            clienteproducto.setOrden(orden);
+        });
         
         System.out.println(cliComProds+" >clicom");
         orden.setPrecioTotal(tempSumTotal);
@@ -144,8 +150,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
         return ManejadorOrdenes.getInstance().obtenerOrdenes().keySet().size();
     }
     @Override
-    public ArrayList<DataOrdenCompra> listarOrdenes(){
-        ArrayList<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
+    public List<DataOrdenCompra> listarOrdenes(){
+        List<DataOrdenCompra> dataOrdenCompra = new ArrayList<>();
         ManejadorOrdenes.getInstance().obtenerOrdenes().entrySet().stream().map((orden) -> orden.getValue()).forEach((valor) -> {
             dataOrdenCompra.add(new DataOrdenCompra(valor));
         });

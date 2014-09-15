@@ -6,10 +6,10 @@
 package Vista;
 
 import Controlador.Clases.Utils;
-
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -58,7 +58,7 @@ public class Formulario extends JPanel {
         this.addField(fieldName, fieldType, null, null);
     }
 
-    public void addIMGField(String fieldName, ArrayList<String> s, Boolean editable) {
+    public void addIMGField(String fieldName, List<String> s, Boolean editable) {
         JComponent componente;
         JLabel label = new JLabel();
         label.setText(fieldName);

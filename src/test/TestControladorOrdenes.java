@@ -13,6 +13,7 @@ import Controlador.DataTypes.DataOrdenCompra;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,10 +33,14 @@ public class TestControladorOrdenes {
         Integer idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
         IControladorProductos controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         
-        controlarUsuario.ingresarDatosProveedor(new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", new Date(1990, 07, 21),"Juegos", "www.juegos.com"));
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosProveedor(new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", cal1,"Juegos", "www.juegos.com"));
         controlarUsuario.guardarUsuario();
-             
-        controlarUsuario.ingresarDatosCliente(new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", new Date(1995, 01, 01)));
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosCliente(new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", cal2));
         controlarUsuario.guardarUsuario();
         
         DataCategoria cat1 = new DataCategoria("cat1", null);
@@ -86,10 +91,14 @@ public class TestControladorOrdenes {
         Integer idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
         IControladorProductos controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         
-        controlarUsuario.ingresarDatosProveedor(new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", new Date(1990, 07, 21),"Juegos", "www.juegos.com"));
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosProveedor(new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", cal1,"Juegos", "www.juegos.com"));
         controlarUsuario.guardarUsuario();
-             
-        controlarUsuario.ingresarDatosCliente(new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", new Date(1995, 01, 01)));
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosCliente(new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", cal2));
         controlarUsuario.guardarUsuario();
         
         DataCategoria cat1 = new DataCategoria("cat1", null);
@@ -139,10 +148,14 @@ public class TestControladorOrdenes {
         Integer idProductosControlador = Fabrica.getInstance().getControladorProductos(null).getId();
         IControladorProductos controlarProducto = Fabrica.getInstance().getControladorProductos(idProductosControlador);
         
-        controlarUsuario.ingresarDatosProveedor(new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", new Date(1990, 07, 21),"Juegos", "www.juegos.com"));
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosProveedor(new DataProveedor("jrod", "Juan", "Rodriguez", "jrod@gmail.com", cal1,"Juegos", "www.juegos.com"));
         controlarUsuario.guardarUsuario();
-             
-        controlarUsuario.ingresarDatosCliente(new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", new Date(1995, 01, 01)));
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.set(1960, 11, 1);
+        controlarUsuario.ingresarDatosCliente(new DataCliente("piedra", "Pedro", "Picapiedra", "ppiedra@gmail.com", cal2));
         controlarUsuario.guardarUsuario();
         
         DataCategoria cat1 = new DataCategoria("cat1", null);

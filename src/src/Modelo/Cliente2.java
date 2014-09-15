@@ -27,19 +27,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
     @NamedQuery(name = "Cliente.findByNickname", query = "SELECT c FROM Cliente c WHERE c.nickname = :nickname")})
-public class Cliente implements Serializable {
+public class Cliente2 implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     private String nickname;
     @JoinColumn(name = "NICKNAME", referencedColumnName = "NICKNAME", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Usuario usuario;
+    private Usuario2 usuario;
 
-    public Cliente() {
+    public Cliente2() {
     }
 
-    public Cliente(String nickname) {
+    public Cliente2(String nickname) {
         this.nickname = nickname;
     }
 
@@ -51,11 +51,11 @@ public class Cliente implements Serializable {
         this.nickname = nickname;
     }
 
-    public Usuario getUsuario() {
+    public Usuario2 getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuario2 usuario) {
         this.usuario = usuario;
     }
 
@@ -69,10 +69,10 @@ public class Cliente implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente)) {
+        if (!(object instanceof Cliente2)) {
             return false;
         }
-        Cliente other = (Cliente) object;
+        Cliente2 other = (Cliente2) object;
         if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname))) {
             return false;
         }

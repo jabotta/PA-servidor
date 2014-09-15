@@ -5,20 +5,22 @@ import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataProducto;
 import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public interface IControladorProductos {
     
     public Integer getId();
     public void setId(Integer id);
-    public ArrayList<DataProveedor> listarProveedores();    
+    public List<DataProveedor> listarProveedores();    
     public void elegirProveedor(String nickname);
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto);
     public Boolean elegirTipoProducto();
     public void agregarMultiplesProductosAutogenerados(Integer cantidad);
     public void ingresarDatosUnidad(DataProducto producto);
-    public ArrayList<DataCategoria> listarCategorias();
+    public List<DataCategoria> listarCategorias();
     public void elegirCategoria(String categoria);
-    public ArrayList<DataEspecificacionProducto> listarProductosCategoria();
+    public List<DataEspecificacionProducto> listarProductosCategoria();
     public DataEspecificacionProducto mostrarDatosProducto(String numRef);
     public void listarImagenesDisco();
     public Boolean controlarErrores();
@@ -37,9 +39,9 @@ public interface IControladorProductos {
     public Boolean validarInfo();
     public void ingresarEspecificacion(String clave, String desc);
     public void agregarCategoriaAEspecificacion(String categoria);
-    public ArrayList<String> listarImagenesAModificar();
+    public List<String> listarImagenesAModificar();
     public void borrarImagen(String rutaImagen);
-    public ArrayList<DataCategoria> listarCategoriasAModificar();
+    public List<DataCategoria> listarCategoriasAModificar();
     public void borrarCategoriaAEspecificacion(String categoria);
     public void guardarEspProductoModificado();
     public Boolean categoryAlreadyExist(String categoria);

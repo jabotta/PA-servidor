@@ -167,7 +167,7 @@ public class ModificarInformacionProducto extends JInternalFrame {
             return;
         }
 
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, Collections.synchronizedMap(new HashMap<String,String>()), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap<Integer,DataProducto>()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto(NroRef, titulo, descripcion, new HashMap(), precioReal, Proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), new ArrayList());
 
         controlarProducto.modificarDatosEspecificacionProducto(espProducto);
 

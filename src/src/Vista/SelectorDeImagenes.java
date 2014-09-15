@@ -12,6 +12,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 import java.util.function.Predicate;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -25,7 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class SelectorDeImagenes extends JPanel {
 
-    private ArrayList<ImagenComponent> imagenes;
+    private List<ImagenComponent> imagenes;
     private final JPanel pane;
     private final JPanel paneWrapper;
     private Boolean justOne;
@@ -194,7 +196,7 @@ public class SelectorDeImagenes extends JPanel {
         SpringUtilities.makeCompactGrid(pane, imagenes.size(), 1, 0, 0, 6, 6);
     }
 
-    void load(ArrayList<String> imagenesPreload) {
+    void load(List<String> imagenesPreload) {
         imagenesPreload.forEach((str) -> {
             System.out.println("str "+str );
             addImagenComponent(new File(str));

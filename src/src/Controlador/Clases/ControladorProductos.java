@@ -7,6 +7,8 @@ import Controlador.DataTypes.DataProveedor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import static java.util.Objects.isNull;
@@ -17,13 +19,13 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto espProductoModificada;
     private Proveedor proveedorElegido;
     private EspecificacionProducto espProdElegido;
-    private Map<String,String> especificaciones = Collections.synchronizedMap(new HashMap<String,String>());
+    private Map<String,String> especificaciones = new HashMap();
     private EspecificacionProducto nuevoEspProducto;
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
-    private Map<String,Categoria> categoriasElegidas = Collections.synchronizedMap(new HashMap<String,Categoria>());
-    private ArrayList<String> imagenes = new ArrayList<>();
-    private Map<Integer,Producto> productosAAgregar = Collections.synchronizedMap(new HashMap<Integer,Producto>());
+    private Map<String,Categoria> categoriasElegidas = new HashMap();
+    private List<String> imagenes = new ArrayList<>();
+    private List<Producto> productosAAgregar = new ArrayList();
     
     //    - prvLst Set<Proveedor>
 //    - espLst : map<string,string>
@@ -41,8 +43,8 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
-    public ArrayList<DataProveedor> listarProveedores(){
-        ArrayList<DataProveedor> dataProveedor = new ArrayList<>();
+    public List<DataProveedor> listarProveedores(){
+        List<DataProveedor> dataProveedor = new ArrayList<>();
         ManejadorUsuarios.getInstance().obtenerProveedores().entrySet().stream().map((cliente) -> cliente.getValue()).forEach((valor) -> {
             dataProveedor.add(new DataProveedor(valor));
         });
@@ -58,7 +60,6 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public void ingresarDatosProductos(DataEspecificacionProducto espProducto){
         nuevoEspProducto = new EspecificacionProducto(espProducto,proveedorElegido);
- 
     }
     
     @Override
@@ -70,19 +71,19 @@ public class ControladorProductos implements IControladorProductos{
     public void agregarMultiplesProductosAutogenerados(Integer cantidad){
         int newId = ManejadorProductos.getInstance().obtenerProductos().keySet().size();
         for(Integer i = 0; i < cantidad; i++){
-            productosAAgregar.put(i, new Producto(newId, nuevoEspProducto));
+            productosAAgregar.add(new Producto(newId, nuevoEspProducto));
             newId++;
         }
     }
     
     @Override
     public void ingresarDatosUnidad(DataProducto producto){
-        productosAAgregar.put(producto.getId(), new Producto(producto));
+        productosAAgregar.add(new Producto(producto));
     }
     
     @Override
-    public ArrayList<DataCategoria> listarCategorias(){
-        ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
+    public List<DataCategoria> listarCategorias(){
+        List<DataCategoria> dataCategoria = new ArrayList<>();
         ManejadorCategorias.getInstance().obtenerCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
             dataCategoria.add(new DataCategoria(valor,true));
         });
@@ -95,8 +96,8 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
-    public ArrayList<DataCategoria> listarCategoriasAModificar(){
-        ArrayList<DataCategoria> dataCategoria = new ArrayList<>();
+    public List<DataCategoria> listarCategoriasAModificar(){
+        List<DataCategoria> dataCategoria = new ArrayList<>();
         espProductoModificada.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
             categoriasElegidas.put(valor.getNombre(),valor);
             dataCategoria.add(new DataCategoria(valor,true));
@@ -115,8 +116,8 @@ public class ControladorProductos implements IControladorProductos{
     }
                 
     @Override
-    public ArrayList<DataEspecificacionProducto> listarProductosCategoria(){
-        ArrayList<DataEspecificacionProducto> result = new ArrayList<DataEspecificacionProducto>();
+    public List<DataEspecificacionProducto> listarProductosCategoria(){
+        List<DataEspecificacionProducto> result = new ArrayList<>();
         categoriaElegida.getListaProductos().entrySet().stream().map((espProd) -> espProd.getValue()).forEach((valor) -> {
             result.add(new DataEspecificacionProducto(valor,true));
         });
@@ -136,7 +137,7 @@ public class ControladorProductos implements IControladorProductos{
     }
     
     @Override
-    public ArrayList<String> listarImagenesAModificar(){
+    public List<String> listarImagenesAModificar(){
         imagenes = espProductoModificada.getImagenes();
         return imagenes;
     }
@@ -167,9 +168,9 @@ public class ControladorProductos implements IControladorProductos{
         nuevoEspProducto.setListaProductos(productosAAgregar);
         ManejadorEspProductos.getInstance().agregarEspecificacionProducto(nuevoEspProducto);
 
-        especificaciones = Collections.synchronizedMap(new HashMap<String,String>());
+        especificaciones = new HashMap();
         imagenes = new ArrayList<>();
-        productosAAgregar = Collections.synchronizedMap(new HashMap<Integer,Producto>());
+        productosAAgregar = new ArrayList();
     }
     
     @Override

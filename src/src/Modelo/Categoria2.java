@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
     @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
-public class Categoria implements Serializable {
+public class Categoria2 implements Serializable {
 
     @Id
     @Basic(optional = false)
@@ -44,18 +44,18 @@ public class Categoria implements Serializable {
         @JoinColumn(name = "CAT_NAME", referencedColumnName = "NOMBRE", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "ESP_NROREF", referencedColumnName = "NROREFERENCIA", nullable = false)})
     @ManyToMany
-    private Collection<Especificacionproducto> especificacionproductoCollection;
+    private Collection<Especificacionproducto2> especificacionproductoCollection;
     private static final long serialVersionUID = 1L;
     @OneToMany(mappedBy = "padre")
-    private Collection<Categoria> categoriaCollection;
+    private Collection<Categoria2> categoriaCollection;
     @JoinColumn(name = "PADRE", referencedColumnName = "NOMBRE")
     @ManyToOne
-    private Categoria padre;
+    private Categoria2 padre;
 
-    public Categoria() {
+    public Categoria2() {
     }
 
-    public Categoria(String nombre) {
+    public Categoria2(String nombre) {
         this.nombre = nombre;
     }
 
@@ -68,19 +68,19 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Categoria> getCategoriaCollection() {
+    public Collection<Categoria2> getCategoriaCollection() {
         return categoriaCollection;
     }
 
-    public void setCategoriaCollection(Collection<Categoria> categoriaCollection) {
+    public void setCategoriaCollection(Collection<Categoria2> categoriaCollection) {
         this.categoriaCollection = categoriaCollection;
     }
 
-    public Categoria getPadre() {
+    public Categoria2 getPadre() {
         return padre;
     }
 
-    public void setPadre(Categoria padre) {
+    public void setPadre(Categoria2 padre) {
         this.padre = padre;
     }
 
@@ -94,10 +94,10 @@ public class Categoria implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categoria)) {
+        if (!(object instanceof Categoria2)) {
             return false;
         }
-        Categoria other = (Categoria) object;
+        Categoria2 other = (Categoria2) object;
         if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
             return false;
         }
@@ -110,11 +110,11 @@ public class Categoria implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Especificacionproducto> getEspecificacionproductoCollection() {
+    public Collection<Especificacionproducto2> getEspecificacionproductoCollection() {
         return especificacionproductoCollection;
     }
 
-    public void setEspecificacionproductoCollection(Collection<Especificacionproducto> especificacionproductoCollection) {
+    public void setEspecificacionproductoCollection(Collection<Especificacionproducto2> especificacionproductoCollection) {
         this.especificacionproductoCollection = especificacionproductoCollection;
     }
 

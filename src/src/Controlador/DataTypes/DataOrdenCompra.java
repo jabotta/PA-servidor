@@ -3,13 +3,14 @@ package Controlador.DataTypes;
 import Controlador.Clases.OrdenCompra;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DataOrdenCompra {
     
     private Integer nroOrden;
     private Date fecha;
     private Float precioTotal;
-    private ArrayList<DataClienteCompraProducto> clienteCompraProducto;
+    private List<DataClienteCompraProducto> clienteCompraProducto;
     
     public DataOrdenCompra(OrdenCompra oc) {
         this.nroOrden = oc.getNroOrden();
@@ -24,14 +25,14 @@ public class DataOrdenCompra {
         this.precioTotal = 0.0f;
     }
     
-    public DataOrdenCompra(Integer nroOrden, Date fecha, Float precioTotal, ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
+    public DataOrdenCompra(Integer nroOrden, Date fecha, Float precioTotal, List<DataClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = fecha;
         this.precioTotal = precioTotal;
         this.clienteCompraProducto = clienteCompraProducto;
     }
     
-    public DataOrdenCompra(Integer nroOrden, ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
+    public DataOrdenCompra(Integer nroOrden, List<DataClienteCompraProducto> clienteCompraProducto) {
         this.nroOrden = nroOrden;
         this.fecha = new Date();
         this.precioTotal = 0.0f;
@@ -54,11 +55,11 @@ public class DataOrdenCompra {
         this.fecha = fecha;
     }
     
-    public ArrayList<DataClienteCompraProducto> getClienteCompraProducto() {
+    public List<DataClienteCompraProducto> getClienteCompraProducto() {
         return clienteCompraProducto;
     }
 
-    public void setClienteCompraProducto(ArrayList<DataClienteCompraProducto> clienteCompraProducto) {
+    public void setClienteCompraProducto(List<DataClienteCompraProducto> clienteCompraProducto) {
         this.clienteCompraProducto = clienteCompraProducto;
     }
     
