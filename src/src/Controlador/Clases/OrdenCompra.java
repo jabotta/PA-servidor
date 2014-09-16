@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -19,6 +21,7 @@ import javax.persistence.Temporal;
 public class OrdenCompra implements Serializable {
     @Id
     @Column(name="NRO_ORDEN")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer nroOrden;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
@@ -67,14 +70,14 @@ public class OrdenCompra implements Serializable {
         return clienteCompraProducto;
     }
     
-    public List<DataClienteCompraProducto> getDataClienteCompraProducto() {
+    /*public List<DataClienteCompraProducto> getDataClienteCompraProducto() {
         List<DataClienteCompraProducto> dataClienteCompraProducto = new ArrayList<>();
-        /*clienteCompraProducto.forEach((cliProd) -> {
+        clienteCompraProducto.forEach((cliProd) -> {
             System.out.println(cliProd+"<<>>");
-            dataClienteCompraProducto.add(new DataClienteCompraProducto(cliProd));
-        });*/
+            //dataClienteCompraProducto.add(new DataClienteCompraProducto(cliProd));
+        });
         return dataClienteCompraProducto;
-    }
+    }*/
 
     public void setClienteCompraProducto(List<ClienteCompraProducto> clienteCompraProducto) {
         this.clienteCompraProducto = clienteCompraProducto;

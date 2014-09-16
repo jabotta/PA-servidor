@@ -40,9 +40,10 @@ public class ManejadorOrdenes {
     public Map<Integer,OrdenCompra> obtenerOrdenes(){
         //obtengo todas las ordenes de la bd
         Query query = entityManager.createQuery("SELECT o FROM OrdenCompra o", OrdenCompra.class);
-        
         //las guardo en la colecion
         List<OrdenCompra> listOrdenes = query.getResultList();
+        System.out.println("underlying entity manager is: "+entityManager.getDelegate().getClass().getSimpleName());
+        
         listOrdenes.stream().forEach((ord) -> {
             ordenes.put(ord.getNroOrden(), ord);
         });

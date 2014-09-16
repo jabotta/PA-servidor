@@ -123,7 +123,7 @@ public class SelectorImgUsuario extends JPanel {
 
     public String getSelectedIMG() {
 
-        return this.f.getAbsolutePath();
+        return this.f != null ? this.f.getAbsolutePath() : null;
     }
 
     protected EventListenerList listenerList = new EventListenerList();

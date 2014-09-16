@@ -86,7 +86,7 @@ class VerInformacionProveedorForm extends JInternalFrame {
                 DataProveedor aux = new DataProveedor(ManejadorUsuarios.getInstance().obtenerProveedores().get(userList.getSelectedValue().split("-")[0].trim()));
                 nicknameText.setText(aux.getNickname());
                 emailText.setText(aux.getEmail());
-                fNacText.setText(Utils.formatDate(aux.getFechaNacimiento()));
+                fNacText.setText(Utils.formatDate(aux.getFechaNacimiento().getTime()));
 
                 apellidoText.setText(aux.getApellido());
                 nombreText.setText(aux.getNombre());

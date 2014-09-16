@@ -2,6 +2,7 @@ package Controlador.Clases;
 
 import Controlador.DataTypes.DataCategoria;
 import Controlador.DataTypes.DataCliente;
+import Controlador.DataTypes.DataClienteCompraProducto;
 import Controlador.DataTypes.DataEspecificacionProducto;
 import Controlador.DataTypes.DataOrdenCompra;
 import java.util.ArrayList;
@@ -86,7 +87,8 @@ public class ControladorOrdenes implements IControladorOrdenes{
     @Override
     public List<DataEspecificacionProducto> listarProductosEnOrden(){
         List<DataEspecificacionProducto> dataProductos = new ArrayList<>();
-        ordenElegida.getDataClienteCompraProducto().stream().forEach((clienteproducto) -> {
+        ordenElegida.getClienteCompraProducto().forEach((cliProd) -> {
+            DataClienteCompraProducto clienteproducto = new DataClienteCompraProducto(cliProd);
             DataEspecificacionProducto aux = clienteproducto.getProducto().getEspecificacionProducto();
             aux.setPrecio(clienteproducto.getPrecio()); //precio al momento de realizar la compra
             dataProductos.add(clienteproducto.getProducto().getEspecificacionProducto());

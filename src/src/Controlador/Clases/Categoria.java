@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Transient;
 
 @Entity
@@ -23,6 +24,7 @@ public class Categoria implements Serializable{
     @JoinColumn(name = "PADRE")
     private Categoria padre;
     @ManyToMany(cascade={CascadeType.PERSIST}, mappedBy="categorias")
+    @MapKeyColumn(name="ESP_NROREF", table="CATEGORIAESPECIFICACIONPROD")
     private Map<String,EspecificacionProducto> listaProductos = new HashMap<String,EspecificacionProducto>();
 
     public Categoria() {

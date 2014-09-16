@@ -236,7 +236,7 @@ public class VerInformacionOrden extends JInternalFrame {
          DefaultListModel tes = new DefaultListModel();
         List<DataOrdenCompra> ordenes = controlarOrden.listarOrdenes();
         ordenes.stream().forEach((orden) -> {
-            tes.addElement(orden);
+            tes.addElement(orden.getNroOrden() + " - " + orden.getFecha());
         });
        
         ordenList.setModel(tes);

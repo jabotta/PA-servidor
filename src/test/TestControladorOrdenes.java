@@ -50,7 +50,7 @@ public class TestControladorOrdenes {
         //leer datos de nueva especificacion de IngresarDatosUnidad
         controlarProducto.elegirProveedor("jrod");
         DataProveedor proveedor = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("jrod"));
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0, proveedor, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", new HashMap(), (float)12.0, proveedor, new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
         controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("Color", "Verde");
         controlarProducto.ingresarEspecificacion("Peso", "1kg");
@@ -108,7 +108,7 @@ public class TestControladorOrdenes {
         //leer datos de nueva especificacion de IngresarDatosUnidad
         controlarProducto.elegirProveedor("jrod");
         DataProveedor proveedor = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("jrod"));
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0, proveedor, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", new HashMap(), (float)12.0, proveedor, new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
         controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("Color", "Verde");
         controlarProducto.ingresarEspecificacion("Peso", "1kg");
@@ -165,7 +165,7 @@ public class TestControladorOrdenes {
         //leer datos de nueva especificacion de IngresarDatosUnidad
         controlarProducto.elegirProveedor("jrod");
         DataProveedor proveedor = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("jrod"));
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float)12.0, proveedor, new ArrayList<>(), new ArrayList<>(),Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto 1", "descripcion 1", new HashMap(), (float)12.0, proveedor, new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
         controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("Color", "Verde");
         controlarProducto.ingresarEspecificacion("Peso", "1kg");

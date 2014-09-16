@@ -1,8 +1,10 @@
 package Controlador.DataTypes;
 
+import Controlador.Clases.ClienteCompraProducto;
 import Controlador.Clases.OrdenCompra;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class DataOrdenCompra {
@@ -16,7 +18,12 @@ public class DataOrdenCompra {
         this.nroOrden = oc.getNroOrden();
         this.fecha = oc.getFecha();
         this.precioTotal = oc.getPrecioTotal();
-        this.clienteCompraProducto = oc.getDataClienteCompraProducto();
+        this.clienteCompraProducto = new ArrayList<DataClienteCompraProducto>();
+        Iterator it = oc.getClienteCompraProducto().iterator();
+        while(it.hasNext()){
+            clienteCompraProducto.add(new DataClienteCompraProducto((ClienteCompraProducto)it.next()));
+        }
+        System.out.println("ACAAAAAAAAA"+clienteCompraProducto);
     }
     
     public DataOrdenCompra(Integer nroOrden) {

@@ -4,6 +4,7 @@ import Controlador.DataTypes.DataCliente;
 import Controlador.DataTypes.DataClienteCompraProducto;
 import Controlador.DataTypes.DataProducto;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,7 +22,8 @@ public class ClienteCompraProducto implements Serializable {
     @JoinColumn(name = "PRODUCTO_ID")
     private Producto producto;
     private Float precio;
-    @ManyToOne
+    @Id
+    @ManyToOne(cascade={CascadeType.PERSIST})
     @JoinColumn(name="ORDEN_ID")
     private OrdenCompra Orden;
     

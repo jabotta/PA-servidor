@@ -81,7 +81,7 @@ class VerInformacionClienteForm extends JInternalFrame {
                 DataCliente aux = new DataCliente(ManejadorUsuarios.getInstance().obtenerClientes().get(userList.getSelectedValue().split("-")[0].trim()));
                 nicknameText.setText(aux.getNickname());
                 emailText.setText(aux.getEmail());
-                fNacText.setText(Utils.formatDate(aux.getFechaNacimiento()));
+                fNacText.setText(Utils.formatDate(aux.getFechaNacimiento().getTime()));
                 apellidoText.setText(aux.getApellido());
                 nombreText.setText(aux.getNombre());
                 imagen = aux.getImagen(); 

@@ -71,7 +71,7 @@ public class TestControladorProducto {
         DataProveedor proveedor1 = new DataProveedor("pperez", "Pedro", "Perez", "perez@gmail.com", cal, "Pcel", "www.pcel.com");
         controlarUsuario.ingresarDatosProveedor(proveedor1);
         controlarUsuario.guardarUsuario();
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("nroref1", "prod1", "nuevo", Collections.synchronizedMap(new HashMap()), (float) 2500.0, proveedor1, new ArrayList<>(), new ArrayList<>(), Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("nroref1", "prod1", "nuevo", new HashMap(), (float) 2500.0, proveedor1, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         //Crear producto id=1 y especificacion espProducto
         DataProducto producto1 = new DataProducto(1, "idSpec", espProducto);
@@ -129,7 +129,7 @@ public class TestControladorProducto {
 
         controlarProducto.elegirProveedor("gclaud");
         DataProveedor proveedor = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("gclaud"));
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float) 12.0, proveedor, new ArrayList<>(), new ArrayList<>(), Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto1", "descripcion 1", new HashMap(), (float) 12.0, proveedor, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("estado", "nuevo");
         controlarProducto.ingresarEspecificacion("color", "gris");
@@ -173,7 +173,7 @@ public class TestControladorProducto {
 
         controlarProducto.elegirProveedor("gclaud");
         DataProveedor proveedor = new DataProveedor(ManejadorUsuarios.getInstance().getProveedor("gclaud"));
-        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto1", "descripcion 1", Collections.synchronizedMap(new HashMap()), (float) 12.0, proveedor, new ArrayList<>(), new ArrayList<>(), Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto = new DataEspecificacionProducto("prod1", "Producto1", "descripcion 1", new HashMap(), (float) 12.0, proveedor, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         controlarProducto.ingresarDatosProductos(espProducto);
         controlarProducto.ingresarEspecificacion("estado", "nuevo");
         controlarProducto.ingresarEspecificacion("color", "gris");
@@ -185,7 +185,7 @@ public class TestControladorProducto {
         
         //Modificar Producto
 
-        DataEspecificacionProducto espProducto2 = new DataEspecificacionProducto("prod1", "Cambio", "nuevo", Collections.synchronizedMap(new HashMap()), (float) 2500.0, proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), Collections.synchronizedMap(new HashMap()));
+        DataEspecificacionProducto espProducto2 = new DataEspecificacionProducto("prod1", "Cambio", "nuevo", new HashMap(), (float) 2500.0, proveedor, new ArrayList<String>(), new ArrayList<DataCategoria>(), new ArrayList<>());
 
         controlarProducto.modificarDatosEspecificacionProducto(espProducto2);       
 
