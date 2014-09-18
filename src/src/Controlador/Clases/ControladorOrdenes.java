@@ -63,7 +63,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
     public List<DataEspecificacionProducto> listarEspecificacionProductos(){
         List<DataEspecificacionProducto> dataEspecificacionProducto = new ArrayList<>();
         ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().entrySet().stream().map((espProducto) -> espProducto.getValue()).forEach((valor) -> {
-            if(valor.getCategorias().containsValue(categoriaElegida)){
+            if(valor.getCategorias().contains(categoriaElegida.getNombre())){
                 dataEspecificacionProducto.add(new DataEspecificacionProducto(valor,true));
             }
         });
@@ -134,6 +134,7 @@ public class ControladorOrdenes implements IControladorOrdenes{
         
         cliComProds.forEach((clienteproducto) -> {
             clienteproducto.setOrden(orden);
+            clienteproducto.setCliente(clienteElegido);
         });
         
         System.out.println(cliComProds+" >clicom");

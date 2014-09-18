@@ -117,14 +117,14 @@ public class Main {
         /* productos */
         Map<String,String> esp3= new HashMap();
         List<Producto> prod3 = new ArrayList();
-        Map<String, Categoria> cat1 = new HashMap();
+        List<Categoria> cat1 = new ArrayList();
         List<Producto> productosAAgregar = new ArrayList();
         
         /////////////////Producto 1
         esp3.put("ESP1","ESP1Val");
-        cat1.put ("iPhone",ManejadorCategorias.getInstance().getCategoria("iPhone"));
-        cat1.put ("iOS",ManejadorCategorias.getInstance().getCategoria("iOS"));
-        cat1.put ("Apple",ManejadorCategorias.getInstance().getCategoria("Apple"));
+        cat1.add (ManejadorCategorias.getInstance().getCategoria("iPhone"));
+        cat1.add (ManejadorCategorias.getInstance().getCategoria("iOS"));
+        cat1.add (ManejadorCategorias.getInstance().getCategoria("Apple"));
         List<String> images = new ArrayList();
         images.add("test");
         EspecificacionProducto pr1 = new EspecificacionProducto("IPH5", "iPhone 5", "El último celular de Apple", esp3, (float) 199.0, p1, cat1, prod3); 

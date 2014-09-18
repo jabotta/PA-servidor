@@ -115,7 +115,7 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
                 ordenar();
             }
         });
-        setTitle("Modificar Informacion de Producto");
+        setTitle("Generar orden de compra");
 
         buttonContainer.add(saveButton);
         cancelarButton = new JButton("Cancelar");

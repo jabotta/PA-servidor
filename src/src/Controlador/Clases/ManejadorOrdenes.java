@@ -43,7 +43,7 @@ public class ManejadorOrdenes {
         //las guardo en la colecion
         List<OrdenCompra> listOrdenes = query.getResultList();
         System.out.println("underlying entity manager is: "+entityManager.getDelegate().getClass().getSimpleName());
-        
+        ordenes = new HashMap();
         listOrdenes.stream().forEach((ord) -> {
             ordenes.put(ord.getNroOrden(), ord);
         });
@@ -55,7 +55,12 @@ public class ManejadorOrdenes {
     }
     
     public void eliminarOrden(Integer nroOrden){
-        this.obtenerOrdenes().remove(nroOrden);
+        OrdenCompra aBorrar = ordenes.get(nroOrden);
+        ordenes.remove(nroOrden);
+        
+        entityManager.getTransaction().begin();
+        entityManager.remove(aBorrar);
+        entityManager.getTransaction().commit();
     }
     
 }

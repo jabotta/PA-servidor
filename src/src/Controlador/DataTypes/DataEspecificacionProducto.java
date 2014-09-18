@@ -27,14 +27,19 @@ public class DataEspecificacionProducto {
         this.precio = ep.getPrecio();
         this.proveedor = ep.getDataProveedor();
         this.imagenes = ep.getImagenes();
-        if(conCategorias)
-            this.categorias = ep.getDataCategorias();
-        else
+        if(conCategorias){
+            this.categorias = new ArrayList<>();
+            ep.getCategorias().stream().forEach((valor) -> {
+                this.categorias.add(new DataCategoria(valor, false));
+            });
+            this.productos = new ArrayList();
+            ep.getListaProductos().forEach((producto) -> {
+               productos.add(new DataProducto(producto));
+            });
+        }else{
             this.categorias = new ArrayList<DataCategoria>();
-        this.productos = new ArrayList();
-        ep.getListaProductos().forEach((producto) -> {
-           productos.add(new DataProducto(producto));
-        });
+            this.productos = new ArrayList();
+        }
     }
     
     public DataEspecificacionProducto(String nroReferencia, String nombre, String descripcion, Map<String,String> especificacion, Float precio, DataProveedor proveedor, ArrayList<String> imagenes, ArrayList<DataCategoria> categorias,List<DataProducto> productos) {

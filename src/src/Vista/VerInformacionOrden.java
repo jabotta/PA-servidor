@@ -92,7 +92,7 @@ public class VerInformacionOrden extends JInternalFrame {
 
             @Override
             public void valueChanged(ListSelectionEvent evt) {
-                if (evt.getValueIsAdjusting()) {
+                if (evt.getValueIsAdjusting() || ordenList.getSelectedValue() == null) {
                     return;
                 }
                 

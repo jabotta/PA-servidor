@@ -23,7 +23,7 @@ public class ControladorProductos implements IControladorProductos{
     private EspecificacionProducto nuevoEspProducto;
     private Categoria nuevaCategoria;
     private Categoria categoriaElegida;
-    private Map<String,Categoria> categoriasElegidas = new HashMap();
+    private List<Categoria> categoriasElegidas = new ArrayList();
     private List<String> imagenes = new ArrayList<>();
     private List<Producto> productosAAgregar = new ArrayList();
     
@@ -98,8 +98,8 @@ public class ControladorProductos implements IControladorProductos{
     @Override
     public List<DataCategoria> listarCategoriasAModificar(){
         List<DataCategoria> dataCategoria = new ArrayList<>();
-        espProductoModificada.getCategorias().entrySet().stream().map((categoria) -> categoria.getValue()).forEach((valor) -> {
-            categoriasElegidas.put(valor.getNombre(),valor);
+        espProductoModificada.getCategorias().stream().forEach((valor) -> {
+            categoriasElegidas.add(valor);
             dataCategoria.add(new DataCategoria(valor,true));
         });
         return dataCategoria;
@@ -107,7 +107,7 @@ public class ControladorProductos implements IControladorProductos{
     
     @Override
     public void agregarCategoriaAEspecificacion(String categoria){
-        categoriasElegidas.put(categoria,ManejadorCategorias.getInstance().getCategoria(categoria));
+        categoriasElegidas.add(ManejadorCategorias.getInstance().getCategoria(categoria));
     }
     
     @Override
