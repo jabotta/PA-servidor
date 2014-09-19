@@ -23,7 +23,7 @@ public class ClienteCompraProducto implements Serializable {
     private Producto producto;
     private Float precio;
     @Id
-    @ManyToOne(cascade={CascadeType.PERSIST})
+    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.ALL})
     @JoinColumn(name="ORDEN_ID")
     private OrdenCompra Orden;
     

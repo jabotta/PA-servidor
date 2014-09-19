@@ -11,6 +11,8 @@
     <class>Controlador.Clases.OrdenCompra</class>
     <class>Controlador.Clases.ClienteCompraProducto</class>
     <properties>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.logging.file" value="test.log"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/prog1"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

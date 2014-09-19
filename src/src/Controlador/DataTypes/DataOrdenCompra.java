@@ -23,7 +23,6 @@ public class DataOrdenCompra {
         while(it.hasNext()){
             clienteCompraProducto.add(new DataClienteCompraProducto((ClienteCompraProducto)it.next()));
         }
-        System.out.println("ACAAAAAAAAA"+clienteCompraProducto);
     }
     
     public DataOrdenCompra(Integer nroOrden) {
