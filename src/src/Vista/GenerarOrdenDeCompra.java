@@ -280,7 +280,8 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
         int row = listaProductos.getSelectedRow();
         String nroRef = (String) model.getValueAt(row, 0);
         String nombre = (String) model.getValueAt(row, 1);
-        currentItem = new Item(nroRef, nombre, 0);
+        Integer cantidad = (Integer) model.getValueAt(row, 2);
+        currentItem = new Item(nroRef, nombre, cantidad);
 //        controlarProducto.elegirEspProducto(nroRef);
 //        DataEspecificacionProducto dataProducto = controlarProducto.mostrarDatosProducto(nroRef);
 
@@ -326,7 +327,6 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
     public void agregar() {
 
         String cantidad = ((JTextField) form.getComponentByName("Cantidad")).getText();
-        System.out.println(cantidad+" <real");
         Integer cantidadReal = null;
 
         try {
@@ -334,6 +334,8 @@ public class GenerarOrdenDeCompra extends JInternalFrame {
             if (cantidadReal <= 0) {
                 JOptionPane.showMessageDialog(this, "Cantidad debe ser un numero Entero", "Validacion", JOptionPane.ERROR_MESSAGE);
 
+            } else if(cantidadReal > currentItem.cantidad){
+                JOptionPane.showMessageDialog(this, "Cantidad debe ser menor o igual al stock del producto", "Validacion", JOptionPane.ERROR_MESSAGE);
             } else {
                 currentItem.cantidad = cantidadReal;
                 System.out.println(cantidadReal+" nroref "+currentItem.nroRef);

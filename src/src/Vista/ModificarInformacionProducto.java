@@ -201,12 +201,12 @@ public class ModificarInformacionProducto extends JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Su Producto se ha creado correctamente", "Validacion", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Sus datos no son correctos, Verifique", "Validacion", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Validacion", JOptionPane.ERROR_MESSAGE);
 
             }
         } else {
 
-            JOptionPane.showMessageDialog(this, "Sus datos no son correctos, Verifique", "Validacion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "2Sus datos no son correctos, Verifique", "Validacion", JOptionPane.ERROR_MESSAGE);
 
         }
 

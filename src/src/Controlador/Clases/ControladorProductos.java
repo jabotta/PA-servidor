@@ -268,7 +268,7 @@ public class ControladorProductos implements IControladorProductos{
         espProductoModificada.setEspecificacion(especificaciones);
         espProductoModificada.setImagenes(imagenes);
         espProductoModificada.setListaProductos(productosAAgregar);
-        ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().remove(espProductoModificada.getNroReferencia());
-        ManejadorEspProductos.getInstance().agregarEspecificacionProducto(espProductoModificada);
+        //ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().remove(espProductoModificada.getNroReferencia());
+        ManejadorEspProductos.getInstance().modificarProducto(espProductoModificada);
     }
 }

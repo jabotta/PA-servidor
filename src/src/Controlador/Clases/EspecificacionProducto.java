@@ -25,6 +25,8 @@ import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class EspecificacionProducto implements Serializable{
@@ -54,13 +56,13 @@ public class EspecificacionProducto implements Serializable{
     @Column(name="PATH")
     private List<String> imagenes;
     
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="CATEGORIAESPECIFICACIONPROD",
         joinColumns={@JoinColumn(name="ESP_NROREF", referencedColumnName="NROREFERENCIA")},
         inverseJoinColumns={@JoinColumn(name="CAT_NAME", referencedColumnName="NOMBRE")})
     private List<Categoria> categorias;
     
-    @OneToMany(cascade={CascadeType.PERSIST},mappedBy="especificacionProducto")
+    @OneToMany(fetch=FetchType.EAGER,cascade={CascadeType.PERSIST},mappedBy="especificacionProducto")
     @JoinColumn(name="ID")
     private List<Producto> listaProductos;
 

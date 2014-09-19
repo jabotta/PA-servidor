@@ -7,12 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Transient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class Categoria implements Serializable{
@@ -23,7 +26,7 @@ public class Categoria implements Serializable{
     @ManyToOne(optional = false)
     @JoinColumn(name = "PADRE")
     private Categoria padre;
-    @ManyToMany(cascade={CascadeType.PERSIST}, mappedBy="categorias")
+    @ManyToMany(fetch=FetchType.EAGER,cascade={CascadeType.PERSIST}, mappedBy="categorias")
     @MapKeyColumn(name="ESP_NROREF", table="CATEGORIAESPECIFICACIONPROD")
     private Map<String,EspecificacionProducto> listaProductos = new HashMap<String,EspecificacionProducto>();
 

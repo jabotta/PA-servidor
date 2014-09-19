@@ -53,6 +53,14 @@ public class ManejadorEspProductos {
         return especificacionProductos;
     }
     
+    public void modificarProducto(EspecificacionProducto especificacionProducto){
+        if(entityManager.find(EspecificacionProducto.class, especificacionProducto.getNroReferencia()) == null){
+           throw new IllegalArgumentException("Unknown Employee id");
+       }
+
+       entityManager.merge(especificacionProducto);
+    }
+    
     public EspecificacionProducto getEspecificacionProducto(String nroRef){
         return this.obtenerEspecificacionProductos().get(nroRef);
     }

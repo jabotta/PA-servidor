@@ -129,6 +129,9 @@ public class ControladorOrdenes implements IControladorOrdenes{
             
             cliComProd.add(cliProd);
             tempSumTotal += cliProd.getPrecio();
+            EspecificacionProducto aux = ManejadorEspProductos.getInstance().obtenerEspecificacionProductos().get(cliProd.getProducto().getEspecificacionProducto().getNroReferencia());
+            aux.getListaProductos().remove(cliProd.getProducto());
+            ManejadorEspProductos.getInstance().modificarProducto(aux);
         }
         
         
