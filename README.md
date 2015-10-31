@@ -8,7 +8,5 @@ Dario Levy     - levy.dario@gmail.com
 
 Rodrigo Rossi  - rodrigo.rossi.trabal@gmail.com
 
-Leroy Deniz    - ldeniz@csic.edu.uy
-
 Mauro Bergalli - maurobergalli@gmail.com
 
